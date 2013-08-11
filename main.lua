@@ -1,8 +1,12 @@
 require('game')
+require('menu')
+require('settings')
+
+main = {}
 
 function love.load()
     -- load images
-    imgNames = {"player"}
+    imgNames = {"player", "menuTitle"}
     imgs = {}
     for _,v in ipairs(imgNames) do
         imgs[v] = love.graphics.newImage("images/"..v..".gif")
@@ -13,50 +17,65 @@ function love.load()
         v:setFilter("nearest", "nearest")
     end
 
-    -- play menu audio TODO: move to menu.lua
-    music = love.audio.newSource("music/music.ogg", "stream")
-    music:setLooping(true)
-    love.audio.play(music)
-
-    -- set initial state
-    state = "game"
+    -- set initial main.state
+    main.state = "menu"
     
+    -- load the menu
+    menu.load()
     -- load the game
     game.load()
 end
 
 function love.draw()
-    -- call the state's draw function
-    if state == "game" then
+    -- call the main.state's draw function
+    if main.state == "game" then
         game.draw()
-    elseif state == "menu" then
-        menu.draw() --TODO not implemented
+    elseif main.state == "menu" then
+        menu.draw()
+    elseif main.state == "settings" then
+        settings.draw()
     end
 end
 
 function love.update(dt)
-    -- call the state's update function
-    if state == "game" then
+    -- call the main.state's update function
+    if main.state == "game" then
         game.update(dt)
-    elseif state == "menu" then
-        menu.update(dt)
+    elseif main.state == "saveAndExit" then
+        os.exit()
     end
 end
     
 function love.keypressed(key)
-    -- call the state's keypressed function
-    if state == "game" then
+    -- call the main.state's keypressed function
+    if main.state == "game" then
         game.keypressed(key)
-    elseif state == "menu" then
+    elseif main.state == "menu" then
         menu.keypressed(key)
+    elseif main.state == "settings" then
+        settings.keypressed(key)
     end
 end
 
 function love.keyreleased(key)
-    -- call the state's keyreleased function
-    if state == "game" then
+    -- call the main.state's keyreleased function
+    if main.state == "game" then
         game.keyreleased(key)
-    elseif state == "menu" then
-        menu.keyreleased(key)
+    end
+end
+
+function updateState(choice)
+    if choice == "continue" then
+        main.state = "game"
+    elseif choice == "exit" then
+        main.state = "saveAndExit"
+    elseif choice == "settings" then
+        main.state = choice
+        settings.load()
+    elseif choice == "back to main menu" then
+        main.state = "menu"
+        menu.load()
+    else
+        main.state = choice
     end
 end
