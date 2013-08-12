@@ -1,16 +1,22 @@
 -- Provides the UI for making new spell gestures.
 require('utils')
 gestures = {}
+-- The lines in the currently loaded gesture
+lines = {}
 
 function gestures.load()
     gestures.initGrid()
     setColor(fireColor)
+    color = fireColor
     drawPreviewLine = false
+    numLines = 0
 end
 
 function gestures.draw()
     -- Draw the grid of possible gesture points
     gestures.drawGrid()
+    -- Draw each line in the current gesture
+    gestures.drawLines()
     -- Draw the cursor
     mouseX = love.mouse.getX()
     mouseY = love.mouse.getY()
@@ -34,6 +40,16 @@ function gestures.drawGrid()
     setColor({r=red, g=green, b=blue})
 end
 
+function gestures.drawLines()
+    red, green, blue = love.graphics.getColor()
+    --TODO convert to sensible for loop
+    for i = 1, numLines do
+        line = lines[i]
+        setColor(line.c)
+        love.graphics.line(line.x1, line.y1, line.x2, line.y2)
+    end
+    setColor({r=red, g=green, b=blue})
+end
 
 function gestures.keypressed(key)
     if key == openMenu then
@@ -55,6 +71,9 @@ end
 function love.mousereleased(x, y, button)
     if button == "l" then
         endX, endY = gestures.getNearestGridPoint(x, y)
+        numLines = numLines + 1
+        lines[numLines] = {x1 = startX, y1 = startY, x2 = endX, y2 = endY,
+                           c = color}
         drawPreviewLine = false
     end
 end
@@ -74,8 +93,6 @@ end
 
 function gestures.getNearestGridPoint(x, y)
     -- Find the nearest grid point to the given point.
-    -- Note: this function is embarrassingly inefficient,
-    -- but probably not enough to matter.
     min = screenWidth
     minX = 0
     minY = 0
