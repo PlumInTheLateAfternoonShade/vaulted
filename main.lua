@@ -1,10 +1,14 @@
 require('game')
 require('menu')
 require('settings')
+require('gestures')
 
 main = {}
 
 function love.load()
+    -- hide the mouse
+    love.mouse.setVisible(false)
+
     -- load images
     imgNames = {"player", "menuTitle"}
     imgs = {}
@@ -34,6 +38,8 @@ function love.draw()
         menu.draw()
     elseif main.state == "settings" then
         settings.draw()
+    elseif main.state == "gestures" then
+        gestures.draw()
     end
 end
 
@@ -47,6 +53,7 @@ function love.update(dt)
 end
     
 function love.keypressed(key)
+    
     -- call the main.state's keypressed function
     if main.state == "game" then
         game.keypressed(key)
@@ -54,6 +61,12 @@ function love.keypressed(key)
         menu.keypressed(key)
     elseif main.state == "settings" then
         settings.keypressed(key)
+    elseif main.state == "gestures" then
+        gestures.keypressed(key)
+    end
+    -- toggle debug mode
+    if key == "`" then
+        debug.debug()
     end
 end
 
@@ -75,6 +88,9 @@ function updateState(choice)
     elseif choice == "back to main menu" then
         main.state = "menu"
         menu.load()
+    elseif choice == "gestures" then
+        gestures.load()
+        main.state = choice
     else
         main.state = choice
     end

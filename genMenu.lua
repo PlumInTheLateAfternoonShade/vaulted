@@ -1,6 +1,7 @@
 -- Generate and draw a generic menu.
 
 require ('lib/class')
+require ('utils')
 
 genMenu = {}
 
