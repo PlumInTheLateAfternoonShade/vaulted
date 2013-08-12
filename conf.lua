@@ -9,7 +9,7 @@ openMenu = "escape"
 confirm = "return"
 left = "a"
 right = "d"
-spell1 = "(space)"
+spell1 = " "
 
 function love.conf(t)
     t.title = "Vaulted"

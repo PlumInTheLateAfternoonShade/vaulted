@@ -1,9 +1,10 @@
 game = {}
 
+require('camera')
+require('spell')
 local loader = require "AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
-
 local HC = require "HardonCollider"
 
 local hero
@@ -11,7 +12,6 @@ local collider
 local allSolidTiles
 
 function game.load()
-
     -- load the level and bind to variable map
     map = loader.load("level.tmx")
 
@@ -23,7 +23,6 @@ function game.load()
 
     -- set up the hero object, set him to position 32, 32
     setupHero(32,32)
-
 end
 
 function game.update(dt)
@@ -38,13 +37,14 @@ end
 function game.draw()
 
     -- scale everything 2x
-    love.graphics.scale(2,2)
-
+    love.graphics.scale(1, 1)
+    camera:set()
     -- draw the level
     map:draw()
 
     -- draw the hero as a rectangle
     hero:draw("fill")
+    camera:unset()
 end
 
 function on_collide(dt, shape_a, shape_b, mtv_x, mtv_y)
@@ -70,42 +70,48 @@ function collideHeroWithTile(dt, shape_a, shape_b, mtv_x, mtv_y)
     -- why not in one function call? because we will need to differentiate between the axis later
     hero_shape:move(mtv_x, 0)
     hero_shape:move(0, mtv_y)
-
+    hero.YVeloc = 0 -- TODO wrong.
 end
 
 function setupHero(x,y)
     hero = collider:addRectangle(x,y,16,16)
-    hero.XYVeloc = 0
-    hero.XYAccel = 0
-    hero.MaxXYSpeed = 300
+    hero.size = 16
+    hero.XVeloc = 0
+    hero.XAccel = 0
+    hero.YAccel = 9.8
+    hero.YVeloc = 0
+    hero.MaxXSpeed = 300
+    hero.MaxYSpeed = 3000
     --	hero.img = love.graphics.newImage("img/hero.png")
 end
 
 function game.keypressed(key)
     if key == right then
-        hero.XYVeloc = 0
-        hero.XYAccel = 10
+        hero.XVeloc = 0
+        hero.XAccel = 10
     elseif key == left then
-        hero.XYVeloc = 0
-        hero.XYAccel = -10
+        hero.XVeloc = 0
+        hero.XAccel = -10
+    elseif key == spell1 then
+        spell.cast(1, hero)
     elseif key == openMenu then
         updateState("back to main menu")
     end
 end
 
 function game.keyreleased(key)
-    if (key == right and hero.XYAccel == 10)
-        or (key == left and hero.XYAccel == -10) then
-        hero.XYAccel = 0
-        hero.XYVeloc = 0
+    if (key == right and hero.XAccel == 10)
+        or (key == left and hero.XAccel == -10) then
+        hero.XAccel = 0
+        hero.XVeloc = 0
     end
 end
 
 function updateHero(dt)
-    hero.XYVeloc = limitedInc(hero.XYVeloc, hero.XYAccel,
-    hero.MaxXYSpeed)
-    -- apply a downward force to the hero (=gravity)
-    hero:move(hero.XYVeloc*dt, dt*50)
+    hero.XVeloc = limitedInc(hero.XVeloc, hero.XAccel, hero.MaxXSpeed)
+    hero.YVeloc = limitedInc(hero.YVeloc, hero.YAccel, hero.MaxYSpeed)
+    hero:move(hero.XVeloc*dt, hero.YVeloc*dt)
+    camera.x = hero:center() - hero.size * 8
 end
 
 function limitedInc(var, inc, limit)
