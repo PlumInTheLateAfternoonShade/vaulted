@@ -74,6 +74,7 @@ function gestures.drawLines()
 end
 
 function gestures.keypressed(key)
+    --TODO cycle thru avail gestures (spells)
     if key == up then
         eles.inc(-1)
     elseif key == down then
@@ -89,19 +90,27 @@ end
 
 function love.mousepressed(x, y, button)
     if button == "l" then
+        --left mouse starts drawing a line
         startX, startY = gestures.getNearestGridPoint(x, y)
         drawPreviewLine = true
+    elseif button == "r" then
+        --right mouse deletes the closest line
+        if numLines > 0 then
+            lineToDelete = gestures.getNearestLine(x, y)
+            --table.remove(lines, lineToDelete)
+            --numLines = numLines - 1
+        end
     end
 end
 
 function love.mousereleased(x, y, button)
     if button == "l" then
-    endX, endY = gestures.getNearestGridPoint(x, y)
-    numLines = numLines + 1
-    lines[numLines] = {x1 = startX, y1 = startY, x2 = endX, y2 = endY,
-    c = eles[eles.i].c}
-    drawPreviewLine = false
-end
+        endX, endY = gestures.getNearestGridPoint(x, y)
+        numLines = numLines + 1
+        lines[numLines] = {x1 = startX, y1 = startY, x2 = endX, y2 = endY,
+        c = eles[eles.i].c}
+        drawPreviewLine = false
+    end
 end
 
 function gestures.initGrid()
@@ -133,4 +142,46 @@ function gestures.getNearestGridPoint(x, y)
         end
     end
     return minX, minY
+end
+
+function gestures.getNearestLine(x, y)
+    --TODO this funct is wrong. Unsure if table indexing or dist algo problem.
+    min = screenWidth*screenWidth
+    minIndex = 1
+    -- Find the nearest line in the current gesture to the given point
+    for i = 1, numLines do
+        l = lines[i]
+        dist = distToSegmentSquared(x, y, l.x1, l.y1, l.x2, l.y2)
+        --[[dx = l.x2 - l.x1
+        dy = l.y2 - l.y1
+        -- TODO simplify this mess, div by zero potential!
+        -- Get intersection point with the line
+        x3 = (dx*dx*x - dx*dy*y + dy*dy*l.x1 - dx*dy*l.y1)/(dy*dy + dx*dx)
+        y3 = (dy/dx)*(x3 - l.x1) + l.y1
+        -- If within x coordinates of line, compute distance to line
+        -- Otherwise compute distance to closest endpoint
+        if within(x3, l.x1, l.x2) then
+            dist = distanceSquared(x, y, x3, y3)
+        else
+            dist = math.min(distanceSquared(x, y, l.x1, l.y1), distanceSquared(x, y, l.x2, l.y2))
+        end]]--
+        print("i: "..i.." dist: "..dist.." min: "..min)
+        if dist < min then
+            minIndex = i
+            min = dist
+        end
+    end
+
+    table.remove(lines, minIndex)
+    numLines = table.getn(lines) --numLines - 1
+    return minIndex
+end
+
+function distToSegmentSquared(px, py, vx, vy, wx, wy)
+    l2 = distance(vx, vy, wx, wy)
+    if (l2 == 0) then return distance(px, py, vx, vy) end
+    t = ((px - vx) * (wx - vx) + (py - vy) * (wy - vy)) / l2
+    if (t < 0) then return distance(px, py, vx, vy) end
+    if (t > 1) then return distance(px, py, wx, wy) end
+    return distance(px, py, vx + t * (wx - vx), vy + t * (wy - vy))
 end

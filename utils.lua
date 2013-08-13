@@ -12,3 +12,13 @@ end
 function distance(x1, y1, x2, y2)
     return math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1))
 end
+
+function distanceSquared(x1, y1, x2, y2)
+    return (x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1)
+end
+
+function within(x, x1, x2)
+    big = math.max(x1, x2)
+    little = math.min(x1, x2)
+    return x >= little and x <= big
+end
