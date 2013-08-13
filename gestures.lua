@@ -1,15 +1,37 @@
 -- Provides the UI for making new spell gestures.
 require('utils')
+--local Class = require "HardonCollider/class"
+require "element"
+
+
 gestures = {}
--- The lines in the currently loaded gesture
-lines = {}
+
+-- A table of elements
+fire = Element('fire', fireColor)
+water = Element('water', waterColor)
+earth = Element('earth', earthColor)
+air = Element('air', airColor)
+numElements = 4
+eles = {fire, water, earth, air, i=1}
 
 function gestures.load()
+    setColor(eles[eles.i].c)
+    -- The lines in the currently loaded gesture
+    lines = {}
+    -- Set up the drawing grid
     gestures.initGrid()
-    setColor(fireColor)
-    color = fireColor
     drawPreviewLine = false
     numLines = 0
+end
+
+function eles.inc(amount)
+    eles.i = eles.i + amount
+    if eles.i < 1 then
+        eles.i = numElements
+    elseif eles.i > numElements then
+        eles.i = 1
+    end
+    setColor(eles[eles.i].c)
 end
 
 function gestures.draw()
@@ -34,7 +56,7 @@ function gestures.drawGrid()
     for i = 1, gridSize do
         for j = 1, gridSize do
             love.graphics.circle("fill", grid[i][j].x, 
-                                 grid[i][j].y, 5, 100)
+            grid[i][j].y, 5, 100)
         end
     end
     setColor({r=red, g=green, b=blue})
@@ -52,7 +74,11 @@ function gestures.drawLines()
 end
 
 function gestures.keypressed(key)
-    if key == openMenu then
+    if key == up then
+        eles.inc(-1)
+    elseif key == down then
+        eles.inc(1)
+    elseif key == openMenu then
         setColor(genMenu.fontColor)
         updateState("back to main menu")
     elseif key == confirm then
@@ -70,12 +96,12 @@ end
 
 function love.mousereleased(x, y, button)
     if button == "l" then
-        endX, endY = gestures.getNearestGridPoint(x, y)
-        numLines = numLines + 1
-        lines[numLines] = {x1 = startX, y1 = startY, x2 = endX, y2 = endY,
-                           c = color}
-        drawPreviewLine = false
-    end
+    endX, endY = gestures.getNearestGridPoint(x, y)
+    numLines = numLines + 1
+    lines[numLines] = {x1 = startX, y1 = startY, x2 = endX, y2 = endY,
+    c = eles[eles.i].c}
+    drawPreviewLine = false
+end
 end
 
 function gestures.initGrid()
