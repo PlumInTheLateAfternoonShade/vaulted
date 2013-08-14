@@ -86,9 +86,9 @@ function gestures.keypressed(key)
         --TODO
         --setColor(genMenu.fontColor)
         --updateState("back to main menu")
-    elseif key == confirm then
-        --TODO ?? Another key to go back to game maybe?
-    elseif key == gesture then
+    elseif key == confirm or key == gesture then
+        -- Finalize and save spells
+        spellBook.finalize()
         -- Go back to game.
         setColorInverted(genMenu.fontColor)
         updateState("game")

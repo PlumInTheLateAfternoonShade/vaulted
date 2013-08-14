@@ -26,3 +26,13 @@ function spellBook.keyMatch(key)
     end
     return false
 end
+
+function spellBook.finalize()
+    --TODO: should only finalize changed spells?
+    for j = 1, #spellBook do
+        print('j = '..j)
+        if spellBook[j].lines[1] ~= nil then
+            spellBook[j]:finalize()
+        end
+    end
+end

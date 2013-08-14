@@ -4,6 +4,8 @@ require('camera')
 require('spellBook')
 require('utils')
 require('gestures')
+require('VisibleIcon')
+local visibleIcons = {}
 local loader = require "AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
@@ -16,7 +18,7 @@ local allSolidTiles
 function game.load()
     -- load the level and bind to variable map
     map = loader.load("level.tmx")
-    map.tileWidth = 16
+    map.tileWidth = tileSize
     map.widthInPixels = map.tileWidth * map.width
     -- load HardonCollider, set callback to on_collide and size of 100
     collider = HC(100, on_collide)
@@ -25,7 +27,7 @@ function game.load()
     allSolidTiles = findSolidTiles(map)
 
     -- set up the hero object, set him to position 32, 32
-    setupHero(32,32)
+    setupHero(32, 32)
 
     -- init debug vars
     game.fps = 0
@@ -36,10 +38,13 @@ end
 
 function game.update(dt)
 
-    -- update the FPS counter
     game.secondCount = game.secondCount + dt
     if game.secondCount > 1 then
+        -- updates which only have to happen once in a while
+        -- get shoved in here to reduce performance impact.
         game.secondCount = game.secondCount - 1
+        visibleIcons:update()
+        -- update the FPS counter
         game.fps = 1 / dt
     end
 
@@ -50,20 +55,18 @@ function game.update(dt)
 end
 
 function game.draw()
-
     -- scale everything 1x
     love.graphics.scale(1, 1)
     camera:set()
     -- draw the level
     map:draw()
-
     -- draw the hero as a rectangle
     hero:draw("fill")
+    -- draw all visible spell icons
+    visibleIcons:draw()
     camera:unset()
-
     -- draw the xp bar
     game.drawXpBar()
-
     -- draw the FPS counter
     love.graphics.print("FPS: "..string.format("%d", game.fps),
     screenWidth - 100, 50)
@@ -93,7 +96,7 @@ end
 
 function setupHero(x,y)
     -- physical properties
-    hero = collider:addRectangle(x,y,16,16)
+    hero = collider:addRectangle(x, y, 16, 16)
     hero.size = 16
     hero.XVeloc = 0
     hero.XAccel = 0
@@ -103,8 +106,8 @@ function setupHero(x,y)
     hero.MaxYSpeed = 3000
 
     -- mental properties
-    hero.vocab = 0 --placeholder
-    game.vocab = 100 --placeholder
+    hero.farthestX = 0
+    hero.damage = 0
     hero.xp = game.getHeroXp()
 
     --	hero.img = love.graphics.newImage("img/hero.png")
@@ -122,7 +125,8 @@ function game.keypressed(key)
         hero.XVeloc = 0
         hero.XAccel = -10
     elseif spellBook.keyMatch(key) then
-        spellBook[spellBook.i]:cast(1, hero)
+        local icon = spellBook[spellBook.i]:cast(1, hero)
+        table.insert(visibleIcons, icon)
     elseif key == openMenu then
         updateState("back to main menu")
     elseif key == gesture then
@@ -143,8 +147,10 @@ end
 --------------
 
 function game.getHeroXp()
-    return ((hero:center() / map.widthInPixels) + (hero.vocab / game.vocab))
-           * 1000
+    hero.farthestX = math.max(hero:center(), hero.farthestX)
+    hero.xp = hero.farthestX / map.widthInPixels * 2000 - hero.damage
+    --* game.maxXp TODO??bug
+    return hero.xp
 end
 
 function game.drawXpBar()
@@ -184,7 +190,9 @@ function findSolidTiles(map)
             end
 
             if tile and tile.properties.solid then
-                local ctile = collider:addRectangle((tileX-1)*16,(tileY-1)*16,16,16)
+                local ctile = collider:addRectangle((tileX-1)*tileSize,
+                                                    (tileY-1)*tileSize,
+                                                    tileSize, tileSize)
                 ctile.type = "tile"
                 collider:addToGroup("tiles", ctile)
                 collider:setPassive(ctile)
@@ -193,4 +201,22 @@ function findSolidTiles(map)
         end
     end
     return collidable_tiles
+end
+
+function visibleIcons:update()
+    -- Remove any visible icons which have persisted beyond their lifetimes.
+    for i = #visibleIcons, 1, -1 do
+        v = visibleIcons[i]
+        print('clock: '..os.clock()..' dateBorn: '..v.dateBorn)
+        if os.clock() >= v.dateBorn + v.maxAge then
+            table.remove(visibleIcons, i)
+        end
+    end
+end
+
+function visibleIcons:draw()
+    -- Draw each visible icon
+    for i = 1, #visibleIcons do
+        visibleIcons[i]:draw()
+    end
 end

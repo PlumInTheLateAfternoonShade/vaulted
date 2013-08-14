@@ -15,6 +15,10 @@ spell1 = " "
 screenWidth = 1600
 screenHeight = 900
 
+-- Map settings
+tileSize = 16
+iconSize = tileSize * 2
+
 -- Element colors
 fireColor = {r = 240, b = 0, g = 70}
 waterColor = {r = 40, b = 240, g = 70}
