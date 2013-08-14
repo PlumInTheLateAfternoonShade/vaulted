@@ -1,7 +1,7 @@
 game = {}
 
 require('camera')
-require('spell')
+require('spellBook')
 require('utils')
 require('gestures')
 local loader = require "AdvTiledLoader/Loader"
@@ -121,8 +121,8 @@ function game.keypressed(key)
     elseif key == left then
         hero.XVeloc = 0
         hero.XAccel = -10
-    elseif key == spell1 then
-        spell.cast(1, hero)
+    elseif spellBook.keyMatch(key) then
+        spellBook[spellBook.i]:cast(1, hero)
     elseif key == openMenu then
         updateState("back to main menu")
     elseif key == gesture then

@@ -1,0 +1,6 @@
+====Hero====
+Sometimes falls thru floor.
+YVeloc gets zeroed even when colliding with vertical things.
+
+====Game/graphics====
+

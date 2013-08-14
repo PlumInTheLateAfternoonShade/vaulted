@@ -28,7 +28,7 @@ airColor = {r = 220, b = 255, g = 225}
             air = {c = airColor}}]]--
 
 -- Gesture grid settings
-gridSize = 15
+gridSize = 16
 gridXOffset = screenWidth / 4
 gridYOffset = screenHeight / 8
 

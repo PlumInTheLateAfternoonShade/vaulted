@@ -53,9 +53,13 @@ function love.update(dt)
 end
     
 function love.keypressed(key)
-    
+    -- first check for game-wide overrides
+    if key == "`" then
+        debug.debug()
+    elseif key == 'return' and love.keyboard.isDown('lalt', 'ralt') then
+        love.graphics.toggleFullscreen()
     -- call the main.state's keypressed function
-    if main.state == "game" then
+    elseif main.state == "game" then
         game.keypressed(key)
     elseif main.state == "menu" then
         menu.keypressed(key)
@@ -63,10 +67,6 @@ function love.keypressed(key)
         settings.keypressed(key)
     elseif main.state == "gestures" then
         gestures.keypressed(key)
-    end
-    -- toggle debug mode
-    if key == "`" then
-        debug.debug()
     end
 end
 

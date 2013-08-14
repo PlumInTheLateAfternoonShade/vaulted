@@ -22,3 +22,12 @@ function within(x, x1, x2)
     little = math.min(x1, x2)
     return x >= little and x <= big
 end
+
+function wrappedInc(obj, amount)
+    obj.i = obj.i + amount
+    if obj.i < 1 then
+        obj.i = #obj
+    elseif obj.i > #obj then
+        obj.i = 1
+    end
+end
