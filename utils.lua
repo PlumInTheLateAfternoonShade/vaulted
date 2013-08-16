@@ -9,6 +9,11 @@ function setColor(color)
     love.graphics.setColor(color.r, color.g, color.b)
 end
 
+function getColor()
+    red, green, blue = love.graphics.getColor()
+    return {r = red, g = green, b = blue}
+end
+
 function distance(x1, y1, x2, y2)
     return math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1))
 end

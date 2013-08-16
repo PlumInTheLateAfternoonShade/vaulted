@@ -77,8 +77,22 @@ function love.keyreleased(key)
     end
 end
 
+function love.mousepressed(button, x, y)
+    if main.state == "gestures" then
+        gestures.mousepressed(button, x, y)
+    end
+end
+
+function love.mousereleased(button, x, y)
+    if main.state == "gestures" then
+        gestures.mousereleased(button, x, y)
+    end
+end
+
 function updateState(choice)
     if choice == "continue" then
+        love.graphics.setLineWidth(1) 
+        --TODO... major refactoring of state switching should occur.
         main.state = "game"
     elseif choice == "exit" then
         main.state = "saveAndExit"

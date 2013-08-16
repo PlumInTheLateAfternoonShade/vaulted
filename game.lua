@@ -207,7 +207,6 @@ function visibleIcons:update()
     -- Remove any visible icons which have persisted beyond their lifetimes.
     for i = #visibleIcons, 1, -1 do
         v = visibleIcons[i]
-        print('clock: '..os.clock()..' dateBorn: '..v.dateBorn)
         if os.clock() >= v.dateBorn + v.maxAge then
             table.remove(visibleIcons, i)
         end

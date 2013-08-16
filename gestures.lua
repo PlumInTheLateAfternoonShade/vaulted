@@ -9,13 +9,6 @@ require 'spellBook'
 
 gestures = {}
 
--- A table of elements
-fire = Element('fire', fireColor)
-water = Element('water', waterColor)
-earth = Element('earth', earthColor)
-air = Element('air', airColor)
-eles = {fire, water, earth, air, i = 1}
-
 function gestures.load()
     setColor(eles[eles.i].c)
     -- The lines in the currently loaded gesture
@@ -23,11 +16,7 @@ function gestures.load()
     -- Set up the drawing grid
     gestures.initGrid()
     drawPreviewLine = false
-end
-
-function eles.inc(amount)
-    wrappedInc(eles, amount)
-    setColor(eles[eles.i].c)
+    love.graphics.setLineWidth(5)
 end
 
 function gestures.draw()
@@ -41,7 +30,6 @@ function gestures.draw()
     love.graphics.circle("fill", mouseX, mouseY, 10, 100)
     -- Draw the preview line if necessary
     if drawPreviewLine then
-        love.graphics.setLineWidth(5)
         love.graphics.line(startPoint.x, startPoint.y, mouseX, mouseY)
     end
 end
@@ -95,7 +83,8 @@ function gestures.keypressed(key)
     end
 end
 
-function love.mousepressed(x, y, button)
+function gestures.mousepressed(x, y, button)
+    if not main.state == 'gesture' then return end
     if button == "l" then
         --left mouse starts drawing a line
         startPoint = gestures.getNearestGridPoint(x, y)
@@ -112,13 +101,11 @@ function love.mousepressed(x, y, button)
     end
 end
 
-function love.mousereleased(x, y, button)
+function gestures.mousereleased(x, y, button)
     if button == "l" then
         local endPoint = gestures.getNearestGridPoint(x, y)
         local line = Seg(startPoint, endPoint, eles[eles.i].c)
         if line:lengthSquared() > 0 then
-            print('Point drawn, start is: '..tostring(startPoint)..' end is: '
-                  ..tostring(endPoint))
             table.insert(lines, line)
         end
         drawPreviewLine = false
@@ -161,7 +148,6 @@ function gestures.deleteNearestLine(p)
     -- Find the nearest line in the current gesture to the given point
     for i = 1, #lines do
         dist = lines[i]:distToPointSquared(p)
-        print("i: "..i.." dist: "..dist.." min: "..min)
         if dist < min then
             minIndex = i
             min = dist
