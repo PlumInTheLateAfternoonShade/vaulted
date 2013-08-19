@@ -1,5 +1,5 @@
 require 'utils'
-require 'Point'
+require 'geometry.Point'
 local Class = require('HardonCollider.class')
 Seg = Class
 {
@@ -35,6 +35,10 @@ end
 function Seg:lengthSquared()
     return (self.p1.x - self.p0.x) * (self.p1.x - self.p0.x)
     + (self.p1.y - self.p0.y) * (self.p1.y - self.p0.y)
+end
+
+function Seg:length()
+    return math.sqrt(self:lengthSquared())
 end
 
 function Seg:intersects(seg)

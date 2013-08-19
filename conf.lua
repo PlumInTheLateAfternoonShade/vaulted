@@ -1,3 +1,6 @@
+-- Whether to run the profiler
+ShouldProfile = false
+
 -- Game Scale
 scale = 1
 
@@ -25,11 +28,8 @@ waterColor = {r = 40, b = 240, g = 70}
 earthColor = {r = 100, b = 50, g = 120}
 airColor = {r = 220, b = 255, g = 225}
 
--- Elements
---[[elements = {fire = {c = fireColor}, 
-            water = {c = waterColor},
-            earth = {c = earthColor},
-            air = {c = airColor}}]]--
+-- Other colors
+fontColor = {r=0,g=0,b=0}
 
 -- Gesture grid settings
 gridSize = 16

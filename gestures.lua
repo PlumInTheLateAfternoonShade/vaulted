@@ -1,29 +1,33 @@
 -- Provides the UI for making new spell gestures.
 require('utils')
 --local Class = require "HardonCollider/class"
-require 'Element'
-require 'Point'
-require 'Seg'
-require 'Spell'
+require 'geometry.Point'
+require 'geometry.Seg'
+require 'spells.Spell'
 require 'spellBook'
+local Class = require 'HardonCollider.class'
+require 'state'
 
-gestures = {}
+Gestures = Class
+{
+    name = 'Gestures',
+    function(self)
+        setColor(eles[eles.i].c)
+        -- The lines in the currently loaded gesture
+        lines = spellBook[spellBook.i].lines
+        -- Set up the drawing grid
+        self:initGrid()
+        drawPreviewLine = false
+        love.graphics.setLineWidth(5)
+    end
+}
+Gestures:inherit(State)
 
-function gestures.load()
-    setColor(eles[eles.i].c)
-    -- The lines in the currently loaded gesture
-    lines = spellBook[spellBook.i].lines
-    -- Set up the drawing grid
-    gestures.initGrid()
-    drawPreviewLine = false
-    love.graphics.setLineWidth(5)
-end
-
-function gestures.draw()
+function Gestures:draw()
     -- Draw the grid of possible gesture points
-    gestures.drawGrid()
+    self:drawGrid()
     -- Draw each line in the current gesture
-    gestures.drawLines()
+    self:drawLines()
     -- Draw the cursor
     local mouseX = love.mouse.getX()
     local mouseY = love.mouse.getY()
@@ -34,7 +38,7 @@ function gestures.draw()
     end
 end
 
-function gestures.drawGrid()
+function Gestures:drawGrid()
     local red, green, blue = love.graphics.getColor()
     setColor({r=255, g=255, b=255})
     for i = 1, gridSize do
@@ -46,7 +50,7 @@ function gestures.drawGrid()
     setColor({r=red, g=green, b=blue})
 end
 
-function gestures.drawLines()
+function Gestures:drawLines()
     local red, green, blue = love.graphics.getColor()
     --TODO convert to sensible for loop
     for i = 1, #lines do
@@ -57,7 +61,7 @@ function gestures.drawLines()
     setColor({r=red, g=green, b=blue})
 end
 
-function gestures.keypressed(key)
+function Gestures:keypressed(key)
     if key == left then
         eles.inc(-1)
     elseif key == right then
@@ -70,29 +74,25 @@ function gestures.keypressed(key)
         lines = spellBook[spellBook.i].lines
     elseif spellBook.keyMatch(key) then
         lines = spellBook[spellBook.i].lines
-    elseif key == openMenu then
-        --TODO
-        --setColor(genMenu.fontColor)
-        --updateState("back to main menu")
     elseif key == confirm or key == gesture then
         -- Finalize and save spells
         spellBook.finalize()
         -- Go back to game.
-        setColorInverted(genMenu.fontColor)
-        updateState("game")
+        setColorInverted(fontColor)
+        updateState("continue")
     end
 end
 
-function gestures.mousepressed(x, y, button)
+function Gestures:mousepressed(x, y, button)
     if not main.state == 'gesture' then return end
     if button == "l" then
         --left mouse starts drawing a line
-        startPoint = gestures.getNearestGridPoint(x, y)
+        startPoint = self:getNearestGridPoint(x, y)
         drawPreviewLine = true
     elseif button == "r" then
         --right mouse deletes the closest line
         if #lines > 0 then
-            gestures.deleteNearestLine(Point(x, y))
+            self:deleteNearestLine(Point(x, y))
         end
     elseif button == "wu" then
         eles.inc(1)
@@ -101,9 +101,9 @@ function gestures.mousepressed(x, y, button)
     end
 end
 
-function gestures.mousereleased(x, y, button)
+function Gestures:mousereleased(x, y, button)
     if button == "l" then
-        local endPoint = gestures.getNearestGridPoint(x, y)
+        local endPoint = self:getNearestGridPoint(x, y)
         local line = Seg(startPoint, endPoint, eles[eles.i].c)
         if line:lengthSquared() > 0 then
             table.insert(lines, line)
@@ -112,7 +112,7 @@ function gestures.mousereleased(x, y, button)
     end
 end
 
-function gestures.initGrid()
+function Gestures:initGrid()
     gapX = (screenWidth - 2*gridXOffset) / gridSize
     gapY = (screenHeight - 2*gridYOffset) / gridSize
     grid = {}
@@ -125,7 +125,7 @@ function gestures.initGrid()
     end
 end
 
-function gestures.getNearestGridPoint(x, y)
+function Gestures:getNearestGridPoint(x, y)
     -- Find the nearest grid point to the given point.
     local min = screenWidth
     for i = 1, gridSize do
@@ -140,7 +140,7 @@ function gestures.getNearestGridPoint(x, y)
     return minPoint
 end
 
-function gestures.deleteNearestLine(p)
+function Gestures:deleteNearestLine(p)
     --TODO this funct is wrong. Unsure if table indexing or dist algo problem.
     local min = screenWidth*screenWidth
     local minIndex = 1
@@ -154,13 +154,4 @@ function gestures.deleteNearestLine(p)
         end
     end
     table.remove(lines, minIndex)
-end
-
-function distToSegmentSquared(px, py, vx, vy, wx, wy)
-    l2 = distance(vx, vy, wx, wy)
-    if (l2 == 0) then return distance(px, py, vx, vy) end
-    t = ((px - vx) * (wx - vx) + (py - vy) * (wy - vy)) / l2
-    if (t < 0) then return distance(px, py, vx, vy) end
-    if (t > 1) then return distance(px, py, wx, wy) end
-    return distance(px, py, vx + t * (wx - vx), vy + t * (wy - vy))
 end

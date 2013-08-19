@@ -1,6 +1,6 @@
 -- A table of all the hero's spells.
 
-require 'Spell'
+require 'spells.Spell'
 require 'utils'
 
 spellBook = {

@@ -1,60 +1,61 @@
-game = {}
-
+require('state')
 require('camera')
 require('spellBook')
 require('utils')
 require('gestures')
-require('VisibleIcon')
 local visibleIcons = {}
 local loader = require "AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
 local HC = require "HardonCollider"
+local Class = require 'HardonCollider.class'
 
 local hero
 local collider
 local allSolidTiles
 
-function game.load()
-    -- load the level and bind to variable map
-    map = loader.load("level.tmx")
-    map.tileWidth = tileSize
-    map.widthInPixels = map.tileWidth * map.width
-    -- load HardonCollider, set callback to on_collide and size of 100
-    collider = HC(100, on_collide)
+Game = Class
+{
+    name = 'Game',
+    function(self)
+        -- load the level and bind to variable map
+        map = loader.load("level.tmx")
+        map.tileWidth = tileSize
+        map.widthInPixels = map.tileWidth * map.width
+        -- load HardonCollider, set callback to on_collide and size of 100
+        collider = HC(100, on_collide)
 
-    -- find all the tiles that we can collide with
-    allSolidTiles = findSolidTiles(map)
+        -- find all the tiles that we can collide with
+        allSolidTiles = findSolidTiles(map)
 
-    -- set up the hero object, set him to position 32, 32
-    setupHero(32, 32)
+        -- set up the hero object, set him to position 32, 32
+        self:setupHero(32, 32)
 
-    -- init debug vars
-    game.fps = 0
-    game.secondCount = 1.1
+        -- init debug vars
+        self.fps = 0
+        self.secondCount = 1.1
 
-    game.maxXp = 2000
-end
+        self.maxXp = 2000
+    end
+}
+Game:inherit(State)
 
-function game.update(dt)
-
-    game.secondCount = game.secondCount + dt
-    if game.secondCount > 1 then
+function Game:update(dt)
+    self.secondCount = self.secondCount + dt
+    if self.secondCount > 1 then
         -- updates which only have to happen once in a while
         -- get shoved in here to reduce performance impact.
-        game.secondCount = game.secondCount - 1
+        self.secondCount = self.secondCount - 1
         visibleIcons:update()
         -- update the FPS counter
-        game.fps = 1 / dt
+        self.fps = 1 / dt
     end
-
     updateHero(dt)
-
     -- update the collision detection
     collider:update(dt)
 end
 
-function game.draw()
+function Game:draw()
     -- scale everything 1x
     love.graphics.scale(1, 1)
     camera:set()
@@ -66,9 +67,9 @@ function game.draw()
     visibleIcons:draw()
     camera:unset()
     -- draw the xp bar
-    game.drawXpBar()
+    self.drawXpBar()
     -- draw the FPS counter
-    love.graphics.print("FPS: "..string.format("%d", game.fps),
+    love.graphics.print("FPS: "..string.format("%d", self.fps),
     screenWidth - 100, 50)
 end
 
@@ -94,7 +95,7 @@ function collideHeroWithTile(dt, shape_a, shape_b, mtv_x, mtv_y)
     hero.YVeloc = 0 -- TODO wrong.
 end
 
-function setupHero(x,y)
+function Game:setupHero(x,y)
     -- physical properties
     hero = collider:addRectangle(x, y, 16, 16)
     hero.size = 16
@@ -108,8 +109,7 @@ function setupHero(x,y)
     -- mental properties
     hero.farthestX = 0
     hero.damage = 0
-    hero.xp = game.getHeroXp()
-
+    hero.xp = self:getHeroXp()
     --	hero.img = love.graphics.newImage("img/hero.png")
 end
 
@@ -117,7 +117,7 @@ end
 -- Key input handling functions
 -------------------------------
 
-function game.keypressed(key)
+function Game:keypressed(key)
     if key == right then
         hero.XVeloc = 0
         hero.XAccel = 10
@@ -134,7 +134,7 @@ function game.keypressed(key)
     end
 end
 
-function game.keyreleased(key)
+function Game:keyreleased(key)
     if (key == right and hero.XAccel == 10)
         or (key == left and hero.XAccel == -10) then
         hero.XAccel = 0
@@ -146,18 +146,19 @@ end
 -- XP Functions
 --------------
 
-function game.getHeroXp()
+function Game:getHeroXp()
     hero.farthestX = math.max(hero:center(), hero.farthestX)
     hero.xp = hero.farthestX / map.widthInPixels * 2000 - hero.damage
-    --* game.maxXp TODO??bug
+    --* self.maxXp TODO??bug
     return hero.xp
 end
 
-function game.drawXpBar()
+function Game:drawXpBar()
     red, green, blue = love.graphics.getColor()
     setColor({r=100, g=100, b=100})
-    love.graphics.rectangle("fill", 0, screenHeight - 75, 
-                            screenWidth*(game.getHeroXp() / game.maxXp), 50)
+    --TODO!!
+ --   love.graphics.rectangle("fill", 0, screenHeight - 75, 
+ --   screenWidth*(self:getHeroXp() / self.maxXp), 50)
     setColor({r=red, g=green, b=blue})
 end
 
@@ -180,6 +181,7 @@ function findSolidTiles(map)
     -- get the layer that the tiles are on by name
     local layer = map.tl["ground"]
 
+
     for tileX=1,map.width do
         for tileY=1,map.height do
 
@@ -191,8 +193,8 @@ function findSolidTiles(map)
 
             if tile and tile.properties.solid then
                 local ctile = collider:addRectangle((tileX-1)*tileSize,
-                                                    (tileY-1)*tileSize,
-                                                    tileSize, tileSize)
+                (tileY-1)*tileSize,
+                tileSize, tileSize)
                 ctile.type = "tile"
                 collider:addToGroup("tiles", ctile)
                 collider:setPassive(ctile)

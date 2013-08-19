@@ -1,0 +1,44 @@
+Classes:
+
+--CollidableObject-- defines a solid object in the game that is added to the HardonCollider.
+
+    --Actor : CollidableObject-- defines an entity that can move.
+
+        --Caster : Actor-- defines an actor that can cast spells.
+
+            --Hero : Caster-- defines a caster that can be controlled using the keys.
+
+            --Enemy : Caster-- defines a caster that actively tries to kill the Hero.
+
+--Spell-- defines a spell that contains regions and has an overall power. It can be cast by a 
+Caster who has it in his/her spellBook.
+
+--Region-- defines a connected, same-color part of a spell that contains lines, a power, an effect, and a mass.
+
+--Effect-- defines the effect that a region has on the game world.
+
+    --Force : Effect-- defines an effect that imparts a force on CollidableObjects in its path.
+
+    --Hilt : Effect-- defines an effect that transforms the rest of the spell into a melee weapon.
+
+    --Arrow : Effect-- defines an effect that fires an arrow.
+
+    --Cloud : Effect-- defines an effect that makes a CollidableObject which lingers in one spot.
+
+    --Lightning : Effect-- defines an effect that zaps stuff.
+
+    ...and so on...
+
+--spellBook-- defines all spells owned by a caster.
+
+--game-- defines a state controlling the game's update, drawing, and collision. So... everything?
+
+--main-- defines the start-up functions and integrates between the game states.
+
+--menu-- defines the main menu screen.
+
+--settings-- defines the settings menu screen.
+
+--genMenu-- defines a generic menu.
+
+...TODO
