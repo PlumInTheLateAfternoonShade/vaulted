@@ -18,8 +18,29 @@ Game = Class
 {
     name = 'Game',
     function(self)
+        self.heroForce = 2000
+        self.heroFriction = 1
+        self.groundFriction = 2.5
+        love.physics.setMeter(tileSize)
+        world = love.physics.newWorld(0, 50*tileSize, true)
+        objects = {} -- a table of all collidable objects in the world
+        objects.ground = {}
+        objects.ground.body = love.physics.newBody(world, screenWidth/2,
+                                                  screenHeight - 50/2)
+        objects.ground.shape = love.physics.newRectangleShape(screenWidth, 50)
+        objects.ground.fixture = love.physics.newFixture(objects.ground.body,
+                                                         objects.ground.shape)
+        objects.ground.fixture:setFriction(self.groundFriction)
+        objects.hero = {}
+        objects.hero.body = love.physics.newBody(world, 200, 550, "dynamic")
+        objects.hero.shape = love.physics.newRectangleShape(tileSize, 
+                                                            tileSize*3)
+        objects.hero.fixture = love.physics.newFixture(objects.hero.body,
+                                                      objects.hero.shape, 1)
+        --objects.hero.fixture:setFriction(self.heroFriction)
+        objects.hero.horzForce = 0
         -- load the level and bind to variable map
-        map = loader.load("level.tmx")
+        --[[map = loader.load("level.tmx")
         map.tileWidth = tileSize
         map.widthInPixels = map.tileWidth * map.width
         -- load HardonCollider, set callback to on_collide and size of 100
@@ -29,7 +50,7 @@ Game = Class
         allSolidTiles = findSolidTiles(map)
 
         -- set up the hero object, set him to position 32, 32
-        self:setupHero(32, 32)
+        self:setupHero(32, 32)]]--
 
         -- init debug vars
         self.fps = 0
@@ -50,19 +71,26 @@ function Game:update(dt)
         -- update the FPS counter
         self.fps = 1 / dt
     end
-    updateHero(dt)
+    world:update(dt)
+    objects.hero.body:applyForce(objects.hero.horzForce, 0)
+    --updateHero(dt)
     -- update the collision detection
-    collider:update(dt)
+    --collider:update(dt)
 end
 
 function Game:draw()
     -- scale everything 1x
     love.graphics.scale(1, 1)
     camera:set()
+
+    love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
+    love.graphics.polygon("fill", 
+    objects.ground.body:getWorldPoints(objects.ground.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
+    love.graphics.polygon("fill", objects.hero.body:getWorldPoints(objects.hero.shape:getPoints()))
     -- draw the level
-    map:draw()
+    --map:draw()
     -- draw the hero as a rectangle
-    hero:draw("fill")
+    --hero:draw("fill")
     -- draw all visible spell icons
     visibleIcons:draw()
     camera:unset()
@@ -119,11 +147,9 @@ end
 
 function Game:keypressed(key)
     if key == right then
-        hero.XVeloc = 0
-        hero.XAccel = 10
+        objects.hero.horzForce = self.heroForce
     elseif key == left then
-        hero.XVeloc = 0
-        hero.XAccel = -10
+        objects.hero.horzForce = -self.heroForce
     elseif spellBook.keyMatch(key) then
         local icon = spellBook[spellBook.i]:cast(1, hero)
         table.insert(visibleIcons, icon)
@@ -135,10 +161,10 @@ function Game:keypressed(key)
 end
 
 function Game:keyreleased(key)
-    if (key == right and hero.XAccel == 10)
-        or (key == left and hero.XAccel == -10) then
-        hero.XAccel = 0
-        hero.XVeloc = 0
+    if (key == right and objects.hero.horzForce == self.heroForce)
+        or (key == left and objects.hero.horzForce == -self.heroForce) then
+        --TODO it shouldn't fully reset the force.
+        objects.hero.horzForce = 0
     end
 end
 

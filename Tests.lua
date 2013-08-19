@@ -1,6 +1,6 @@
 local LuaUnit = require('luaunit.luaunit')
-require('Seg')
-require('Point')
+require('geometry.Seg')
+require('geometry.Point')
 
 Tests = {}
 
