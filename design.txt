@@ -1,6 +1,6 @@
 Classes:
 
---CollidableObject-- defines a solid object in the game that is added to the HardonCollider.
+--CollidableObject-- defines a solid object in the game that is added to the physics world.
 
     --Actor : CollidableObject-- defines an entity that can move.
 
