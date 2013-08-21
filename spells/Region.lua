@@ -2,6 +2,7 @@ require('lib.deepcopy.deepcopy')
 local Seg = require('geometry.Seg')
 local Point = require('geometry.Point')
 local Element = require('spells.Element')
+require('spells.effectFactory')
 
 -- Defines a connected region of lines of one element.
 
@@ -13,7 +14,7 @@ Region = Class
         self.seed = seedLine
         self.element = eles.getEleFromColor(self.seed.c)
         self.lines = {self.seed}
-        self.effect = 'Projectile'
+        self.effect = nil
         self.power = 0
     end
 }
@@ -33,8 +34,13 @@ function Region:assignPower()
     return self.power
 end
 
+function Region:assignEffect()
+    print('#lines: '..#self.lines)
+    self.effect = effectFactory:makeEffect(self.lines, self.element, self.power)
+end
+
 function Region.__tostring(r)
-    str = 'REGION element: '..tostring(r.element)..' | effect: '..r.effect..' | power: '..r.power..'\n'
+    str = 'REGION element: '..tostring(r.element)..' | power: '..r.power..'\n'
     for i = 1, #r.lines do
         str = str..tostring(r.lines[i])..'\n'
     end

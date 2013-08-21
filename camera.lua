@@ -1,39 +1,45 @@
-camera = {}
-camera.x = 0
-camera.y = 0
-camera.scaleX = 1
-camera.scaleY = 1
+local Class = require('class')
+Camera = Class
+{
+    name = 'Camera',
+    function(self)
+        self.x = 0
+        self.y = 0
+        self.scaleX = 1
+        self.scaleY = 1
+    end
+}
 
-function camera:set()
+function Camera:set()
     love.graphics.push()
     love.graphics.scale(self.scaleX, self.scaleY)
     love.graphics.translate(-self.x, -self.y)
 end
 
-function camera:unset()
+function Camera:unset()
     love.graphics.pop()
 end
 
-function camera:move(dx, dy)
+function Camera:move(dx, dy)
     self.x = self.x + dx
     self.y = self.y + dy
 end
 
-function camera:rotate(dr)
+function Camera:rotate(dr)
     self.rotation = self.rotation + dr
 end
 
-function camera:scale(sx, sy)
+function Camera:scale(sx, sy)
     self.scaleX = self.scaleX * sx
     self.scaleY = self.scaleY * sy
 end
 
-function camera:setPosition(x, y)
+function Camera:setPosition(x, y)
     self.x = x
     self.y = y
 end
 
-function camera:setScale(sx, sy)
+function Camera:setScale(sx, sy)
     self.scaleX = sx
     self.scaleY = sy
 end

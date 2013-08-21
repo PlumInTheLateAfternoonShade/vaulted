@@ -4,11 +4,12 @@ local Class = require 'class'
 CollidableObject = Class
 {
     name = 'CollidableObject',
-    function(self, world, point, w, h, friction, type, color)
+    function(self, world, point, w, h, friction, type, color, name)
         self.body = love.physics.newBody(world, point.x, point.y, type)
         self.shape = love.physics.newRectangleShape(w, h)
         self.fixture = love.physics.newFixture(self.body, self.shape)
         self.fixture:setFriction(friction)
+        self.fixture:setUserData(name)
         self.color = color
     end
 }

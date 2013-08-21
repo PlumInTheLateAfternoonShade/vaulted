@@ -19,7 +19,7 @@ screenWidth = 1600
 screenHeight = 900
 
 -- Map settings
-tileSize = 16
+tileSize = 64
 iconSize = tileSize * 2
 
 -- Element colors

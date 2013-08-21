@@ -109,6 +109,13 @@ function Seg:scale(value)
     self.p0:scale(value)
     self.p1:scale(value)
 end
+
+function Seg:getAngle()
+    local dx = self.p0.x - self.p1.x
+    local dy = self.p1.y - self.p0.y
+    return math.atan2(dy, dx)
+end
+
 function Seg.__tostring(r)
     return tostring(r.p0)..','..tostring(r.p1)
 end

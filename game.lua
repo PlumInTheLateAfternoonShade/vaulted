@@ -16,30 +16,33 @@ local hero
 local collider
 local allSolidTiles
 
+local camera
+local world
+
 Game = Class
 {
     name = 'Game',
     function(self)
-        self.heroForce = 2000
-        self.groundFriction = 2.5
+        self.groundFriction = 0.5
         love.physics.setMeter(tileSize)
         world = love.physics.newWorld(0, 50*tileSize, true)
+        world:setCallbacks(beginContact, endContact, preSolve,
+        postSolve)
         objects = {} -- a table of all collidable objects in the world
         objects.ground = {}
         objects.ground.body = love.physics.newBody(world, screenWidth/2,
-                                                  screenHeight - 50/2)
+        screenHeight - 50/2)
         objects.ground.shape = love.physics.newRectangleShape(screenWidth, 50)
         objects.ground.fixture = love.physics.newFixture(objects.ground.body,
-                                                         objects.ground.shape)
+        objects.ground.shape)
         objects.ground.fixture:setFriction(self.groundFriction)
+        objects.ground.fixture:setUserData("Ground")
         hero = Hero(world, Point(200, 550), tileSize, tileSize*3)
-        hero.body:setLinearDamping(0.1)
-        hero.horzForce = 0
         -- load the level and bind to variable map
         --[[map = loader.load("level.tmx")
         map.tileWidth = tileSize
         map.widthInPixels = map.tileWidth * map.width
-        -- load HardonCollider, set callback to on_collide and size of 100
+        - load HardonCollider, set callback to on_collide and size of 100
         collider = HC(100, on_collide)
 
         -- find all the tiles that we can collide with
@@ -53,6 +56,10 @@ Game = Class
         self.secondCount = 1.1
 
         self.maxXp = 2000
+        
+        -- init camera
+        camera = Camera()
+        camera:scale(0.25, 0.25)
     end
 }
 Game:inherit(State)
@@ -67,19 +74,13 @@ function Game:update(dt)
         -- update the FPS counter
         self.fps = 1 / dt
     end
-    hero.body:setAngle(0)
-    camera.x = hero.body:getX() - tileSize * 8
+    hero:update(dt)
     world:update(dt)
-    hero.body:applyForce(hero.horzForce, 0)
-    hero.body:setAngle(0)
-    --updateHero(dt)
-    -- update the collision detection
-    --collider:update(dt)
 end
 
 function Game:draw()
-    -- scale everything 1x
-    love.graphics.scale(1, 1)
+    camera.x = hero.body:getX() - screenWidth/(2*camera.scaleX)
+    camera.y = hero.body:getY() - screenHeight/(2*camera.scaleY)
     camera:set()
 
     love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
@@ -96,7 +97,41 @@ function Game:draw()
     self.drawXpBar()
     -- draw the FPS counter
     love.graphics.print("FPS: "..string.format("%d", self.fps),
-    screenWidth - 100, 50)
+    screenWidth * 0.9375, screenHeight * 0.0625)
+
+    love.graphics.print("WrappedAngle: "
+    ..string.format("%.2f", hero:getWrappedAngle()),
+    screenWidth * 0.6, screenHeight * 0.6)
+    love.graphics.print("AngVel: "
+    ..string.format("%.2f", hero.body:getAngularVelocity()).." IsFixed: "
+    ..tostring(hero.body:isFixedRotation()),
+    screenWidth * 0.6, screenHeight * 0.4)
+    love.graphics.print("Mass: "..string.format("%.2f", hero.body:getMass()),
+    screenWidth * 0.4, screenHeight * 0.4)
+end
+
+function beginContact(a, b, coll)
+    setRighting(a, b, true)
+end
+
+function endContact(a, b, coll)
+    setRighting(a, b, false)
+end
+
+function preSolve(a, b, coll)
+end
+
+function postSolve(a, b, coll)
+end
+
+function setRighting(a, b, value)
+    local userData = {[a:getUserData()] = a, [b:getUserData()] = b}
+    local actor = userData["Actor"]
+    local ground = userData["Ground"]
+    if actor ~= nil and ground ~= nil then
+        hero.righting = value --TODO horrifically wrong.
+        hero.body:setFixedRotation(value)
+    end
 end
 
 function on_collide(dt, shape_a, shape_b, mtv_x, mtv_y)
@@ -145,11 +180,11 @@ end
 
 function Game:keypressed(key)
     if key == right then
-        hero.horzForce = self.heroForce
+        hero:setWalkingRight()
     elseif key == left then
-        hero.horzForce = -self.heroForce
+        hero:setWalkingLeft()
     elseif spellBook.keyMatch(key) then
-        local icon = spellBook[spellBook.i]:cast(1, hero)
+        local icon = spellBook[spellBook.i]:cast(world, hero)
         table.insert(visibleIcons, icon)
     elseif key == openMenu then
         updateState("back to main menu")
@@ -159,10 +194,9 @@ function Game:keypressed(key)
 end
 
 function Game:keyreleased(key)
-    if (key == right and hero.horzForce == self.heroForce)
-        or (key == left and hero.horzForce == -self.heroForce) then
-        --TODO it shouldn't fully reset the force.
-        hero.horzForce = 0
+    if (key == right and hero:isWalkingRight())
+        or (key == left and hero:isWalkingLeft()) then
+        hero:setStanding()
     end
 end
 
@@ -181,8 +215,8 @@ function Game:drawXpBar()
     red, green, blue = love.graphics.getColor()
     setColor({r=100, g=100, b=100})
     --TODO!!
- --   love.graphics.rectangle("fill", 0, screenHeight - 75, 
- --   screenWidth*(self:getHeroXp() / self.maxXp), 50)
+    --   love.graphics.rectangle("fill", 0, screenHeight - 75, 
+    --   screenWidth*(self:getHeroXp() / self.maxXp), 50)
     setColor({r=red, g=green, b=blue})
 end
 

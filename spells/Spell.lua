@@ -15,15 +15,14 @@ Spell = Class
     end
 }
 
-function Spell:cast(num, caster)
-    local x, y = caster:center()
-    --TODO
-    if num == 1 then
-        caster.YVeloc = -400
+function Spell:cast(world, caster)
+    local x, y = caster.body:getWorldCenter()
+    for i = 1, #self.regions do
+        self.regions[i].effect:apply(world, caster)
     end
-    -- Casting spells drains the caster's lifeforce. 
+    -- Casting spells drains the caster's lifeforce.
     -- TODO: refuse to cast if it would kill the caster.
-    caster.damage = caster.damage + self.power
+    --caster.damage = caster.damage + self.power
     -- Note: tileSize*3 is arbitrary for now.
     return VisibleIcon(self.iconLines, x + tileSize*3, y - tileSize*3, os.clock())
 end
@@ -55,7 +54,7 @@ function Spell:analyzeLines()
     self:breakLinesIntoRegions()
     self:compressRegions()
     self:assignPower()
-    --self:assignEffects()
+    self:assignEffects()
     -- Debug output.
     print(tostring(self))
     for i = 1, #self.regions do
