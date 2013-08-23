@@ -24,8 +24,9 @@ local choose = {
             elseif not equals(frontP0, frontP1) then
                 return nil
             end
-            local chosenLine = Seg(frontP0, longestLine:getOtherPoint(frontP0),
-            longestLine.c)
+            local otherP = longestLine:getOtherPoint(frontP0)
+            print('otherP: '..tostring(otherP))
+            local chosenLine = Seg(frontP0, otherP, longestLine.c)
             return make.force(lines, element, power, chosenLine)
         end
         return nil
@@ -35,7 +36,7 @@ local choose = {
 function make.force(lines, element, power, longestLine)
     local angle = longestLine:getAngle()
     local horzForce = forceConst*power*math.cos(angle)
-    local vertForce = forceConst*power*math.sin(angle)
+    local vertForce = -1.0*forceConst*power*math.sin(angle)
     local x = 0 -- Placeholder
     local y = 0 -- Placeholder
     print('Making a force effect with hF = '..horzForce..' vF = '..vertForce
