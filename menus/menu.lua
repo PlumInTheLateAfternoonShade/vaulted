@@ -1,9 +1,9 @@
 -- The main menu for the game
 
-require('menus.genMenu')
+local GenMenu = require('menus.genMenu')
 local Class = require 'HardonCollider.class'
-require 'state'
-Menu = Class
+local State = require 'state'
+local Menu = Class
 {
     name = 'menu',
     function(self)
@@ -23,3 +23,5 @@ end
 function Menu:keypressed(key)
     self.genMenu:keypressed(key)
 end
+
+return Menu

@@ -1,12 +1,14 @@
-require('game')
-require('menus.menu')
-require('menus.settings')
-require('gestures')
+local Game = require('game')
+local Menu = require('menus.menu')
+local Settings = require('menus.settings')
+local Gestures = require('gestures')
 require('lib.deepcopy.deepcopy')
+local SaveAndExit = require('saveAndExit')
 if ShouldProfile then
     local ProFi = require 'ProFi'
 end
 local state = Menu()
+local savedGame = Game(true)
 main = {}
 
 function love.load()
@@ -86,7 +88,7 @@ function updateState(choice)
     elseif choice == "new game" then
         state = Game()
     elseif choice == "exit" then
-        state = SaveAndExit()
+        SaveAndExit:close()
     elseif choice == "settings" then
         state = Settings()
     elseif choice == "back to main menu" then

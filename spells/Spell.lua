@@ -1,19 +1,41 @@
 require 'spells.VisibleIcon'
-require 'spells.Region'
--- For casting spells.
-local Class = require('HardonCollider.class')
-Spell = Class
+local Seg = require 'geometry.Seg'
+local Region = require 'spells.Region'
+local Class = require('class')
+
+local defaultSpellTable =
+{
+    lines = {},
+    iconLines = {},
+    iconName = "",
+    power = 200,
+    regions = {}
+}
+
+-- Defines a spell that can be cast by a caster.
+local Spell = Class
 {
     name = 'Spell',
-    function(self, key)
+    function(self, key, table)
         self.key = key
-        self.lines = {}
-        self.iconLines = {}
-        self.iconName = "images/spells/"..key..".gif" --TODO delete, probably
-        self.power = 200
-        self.regions = {}
+        self:selfConstruct(table or defaultSpellTable)
     end
 }
+
+function Spell:selfConstruct(table)
+    self.lines = {}
+    self.iconLines = {}
+    self.regions = {}
+    for i = 1, #table.lines do
+        self.lines[i] = Seg(nil, nil, nil, table.lines[i])
+        self.iconLines[i] = Seg(nil, nil, nil, table.iconLines[i])
+    end
+    self.iconName = table.iconName
+    self.power = table.power
+    for i = 1, #table.regions do
+        self.regions[i] = Region(nil, table.regions[i])
+    end
+end
 
 function Spell:cast(world, caster)
     local x, y = caster.body:getWorldCenter()
@@ -68,6 +90,7 @@ function Spell:breakLinesIntoRegions()
     self:resetRegioning()
     for i = 1, #self.lines do
         l = self.lines[i]
+        print('Line = '..tostring(l))
         if not l.regioned then
             region = Region(l)
             table.insert(self.regions, region)
@@ -78,7 +101,7 @@ function Spell:breakLinesIntoRegions()
                 for k = 1, #self.lines do
                     l3 = self.lines[k]
                     if not l3.regioned
-                        and l2.c == l3.c
+                        and l2.c.t == l3.c.t
                         and l2:intersects(l3) then
                         l3.regioned = l2.regioned
                         table.insert(region.lines, l3)
@@ -127,3 +150,5 @@ end
 function Spell.__tostring(s)
     return '\n\nSPELL key: '..s.key..' power: '..s.power..'\n'
 end
+
+return Spell

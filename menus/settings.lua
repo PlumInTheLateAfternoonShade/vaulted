@@ -1,10 +1,10 @@
 -- The settings menu for the game
 
-require('menus.genMenu')
+local GenMenu = require('menus.genMenu')
 local Class = require('HardonCollider.class')
-require('state')
+local State = require('state')
 
-Settings = Class
+local Settings = Class
 {
     name = 'Settings',
     function(self)
@@ -23,3 +23,5 @@ end
 function Settings:keypressed(key)
     self.genMenu:keypressed(key)
 end
+
+return Settings

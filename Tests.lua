@@ -1,35 +1,36 @@
 local LuaUnit = require('luaunit.luaunit')
 require('geometry.Seg')
 require('geometry.Point')
+require('spells.effectFactory')
 
 Tests = {}
 
+-- Omit the colors. Because we can.
+local line11 = Seg(Point(0, 0), Point(2, 8))
+local line12 = Seg(Point(8, 0), Point(0, 20))
+
+local line21 = Seg(Point(0, 10), Point(2, 0))
+local line22 = Seg(Point(10, 0), Point(0, 5))
+
+local line31 = Seg(Point(0, 0), Point(0, 10))
+local line32 = Seg(Point(2, 0), Point(2, 10))
+
+local line41 = Seg(Point(0, 0), Point(5, 5))
+local line42 = Seg(Point(2, 0), Point(7, 5))
+
+local line51 = Seg(Point(0, 0), Point(5, 5))
+local line52 = Seg(Point(2, 2), Point(7, 7))
+
+local line61 = Seg(Point(0, 0), Point(5, 5))
+local line62 = Seg(Point(7, 7), Point(10, 10))
+
+local line71 = Seg(Point(0, 0), Point(5, 5))
+local line72 = Seg(Point(5, 5), Point(10, 10))
+
+local line81 = Seg(Point(0, 0), Point(5, 5))
+local line82 = Seg(Point(5, 5), Point(1, 9))
+
 function Tests:testSegmentIntersects()
-    -- Omit the colors. Because we can.
-    local line11 = Seg(Point(0, 0), Point(2, 8))
-    local line12 = Seg(Point(8, 0), Point(0, 20))
-
-    local line21 = Seg(Point(0, 10), Point(2, 0))
-    local line22 = Seg(Point(10, 0), Point(0, 5))
-
-    local line31 = Seg(Point(0, 0), Point(0, 10))
-    local line32 = Seg(Point(2, 0), Point(2, 10))
-
-    local line41 = Seg(Point(0, 0), Point(5, 5))
-    local line42 = Seg(Point(2, 0), Point(7, 5))
-    
-    local line51 = Seg(Point(0, 0), Point(5, 5))
-    local line52 = Seg(Point(2, 2), Point(7, 7))
-
-    local line61 = Seg(Point(0, 0), Point(5, 5))
-    local line62 = Seg(Point(7, 7), Point(10, 10))
-    
-    local line71 = Seg(Point(0, 0), Point(5, 5))
-    local line72 = Seg(Point(5, 5), Point(10, 10))
-    
-    local line81 = Seg(Point(0, 0), Point(5, 5))
-    local line82 = Seg(Point(5, 5), Point(1, 9))
-    
     assertEquals(line11:intersects(line12), false) -- No intersects
     assertEquals(line21:intersects(line22), true) -- Intersects
     assertEquals(line31:intersects(line32), false) -- Parallel, vertical
@@ -42,6 +43,15 @@ end
 
 function Tests:testSegmentPointDist()
     -- TODO
+end
+
+function Tests:testAverageAngle()
+    local sameAngles1 = {line61, line62}
+    local sameAngles2 = {line71, line72}
+    local pi4Angles1 = {line31, line32}
+    assertEquals(effectFactory:averageAngle(sameAngles1),
+    effectFactory:averageAngle(sameAngles2), true)
+    assertEquals(effectFactory:averageAngle(pi4Angles1), math.pi/2)
 end
 
 LuaUnit:run()

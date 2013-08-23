@@ -1,28 +1,28 @@
-require('state')
+local State = require('state')
 require('camera')
-require('spellBook')
 require('utils')
-require('gestures')
-require('actors.hero')
-require('geometry.Point')
+local Gestures = require('gestures')
+local Hero = require('actors.hero')
+local Point = require('geometry.Point')
+local tLoader = require('loader')
 local visibleIcons = {}
 local loader = require "AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
 local HC = require "HardonCollider"
 local Class = require 'HardonCollider.class'
+local SpellBook = require('spellBook')
 
-local hero
 local collider
 local allSolidTiles
 
 local camera
 local world
 
-Game = Class
+local Game = Class
 {
     name = 'Game',
-    function(self)
+    function(self, shouldLoadHero)
         self.groundFriction = 0.5
         love.physics.setMeter(tileSize)
         world = love.physics.newWorld(0, 50*tileSize, true)
@@ -37,7 +37,11 @@ Game = Class
         objects.ground.shape)
         objects.ground.fixture:setFriction(self.groundFriction)
         objects.ground.fixture:setUserData("Ground")
-        hero = Hero(world, Point(200, 550), tileSize, tileSize*3)
+        local loadedHero
+        if shouldLoadHero then
+            loadedHero = tLoader:unpack("Hero")
+        end
+        hero = Hero(world, Point(200, 550), tileSize, tileSize*3, loadedHero)
         -- load the level and bind to variable map
         --[[map = loader.load("level.tmx")
         map.tileWidth = tileSize
@@ -92,6 +96,15 @@ function Game:draw()
     hero:draw()
     -- draw all visible spell icons
     visibleIcons:draw()
+    
+    -- Effect debug
+    if hero.spellBook[1] ~= nil then
+        if hero.spellBook[1].regions[1] ~= nil then
+            love.graphics.print("Here", hero.spellBook[1].regions[1].effect.x, hero.spellBook[1].regions[1].effect.y)
+        end
+    end
+
+
     camera:unset()
     -- draw the xp bar
     self.drawXpBar()
@@ -183,8 +196,8 @@ function Game:keypressed(key)
         hero:setWalkingRight()
     elseif key == left then
         hero:setWalkingLeft()
-    elseif spellBook.keyMatch(key) then
-        local icon = spellBook[spellBook.i]:cast(world, hero)
+    elseif hero.spellBook:keyMatch(key) then
+        local icon = hero.spellBook[hero.spellBook.i]:cast(world, hero)
         table.insert(visibleIcons, icon)
     elseif key == openMenu then
         updateState("back to main menu")
@@ -279,3 +292,5 @@ function visibleIcons:draw()
         visibleIcons[i]:draw()
     end
 end
+
+return Game

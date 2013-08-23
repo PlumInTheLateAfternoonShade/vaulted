@@ -13,6 +13,17 @@ confirm = "return"
 left = "a"
 right = "d"
 spell1 = " "
+spell2 = "w"
+spell3 = "s"
+spell4 = "q"
+spellKey =
+{
+    spell1,
+    spell2,
+    spell3,
+    spell4
+}
+
 
 -- Screen settings
 screenWidth = 1600
@@ -42,4 +53,5 @@ function love.conf(t)
     t.screen.height = screenHeight
     t.vsync = false
     t.screen.fullscreen = false
+    t.identity = "saves" --TODO genericize
 end

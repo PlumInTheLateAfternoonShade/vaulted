@@ -1,15 +1,15 @@
 local Class = require 'class'
-require 'collidableObject'
+local CollidableObject = require 'collidableObject'
 -- Defines an object in the game world that moves around 
 -- independent of impulses.
 -- Just a rectangle for now.
 -- TODO: Look into changing the rotational inertia to make it less wobbly.
-Actor = Class
+local Actor = Class
 {
     name = 'Actor',
-    function(self, world, point, w, h, friction, color)
+    function(self, world, point, w, h, friction, color, savedSelf)
         CollidableObject.construct(self, world, point, w, h, friction,
-        "dynamic", color, "Actor")
+        "dynamic", color, "Actor", savedSelf)
         self.standupAccel = -250
         self.walkingForce = 0
         self.maxWalkingForce = self.body:getMass()*2500
@@ -69,6 +69,9 @@ end
 function Actor:update(dt)
     self:rightSelf(dt)
     self:walk(dt)
+    --TODO: it would be nice to just call the base class's function here.
+    --Not sure how to, though.
+    self.point.x, self.point.y = self.body:getWorldCenter()
 end
 
 function Actor:setRighting(value)
@@ -83,3 +86,5 @@ function Actor:getWrappedAngle()
     end 
     return angle
 end
+
+return Actor

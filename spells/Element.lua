@@ -1,4 +1,4 @@
-local Class = require('HardonCollider.class')
+local Class = require('class')
 
 Element = Class
 {
@@ -26,7 +26,9 @@ end
 
 function eles.getEleFromColor(color)
     for j = 1, #eles do
-        if eles[j].c == color then
+        if eles[j].c.r == color.r and
+           eles[j].c.g == color.g and
+           eles[j].c.b == color.b then
             return eles[j]
         end
     end

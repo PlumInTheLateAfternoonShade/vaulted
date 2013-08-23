@@ -4,11 +4,9 @@ Classes:
 
     --Actor : CollidableObject-- defines an entity that can move.
 
-        --Caster : Actor-- defines an actor that can cast spells.
+        --Hero : Actor-- defines a caster that can be controlled using the keys.
 
-            --Hero : Caster-- defines a caster that can be controlled using the keys.
-
-            --Enemy : Caster-- defines a caster that actively tries to kill the Hero.
+        --Enemy : Actor-- defines a caster that actively tries to kill the Hero.
 
 --Spell-- defines a spell that contains regions and has an overall power. It can be cast by a 
 Caster who has it in his/her spellBook.

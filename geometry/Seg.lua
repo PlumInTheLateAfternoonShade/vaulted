@@ -1,15 +1,22 @@
 require 'utils'
-require 'geometry.Point'
-local Class = require('HardonCollider.class')
-Seg = Class
+local Point = require 'geometry.Point'
+local Class = require('class')
+local Seg = Class
 {
     name = 'Seg',
-    function(self, p0, p1, c)
-        self.p0 = p0
-        self.p1 = p1
-        self.c = c
-        -- For spell usage. Whether it's been inserted into a region yet.
-        self.regioned = false
+    function(self, p0, p1, c, table)
+        if table ~= nil then
+            self.p0 = Point(nil, nil, table.p0)
+            self.p1 = Point(nil, nil, table.p1)
+            self.c = table.c
+            self.regioned = table.regioned
+        else
+            self.p0 = p0
+            self.p1 = p1
+            self.c = c
+            -- For spell usage. Whether it's been inserted into a region yet.
+            self.regioned = nil
+        end
     end
 }
 
@@ -77,8 +84,12 @@ function Seg:intersects(seg)
 end
 
 function Seg:sharesAPoint(seg)
-    return equals(self.p0, seg.p0) or equals(self.p0, seg.p1) or
-    equals(self.p1, seg.p0) or equals(self.p1, seg.p1)
+    if equals(self.p0, seg.p0) or equals(self.p0, seg.p1) then
+        return self.p0
+    elseif equals(self.p1, seg.p0) or equals(self.p1, seg.p1) then
+        return self.p1
+    end
+    return false
 end
 
 function Seg:compress()
@@ -116,6 +127,41 @@ function Seg:getAngle()
     return math.atan2(dy, dx)
 end
 
+function Seg:getOtherPoint(point)
+    if self.p0:equals(point) then
+        print('p1')
+        return p1
+    elseif self.p1:equals(point) then
+        print('p0')
+        return p0
+    end
+    print('false')
+    return false
+end
+
+function getLongestLine(lines)
+    local max = 0
+    local maxI = 1
+    for i = 1, #lines do
+        local len = lines[i]:length()
+        if len > max then
+            max = len
+            maxI = i
+        end
+    end
+    local j = 1
+    local shorterLines = {}
+    for i = 1, #lines do
+        if i ~= maxI then
+            shorterLines[j] = lines[i]
+            j = j + 1
+        end
+    end
+    return lines[maxI], shorterLines
+end
+
 function Seg.__tostring(r)
     return tostring(r.p0)..','..tostring(r.p1)
 end
+
+return Seg

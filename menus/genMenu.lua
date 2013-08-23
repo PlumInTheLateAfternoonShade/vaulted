@@ -2,7 +2,7 @@
 
 require ('utils')
 local Class = require('HardonCollider.class')
-GenMenu = Class
+local GenMenu = Class
 {
     name = 'GenMenu',
     function(self, items)
@@ -79,11 +79,4 @@ function GenMenu:drawText(text, pos, inverted)
     0, pos, love.graphics.getWidth(), "center")
 end
 
-function setColorInverted(color)
-    love.graphics.setColor(255 - color.r, 255 - color.g,
-    255 - color.b)
-end
-
-function setColor(color)
-    love.graphics.setColor(color.r, color.g, color.b)
-end
+return GenMenu

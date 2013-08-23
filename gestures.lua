@@ -1,18 +1,18 @@
 -- Provides the UI for making new spell gestures.
 require('utils')
 --local Class = require "HardonCollider/class"
-require 'geometry.Point'
-require 'geometry.Seg'
-require 'spells.Spell'
-require 'spellBook'
+local Point = require 'geometry.Point'
+local Seg = require 'geometry.Seg'
 local Class = require 'HardonCollider.class'
-require 'state'
-
-Gestures = Class
+local State = require 'state'
+local lines
+local spellBook
+local Gestures = Class
 {
     name = 'Gestures',
     function(self)
         setColor(eles[eles.i].c)
+        spellBook = hero.spellBook
         -- The lines in the currently loaded gesture
         lines = spellBook[spellBook.i].lines
         -- Set up the drawing grid
@@ -67,16 +67,16 @@ function Gestures:keypressed(key)
     elseif key == right then
         eles.inc(1)
     elseif key == up then
-        spellBook.inc(-1)
+        spellBook:inc(-1)
         lines = spellBook[spellBook.i].lines
     elseif key == down then
-        spellBook.inc(1)
+        spellBook:inc(1)
         lines = spellBook[spellBook.i].lines
-    elseif spellBook.keyMatch(key) then
+    elseif spellBook:keyMatch(key) then
         lines = spellBook[spellBook.i].lines
     elseif key == confirm or key == gesture then
         -- Finalize and save spells
-        spellBook.finalize()
+        spellBook:finalize()
         -- Go back to game.
         setColorInverted(fontColor)
         updateState("continue")
@@ -155,3 +155,5 @@ function Gestures:deleteNearestLine(p)
     end
     table.remove(lines, minIndex)
 end
+
+return Gestures

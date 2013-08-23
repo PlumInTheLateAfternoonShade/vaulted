@@ -1,7 +1,7 @@
 require('lib.deepcopy.deepcopy')
 
 --For casting spells.
-local Class = require('HardonCollider.class')
+local Class = require('class')
 VisibleIcon = Class
 {
     name = 'VisibleIcon',

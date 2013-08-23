@@ -1,10 +1,15 @@
-local Class = require('HardonCollider.class')
-Point = Class
+local Class = require('class')
+local Point = Class
 {
     name = 'Point',
-    function(self, x, y)
-        self.x = x
-        self.y = y
+    function(self, x, y, table)
+        if table ~= nil then
+            self.x = table.x
+            self.y = table.y
+        else
+            self.x = x
+            self.y = y
+        end
     end
 }
 
@@ -41,6 +46,10 @@ function Point:scale(value)
     self.y = self.y * value
 end
 
+function Point:equals(point)
+    return self.x == point.x and self.y == point.y
+end
+
 dot = function(p0, p1)
     return p0.x * p1.x + p0.y * p1.y
 end
@@ -48,3 +57,5 @@ end
 equals = function(p0, p1)
     return p0.x == p1.x and p0.y == p1.y
 end
+
+return Point

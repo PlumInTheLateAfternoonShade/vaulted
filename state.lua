@@ -2,7 +2,7 @@
 -- don't have to redefine each empty method in states that don't care about
 -- mouse input, for example.
 local Class = require('HardonCollider.class')
-State = Class
+local State = Class
 {
     name = 'State',
     function(self)
@@ -29,3 +29,5 @@ end
 
 function State:mousereleased(x, y, button)
 end
+
+return State
