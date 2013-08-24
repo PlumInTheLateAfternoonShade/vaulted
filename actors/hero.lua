@@ -1,6 +1,6 @@
 local Class = require 'class'
 local Actor = require 'actors.actor'
-require 'geometry.Point'
+local Point = require 'geometry.Point'
 local SpellBook = require 'spellBook'
 -- Defines the player character in the game world.
 -- Just a rectangle for now.
@@ -13,8 +13,18 @@ local defaultHero =
 local Hero = Class
 {
     name = 'Hero',
-    function(self, world, point, w, h, savedSelf)
-        Actor.construct(self, world, point, w, h, 1, {r=230, g=255, b=255},
+    function(self, world, points, center, savedSelf)
+        --Set default hero start position
+        if points == nil and savedSelf == nil then
+            points = 
+            {
+                Point(0, 0),
+                Point(0, tileSize*3),
+                Point(tileSize, tileSize*3),
+                Point(tileSize, 0)
+            }
+        end
+        Actor.construct(self, world, points, center, 1, {r=230, g=255, b=255},
         savedSelf)
         self.name = 'Hero'
         local table = savedSelf or defaultHero

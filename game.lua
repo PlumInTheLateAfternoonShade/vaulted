@@ -18,6 +18,7 @@ local allSolidTiles
 
 local camera
 local world
+objects = {} -- a table of all collidable objects in the world
 
 local Game = Class
 {
@@ -28,7 +29,6 @@ local Game = Class
         world = love.physics.newWorld(0, 50*tileSize, true)
         world:setCallbacks(beginContact, endContact, preSolve,
         postSolve)
-        objects = {} -- a table of all collidable objects in the world
         objects.ground = {}
         objects.ground.body = love.physics.newBody(world, screenWidth/2,
         screenHeight - 50/2)
@@ -41,7 +41,8 @@ local Game = Class
         if shouldLoadHero then
             loadedHero = tLoader:unpack("Hero")
         end
-        hero = Hero(world, Point(200, 550), tileSize, tileSize*3, loadedHero)
+        hero = Hero(world, nil, Point(200, 550), loadedHero)
+        table.insert(objects, hero)
         -- load the level and bind to variable map
         --[[map = loader.load("level.tmx")
         map.tileWidth = tileSize
@@ -78,7 +79,9 @@ function Game:update(dt)
         -- update the FPS counter
         self.fps = 1 / dt
     end
-    hero:update(dt)
+    for i = 1, #objects do
+        objects[i]:update(dt)
+    end
     world:update(dt)
 end
 
@@ -92,26 +95,31 @@ function Game:draw()
     objects.ground.body:getWorldPoints(objects.ground.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
     -- draw the level
     --map:draw()
-    -- draw the hero as a rectangle
-    hero:draw()
+    for i = 1, #objects do
+    -- draw the objects as rectangles
+        objects[i]:draw()
+    end
     -- draw all visible spell icons
     visibleIcons:draw()
     
     -- Effect debug
-    if hero.spellBook[1] ~= nil then
+    --[[if hero.spellBook[1] ~= nil then
         if hero.spellBook[1].regions[1] ~= nil then
             love.graphics.print("Here", hero.spellBook[1].regions[1].effect.x, hero.spellBook[1].regions[1].effect.y)
         end
-    end
+    end]]--
 
 
     camera:unset()
     -- draw the xp bar
     self.drawXpBar()
+
+    setColorInverted(fontColor)
     -- draw the FPS counter
     love.graphics.print("FPS: "..string.format("%d", self.fps),
     screenWidth * 0.9375, screenHeight * 0.0625)
 
+    -- debug prints
     love.graphics.print("WrappedAngle: "
     ..string.format("%.2f", hero:getWrappedAngle()),
     screenWidth * 0.6, screenHeight * 0.6)

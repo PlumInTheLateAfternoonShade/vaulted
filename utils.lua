@@ -36,3 +36,17 @@ function wrappedInc(obj, amount)
         obj.i = 1
     end
 end
+
+-- By Bradley Smith, from
+-- http://www.dzone.com/snippets/lua-unpack-multiple-tables
+-- Returns all elements from all table arguments
+function unpacks( ... )
+    local values = {}
+    -- Collect values from all tables
+    for i = 1, select( '#', ... ) do
+        for _, value in ipairs( select( i, ... ) ) do
+            values[ #values + 1] = value
+        end
+    end
+    return unpack( values )
+end

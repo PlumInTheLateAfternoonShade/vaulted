@@ -2,9 +2,11 @@ local Class = require('class')
 
 Element = Class
 {
-    function(self, t, color)
+    function(self, t, color, friction, density)
         self.t = t
         self.c = color
+        self.friction = friction
+        self.density = density
     end
 }
 
@@ -13,10 +15,10 @@ function Element.__tostring(e)
 end
 
 -- A table of elements
-fire = Element('fire', fireColor)
-water = Element('water', waterColor)
-earth = Element('earth', earthColor)
-air = Element('air', airColor)
+fire = Element('fire', fireColor, 0.2, 0.5)
+water = Element('water', waterColor, 0.05, 5)
+earth = Element('earth', earthColor, 0.5, 20)
+air = Element('air', airColor, 0, 0)
 eles = {fire, water, earth, air, i = 1}
 
 function eles.inc(amount)

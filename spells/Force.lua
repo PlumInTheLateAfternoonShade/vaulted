@@ -16,11 +16,11 @@ local Force = Class
 Force:inherit(Effect)
 
 function Force:apply(world, caster)
-    self.x = caster.body:getX()
-    self.y = caster.body:getY() + tileSize*2 --TODO Placeholder
-    print('Applying a force at '..string.format("x:%.2f, y: %.2f, h: %.2f, v: %.2f", self.x, self.y, self.h, self.v))
+    local adjX = caster.body:getX() + self.x
+    local adjY = caster.body:getY() + self.y
+    print('Applying a force at '..string.format("x:%.2f, y: %.2f, h: %.2f, v: %.2f", adjX, adjY, self.h, self.v))
     currentForce = self
-    world:rayCast(self.x, self.y, self.x + self.h*1000, self.y + self.v*1000,
+    world:rayCast(adjX, adjY, adjX + self.h*1000, adjY + self.v*1000,
     forceRayCallBack)
 end
 

@@ -39,4 +39,6 @@ Caster who has it in his/her spellBook.
 
 --genMenu-- defines a generic menu.
 
-...TODO
+--world-- defines the physics world.
+
+--objects-- a table of CollidableObjects.

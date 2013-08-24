@@ -39,15 +39,27 @@ function Gestures:draw()
 end
 
 function Gestures:drawGrid()
+    local smallDotRad = 5
+    local bigDotRad = 8
     local red, green, blue = love.graphics.getColor()
     setColor({r=255, g=255, b=255})
     for i = 1, gridSize do
         for j = 1, gridSize do
+            local dotRad
+            if self:isPlayerDot(i, j) then
+                dotRad = bigDotRad
+            else
+                dotRad = smallDotRad
+            end
             love.graphics.circle("fill", grid[i][j].x, 
-            grid[i][j].y, 5, 100)
+            grid[i][j].y, dotRad, 100)
         end
     end
     setColor({r=red, g=green, b=blue})
+end
+
+function Gestures:isPlayerDot(i, j)
+    return i >= 8 and i <= 9 and j >= 8 and j <= 11
 end
 
 function Gestures:drawLines()

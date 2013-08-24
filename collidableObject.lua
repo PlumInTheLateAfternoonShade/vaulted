@@ -6,17 +6,21 @@ local Point = require 'geometry.Point'
 local CollidableObject = Class
 {
     name = 'CollidableObject',
-    function(self, world, point, w, h, friction, type, color, name, savedSelf)
-        print('Constructing colObj. savedSelf='..tostring(savedSelf))
-        local table = savedSelf or {point = point, color = color}
-        print('Constructing colObj. color.r='..tostring(color.r))
-        self.point = Point(0, 0, table.point)
-        print('Constructing colObj. table.color.r='..tostring(table.color.r))
+    function(self, world, points, center, friction, type, color, name, 
+        savedSelf)
+        local table = savedSelf or {points = points, 
+        color = color, center = center}
+        self.center = table.center
+        self.points = {}
+        for i = 1, #table.points do
+            self.points[i] = Point(table.points[i].x, table.points[i].y)
+        end
         self.color = table.color
-        print('Constructing colObj. self.color.r='..tostring(self.color.r))
         self.body = love.physics.newBody(world,
-        self.point.x, self.point.y, type)
-        self.shape = love.physics.newRectangleShape(w, h)
+        self.center.x, self.center.y, type)
+        local a, b, c, d = unpack(self.points)
+        self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+        c.y, d.x, d.y)
         self.fixture = love.physics.newFixture(self.body, self.shape)
         self.fixture:setFriction(friction)
         self.fixture:setUserData(name)
@@ -30,7 +34,7 @@ function CollidableObject:draw()
 end
 
 function CollidableObject:update(dt)
-    self.point.x, self.point.y = self.body:getWorldCenter()
+    self.center.x, self.center.y = self.body:getWorldCenter()
 end
 
 return CollidableObject

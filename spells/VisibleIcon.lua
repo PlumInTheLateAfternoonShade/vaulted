@@ -8,7 +8,7 @@ VisibleIcon = Class
     function(self, lines, x, y, dateBorn)
         self.lines = table.deepcopy(lines)
         for i = 1, #self.lines do
-            self.lines[i]:scale(2)
+            self.lines[i]:scale(tileSize / 4)
             self.lines[i]:offset(x, y)
         end
         self.maxAge = 4
@@ -19,7 +19,7 @@ VisibleIcon = Class
 
 function VisibleIcon:draw()
     local currWidth = love.graphics.getLineWidth()
-    love.graphics.setLineWidth(1)
+    love.graphics.setLineWidth(tileSize / 16)
     for i = 1, #self.lines do
         self.lines[i]:draw()
     end

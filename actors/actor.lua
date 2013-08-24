@@ -7,8 +7,8 @@ local CollidableObject = require 'collidableObject'
 local Actor = Class
 {
     name = 'Actor',
-    function(self, world, point, w, h, friction, color, savedSelf)
-        CollidableObject.construct(self, world, point, w, h, friction,
+    function(self, world, points, center, friction, color, savedSelf)
+        CollidableObject.construct(self, world, points, center, friction,
         "dynamic", color, "Actor", savedSelf)
         self.standupAccel = -250
         self.walkingForce = 0
@@ -71,7 +71,7 @@ function Actor:update(dt)
     self:walk(dt)
     --TODO: it would be nice to just call the base class's function here.
     --Not sure how to, though.
-    self.point.x, self.point.y = self.body:getWorldCenter()
+    self.center.x, self.center.y = self.body:getWorldCenter()
 end
 
 function Actor:setRighting(value)

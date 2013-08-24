@@ -128,14 +128,14 @@ function Seg:getAngle()
 end
 
 function Seg:getOtherPoint(point)
-    if self.p0:equals(point) then
-        print('p1')
-        return p1
-    elseif self.p1:equals(point) then
-        print('p0')
-        return p0
+    if not point then
+        return false
     end
-    print('false')
+    if self.p0:equals(point) then
+        return self.p1
+    elseif self.p1:equals(point) then
+        return self.p0
+    end
     return false
 end
 
