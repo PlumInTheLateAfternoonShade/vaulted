@@ -1,6 +1,3 @@
--- Whether to run the profiler
-ShouldProfile = false
-
 -- Game Scale
 scale = 1
 

@@ -21,6 +21,11 @@ function Point.__sub(p0, p1)
     return Point(p0.x - p1.x, p0.y - p1.y)
 end
 
+
+function Point.__mult(p0, p1)
+    return Point(p0.x * p1.x, p0.y * p1.y)
+end
+
 function Point.__tostring(p)
     return string.format('(%.1f, %.1f)', p.x, p.y)
 end

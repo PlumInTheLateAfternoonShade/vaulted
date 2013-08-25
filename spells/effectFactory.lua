@@ -60,7 +60,13 @@ function make.conjure(points, element)
         return nil
     end
     print('Making a conjure effect with element = '..element.t)
-    return Conjure(points, element)
+    -- TODO this is a hack.
+    points = translatePolygonToWorldCoords(points)
+    local cX = (points[1].x + points[2].x + points[3].x + points[4].x) / 4
+    local cY = (points[1].y + points[2].y + points[3].y + points[4].y) / 4
+    local center = Point(cX, cY)
+    print('Conjure center = '..tostring(center))
+    return Conjure(points, center, element)
 end
 
 function connectLinesIntoPolygon(lines)
@@ -101,7 +107,7 @@ end
 function translatePolygonToWorldCoords(points)
     local coords = {}
     for i = 1, #points do
-        local x, y = translatePointToWorldCoords(point)
+        local x, y = translatePointToWorldCoords(points[i])
         local coord = Point(x, y)
         table.insert(coords, coord)
     end

@@ -2,7 +2,7 @@ require('lib.deepcopy.deepcopy')
 
 --For casting spells.
 local Class = require('class')
-VisibleIcon = Class
+local VisibleIcon = Class
 {
     name = 'VisibleIcon',
     function(self, lines, x, y, dateBorn)
@@ -25,3 +25,5 @@ function VisibleIcon:draw()
     end
     love.graphics.setLineWidth(currWidth)
 end
+
+return VisibleIcon

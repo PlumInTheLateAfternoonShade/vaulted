@@ -8,20 +8,27 @@ local Seg = require('geometry.Seg')
 local Conjure = Class
 {
     name = 'Conjure',
-    function(self, points, element)
+    function(self, points, center, element)
+        self.name = 'Conjure'
         self.element = element
         self.points = points
+        self.center = center
+        --[[self.center:scale(tileSize / 2)
+        print('Scaled Conjure center: '..tostring(self.center))
         for i = 1, #self.points do
             self.points[i]:scale(tileSize / 2)
-        end
+        end]]--
     end
 }
 Conjure:inherit(Effect)
 
 function Conjure:apply(world, caster)
     print('Applying a conjure of '..self.element.t)
+    print('Scaled Conjure center apply: '..tostring(self.center))
     table.insert(objects, ElementalObject(world, self.points,
-    Point(caster.body:getX(), caster.body:getY()), self.element))
+    Point(caster.body:getX() + self.center.x, 
+    caster.body:getY() + self.center.y),
+    self.element))
 end
 
 return Conjure

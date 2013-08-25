@@ -127,6 +127,14 @@ function Seg:getAngle()
     return math.atan2(dy, dx)
 end
 
+function Seg:normalize()
+    --Returns a vector starting at origin with length 1 and current slope.
+    local angle = self:getAngle()
+    local x = math.cos(angle)
+    local y = math.sin(angle)
+    return Point(x, y)
+end
+
 function Seg:getOtherPoint(point)
     if not point then
         return false

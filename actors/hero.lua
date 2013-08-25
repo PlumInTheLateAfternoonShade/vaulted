@@ -29,13 +29,19 @@ local Hero = Class
         self.name = 'Hero'
         local table = savedSelf or defaultHero
         self.spellBook = SpellBook(table.spellBook)
-        --self.fixture:setDensity(10)
-        --self.body:setInertia(10)
-        self.body:setAngularDamping(0.1)
-        self.body:setLinearDamping(0.1)
-        self.fixture:setFriction(1)
+        self.heroFirstUpdate = true
     end
 }
 Hero:inherit(Actor)
+
+function Hero:update(dt)
+    Actor.update(self, dt)
+    if self.heroFirstUpdate then
+        self.body:setAngularDamping(0.1)
+        self.body:setLinearDamping(0.1)
+        self.fixture:setFriction(1)
+        self.heroFirstUpdate = false
+    end
+end
 
 return Hero

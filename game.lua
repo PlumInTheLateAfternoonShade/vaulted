@@ -2,16 +2,17 @@ local State = require('state')
 require('camera')
 require('utils')
 local Gestures = require('gestures')
+local Ground = require('ground')
 local Hero = require('actors.hero')
 local Point = require('geometry.Point')
 local tLoader = require('loader')
-local visibleIcons = {}
 local loader = require "AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
 local HC = require "HardonCollider"
 local Class = require 'HardonCollider.class'
 local SpellBook = require('spellBook')
+local VisibleIcons = require('spells.visibleIcons')
 
 local collider
 local allSolidTiles
@@ -19,29 +20,33 @@ local allSolidTiles
 local camera
 local world
 objects = {} -- a table of all collidable objects in the world
+local visibleIcons
 
 local Game = Class
 {
     name = 'Game',
     function(self, shouldLoadHero)
-        self.groundFriction = 0.5
+        visibleIcons = VisibleIcons()
+        objects = {}
         love.physics.setMeter(tileSize)
         world = love.physics.newWorld(0, 50*tileSize, true)
         world:setCallbacks(beginContact, endContact, preSolve,
         postSolve)
-        objects.ground = {}
-        objects.ground.body = love.physics.newBody(world, screenWidth/2,
-        screenHeight - 50/2)
-        objects.ground.shape = love.physics.newRectangleShape(screenWidth, 50)
-        objects.ground.fixture = love.physics.newFixture(objects.ground.body,
-        objects.ground.shape)
-        objects.ground.fixture:setFriction(self.groundFriction)
-        objects.ground.fixture:setUserData("Ground")
+        local groundPoints =
+        {
+            Point(-tileSize*50, -tileSize),
+            Point(-tileSize*50, tileSize),
+            Point(tileSize*50, tileSize),
+            Point(tileSize*50, tileSize)
+        }
+        local ground = Ground(world, groundPoints, Point(tileSize*25, 0),
+        {r = 150, g = 75, b = 75})
+        table.insert(objects, ground)
         local loadedHero
         if shouldLoadHero then
             loadedHero = tLoader:unpack("Hero")
         end
-        hero = Hero(world, nil, Point(200, 550), loadedHero)
+        hero = Hero(world, nil, Point(200, -550), loadedHero)
         table.insert(objects, hero)
         -- load the level and bind to variable map
         --[[map = loader.load("level.tmx")
@@ -61,7 +66,7 @@ local Game = Class
         self.secondCount = 1.1
 
         self.maxXp = 2000
-        
+
         -- init camera
         camera = Camera()
         camera:scale(0.25, 0.25)
@@ -79,10 +84,10 @@ function Game:update(dt)
         -- update the FPS counter
         self.fps = 1 / dt
     end
-    for i = 1, #objects do
+    world:update(dt)
+    for i = #objects, 1, -1 do
         objects[i]:update(dt)
     end
-    world:update(dt)
 end
 
 function Game:draw()
@@ -91,22 +96,18 @@ function Game:draw()
     camera:set()
 
     love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
-    love.graphics.polygon("fill", 
-    objects.ground.body:getWorldPoints(objects.ground.shape:getPoints())) -- draw a "filled in" polygon using the ground's coordinates
-    -- draw the level
-    --map:draw()
     for i = 1, #objects do
-    -- draw the objects as rectangles
+        -- draw the objects as rectangles
         objects[i]:draw()
     end
     -- draw all visible spell icons
     visibleIcons:draw()
-    
+
     -- Effect debug
     --[[if hero.spellBook[1] ~= nil then
-        if hero.spellBook[1].regions[1] ~= nil then
-            love.graphics.print("Here", hero.spellBook[1].regions[1].effect.x, hero.spellBook[1].regions[1].effect.y)
-        end
+    if hero.spellBook[1].regions[1] ~= nil then
+    love.graphics.print("Here", hero.spellBook[1].regions[1].effect.x, hero.spellBook[1].regions[1].effect.y)
+    end
     end]]--
 
 
@@ -132,27 +133,47 @@ function Game:draw()
 end
 
 function beginContact(a, b, coll)
-    setRighting(a, b, true)
+    local done = 0
+    for i = #objects, 1, -1 do
+        if objects[i].fixture == a then
+            objects[i]:beginCollision(b, coll, world)
+            done = done + 1
+            if done == 2 then
+                break
+            end
+        elseif objects[i].fixture == b then
+            objects[i]:beginCollision(a, coll, world)
+            done = done + 1
+            if done == 2 then
+                break
+            end
+        end
+    end
 end
 
 function endContact(a, b, coll)
-    setRighting(a, b, false)
+    local done = 0
+    for i = 1, #objects do
+        if objects[i].fixture == a then
+            objects[i]:endCollision(b, coll, world)
+            done = done + 1
+            if done == 2 then
+                break
+            end
+        elseif objects[i].fixture == b then
+            objects[i]:endCollision(a, coll, world)
+            done = done + 1
+            if done == 2 then
+                break
+            end
+        end
+    end
 end
 
 function preSolve(a, b, coll)
 end
 
 function postSolve(a, b, coll)
-end
-
-function setRighting(a, b, value)
-    local userData = {[a:getUserData()] = a, [b:getUserData()] = b}
-    local actor = userData["Actor"]
-    local ground = userData["Ground"]
-    if actor ~= nil and ground ~= nil then
-        hero.righting = value --TODO horrifically wrong.
-        hero.body:setFixedRotation(value)
-    end
 end
 
 function on_collide(dt, shape_a, shape_b, mtv_x, mtv_y)
@@ -206,7 +227,7 @@ function Game:keypressed(key)
         hero:setWalkingLeft()
     elseif hero.spellBook:keyMatch(key) then
         local icon = hero.spellBook[hero.spellBook.i]:cast(world, hero)
-        table.insert(visibleIcons, icon)
+        visibleIcons:add(icon)
     elseif key == openMenu then
         updateState("back to main menu")
     elseif key == gesture then
@@ -243,13 +264,6 @@ end
 
 --------------
 
-function updateHero(dt)
-    hero.XVeloc = limitedInc(hero.XVeloc, hero.XAccel, hero.MaxXSpeed)
-    hero.YVeloc = limitedInc(hero.YVeloc, hero.YAccel, hero.MaxYSpeed)
-    hero:move(hero.XVeloc*dt, hero.YVeloc*dt)
-    camera.x = hero:center() - hero.size * 8
-end
-
 function limitedInc(var, inc, limit)
     result = var + inc
     return math.max(math.min(result, limit), -limit)
@@ -282,23 +296,6 @@ function findSolidTiles(map)
         end
     end
     return collidable_tiles
-end
-
-function visibleIcons:update()
-    -- Remove any visible icons which have persisted beyond their lifetimes.
-    for i = #visibleIcons, 1, -1 do
-        v = visibleIcons[i]
-        if os.clock() >= v.dateBorn + v.maxAge then
-            table.remove(visibleIcons, i)
-        end
-    end
-end
-
-function visibleIcons:draw()
-    -- Draw each visible icon
-    for i = 1, #visibleIcons do
-        visibleIcons[i]:draw()
-    end
 end
 
 return Game

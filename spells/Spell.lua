@@ -1,4 +1,4 @@
-require 'spells.VisibleIcon'
+local VisibleIcon = require 'spells.VisibleIcon'
 local Seg = require 'geometry.Seg'
 local Region = require 'spells.Region'
 local Class = require('class')
@@ -77,6 +77,7 @@ function Spell:analyzeLines()
     self:compressRegions()
     self:assignPower()
     self:assignEffects()
+    self:orderRegions()
     -- Debug output.
     print(tostring(self))
     for i = 1, #self.regions do
@@ -86,7 +87,7 @@ function Spell:analyzeLines()
 end
 
 function Spell:breakLinesIntoRegions()
-    -- A region is an intersecting shape of same-element segs,
+    -- A region is an intersecting shape of same-element segs.
     self:resetRegioning()
     for i = 1, #self.lines do
         l = self.lines[i]
@@ -144,6 +145,20 @@ function Spell:assignEffects()
     -- based on its shape.
     for i = 1, #self.regions do
        self.regions[i]:assignEffect()
+    end
+end
+
+function Spell:orderRegions()
+    -- Force effect regions should occur last in the region list.
+    local forceRegions = {}
+    for i = #self.regions, 1, -1 do
+        if self.regions[i].effect.name == 'Force' then
+            table.insert(forceRegions, self.regions[i])
+            table.remove(self.regions[i], i)
+        end
+    end
+    for j = 1, #forceRegions do
+        table.insert(self.regions, forceRegions[j])
     end
 end
 

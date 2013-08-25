@@ -5,6 +5,7 @@ local Effect = Class
 {
     name = 'Effect',
     function(self)
+        self.name = 'Effect'
     end
 }
 

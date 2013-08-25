@@ -66,7 +66,7 @@ function Gestures:drawLines()
     local red, green, blue = love.graphics.getColor()
     --TODO convert to sensible for loop
     for i = 1, #lines do
-        line = lines[i]
+        local line = lines[i]
         setColor(line.c)
         love.graphics.line(line.p0.x, line.p0.y, line.p1.x, line.p1.y)
     end
@@ -91,6 +91,7 @@ function Gestures:keypressed(key)
         spellBook:finalize()
         -- Go back to game.
         setColorInverted(fontColor)
+        print('Returning to game from gestures.')
         updateState("continue")
     end
 end

@@ -1,3 +1,4 @@
+ShouldProfile = false
 local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')
@@ -5,7 +6,8 @@ local Gestures = require('gestures')
 require('lib.deepcopy.deepcopy')
 local SaveAndExit = require('saveAndExit')
 if ShouldProfile then
-    local ProFi = require 'ProFi'
+    print('Got here')
+    ProFi = require('ProFi')
 end
 local state = Menu()
 local savedGame = Game(true)
@@ -14,6 +16,7 @@ main = {}
 function love.load()
     if ShouldProfile then
         -- prof only. Start the profiler.
+        print('Starting profiler.')
         ProFi:start()
     end
 
@@ -44,14 +47,6 @@ end
 function love.update(dt)
     -- call the state's update function
     state:update(dt)
-    --[[elseif main.state == "saveAndExit" then
-    if ShouldProfile then
-    -- prof only
-    ProFi:stop()
-    ProFi:writeReport('profile.txt')
-    end
-    os.exit()]]--
-    --end
 end
 
 function love.keypressed(key)
@@ -83,6 +78,7 @@ function updateState(choice)
         if savedGame == nil then
             state = Game()
         else
+            print('Returning to saved game.')
             state = savedGame
         end
     elseif choice == "new game" then

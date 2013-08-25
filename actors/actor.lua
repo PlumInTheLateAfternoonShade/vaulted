@@ -1,5 +1,6 @@
 local Class = require 'class'
 local CollidableObject = require 'collidableObject'
+local Element = require 'spells.Element'
 -- Defines an object in the game world that moves around 
 -- independent of impulses.
 -- Just a rectangle for now.
@@ -12,8 +13,9 @@ local Actor = Class
         "dynamic", color, "Actor", savedSelf)
         self.standupAccel = -250
         self.walkingForce = 0
-        self.maxWalkingForce = self.body:getMass()*2500
+        self.maxWalkingForce = 0
         self.righting = false
+        self.actorFirstUpdate = true
     end
 }
 Actor:inherit(CollidableObject)
@@ -67,16 +69,20 @@ function Actor:walk(dt)
 end
 
 function Actor:update(dt)
+    CollidableObject.update(self, dt)
+    if self.actorFirstUpdate then
+        self.fixture:setDensity(water.density)
+        self.body:resetMassData()
+        self.maxWalkingForce = self.body:getMass()*2500
+        self.actorFirstUpdate = false
+    end
     self:rightSelf(dt)
     self:walk(dt)
-    --TODO: it would be nice to just call the base class's function here.
-    --Not sure how to, though.
-    self.center.x, self.center.y = self.body:getWorldCenter()
 end
 
 function Actor:setRighting(value)
     self.righting = value
-    --self.body:setFixedRotation(value)
+    self.body:setFixedRotation(value)
 end
 
 function Actor:getWrappedAngle()
@@ -85,6 +91,23 @@ function Actor:getWrappedAngle()
         angle = angle - 2 * math.pi
     end 
     return angle
+end
+
+function Actor:beginCollision(other, contact, world)
+    -- TODO: should damage based on velocity of contact
+    print('Actor beginning collision with '..other:getUserData())
+    if other:getUserData() == 'Ground' then
+        print('Setting righting to true.')
+        self:setRighting(true)
+    end
+end
+
+
+function Actor:endCollision(other, contact, world)
+    print('Actor ending collision with '..other:getUserData())
+    if other:getUserData() == 'Ground' then
+        self:setRighting(false)
+    end
 end
 
 return Actor

@@ -7,6 +7,7 @@ local Force = Class
 {
     name = 'Force',
     function(self, h, v, x, y)
+        self.name = 'Force'
         self.h = h
         self.v = v
         self.x = x
