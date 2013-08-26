@@ -23,6 +23,8 @@ local CollidableObject = Class
         self.type = type
         self.expireTime = 0
         self.queuedVelocity = nil
+        self.ambientTemp = 300
+        self.temp = self.ambientTemp
     end
 }
 
@@ -30,6 +32,7 @@ function CollidableObject:draw()
     setColor(self.color)
     love.graphics.polygon("fill",
                           self.body:getWorldPoints(self.shape:getPoints()))
+
 end
 
 function CollidableObject:update(dt)
@@ -63,7 +66,7 @@ function CollidableObject:update(dt)
 end
 
 function CollidableObject:beginCollision(other, contact, world)
-    --Do nothing special.
+    --Update the temp as the weighted average. 
 end
 
 function CollidableObject:endCollision(other, contact, world)

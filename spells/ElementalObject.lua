@@ -4,9 +4,8 @@ local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local CollidableObject = require 'collidableObject'
 local FireParticleSystem = require 'particles.fireParticleSystem'
-local maxMassToBreak = 10 --2.7 --TODO: Should calc based on density of element.
 local deathSeconds = 0.3 --TODO: In tens of seconds for some reason?
--- Defines an object in the game world that can be collided with.
+-- Defines an object in the game world that is a specific element.
 -- Just a rectangle for now.
 local ElementalObject = Class
 {
@@ -18,6 +17,9 @@ local ElementalObject = Class
         element.friction, 'dynamic', element.c, name)
         self.eleObjFirstUpdate = true
         self.partUpdateCounter = 1000
+        self.maxMassToBreak = element.density*16
+        self.ambientTemp = element.temp
+        self.temp = self.ambientTemp
     end
 }
 ElementalObject:inherit(CollidableObject)
@@ -59,33 +61,40 @@ end
 
 function ElementalObject:beginCollision(other, contact, world)
     --TODO: Separate elements into 4 classes? Kind of annoying.
-    if self.element.t == 'fire' then
-        if self.body:getMass() > maxMassToBreak then
+    if self.element.t == 'fire' or self.element.t == 'water' then
+        local deleteSeconds = nil
+        if self.body:getMass() > self.maxMassToBreak then
             local numNew = math.random(2, 4)
             for i = 1, numNew do
                 local xb1, yb1, xb2, yb2 = self.fixture:getBoundingBox()
                 local newCenter = Point(math.random(xb1, xb2),
                 math.random(yb1, yb2))
-
                 local newPoints = coordsToPoints(self.shape:getPoints())
                 for j = 1, #newPoints do
                     newPoints[j]:scale(1/numNew)
                 end
-                local newFire = ElementalObject(world, 
+                local newObj = ElementalObject(world, 
                 newPoints, newCenter, self.element)
                 local vX, vY = self.body:getLinearVelocity() 
                 --TODO should take into account other's veloc too.
                 local speed = Seg(Point(0, 0), Point(vX, vY)):length()
                 local newV = Seg(self.center, newCenter):normalize()
                 newV:scale(speed)
-                newFire:queueVelocity(newV)
-                table.insert(objects, newFire)
+                newObj:queueVelocity(newV)
+                table.insert(objects, newObj)
+                if self.element.t == 'fire' then
+                    deleteSeconds = 0
+                end
             end
             self:setDeleteTime(0)
-        else
-            self:setDeleteTime(deathSeconds)
+        elseif self.element.t == 'fire' then
+            deleteTime = deathSeconds
+        end
+        if deleteSeconds then
+            self:setDeleteTime(deleteSeconds)
         end
     end
+    CollidableObject.beginCollision(self, other, contact, world)
 end
 
 function coordsToPoints(...)

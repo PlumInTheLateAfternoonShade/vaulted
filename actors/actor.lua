@@ -1,6 +1,8 @@
 local Class = require 'class'
 local CollidableObject = require 'collidableObject'
 local Element = require 'spells.Element'
+local maxAngVToRight = 30
+local maxVertVToRight = 2000
 -- Defines an object in the game world that moves around 
 -- independent of impulses.
 -- Just a rectangle for now.
@@ -16,6 +18,9 @@ local Actor = Class
         self.maxWalkingForce = 0
         self.righting = false
         self.actorFirstUpdate = true
+        self.isCollided = false
+        self.ambientTemp = 310.15
+        self.temp = self.ambientTemp
     end
 }
 Actor:inherit(CollidableObject)
@@ -76,6 +81,15 @@ function Actor:update(dt)
         self.maxWalkingForce = self.body:getMass()*2500
         self.actorFirstUpdate = false
     end
+    local vX, vY = self.body:getLinearVelocity()
+    local angV = self.body:getAngularVelocity()
+    if math.abs(vY) < maxVertVToRight 
+    and math.abs(angV) < maxAngVToRight 
+    and self.isCollided then
+        self:setRighting(true)
+    else
+        self:setRighting(false)
+    end
     self:rightSelf(dt)
     self:walk(dt)
 end
@@ -95,19 +109,13 @@ end
 
 function Actor:beginCollision(other, contact, world)
     -- TODO: should damage based on velocity of contact
-    print('Actor beginning collision with '..other:getUserData())
-    if other:getUserData() == 'Ground' then
-        print('Setting righting to true.')
-        self:setRighting(true)
-    end
+    self.isCollided = true
+    CollidableObject.beginCollision(self, other, contact, world)
 end
 
 
 function Actor:endCollision(other, contact, world)
-    print('Actor ending collision with '..other:getUserData())
-    if other:getUserData() == 'Ground' then
-        self:setRighting(false)
-    end
+    self.isCollided = false
 end
 
 return Actor

@@ -1,5 +1,5 @@
 local State = require('state')
-require('camera')
+local Camera = require('camera')
 require('utils')
 local Gestures = require('gestures')
 local Ground = require('ground')
@@ -88,11 +88,11 @@ function Game:update(dt)
     for i = #objects, 1, -1 do
         objects[i]:update(dt)
     end
+    camera:setAdjPosition(hero.body:getX(), hero.body:getY(), dt)
 end
 
 function Game:draw()
-    camera.x = hero.body:getX() - screenWidth/(2*camera.scaleX)
-    camera.y = hero.body:getY() - screenHeight/(2*camera.scaleY)
+    --camera:setAdjPosition(hero.body:getX(), hero.body:getY(), dt)
     camera:set()
 
     love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
@@ -121,6 +121,10 @@ function Game:draw()
     screenWidth * 0.9375, screenHeight * 0.0625)
 
     -- debug prints
+    local vX, vY = hero.body:getLinearVelocity()
+    love.graphics.print(string.format("vX: %.2f vY: %.2f", vX, vY),
+    screenWidth*0.7, screenHeight*0.7)
+
     love.graphics.print("WrappedAngle: "
     ..string.format("%.2f", hero:getWrappedAngle()),
     screenWidth * 0.6, screenHeight * 0.6)
@@ -133,6 +137,9 @@ function Game:draw()
 end
 
 function beginContact(a, b, coll)
+    -- If the force of the impact is high enough, shake the screen.
+    camera:shake(a:getBody(), b:getBody(), coll)
+    -- Handle the collision of the individual CollidableObjects.
     local done = 0
     for i = #objects, 1, -1 do
         if objects[i].fixture == a then

@@ -26,6 +26,9 @@ spellKey =
 screenWidth = 1600
 screenHeight = 900
 
+-- Camera settings
+ShouldCameraShake = true
+
 -- Map settings
 tileSize = 64
 iconSize = tileSize * 2

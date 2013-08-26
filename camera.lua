@@ -1,5 +1,13 @@
 local Class = require('class')
-Camera = Class
+require('utils')
+local Point = require('geometry.Point')
+
+local minShakeImpact = 50000 --30000
+local maxShakeImpact = 5000000--300000
+local shakeDecayRate = 0.4
+local shakeMult = 1000
+
+local Camera = Class
 {
     name = 'Camera',
     function(self)
@@ -7,8 +15,26 @@ Camera = Class
         self.y = 0
         self.scaleX = 1
         self.scaleY = 1
+        self.shakeFactor = 0
+        self.shakeXOffset = 0
+        self.shakeYOffset = 0
     end
 }
+
+function Camera:setAdjPosition(x, y, dt)
+    self.x = x - screenWidth/(2*self.scaleX)
+    self.y = y - screenHeight/(2*self.scaleY)
+    if self.shakeFactor == 0 then
+        -- Short circuit to prevent needless computations.
+        return
+    end
+    self.x = self.x + 
+    shakeMult*(math.random()-0.5)*self.shakeFactor
+    self.y = self.y +
+    shakeMult*(math.random()-0.5)*self.shakeFactor
+    self.shakeFactor = math.max(self.shakeFactor - shakeDecayRate*dt, 0)
+    print('cam x: '..self.x..' cam y: '..self.y..' fact: '..self.shakeFactor)
+end
 
 function Camera:set()
     love.graphics.push()
@@ -43,3 +69,24 @@ function Camera:setScale(sx, sy)
     self.scaleX = sx
     self.scaleY = sy
 end
+
+function Camera:shake(a, b, contact)
+    -- Begin a camera shake if the contact force is great enough
+    if not ShouldCameraShake then
+        return
+    end
+    -- This is a bit of an unscientific hack. Might be able to get
+    -- better perf by getting rid of the sqrt computations.
+    local aVX, aVY = a:getLinearVelocity()
+    local bVX, bVY = b:getLinearVelocity()
+    local aS = math.sqrt(aVX*aVX + aVY*aVY)
+    local bS = math.sqrt(bVX*bVX + bVY*bVY)
+    local impact = (aS*a:getMass() + bS*b:getMass())
+    print('camera shake impact: '..impact)
+    self.shakeFactor = math.max(self.shakeFactor, limit(
+    (impact - minShakeImpact)/(maxShakeImpact - minShakeImpact), 0, 1))
+    print('camera shake factor: '..self.shakeFactor)
+
+end
+
+return Camera

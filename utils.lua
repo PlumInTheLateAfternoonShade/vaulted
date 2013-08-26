@@ -28,6 +28,11 @@ function within(x, x1, x2)
     return x >= little and x <= big
 end
 
+function limit(x, little, big)
+    -- Limit x to within little and big.
+    return math.min(big, math.max(little, x))
+end
+
 function wrappedInc(obj, amount)
     obj.i = obj.i + amount
     if obj.i < 1 then
