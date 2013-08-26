@@ -17,7 +17,7 @@ function Element.__tostring(e)
 end
 
 -- A table of elements
-fire = Element('fire', fireColor, 0.2, 2.5, 1200)
+fire = Element('fire', fireColor, 0.2, 2.5, 500)
 water = Element('water', waterColor, 0.05, 5, 100)
 earth = Element('earth', earthColor, 0.5, 10, 300)
 air = Element('air', airColor, 0, 0, 300, 0)

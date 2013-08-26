@@ -63,4 +63,24 @@ equals = function(p0, p1)
     return p0.x == p1.x and p0.y == p1.y
 end
 
+function computeCentroid(points)
+    --From http://en.wikipedia.org/wiki/Centroid#Locating_the_centroid
+    local cx = 0
+    local cy = 0
+    local a = 0
+    for i = 1, #points - 1 do
+        local p0 = points[i]
+        local p1 = points[i + 1]
+        cx = cx + (p0.x + p1.x)*(p0.x*p1.y - p1.x*p0.y)
+        cy = cy + (p0.y + p1.y)*(p0.x*p1.y - p1.x*p0.y)
+        a = a + (p0.x*p1.y - p1.x*p0.y)
+    end
+    a = a/2
+    if a ~= 0 then
+        cx = cx/(6*a)
+        cy = cy/(6*a)
+    end
+    return Point(cx, cy)
+end
+
 return Point

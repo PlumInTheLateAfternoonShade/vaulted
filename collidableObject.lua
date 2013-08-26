@@ -1,3 +1,4 @@
+require 'lib.deepcopy.deepcopy'
 require 'utils'
 local Class = require 'class'
 local Point = require 'geometry.Point'
@@ -8,14 +9,15 @@ local CollidableObject = Class
     name = 'CollidableObject',
     function(self, world, points, center, friction, type, color, name, 
         savedSelf)
-        local table = savedSelf or {points = points, 
+        local t = savedSelf or {points = points, 
         color = color, center = center}
-        self.center = table.center
+        self.center = t.center
         self.points = {}
-        for i = 1, #table.points do
-            self.points[i] = Point(table.points[i].x, table.points[i].y)
+        for i = 1, #t.points do
+            self.points[i] = Point(t.points[i].x, t.points[i].y)
         end
-        self.color = table.color
+        self.color = table.deepcopy(t.color)
+        self.ambientColor = table.deepcopy(self.color)
         self.firstUpdate = true
         self.world = world
         self.name = name
@@ -32,26 +34,42 @@ function CollidableObject:draw()
     setColor(self.color)
     love.graphics.polygon("fill",
                           self.body:getWorldPoints(self.shape:getPoints()))
-
 end
 
 function CollidableObject:update(dt)
     if self.firstUpdate then
         --Need to construct here rather than constructor,
         --in case construct occurs during middle of physics calcs.
-        --TODO subclasses need to do this too!
         self.firstUpdate = false
+        local centroid = self:computeCentroid()
+        self:centralize(centroid)
         self.body = love.physics.newBody(self.world,
         self.center.x, self.center.y, self.type)
-        local a, b, c, d = unpack(self.points)
-        --[[b = b - a
-        c = c - a
-        d = d - a
-        a = Point(0, 0)]]--
-        --self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
-        --c.y, d.x, d.y) TODO
-        self.shape = love.physics.newRectangleShape(math.abs(a.x - c.x),
-        math.abs(a.y - c.y))
+        --This is perhaps the ugliest thing I've ever written.
+        --There must be a clever way to do it with unpack.
+        --Or maybe a function in Point that returns x, y?
+        local a, b, c, d, e, f, g, h = unpack(self.points)
+        if h then
+            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y, h.x, h.y)
+        elseif g then
+            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y)
+        elseif f then
+            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y, f.x, f.y)
+        elseif e then
+            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y)
+        elseif d then
+            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            c.y, d.x, d.y)
+        else
+            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            c.y)
+        end
+        --self.shape = love.physics.newRectangleShape(math.abs(a.x - c.x),
+        --math.abs(a.y - c.y))
         self.fixture = love.physics.newFixture(self.body, self.shape)
         self.fixture:setFriction(self.friction)
         self.fixture:setUserData(self.name)
@@ -63,10 +81,35 @@ function CollidableObject:update(dt)
     end
     self.center.x, self.center.y = self.body:getWorldCenter()
     self:deleteIfNecessary()
+    self:updateTemp(dt)
+end
+
+function CollidableObject:updateTemp(dt)
+    local mult = 0
+    local diff = self.temp - self.ambientTemp
+    if diff > 0 then
+        mult = -1000
+    elseif diff < 0 then
+        mult = 1000
+    end
+    self.color.r = limit(self.ambientColor.r + diff, 0, 255)
+    self.color.g = limit(self.ambientColor.g + diff/3, 0, 255)
+    self.color.b = limit(self.ambientColor.b - diff, 0, 255)
+    --print('mult = '..mult)
+    --print('temp = '..self.temp..' amTemp = '..self.ambientTemp)
+    --print('diff = '..diff..'color = '..tostring(self.color))
+    self.temp = self.temp + mult/math.max(self.body:getMass(), 0.1)*dt
 end
 
 function CollidableObject:beginCollision(other, contact, world)
-    --Update the temp as the weighted average. 
+    --Update the temp as a weighted average.
+    --This should really happen non-instantaneously and when things
+    --are near each other, but this is good enough for now.
+    if other.type == 'dynamic' and self.type == 'dynamic' then
+        local m1 = self.body:getMass()
+        local m2 = other.body:getMass()
+        self.temp = (self.temp + (m1*self.temp + m2*other.temp)/(m1 + m2))/2
+    end
 end
 
 function CollidableObject:endCollision(other, contact, world)
@@ -101,4 +144,13 @@ function CollidableObject:queueVelocity(v)
     self.queuedVelocity = v
 end
 
+function CollidableObject:computeCentroid()
+    return computeCentroid(self.points)    
+end
+
+function CollidableObject:centralize(c)
+    for i = 1, #self.points do
+        self.points[i] = self.points[i] - c
+    end
+end
 return CollidableObject

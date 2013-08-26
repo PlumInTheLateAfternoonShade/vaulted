@@ -37,7 +37,7 @@ local Game = Class
             Point(-tileSize*50, -tileSize),
             Point(-tileSize*50, tileSize),
             Point(tileSize*50, tileSize),
-            Point(tileSize*50, tileSize)
+            Point(tileSize*50, -tileSize)
         }
         local ground = Ground(world, groundPoints, Point(tileSize*25, 0),
         {r = 150, g = 75, b = 75})
@@ -141,21 +141,24 @@ function beginContact(a, b, coll)
     camera:shake(a:getBody(), b:getBody(), coll)
     -- Handle the collision of the individual CollidableObjects.
     local done = 0
+    local aIndex, bIndex
     for i = #objects, 1, -1 do
         if objects[i].fixture == a then
-            objects[i]:beginCollision(b, coll, world)
+            aIndex = i
             done = done + 1
             if done == 2 then
                 break
             end
         elseif objects[i].fixture == b then
-            objects[i]:beginCollision(a, coll, world)
+            bIndex = i
             done = done + 1
             if done == 2 then
                 break
             end
         end
     end
+    objects[aIndex]:beginCollision(objects[bIndex], coll, world)
+    objects[bIndex]:beginCollision(objects[aIndex], coll, world)
 end
 
 function endContact(a, b, coll)

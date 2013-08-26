@@ -62,9 +62,7 @@ function make.conjure(points, element)
     print('Making a conjure effect with element = '..element.t)
     -- TODO this is a hack.
     points = translatePolygonToWorldCoords(points)
-    local cX = (points[1].x + points[2].x + points[3].x + points[4].x) / 4
-    local cY = (points[1].y + points[2].y + points[3].y + points[4].y) / 4
-    local center = Point(cX, cY)
+    local center = computeCentroid(points)
     print('Conjure center = '..tostring(center))
     return Conjure(points, center, element)
 end
@@ -74,6 +72,7 @@ function connectLinesIntoPolygon(lines)
     local points = {segs[1].p0, segs[1].p1}
     local lastPoint = points[2]
     table.remove(segs, 1)
+    -- TODO look at the logic of this loop
     while #segs > 0 do
         print('Start loop. #lines='..#lines..' #segs='..#segs..' #points='..#points)
         lastPoint = getOtherPointFromLines(segs, lastPoint)
@@ -87,6 +86,7 @@ function connectLinesIntoPolygon(lines)
         print('End loop. #lines='..#lines..' #segs='..#segs..' #points='..#points)
     end
     if equals(lastPoint, points[1]) then
+        table.remove(points, #points)
         return points
     end
     print('retnil 2')

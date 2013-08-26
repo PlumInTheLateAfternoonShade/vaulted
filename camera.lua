@@ -82,11 +82,8 @@ function Camera:shake(a, b, contact)
     local aS = math.sqrt(aVX*aVX + aVY*aVY)
     local bS = math.sqrt(bVX*bVX + bVY*bVY)
     local impact = (aS*a:getMass() + bS*b:getMass())
-    print('camera shake impact: '..impact)
     self.shakeFactor = math.max(self.shakeFactor, limit(
     (impact - minShakeImpact)/(maxShakeImpact - minShakeImpact), 0, 1))
-    print('camera shake factor: '..self.shakeFactor)
-
 end
 
 return Camera

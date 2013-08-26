@@ -57,7 +57,7 @@ local FireParticleSystem = Class
     end
 }
 
-function FireParticleSystem:update(dt, vX, vY)
+function FireParticleSystem:update(dt, vX, vY, color)
     local newVX1 = initVX1 - vX
     local newVX2 = initVX2 - vX
     local newVY1 = initVY1 - vY
@@ -68,6 +68,8 @@ function FireParticleSystem:update(dt, vX, vY)
     for i = 1, #self.systems do
         self.systems[i].p:setDirection(newAngle1)
         self.systems[i].p:setSpeed(newSpeed1, newSpeed2)
+        self.systems[i].p:setColors(color.r, color.g, color.b, 255, 
+        color.r, color.g, color.b, 0)
         self.systems[i].p:update(dt)
     end
 end
