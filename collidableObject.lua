@@ -50,22 +50,28 @@ function CollidableObject:update(dt)
         --Or maybe a function in Point that returns x, y?
         local a, b, c, d, e, f, g, h = unpack(self.points)
         if h then
-            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            self.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
             c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y, h.x, h.y)
         elseif g then
-            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            self.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
             c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y)
         elseif f then
-            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            self.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
             c.y, d.x, d.y, e.x, e.y, f.x, f.y)
         elseif e then
-            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            self.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
             c.y, d.x, d.y, e.x, e.y)
         elseif d then
-            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            self.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
             c.y, d.x, d.y)
         else
-            self.shape = love.physics.newPolygonShape(a.x, a.y, b.x, b.y, c.x,
+            self.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
             c.y)
         end
         --self.shape = love.physics.newRectangleShape(math.abs(a.x - c.x),
@@ -153,4 +159,17 @@ function CollidableObject:centralize(c)
         self.points[i] = self.points[i] - c
     end
 end
+
+function CollidableObject:getSpeed()
+    local vX, vY = self.body:getLinearVelocity()
+    return Point(vX, vY):magnitude()
+end
+
+function CollidableObject:getImpact()
+    --A hacky way to calculate the "force" of an impact
+    --because it doesn't look like there's an easy way
+    --to get acceleration.
+    return self:getSpeed()*self.body:getMass()
+end
+
 return CollidableObject

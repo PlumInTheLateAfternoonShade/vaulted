@@ -20,6 +20,8 @@ function love.load()
         ProFi:start()
     end
 
+    math.randomseed(os.time())
+
     -- hide the mouse
     love.mouse.setVisible(false)
 

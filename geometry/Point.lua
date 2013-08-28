@@ -21,7 +21,6 @@ function Point.__sub(p0, p1)
     return Point(p0.x - p1.x, p0.y - p1.y)
 end
 
-
 function Point.__mult(p0, p1)
     return Point(p0.x * p1.x, p0.y * p1.y)
 end
@@ -32,6 +31,10 @@ end
 
 function Point:magSquared()
     return self.x * self.x + self.y * self.y
+end
+
+function Point:magnitude()
+    return math.sqrt(self:magSquared())
 end
 
 function Point:compress()
@@ -55,12 +58,45 @@ function Point:equals(point)
     return self.x == point.x and self.y == point.y
 end
 
+function mirrorPoint(point, shouldX, shouldY)
+    local shouldX = shouldX or false
+    local shouldY = shouldY or false
+    local mirPoint = Point(point.x, point.y)
+    if shouldX then
+        mirPoint.x = -1.0 * point.x
+    end
+    if shouldY then
+        mirPoint.y = -1.0 * point.y
+    end
+    return mirPoint
+end
+
+function mirrorXPoint(point)
+    return mirrorPoint(point, true)
+end
+
+function mirrorYPoint(point)
+    return mirrorPoint(point, false, true)
+end
+
+function mirrorXYPoint(point)
+    return mirrorPoint(point, true, true)
+end
+
 dot = function(p0, p1)
     return p0.x * p1.x + p0.y * p1.y
 end
 
 equals = function(p0, p1)
     return p0.x == p1.x and p0.y == p1.y
+end
+
+function mirrorXListOfPoints(points)
+    local mirroredPoints = {}
+    for i = 1, #points do
+        mirroredPoints[i] = mirrorXPoint(points[i])
+    end
+    return mirroredPoints
 end
 
 function computeCentroid(points)

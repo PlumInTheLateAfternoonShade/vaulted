@@ -32,6 +32,7 @@ ShouldCameraShake = true
 -- Map settings
 tileSize = 64
 iconSize = tileSize * 2
+worldXEnd = 10000 --TODO: should be calculated based on map.
 
 -- Element colors
 fireColor = {r = 240, b = 0, g = 70}
@@ -52,6 +53,6 @@ function love.conf(t)
     t.screen.width = screenWidth
     t.screen.height = screenHeight
     t.vsync = false
-    t.screen.fullscreen = false
+    t.screen.fullscreen = true
     t.identity = "saves" --TODO genericize
 end

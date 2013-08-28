@@ -1,5 +1,5 @@
 require 'utils'
-local Point = require 'geometry.Point'
+Point = require('geometry.Point')
 local Class = require('class')
 local Seg = Class
 {
@@ -53,13 +53,16 @@ function Seg:intersects(seg)
     -- http://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect?rq=1
     -- Also returns true if the lines share a point, 
     -- which counts for my purposes.
+    Point(3, 4)
+    Point(12, -6)
     local A, B, C, D = self.p0, self.p1, seg.p0, seg.p1
 
     if self:sharesAPoint(seg) then
         -- Lines share a point, so they intersect.
         return true
     end
-
+    print('A: '..tostring(A)..' B: '..tostring(B)..' C: '..tostring(C)..' D: '
+    ..tostring(D))
     local CmP = Point(C.x - A.x, C.y - A.y)
     local r = Point(B.x - A.x, B.y - A.y)
     local s = Point(D.x - C.x, D.y - C.y)
@@ -94,8 +97,6 @@ end
 
 function Seg:compress()
     -- Compresses a segment into 1, 16.
-    -- Ah, the joys of OO! Eventually you will get so bored
-    -- following the rabbit hole down that you will give up.
     self.p0:compress()
     self.p1:compress()
 end
@@ -145,6 +146,26 @@ function Seg:getOtherPoint(point)
         return self.p0
     end
     return false
+end
+
+function mirrorXSeg(seg)
+    return Seg(mirrorXPoint(seg.p0), mirrorXPoint(seg.p1), seg.c)
+end
+
+function mirrorYSeg(seg)
+    return Seg(mirrorYPoint(seg.p0), mirrorYPoint(seg.p1), seg.c)
+end
+
+function mirrorXYSeg(seg)
+    return Seg(mirrorXYPoint(seg.p0), mirrorXYPoint(seg.p1), seg.c)
+end
+
+function mirrorXListOfSegs(segs)
+    local mirroredSegs = {}
+    for i = 1, #segs do
+        mirroredSegs[i] = mirrorXSeg(segs[i])
+    end
+    return mirroredSegs
 end
 
 function getLongestLine(lines)

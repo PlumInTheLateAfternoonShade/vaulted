@@ -15,8 +15,11 @@ local GenMenu = Class
         love.graphics.setFont(font)
         self.fontColor = {r=0,g=0,b=0}
         self.fontYSize = 500*scale/self.numItems
-        -- play self audio
-        music = love.audio.newSource("music/music.ogg", "stream")
+        -- play menu audio
+        -- From http://upload.wikimedia.org/wikipedia/commons/8/8e/CELLO_LIVE_PERFORMANCES_JOHN_MICHEL-Schumann_Folk_Pieces_Op_102_1st_mvt_.ogg
+        -- on http://en.wikipedia.org/wiki/Wikipedia:Sound/list
+        -- by http://johnmichel.com/johnmichel.com/Discography.html.
+        music = love.audio.newSource("music/menuMusic1.ogg", "stream")
         music:setLooping(true)
         love.audio.play(music)
     end

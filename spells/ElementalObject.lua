@@ -17,7 +17,7 @@ local ElementalObject = Class
         element.friction, 'dynamic', element.c, name)
         self.eleObjFirstUpdate = true
         self.partUpdateCounter = 1000
-        self.maxMassToBreak = element.density*16
+        self.maxMassToBreak = element.density*4
         self.ambientTemp = element.temp
         self.temp = self.ambientTemp
     end
@@ -65,19 +65,22 @@ function ElementalObject:beginCollision(other, contact, world)
         local deleteSeconds = nil
         if self.body:getMass() > self.maxMassToBreak then
             local numNew = math.random(2, 4)
+            local xb1, yb1, xb2, yb2 = self.fixture:getBoundingBox()
+            local vX, vY = self.body:getLinearVelocity() 
             for i = 1, numNew do
-                local xb1, yb1, xb2, yb2 = self.fixture:getBoundingBox()
-                local newCenter = Point(math.random(xb1, xb2),
-                math.random(yb1, yb2))
+                local newCenter =
+                Point(math.random(xb1*0.5, xb2*0.5),
+                math.random(yb1*0.5, yb2*0.5))
+                print('x bco: '..tostring(self.body:getX() - newCenter.x))
                 local newPoints = coordsToPoints(self.shape:getPoints())
+                local scaleFactor = math.sqrt(1/numNew)
                 for j = 1, #newPoints do
-                    newPoints[j]:scale(1/numNew)
+                    newPoints[j]:scale(scaleFactor)
                 end
                 local newObj = ElementalObject(world, 
                 newPoints, newCenter, self.element)
-                local vX, vY = self.body:getLinearVelocity() 
                 --TODO should take into account other's veloc too.
-                local speed = Seg(Point(0, 0), Point(vX, vY)):length()
+                local speed = Point(vX, vY):magnitude()
                 local newV = Seg(self.center, newCenter):normalize()
                 newV:scale(speed)
                 newObj:queueVelocity(newV)

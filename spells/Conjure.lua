@@ -25,9 +25,10 @@ Conjure:inherit(Effect)
 function Conjure:apply(world, caster)
     print('Applying a conjure of '..self.element.t)
     print('Scaled Conjure center apply: '..tostring(self.center))
-    table.insert(objects, ElementalObject(world, self.points,
-    Point(caster.body:getX() + self.center.x, 
-    caster.body:getY() + self.center.y),
+    local points, center = self:mirrorIfLeftFacing(caster.facingRight)
+    table.insert(objects, ElementalObject(world, points,
+    Point(caster.body:getX() + center.x, 
+    caster.body:getY() + center.y),
     self.element))
 end
 

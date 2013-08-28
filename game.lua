@@ -2,6 +2,7 @@ local State = require('state')
 local Camera = require('camera')
 require('utils')
 local Gestures = require('gestures')
+local UI = require('ui')
 local Ground = require('ground')
 local Hero = require('actors.hero')
 local Point = require('geometry.Point')
@@ -20,6 +21,7 @@ local allSolidTiles
 local camera
 local world
 objects = {} -- a table of all collidable objects in the world
+rayCastStack = {}
 local visibleIcons
 
 local Game = Class
@@ -88,11 +90,15 @@ function Game:update(dt)
     for i = #objects, 1, -1 do
         objects[i]:update(dt)
     end
+    while #rayCastStack > 0 do
+        local r = rayCastStack[#rayCastStack]
+        world:rayCast(r.x1, r.y1, r.x2, r.y2, r.func)
+        table.remove(rayCastStack, #rayCastStack)
+    end
     camera:setAdjPosition(hero.body:getX(), hero.body:getY(), dt)
 end
 
 function Game:draw()
-    --camera:setAdjPosition(hero.body:getX(), hero.body:getY(), dt)
     camera:set()
 
     love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
@@ -112,8 +118,8 @@ function Game:draw()
 
 
     camera:unset()
-    -- draw the xp bar
-    self.drawXpBar()
+    -- draw the ui
+    UI:draw()
 
     setColorInverted(fontColor)
     -- draw the FPS counter
@@ -186,46 +192,6 @@ end
 function postSolve(a, b, coll)
 end
 
-function on_collide(dt, shape_a, shape_b, mtv_x, mtv_y)
-    -- seperate collision function for entities
-    collideHeroWithTile(dt, shape_a, shape_b, mtv_x, mtv_y)
-end
-
-function collideHeroWithTile(dt, shape_a, shape_b, mtv_x, mtv_y)
-    -- sort out which one our hero shape is
-    local hero_shape, tileshape
-    if shape_a == hero and shape_b.type == "tile" then
-        hero_shape = shape_a
-    elseif shape_b == her and shape_a.type == "tile" then
-        hero_shape = shape_b
-    else
-        -- none of the two shapes is a tile, return to upper function
-        return
-    end
-    -- why not in one function call? because we will need to differentiate between the axis later
-    hero_shape:move(mtv_x, 0)
-    hero_shape:move(0, mtv_y)
-    hero.YVeloc = 0 -- TODO wrong.
-end
-
-function Game:setupHero(x,y)
-    -- physical properties
-    hero = collider:addRectangle(x, y, 16, 16)
-    hero.size = 16
-    hero.XVeloc = 0
-    hero.XAccel = 0
-    hero.YAccel = 9.8
-    hero.YVeloc = 0
-    hero.MaxXSpeed = 300
-    hero.MaxYSpeed = 3000
-
-    -- mental properties
-    hero.farthestX = 0
-    hero.damage = 0
-    hero.xp = self:getHeroXp()
-    --	hero.img = love.graphics.newImage("img/hero.png")
-end
-
 -------------------------------
 -- Key input handling functions
 -------------------------------
@@ -237,7 +203,9 @@ function Game:keypressed(key)
         hero:setWalkingLeft()
     elseif hero.spellBook:keyMatch(key) then
         local icon = hero.spellBook[hero.spellBook.i]:cast(world, hero)
-        visibleIcons:add(icon)
+        if icon then
+            visibleIcons:add(icon)
+        end
     elseif key == openMenu then
         updateState("back to main menu")
     elseif key == gesture then
@@ -250,26 +218,6 @@ function Game:keyreleased(key)
         or (key == left and hero:isWalkingLeft()) then
         hero:setStanding()
     end
-end
-
---------------
--- XP Functions
---------------
-
-function Game:getHeroXp()
-    hero.farthestX = math.max(hero:center(), hero.farthestX)
-    hero.xp = hero.farthestX / map.widthInPixels * 2000 - hero.damage
-    --* self.maxXp TODO??bug
-    return hero.xp
-end
-
-function Game:drawXpBar()
-    red, green, blue = love.graphics.getColor()
-    setColor({r=100, g=100, b=100})
-    --TODO!!
-    --   love.graphics.rectangle("fill", 0, screenHeight - 75, 
-    --   screenWidth*(self:getHeroXp() / self.maxXp), 50)
-    setColor({r=red, g=green, b=blue})
 end
 
 --------------

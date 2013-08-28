@@ -5,6 +5,7 @@ local Force = require('spells.Force')
 local Conjure = require('spells.Conjure')
 local Point = require('geometry.Point')
 local Seg = require('geometry.Seg')
+local Bolt = require('spells.Bolt')
 
 effectFactory = {}
 
@@ -33,13 +34,34 @@ local choose = {
         return nil
     end,
     function(lines, element, power)
+        -- A bolt is a jagged, possibly branching line.
+        print('Trying bolt.')
+        local longestLine = getLongestLine(lines)
+        -- The longest line should be fairly short.
+        if #lines < 5 or longestLine:length() > 4 then
+            return nil
+        end
+        for i = 1, #lines do
+            for j = 1, #lines do
+                print('i: '..tostring(lines[i])..' j: '..tostring(lines[j]))
+                if i ~= j and lines[i]:intersects(lines[j])
+                and not lines[i]:sharesAPoint(lines[j]) then
+                    return nil
+                end
+            end
+        end
+        --TODO                 
+        print('Was a bolt.')
+        return make.bolt(lines, element)
+    end,
+    function(lines, element, power)
         print('Trying conjure. #lines = '..#lines..' element = '..element.t)
         -- TODO check is polygon and is convex
         -- love.physics polygons can have at most 8 sides
         if #lines > 8 then
             return nil
         end
-        points = connectLinesIntoPolygon(lines)
+        local points = connectLinesIntoPolygon(lines)
         return make.conjure(points, element)
     end
 }
@@ -54,6 +76,9 @@ function make.force(lines, element, power, longestLine)
     return Force(horzForce, vertForce, x, y)
 end
 
+function make.bolt(lines, element)
+    return Bolt()
+end
 
 function make.conjure(points, element)
     if points == nil then

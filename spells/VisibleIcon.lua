@@ -11,7 +11,7 @@ local VisibleIcon = Class
             self.lines[i]:scale(tileSize / 4)
             self.lines[i]:offset(x, y)
         end
-        self.maxAge = 4
+        self.maxAge = 0.4
         -- center returns vertices as x1,y1,x2,y2, ..., xn,yn
         self.dateBorn = dateBorn
     end

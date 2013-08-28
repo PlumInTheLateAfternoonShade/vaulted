@@ -3,6 +3,7 @@ local Seg = require 'geometry.Seg'
 local Region = require 'spells.Region'
 local Class = require('class')
 
+local manaMult = 6
 local defaultSpellTable =
 {
     lines = {},
@@ -27,8 +28,15 @@ function Spell:selfConstruct(table)
     self.iconLines = {}
     self.regions = {}
     for i = 1, #table.lines do
-        self.lines[i] = Seg(nil, nil, nil, table.lines[i])
-        self.iconLines[i] = Seg(nil, nil, nil, table.iconLines[i])
+        local l = table.lines[i]
+        local iL = table.iconLines[i]
+        self.lines[i] = Seg(
+        Point(l.p0.x, l.p0.y), Point(l.p1.x, l.p1.y), l.c)
+        self.iconLines[i] = Seg(
+        Point(iL.p0.x, iL.p0.y), Point(iL.p1.x, iL.p1.y), iL.c)
+        --TODO test
+        --self.lines[i] = Seg(nil, nil, nil, table.lines[i])
+        --self.iconLines[i] = Seg(nil, nil, nil, table.iconLines[i])
     end
     self.iconName = table.iconName
     self.power = table.power
@@ -38,15 +46,25 @@ function Spell:selfConstruct(table)
 end
 
 function Spell:cast(world, caster)
+    -- Casting spells drains the caster's mana.
+    if caster.mana < self.power*manaMult then
+        return nil
+    end
+    caster.mana = caster.mana - self.power*manaMult
     local x, y = caster.body:getWorldCenter()
     for i = 1, #self.regions do
         self.regions[i].effect:apply(world, caster)
     end
-    -- Casting spells drains the caster's lifeforce.
-    -- TODO: refuse to cast if it would kill the caster.
-    --caster.damage = caster.damage + self.power
-    -- Note: tileSize*3 is arbitrary for now.
-    return VisibleIcon(self.iconLines, x + tileSize*3, y - tileSize*3, os.clock())
+    local iconLines
+    if caster.facingRight == 1 then
+        iconLines = self.iconLines
+    else
+        iconLines = mirrorXListOfSegs(self.iconLines)
+    end
+    -- Note: tileSize is arbitrary for now. Should appear at caster's "hands".
+    return VisibleIcon(iconLines, 
+    x + tileSize*caster.facingRight, y - tileSize,
+    os.clock())
 end
 
 function Spell:finalize()
@@ -123,6 +141,7 @@ end
 
 function Spell:compressRegions()
     -- The x, y are compressed into 1 to 16.
+    self.iconLines = {}
     for i = 1, #self.regions do
         self.regions[i]:compress()
         for j = 1, #self.regions[i].lines do
