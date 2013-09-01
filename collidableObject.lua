@@ -74,8 +74,6 @@ function CollidableObject:update(dt)
             b.x, b.y, c.x,
             c.y)
         end
-        --self.shape = love.physics.newRectangleShape(math.abs(a.x - c.x),
-        --math.abs(a.y - c.y))
         self.fixture = love.physics.newFixture(self.body, self.shape)
         self.fixture:setFriction(self.friction)
         self.fixture:setUserData(self.name)
@@ -144,6 +142,10 @@ function CollidableObject:destroy()
             return
         end
     end
+end
+
+function CollidableObject:applyBolt(power, element)
+
 end
 
 function CollidableObject:queueVelocity(v)

@@ -1,4 +1,5 @@
 require 'utils'
+require 'lib.deepcopy.deepcopy'
 Point = require('geometry.Point')
 local Class = require('class')
 local Seg = Class
@@ -21,6 +22,7 @@ local Seg = Class
 }
 
 function Seg:distToPointSquared(a)
+    -- TODO: this is wrong.
     local dotProd = dot(a - self.p0, self.p1 - self.p0)
     if dotProd <= 0 then
         local sub = a - self.p0
@@ -53,8 +55,6 @@ function Seg:intersects(seg)
     -- http://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect?rq=1
     -- Also returns true if the lines share a point, 
     -- which counts for my purposes.
-    Point(3, 4)
-    Point(12, -6)
     local A, B, C, D = self.p0, self.p1, seg.p0, seg.p1
 
     if self:sharesAPoint(seg) then
@@ -80,10 +80,59 @@ function Seg:intersects(seg)
     if (rxs == 0) then
         return false -- Lines are parallel.
     end
-    rxsr = 1 / rxs
-    t = CmPxs * rxsr
-    u = CmPxr * rxsr
+    local rxsr = 1 / rxs
+    local t = CmPxs * rxsr
+    local u = CmPxr * rxsr
     return (t >= 0) and (t <= 1) and (u >= 0) and (u <= 1)
+end
+
+function Seg:getIntersectionAsLines(line)
+    -- Get the intersection point as if the segs were infinite lines.
+    -- From http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=geometry2#line_line_intersection
+
+    local A0, B0, C0 = self:convertToABC()
+    local A1, B1, C1 = line:convertToABC()
+    local det = A0*B1 - A1*B0
+    if det == 0 then
+        --Lines are parallel
+        return nil
+    end
+    local x = (B1*C0 - B0*C1)/det
+    local y = (A0*C1 - A1*C0)/det
+    return Point(x, y)
+end
+
+function Seg:convertToABC()
+    --Convert to Ax + By = C form
+    local A = self.p1.y - self.p0.y
+    local B = self.p0.x - self.p1.x
+    local C = A*self.p0.x + B*self.p0.y
+    return A, B, C
+end
+
+function Seg:hasPoint(point)
+    local A, B, C = self:convertToABC()
+    print(tostring(A*point.x)..'~'..tostring(B*point.y))
+    if A*point.x + B*point.y ~= C then
+        print('returning false one')
+        --TODO: Floating point errors here?
+        return false
+    end
+    print('point.x: '..point.x..' p0.x: '..self.p0.x..' p1.x: '..self.p1.x)
+    print('point.y: '..point.y..' p0.y: '..self.p0.y..' p1.y: '..self.p1.y)
+    if within(point.x, self.p0.x, self.p1.x)
+        and within(point.y, self.p0.y, self.p1.y) then
+        return true
+    end
+    print('returning false two')
+    return false
+end
+
+function Seg:findSidePointIsOn(point)
+    -- Return a positive number if above the seg's line, 0 if on it,
+    -- and a negative number if below it.
+    local A, B, C = self:convertToABC()
+    return point.x*A + point.y*B - C
 end
 
 function Seg:sharesAPoint(seg)
@@ -115,6 +164,15 @@ end
 function Seg:offset(x, y)
     self.p0:offset(x, y)
     self.p1:offset(x, y)
+end
+
+function offsetListOfSegs(segs, x, y)
+    local newSegs = {}
+    for i = 1, #segs do
+        newSegs[i] = table.deepcopy(segs[i])
+        newSegs[i]:offset(x, y)
+    end
+    return newSegs
 end
 
 function Seg:scale(value)

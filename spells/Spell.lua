@@ -52,8 +52,12 @@ function Spell:cast(world, caster)
     end
     caster.mana = caster.mana - self.power*manaMult
     local x, y = caster.body:getWorldCenter()
+    local visuals = {}
     for i = 1, #self.regions do
-        self.regions[i].effect:apply(world, caster)
+        local vis = self.regions[i].effect:apply(world, caster)
+        if vis then
+            table.insert(visuals, vis)
+        end
     end
     local iconLines
     if caster.facingRight == 1 then
@@ -64,7 +68,7 @@ function Spell:cast(world, caster)
     -- Note: tileSize is arbitrary for now. Should appear at caster's "hands".
     return VisibleIcon(iconLines, 
     x + tileSize*caster.facingRight, y - tileSize,
-    os.clock())
+    os.clock()), visuals
 end
 
 function Spell:finalize()
@@ -101,7 +105,6 @@ function Spell:analyzeLines()
     for i = 1, #self.regions do
         print(tostring(self.regions[i]))
     end
-
 end
 
 function Spell:breakLinesIntoRegions()

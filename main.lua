@@ -90,10 +90,14 @@ function updateState(choice)
     elseif choice == "settings" then
         state = Settings()
     elseif choice == "back to main menu" then
-        savedGame = objectDeepcopy(state)
+        if state.shouldSave then
+            savedGame = objectDeepcopy(state)
+        end
         state = Menu()
     elseif choice == "gestures" then
-        savedGame = objectDeepcopy(state)
+        if state.shouldSave then
+            savedGame = objectDeepcopy(state)
+        end
         state = Gestures()
     end
 end

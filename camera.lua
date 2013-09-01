@@ -33,7 +33,6 @@ function Camera:setAdjPosition(x, y, dt)
     self.y = self.y +
     shakeMult*(math.random()-0.5)*self.shakeFactor
     self.shakeFactor = math.max(self.shakeFactor - shakeDecayRate*dt, 0)
-    print('cam x: '..self.x..' cam y: '..self.y..' fact: '..self.shakeFactor)
 end
 
 function Camera:set()

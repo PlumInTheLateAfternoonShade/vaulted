@@ -22,13 +22,15 @@ local camera
 local world
 objects = {} -- a table of all collidable objects in the world
 rayCastStack = {}
-local visibleIcons
+local visibleIcons -- The spell icons made by gestures.
+local visuals -- Visible effects in the world, like bolts of lightning.
 
 local Game = Class
 {
     name = 'Game',
     function(self, shouldLoadHero)
         visibleIcons = VisibleIcons()
+        visuals = {}
         objects = {}
         love.physics.setMeter(tileSize)
         world = love.physics.newWorld(0, 50*tileSize, true)
@@ -69,6 +71,8 @@ local Game = Class
 
         self.maxXp = 2000
 
+        self.shouldSave = true
+
         -- init camera
         camera = Camera()
         camera:scale(0.25, 0.25)
@@ -90,6 +94,12 @@ function Game:update(dt)
     for i = #objects, 1, -1 do
         objects[i]:update(dt)
     end
+    for i = #visuals, 1, -1 do
+        if not visuals[i]:update(dt) then
+            table.remove(visuals, i)
+        end
+    end
+
     while #rayCastStack > 0 do
         local r = rayCastStack[#rayCastStack]
         world:rayCast(r.x1, r.y1, r.x2, r.y2, r.func)
@@ -108,6 +118,11 @@ function Game:draw()
     end
     -- draw all visible spell icons
     visibleIcons:draw()
+
+    -- draw all visual effects
+    for i = 1, #visuals do
+        visuals[i]:draw()
+    end
 
     -- Effect debug
     --[[if hero.spellBook[1] ~= nil then
@@ -202,9 +217,14 @@ function Game:keypressed(key)
     elseif key == left then
         hero:setWalkingLeft()
     elseif hero.spellBook:keyMatch(key) then
-        local icon = hero.spellBook[hero.spellBook.i]:cast(world, hero)
+        local icon, vis = hero.spellBook[hero.spellBook.i]:cast(world, hero)
         if icon then
             visibleIcons:add(icon)
+        end
+        if vis then
+            for i = 1, #vis do
+                table.insert(visuals, vis[i])
+            end
         end
     elseif key == openMenu then
         updateState("back to main menu")

@@ -6,6 +6,7 @@ local maxVertVToRight = 2000
 local xpMult = 2000
 local impactHealthMult = 0.02
 local tempHealthMult = 10
+local boltHealthMult = 10
 local minDamage = 5
 -- Defines an object in the game world that moves around 
 -- independent of impulses.
@@ -173,6 +174,13 @@ function Actor:damageFromTemp(dt)
         return
     end
     self.health = self.health - tempDamage
+end
+
+function Actor:applyBolt(power, element)
+    -- TODO: should be different based on element.
+    -- Also should change health.
+    print('Applying a Bolt to an Actor.')
+    self.health = self.health - power*boltHealthMult
 end
 
 return Actor

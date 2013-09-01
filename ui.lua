@@ -13,7 +13,7 @@ function UI:drawHealthBar()
     setColor(healthColor)
     if hero.health then
         love.graphics.rectangle("fill", 0, screenHeight*0.95,
-        screenWidth*(hero.health / hero.maxXp), screenHeight*0.025)
+        screenWidth*(hero.health / hero.xp), screenHeight*0.025)
     end
 end
 
@@ -21,7 +21,7 @@ function UI:drawManaBar()
     setColor(manaColor)
     if hero.mana then
         love.graphics.rectangle("fill", 0, screenHeight*0.975,
-        screenWidth*(hero.mana / hero.maxXp), screenHeight*0.025)
+        screenWidth*(hero.mana / hero.xp), screenHeight*0.025)
     end
 end
 

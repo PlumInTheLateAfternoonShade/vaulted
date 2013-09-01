@@ -13,11 +13,6 @@ local Conjure = Class
         self.element = element
         self.points = points
         self.center = center
-        --[[self.center:scale(tileSize / 2)
-        print('Scaled Conjure center: '..tostring(self.center))
-        for i = 1, #self.points do
-            self.points[i]:scale(tileSize / 2)
-        end]]--
     end
 }
 Conjure:inherit(Effect)

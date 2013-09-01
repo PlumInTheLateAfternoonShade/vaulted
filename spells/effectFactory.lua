@@ -41,6 +41,7 @@ local choose = {
         if #lines < 5 or longestLine:length() > 4 then
             return nil
         end
+        -- Regions with intersecting lines at non-endpoints aren't bolts.
         for i = 1, #lines do
             for j = 1, #lines do
                 print('i: '..tostring(lines[i])..' j: '..tostring(lines[j]))
@@ -50,9 +51,13 @@ local choose = {
                 end
             end
         end
-        --TODO                 
+        -- Valid polygons aren't bolts.
+        if connectLinesIntoPolygon(lines) then
+            return nil
+        end
+        -- TODO                 
         print('Was a bolt.')
-        return make.bolt(lines, element)
+        return make.bolt(lines, element, power)
     end,
     function(lines, element, power)
         print('Trying conjure. #lines = '..#lines..' element = '..element.t)
@@ -76,8 +81,9 @@ function make.force(lines, element, power, longestLine)
     return Force(horzForce, vertForce, x, y)
 end
 
-function make.bolt(lines, element)
-    return Bolt()
+function make.bolt(lines, element, power)
+    local wLines = translateLinesToWorldCoords(lines)
+    return Bolt(wLines, element, power)
 end
 
 function make.conjure(points, element)
@@ -143,6 +149,20 @@ function translatePointToWorldCoords(point)
     local x = (point.x - 8.5) * tileSize
     local y = (point.y - 9.5) * tileSize
     return x, y
+end
+
+function translateLinesToWorldCoords(lines)
+    local newLines = {}
+    for i = 1, #lines do
+        newLines[i] = translateLineToWorldCoords(lines[i])
+    end
+    return newLines
+end
+
+function translateLineToWorldCoords(line)
+    local x1, y1 = translatePointToWorldCoords(line.p0)
+    local x2, y2 = translatePointToWorldCoords(line.p1)
+    return Seg(Point(x1, y1), Point(x2, y2), line.c)
 end
 
 function effectFactory:makeEffect(lines, element, power)

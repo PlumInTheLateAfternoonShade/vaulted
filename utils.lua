@@ -55,3 +55,20 @@ function unpacks( ... )
     end
     return unpack( values )
 end
+
+function tableSwap(table, index1, index2)
+    --Swap the values of index1 and index2 in the table.
+    local value1 = table[index1]
+    table[index1] = table[index2]
+    table[index2] = value1
+    return table
+end
+
+function printTable(preMessage, table, postMessage)
+    print(preMessage)
+    -- Print each member of the table
+    for k, v in pairs(table) do
+        print(tostring(k)..' = '..tostring(v))
+    end
+    print(postMessage)
+end
