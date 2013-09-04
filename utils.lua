@@ -72,3 +72,9 @@ function printTable(preMessage, table, postMessage)
     end
     print(postMessage)
 end
+
+function colorEquals(color1, color2)
+    return color1.r == color2.r and
+    color1.g == color2.g and
+    color1.b == color2.b
+end

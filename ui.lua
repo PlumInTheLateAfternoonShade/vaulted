@@ -7,6 +7,7 @@ local manaColor = {r=100, g=100, b=230}
 function UI:draw()
     self:drawHealthBar()
     self:drawManaBar()
+    hero.spellBook:draw(0, 0, screenWidth, screenHeight*0.1)
 end
 
 function UI:drawHealthBar()

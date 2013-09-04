@@ -5,6 +5,7 @@ local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local Class = require 'HardonCollider.class'
 local State = require 'state'
+local ui = require 'ui'
 local lines
 local spellBook
 local Gestures = Class
@@ -14,16 +15,18 @@ local Gestures = Class
         setColor(eles[eles.i].c)
         spellBook = hero.spellBook
         -- The lines in the currently loaded gesture
+        print(spellBook.i)
         lines = spellBook[spellBook.i].lines
         -- Set up the drawing grid
         self:initGrid()
         drawPreviewLine = false
-        love.graphics.setLineWidth(5)
     end
 }
 Gestures:inherit(State)
 
 function Gestures:draw()
+    -- Draw the UI
+    ui:draw()
     -- Draw the grid of possible gesture points
     self:drawGrid()
     -- Draw each line in the current gesture
@@ -31,6 +34,7 @@ function Gestures:draw()
     -- Draw the cursor
     local mouseX = love.mouse.getX()
     local mouseY = love.mouse.getY()
+    setColor(eles[eles.i].c)
     love.graphics.circle("fill", mouseX, mouseY, 10, 100)
     -- Draw the preview line if necessary
     if drawPreviewLine then
@@ -63,6 +67,7 @@ function Gestures:isPlayerDot(i, j)
 end
 
 function Gestures:drawLines()
+    love.graphics.setLineWidth(5)
     local red, green, blue = love.graphics.getColor()
     --TODO convert to sensible for loop
     for i = 1, #lines do
@@ -74,17 +79,11 @@ function Gestures:drawLines()
 end
 
 function Gestures:keypressed(key)
-    if key == left then
+    if key == up then
         eles.inc(-1)
-    elseif key == right then
-        eles.inc(1)
-    elseif key == up then
-        spellBook:inc(-1)
-        lines = spellBook[spellBook.i].lines
     elseif key == down then
-        spellBook:inc(1)
-        lines = spellBook[spellBook.i].lines
-    elseif spellBook:keyMatch(key) then
+        eles.inc(1)
+    elseif spellBook:keyMatch(key) ~= nil then
         lines = spellBook[spellBook.i].lines
     elseif key == confirm or key == gesture then
         -- Finalize and save spells

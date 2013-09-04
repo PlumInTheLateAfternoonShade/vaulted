@@ -5,10 +5,11 @@ local Class = require('class')
 local VisibleIcon = Class
 {
     name = 'VisibleIcon',
-    function(self, lines, x, y, dateBorn)
+    function(self, lines, x, y, dateBorn, scaleFactor)
         self.lines = table.deepcopy(lines)
+        self.scaleFactor = scaleFactor or tileSize/4
         for i = 1, #self.lines do
-            self.lines[i]:scale(tileSize / 4)
+            self.lines[i]:scale(self.scaleFactor)
             self.lines[i]:offset(x, y)
         end
         self.maxAge = 0.4
@@ -19,7 +20,7 @@ local VisibleIcon = Class
 
 function VisibleIcon:draw()
     local currWidth = love.graphics.getLineWidth()
-    love.graphics.setLineWidth(tileSize / 16)
+    love.graphics.setLineWidth(self.scaleFactor/4)
     for i = 1, #self.lines do
         self.lines[i]:draw()
     end

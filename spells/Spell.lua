@@ -110,21 +110,27 @@ end
 function Spell:breakLinesIntoRegions()
     -- A region is an intersecting shape of same-element segs.
     self:resetRegioning()
+    -- For each unregioned line, make a region.
+    -- For each line in the region, check whether any other
+    -- line in the spell qualifies to be part of its region.
     for i = 1, #self.lines do
-        l = self.lines[i]
+        print('r: '..self.lines[i].c.r)
+    end
+    for i = 1, #self.lines do
+        local l = self.lines[i]
         print('Line = '..tostring(l))
         if not l.regioned then
-            region = Region(l)
+            local region = Region(l)
             table.insert(self.regions, region)
             l.regioned = #self.regions
-            j = 1
+            local j = 1
             while j <= #region.lines do
-                l2 = region.lines[j]
+                local l2 = region.lines[j]
                 for k = 1, #self.lines do
-                    l3 = self.lines[k]
-                    if not l3.regioned
-                        and l2.c.t == l3.c.t
-                        and l2:intersects(l3) then
+                    local l3 = self.lines[k]
+                    if (not l3.regioned)
+                        and (colorEquals(l2.c, l3.c))
+                        and (l2:intersects(l3)) then
                         l3.regioned = l2.regioned
                         table.insert(region.lines, l3)
                     end
