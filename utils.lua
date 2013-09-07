@@ -65,12 +65,16 @@ function tableSwap(table, index1, index2)
 end
 
 function printTable(preMessage, table, postMessage)
-    print(preMessage)
+    if preMessage then
+        print(preMessage)
+    end
     -- Print each member of the table
     for k, v in pairs(table) do
         print(tostring(k)..' = '..tostring(v))
     end
-    print(postMessage)
+    if postMessage then
+        print(postMessage)
+    end
 end
 
 function colorEquals(color1, color2)

@@ -17,7 +17,7 @@ local ElementalObject = Class
         element.friction, 'dynamic', element.c, name)
         self.eleObjFirstUpdate = true
         self.partUpdateCounter = 1000
-        self.maxMassToBreak = 0.1 --element.density*1 --Pretty arbitrary (TODO)
+        self.maxMassToBreak = 10 --element.density*1 --Pretty arbitrary (TODO)
         self.ambientTemp = element.temp
         self.temp = self.ambientTemp
     end
@@ -61,7 +61,9 @@ end
 
 function ElementalObject:beginCollision(other, contact, world)
     --TODO: Separate elements into 4 classes? Kind of annoying.
-    if self.element.t == 'fire' or self.element.t == 'water' then
+    --print('expireTime: '..self.expireTime)
+    if (self.element.t == 'fire' or self.element.t == 'water')
+    and self.expireTime == 0 then --TODO bug with fire!
         local deleteSeconds = nil
         if self.body:getMass() > self.maxMassToBreak then
             self:centralize(self:computeCentroid())
@@ -78,80 +80,28 @@ function ElementalObject:beginCollision(other, contact, world)
                 local newCenter2 = 
                 computeCentroid(points2) + self.center
 
-                -- Debug
-                print('points1')
-                for i = 1, #points1 do
-                    print(tostring(points1[i]))
-                end
-                print('points2')
-                for i = 1, #points2 do
-                    print(tostring(points2[i]))
-                end
-                -- Debug
-                --[[points1 = 
-                {
-                    Point(-176.7, -79.3),
-                    Point(-48.7, -207.3),
-                    Point(207.3, -79.3),
-                    Point(207.3, 48.7),
-                    Point(79.3, 176.7),
-                    Point(-48.7, 176.7),
-                    Point(-176.7, 48.7)
-                }]]--
+                -- Debug prints
+                print('area1: '..computeArea(points1))
+                printTable('points1: ', points1)
+                print('area2: '..computeArea(points2))
+                printTable('points2: ', points2)
+
                 -- Construct the elemental objects.
                 local obj1 = self:makeChildObject(points1, newCenter1)
                 local obj2 = self:makeChildObject(points2, newCenter2)
-                local result1 = true
-                local result2 = true
-                -- TODO fix so try/catch not necessary
-                --[[local result1, obj1 = 
-                pcall(self:makeChildObject(points1, newCenter1))
-                local result2, obj2 = 
-                pcall(self:makeChildObject(points2, newCenter2))]]--
-                local vX, vY = self.body:getLinearVelocity() 
-                --[[print('result1: '..tostring(result1))
-                print('result2: '..tostring(result2))]]--
-                -- Set their velocities and insert 
-                -- them into the object table.
-                if result1 then
-                    -- TODO Placeholders
-                    obj1:queueVelocity(Point(vX, vY))
-                    table.insert(objects, obj1)
-                end
-                if result2 then
-                    obj2:queueVelocity(Point(vX, vY))
-                    table.insert(objects, obj2)
-                end
-                if result1 or result2 then
-                    self:setDeleteTime(0)
-                end
+
+                -- Assign their velocities
+                local vX, vY = self.body:getLinearVelocity()
+                local v = Point(vX, vY)
+                local newV1 = self:getNewVelocity(v, newCenter1)
+                local newV2 = self:getNewVelocity(v, newCenter2)
+                obj1:queueVelocity(newV1)
+                obj2:queueVelocity(newV2)
+                -- Insert them into the object table.
+                table.insert(objects, obj1)
+                table.insert(objects, obj2)
+                self:setDeleteTime(-1)
             end
-            --[[local numNew = math.random(2, 4)
-            local xb1, yb1, xb2, yb2 = self.fixture:getBoundingBox()
-            local vX, vY = self.body:getLinearVelocity() 
-            for i = 1, numNew do
-            local newCenter =
-            Point(math.random(xb1*0.5, xb2*0.5),
-            math.random(yb1*0.5, yb2*0.5))
-            print('x bco: '..tostring(self.body:getX() - newCenter.x))
-            local newPoints = coordsToPoints(self.shape:getPoints())
-            local scaleFactor = math.sqrt(1/numNew)
-            for j = 1, #newPoints do
-            newPoints[j]:scale(scaleFactor)
-            end
-            local newObj = ElementalObject(world, 
-            newPoints, newCenter, self.element)
-            --TODO should take into account other's veloc too.
-            local speed = Point(vX, vY):magnitude()
-            local newV = Seg(self.center, newCenter):normalize()
-            newV:scale(speed)
-            newObj:queueVelocity(newV)
-            table.insert(objects, newObj)
-            if self.element.t == 'fire' then
-            deleteSeconds = 0
-            end
-            end]]--
-            --self:setDeleteTime(0)
         elseif self.element.t == 'fire' then
             deleteSeconds = deathSeconds
         end
@@ -161,6 +111,13 @@ function ElementalObject:beginCollision(other, contact, world)
         end
     end
     CollidableObject.beginCollision(self, other, contact, world)
+end
+
+function ElementalObject:getNewVelocity(v, newCenter)
+    local speed = v:magnitude()
+    local newV = Seg(self.center, newCenter):normalize()
+    newV:scale(speed)
+    return newV
 end
 
 function ElementalObject:makeChildObject(points, center)
@@ -179,13 +136,13 @@ function coordsToPoints(...)
 end
 
 function ElementalObject:getContactSeg(contact)
-    local nx, ny = contact:getNormal()
     local cx, cy = contact:getPositions() --Gets the first pos only.
     -- Generate another point to make a line
-    local px = cx + nx*1000 - self.center.x 
-    local py = cy + ny*1000 - self.center.y
-    return Seg(
-    Point(cx - self.center.x, cy - self.center.y), Point(px, py))
+    local c = Point(cx, cy)
+    local p = c:getReflectAcrossPoint(self.center)
+    c:offset(-self.center.x, -self.center.y)
+    p:offset(-self.center.x, -self.center.y)
+    return Seg(c, p)
 end
 
 function breakNearSeg(points, seg)
@@ -196,7 +153,21 @@ function breakNearSeg(points, seg)
     local ps = table.deepcopy(points)
     local p0, i = nearestPoint(ps, seg.p0)
     local p1, j = nearestPoint(ps, seg.p1)
+    if #points == 3 then
+        -- If it's a triangle, we can't break it along two points.
+        -- So we break it along one point and the midpoint of the
+        -- opposite seg.
+
+        -- Get the opposite seg's points
+        table.remove(ps, i)
+        -- Compute midpoint of that seg.
+        local mP = midPoint(ps[1], ps[2])
+        print('p0: '..tostring(p0)..' opp1: '..tostring(ps[1])..' opp2: '..tostring(ps[2])..' mP: '..tostring(mP))
+        -- Return two triangles formed by a cut through p0 and the midpoint.
+        return {p0, ps[1], mP}, {p0, ps[2], mP}
+    end
     if math.abs(i - j) <= 1 then
+        print('Wouldn\'t get two polygons. i = '..i..' j = '..j..' # = '..#points)
         -- Don't break it if we wouldn't get two polygons out of it.
         return points
     end
@@ -204,14 +175,21 @@ function breakNearSeg(points, seg)
     local side2 = {}
     local nearSeg = Seg(p0, p1)
     for k = 1, #points do
-        if nearSeg:findSidePointIsOn(points[k]) >= 0 then
+        local found = nearSeg:findSidePointIsOn(points[k])
+        print(k..' = Found: '..found..' points[k]: '..tostring(points[k]))
+        --TODO: Hacky fix for floating point errors.
+        if found > 0.001 then
             table.insert(side1, points[k])
-        else
+        elseif found < -0.001 then
             table.insert(side2, points[k])
         end
     end
     table.insert(side2, p0)
     table.insert(side2, p1)
+    table.insert(side1, p0)
+    table.insert(side1, p1)
+    removeRedundantPoints(side1)
+    removeRedundantPoints(side2)
     -- debug
     printTable('Broken side1:\n====', side1, '===')
     printTable('Broken side2:\n====', side2, '===')

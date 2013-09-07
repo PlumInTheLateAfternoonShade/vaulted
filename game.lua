@@ -88,7 +88,7 @@ function Game:update(dt)
         self.secondCount = self.secondCount - 1
         visibleIcons:update()
         -- update the FPS counter
-        self.fps = 1 / dt
+        self.fps = love.timer.getFPS()
     end
     world:update(dt)
     for i = #objects, 1, -1 do

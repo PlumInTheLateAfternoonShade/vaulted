@@ -38,6 +38,28 @@ function Point:magnitude()
     return math.sqrt(self:magSquared())
 end
 
+function Point:normalize()
+    local m = self:magnitude()
+    if m == 0 then
+        return
+    end
+    self.x = self.x / m
+    self.y = self.y / m
+end
+
+function Point:reflectAcrossPoint(point)
+    local x = self.x - point
+    local y = self.y - point
+    self.x = point - x
+    self.y = point - y
+end
+
+function Point:getReflectAcrossPoint(point)
+    local x = self.x - point.x
+    local y = self.y - point.y
+    return Point(point.x - x, point.y - y)
+end
+
 function Point:compress()
     gapX = (screenWidth - 2*gridXOffset) / gridSize
     gapY = (screenHeight - 2*gridYOffset) / gridSize
@@ -123,9 +145,14 @@ function computeCentroid(points)
     local cx = 0
     local cy = 0
     local a = 0
-    for i = 1, #points - 1 do
+    for i = 1, #points do
         local p0 = points[i]
-        local p1 = points[i + 1]
+        local p1
+        if i == #points then
+            p1 = points[1]
+        else
+            p1 = points[i + 1]
+        end
         cx = cx + (p0.x + p1.x)*(p0.x*p1.y - p1.x*p0.y)
         cy = cy + (p0.y + p1.y)*(p0.x*p1.y - p1.x*p0.y)
         a = a + (p0.x*p1.y - p1.x*p0.y)
@@ -142,9 +169,14 @@ end
 function computeArea(points)
     -- From http://en.wikipedia.org/wiki/Centroid#Locating_the_centroid
     local a = 0
-    for i = 1, #points - 1 do
+    for i = 1, #points do
         local p0 = points[i]
-        local p1 = points[i + 1]
+        local p1
+        if i == #points then
+            p1 = points[1]
+        else
+            p1 = points[i + 1]
+        end
         a = a + (p0.x*p1.y - p1.x*p0.y)
     end
     a = a/2
@@ -155,10 +187,12 @@ function convexHull(unsortedPoints)
     -- Finds the smallest convex polygon that encapsulates all the points.
     -- using Graham's scan. See http://en.wikipedia.org/wiki/Graham_scan
     -- and http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
+    printTable('Before copy', unsortedPoints)
     local points = table.deepcopy(unsortedPoints)
+    printTable('Before sort', points)
     -- Sort the points by Y value.
     table.sort(points, compareXthenY)
-    -- TODO: Remove duplicates.
+    printTable('After sort', points)
     if #points <= 2 then
         -- Can't make a polygon without a big enough input.
         return nil
@@ -223,33 +257,6 @@ function compareXthenY(p0, p1)
     return p0.x <= p1.x
 end
 
-function breakNearSeg(points, seg)
-    -- Finds the two points closest to the seg's endpoints
-    -- and returns two collections of points on either side.
-    local ps = table.deepcopy(points)
-    local p0, i = nearestPoint(ps, seg.p0)
-    local p1, j = nearestPoint(ps, seg.p1)
-    if math.abs(i - j) <= 1 then
-        -- Don't break it if we wouldn't get two polygons out of it.
-        return points
-    end
-    local side1 = {}
-    local side2 = {}
-    local nearSeg = Seg(p0, p1)
-    for k = 1, #points do
-        if nearSeg:findSidePointIsOn(points[k]) >= 0 then
-            table.insert(side1, points[k])
-        else
-            table.insert(side2, points[k])
-        end
-    end
-    table.insert(side1, p0)
-    table.insert(side2, p0)
-    table.insert(side1, p1)
-    table.insert(side2, p1)
-    return side1, side2
-end
-
 function nearestPoint(points, point)
     local nearestIndex = 1
     local nearestDist = worldXEnd
@@ -261,6 +268,22 @@ function nearestPoint(points, point)
         end
     end
     return points[nearestIndex], nearestIndex
+end
+
+function midPoint(p0, p1)
+    local x = (p0.x + p1.x)/2
+    local y = (p0.y + p1.y)/2
+    return Point(x, y)
+end
+
+function removeRedundantPoints(points)
+    for i = #points, 1, -1 do
+        for j = #points, 1, -1 do
+            if i ~= j and points[i]:equals(points[j]) then
+                table.remove(points, j)
+            end
+        end
+    end
 end
 
 return Point

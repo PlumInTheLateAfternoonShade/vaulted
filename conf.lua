@@ -55,6 +55,6 @@ function love.conf(t)
     t.screen.width = screenWidth
     t.screen.height = screenHeight
     t.vsync = false
-    t.screen.fullscreen = true
+    t.screen.fullscreen = false
     t.identity = "saves" --TODO genericize
 end

@@ -186,6 +186,12 @@ function Seg:getAngle()
     return math.atan2(dy, dx)
 end
 
+function Seg:getMidPoint()
+    local x = (self.p0.x + self.p1.x)/2
+    local y = (self.p0.y + self.p1.y)/2
+    return Point(x, y)
+end
+
 function Seg:normalize()
     --Returns a vector starting at origin with length 1 and current slope.
     local angle = self:getAngle()

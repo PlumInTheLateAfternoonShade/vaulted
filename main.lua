@@ -13,11 +13,15 @@ local state = Menu()
 local savedGame = Game(true)
 main = {}
 
-function love.load()
+function love.load(args)
     if ShouldProfile then
         -- prof only. Start the profiler.
         print('Starting profiler.')
         ProFi:start()
+    end
+    
+    if args[#args] == '-debug' then 
+        require('mobdebug').start()
     end
 
     math.randomseed(os.time())

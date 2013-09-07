@@ -41,6 +41,7 @@ function CollidableObject:update(dt)
         --Need to construct here rather than constructor,
         --in case construct occurs during middle of physics calcs.
         self.firstUpdate = false
+        removeRedundantPoints(self.points)
         local centroid = self:computeCentroid()
         self:centralize(centroid)
         self.body = love.physics.newBody(self.world,
