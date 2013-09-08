@@ -286,4 +286,20 @@ function removeRedundantPoints(points)
     end
 end
 
+function testPoint(p, points)
+    -- Return true if the point p is in the polygon points, else false.
+    -- From http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+    local c = false
+    local j = #points
+    for i = 1, #points do
+        if ((points[i].y > p.y) ~= (points[j].y > p.y)) and
+        (p.x < (points[j].x - points[i].x)*(p.y - points[i].y)
+        /(points[j].y - points[i].y) + points[i].x) then
+            c = not c
+        end
+        j = i
+    end
+    return c
+end
+
 return Point

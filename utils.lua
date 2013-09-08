@@ -77,6 +77,72 @@ function printTable(preMessage, table, postMessage)
     end
 end
 
+function tableMax(table, field)
+    -- Finds the entry with the max value of the specified field of the table.
+    return tableCompare(table, field, greater)
+end
+
+function tableMin(table, field)
+    -- Finds the entry with the min value of the specified field of the table.
+    return tableCompare(table, field, less)
+end
+
+function tableCompare(table, field, compare)
+    -- Finds the entry with the value of the specified field of the table
+    -- determined to maximize the compare function
+    if (not table) or #table == 0 then
+        return nil
+    end
+    printTable('tableCompare', table)
+    local max = table[1][field]
+    local maxI = 1
+    local maxEntry = table[1]
+    for i = 1, #table do
+        if compare(table[i][field], max) then
+            max = table[i][field]
+            maxI = i
+            maxEntry = table[i]
+        end
+    end
+    return max, maxI, maxEntry
+end
+
+function greater(a, b)
+    return a > b
+end
+
+function less(a, b)
+    return a < b
+end
+
+function map(table, func, ...)
+    -- Applies the function to each of the numeric table values
+    -- and returns the result. (Of course, you usually wouldn't
+    -- need that return since the table is modified.)
+    -- ... are additional parameters.
+    for i = 1, #table do
+        func(table[i], ...)
+    end
+    return table
+end
+
+function mapMethod(table, method, ...)
+    -- Applies the method to each of the table's numeric values.
+    -- TODO broken.
+    for i = 1, #table do
+        table[i]:method(...)
+    end
+    return table
+end
+
+function mapPairs(table, func, ...)
+    -- Applies the function to each of the table's values.
+    for key, value in pairs(table) do
+        func(value, ...)
+    end
+    return table
+end
+
 function colorEquals(color1, color2)
     return color1.r == color2.r and
     color1.g == color2.g and

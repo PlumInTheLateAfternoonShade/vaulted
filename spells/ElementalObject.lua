@@ -42,7 +42,8 @@ function ElementalObject:update(dt)
         self.body:setGravityScale(self.element.gravScale)
         self.body:resetMassData()
         if self.element.t == 'fire' then
-            self.particle = FireParticleSystem(self.fixture, self.color)
+            self.particle = FireParticleSystem(
+            self.fixture, self.points, self.center)
         end
         self.eleObjFirstUpdate = false
     end
@@ -102,8 +103,6 @@ function ElementalObject:beginCollision(other, contact, world)
                 table.insert(objects, obj2)
                 self:setDeleteTime(-1)
             end
-        elseif self.element.t == 'fire' then
-            deleteSeconds = deathSeconds
         end
         if deleteSeconds then
             print('Deleting in '..deleteSeconds..'.')
