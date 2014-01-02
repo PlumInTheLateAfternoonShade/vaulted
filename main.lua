@@ -60,9 +60,9 @@ function love.keypressed(key)
     if key == "`" then
         debug.debug()
     elseif key == 'return' and love.keyboard.isDown('lalt', 'ralt') then
-        love.graphics.toggleFullscreen()
-        -- call the state's keypressed function
+        toggleFullscreen()
     end
+    -- call the state's keypressed function
     state:keypressed(key)
 end
 
@@ -122,4 +122,10 @@ function objectDeepcopy(object)
         return setmetatable(new_table, _copy(getmetatable(object)))
     end
     return _copy(object)
+end
+
+function toggleFullscreen()
+    -- love.window.toggleFullscreen doesn't seem to be implemented yet.
+    -- So use this until then.
+    love.window.setFullscreen(not love.window.getFullscreen())
 end

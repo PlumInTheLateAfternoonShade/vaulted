@@ -34,9 +34,6 @@ function Spell:selfConstruct(table)
         Point(l.p0.x, l.p0.y), Point(l.p1.x, l.p1.y), l.c)
         self.iconLines[i] = Seg(
         Point(iL.p0.x, iL.p0.y), Point(iL.p1.x, iL.p1.y), iL.c)
-        --TODO test
-        --self.lines[i] = Seg(nil, nil, nil, table.lines[i])
-        --self.iconLines[i] = Seg(nil, nil, nil, table.iconLines[i])
     end
     self.iconName = table.iconName
     self.power = table.power
@@ -54,9 +51,13 @@ function Spell:cast(world, caster)
     local x, y = caster.body:getWorldCenter()
     local visuals = {}
     for i = 1, #self.regions do
-        local vis = self.regions[i].effect:apply(world, caster)
-        if vis then
-            table.insert(visuals, vis)
+        if self.regions[i].effect then
+            local vis = self.regions[i].effect:apply(world, caster)
+            if vis then
+                table.insert(visuals, vis)
+            end
+        else
+            print('Region '..i..' had no effect assigned.')
         end
     end
     local iconLines
@@ -180,13 +181,17 @@ function Spell:orderRegions()
     -- Force effect regions should occur last in the region list.
     local forceRegions = {}
     for i = #self.regions, 1, -1 do
-        if self.regions[i].effect.name == 'Force' then
-            table.insert(forceRegions, self.regions[i])
-            table.remove(self.regions[i], i)
+        if self.regions[i].effect then
+            if self.regions[i].effect.name == 'Force' then
+                table.insert(forceRegions, self.regions[i])
+                table.remove(self.regions[i], i)
+            end
         end
     end
     for j = 1, #forceRegions do
-        table.insert(self.regions, forceRegions[j])
+        if self.regions[i].effect then
+            table.insert(self.regions, forceRegions[j])
+        end
     end
 end
 

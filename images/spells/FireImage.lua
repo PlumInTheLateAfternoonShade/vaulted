@@ -46,7 +46,6 @@ function FireImage.pixelFunction(x, y, r, g, b, a)
     local p = Point(x, y)
     if not testPoint(p, currPoints) then
         a = 0
-        --a = 50
     else
         a = 255
     end

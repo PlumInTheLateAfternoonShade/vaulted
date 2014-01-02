@@ -52,9 +52,9 @@ gridYOffset = screenHeight / 8
 
 function love.conf(t)
     t.title = "Vaulted"
-    t.screen.width = screenWidth
-    t.screen.height = screenHeight
+    t.window.width = screenWidth
+    t.window.height = screenHeight
     t.vsync = false
-    t.screen.fullscreen = false
+    t.window.fullscreen = false
     t.identity = "saves" --TODO genericize
 end
