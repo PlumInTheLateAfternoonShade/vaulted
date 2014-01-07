@@ -26,23 +26,41 @@ local ElementalObject = Class
 ElementalObject:inherit(CollidableObject)
 
 function ElementalObject:initMesh()
-    local image = img.load("ice.jpg")
-    self.mesh = love.graphics.newMesh(self:getMeshVertices(), image)
+    self.textureCoords = self:computeTextureCoords()
+    self.mesh = love.graphics.newMesh(self:getMeshVertices(), img.load("ice.jpg"))
 end
 
 function ElementalObject:getMeshVertices()
     local wPoints = {self.body:getWorldPoints(self.shape:getPoints())}
+    
     local vertices = {}
     for i = 1, #wPoints, 2 do
         table.insert(vertices,
         {
             wPoints[i], -- x coord
             wPoints[i + 1], -- y coord
-            0, 0, -- texture coords
-            255, 0, 0
+            self.textureCoords[i],
+            self.textureCoords[i + 1]
         })
     end
     return vertices
+end
+
+function ElementalObject:computeTextureCoords()
+    local maxY = tableMax(self.points, 'y')
+    local minY = tableMin(self.points, 'y')
+    local maxX = tableMax(self.points, 'x')
+    local minX = tableMin(self.points, 'x')
+    local scaleFactor = math.max(maxY - minY, maxX - minX)
+    local textureCoords = {}
+    for i = 1, #self.points do
+        table.insert(textureCoords,
+            (self.points[i].x - minX) / scaleFactor)
+        table.insert(textureCoords,
+            (self.points[i].y - minY) / scaleFactor)
+    end
+    printTable('texture', textureCoords, '===')
+    return textureCoords
 end
 
 function ElementalObject:draw()
