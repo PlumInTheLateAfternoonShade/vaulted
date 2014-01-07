@@ -4,7 +4,6 @@ local Spell = require 'spells.Spell'
 local VisibleIcon = require 'spells.VisibleIcon'
 require 'utils'
 local Class = require 'class'
-
 local defaultSpellBookTable =
 {
     i = 1,

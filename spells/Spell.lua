@@ -189,7 +189,7 @@ function Spell:orderRegions()
         end
     end
     for j = 1, #forceRegions do
-        if self.regions[i].effect then
+        if forceRegions[j].effect then
             table.insert(self.regions, forceRegions[j])
         end
     end

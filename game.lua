@@ -124,14 +124,6 @@ function Game:draw()
         visuals[i]:draw()
     end
 
-    -- Effect debug
-    --[[if hero.spellBook[1] ~= nil then
-    if hero.spellBook[1].regions[1] ~= nil then
-    love.graphics.print("Here", hero.spellBook[1].regions[1].effect.x, hero.spellBook[1].regions[1].effect.y)
-    end
-    end]]--
-
-
     camera:unset()
     -- draw the ui
     UI:draw()

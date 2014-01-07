@@ -9,7 +9,6 @@ local defaultHero =
 {
     spellBook = nil
 }
-
 local Hero = Class
 {
     name = 'Hero',

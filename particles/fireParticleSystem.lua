@@ -26,13 +26,12 @@ local FireParticleSystem = Class
         self.speed2 = initSpeed2
         self.pLife = 0.5
         local p = love.graphics.newParticleSystem(self.image, 1000)
-        p:setGravity(0, 0)
         p:setEmissionRate(self.emRate)
         p:setSpeed(self.speed1, self.speed2)
         p:setColors(220, 105, 20, 255, 194, 30, 18, 0)
         p:setPosition(0, 0)
-        p:setLifetime(10000)
-        p:setParticleLife(self.pLife)
+        p:setEmitterLifetime(10000)
+        p:setParticleLifetime(self.pLife)
         p:setDirection(initDir)
         p:setSpread(math.pi/8)
         p:start()
@@ -62,7 +61,7 @@ function FireParticleSystem:reduce(deathTime, deathSeconds)
     --Causes a dying particle system to reduce in intensity.
     local timeRemaining = deathTime - os.clock()
     local percentRemaining = timeRemaining / deathSeconds
-    self.p:setParticleLife(self.pLife*percentRemaining)
+    self.p:setParticleLifetime(self.pLife*percentRemaining)
 end
     
 function FireParticleSystem:draw(x, y, angle)

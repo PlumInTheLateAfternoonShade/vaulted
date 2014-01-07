@@ -15,7 +15,8 @@ local state = Menu()
 local stateInitializers = {
     ["continue"] = function()
         if savedGame == nil then
-            state = Game()
+            print('savedGame nil')
+            state = Game(true)
         else
             print('Returning to saved game.')
             state = savedGame
@@ -50,7 +51,7 @@ local stateInitializers = {
     end
 }
 
-local savedGame = Game(true)
+local savedGame = nil
 main = {}
 
 function love.load(args)

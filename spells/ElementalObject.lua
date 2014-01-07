@@ -25,9 +25,9 @@ local ElementalObject = Class
 }
 ElementalObject:inherit(CollidableObject)
 
-function ElementalObject:initMesh()
+function ElementalObject:initMesh(imageName)
     self.textureCoords = self:computeTextureCoords()
-    self.mesh = love.graphics.newMesh(self:getMeshVertices(), img.load("ice.jpg"))
+    self.mesh = love.graphics.newMesh(self:getMeshVertices(), img.load(imageName))
 end
 
 function ElementalObject:getMeshVertices()
@@ -59,7 +59,6 @@ function ElementalObject:computeTextureCoords()
         table.insert(textureCoords,
             (self.points[i].y - minY) / scaleFactor)
     end
-    printTable('texture', textureCoords, '===')
     return textureCoords
 end
 
@@ -87,7 +86,11 @@ function ElementalObject:update(dt)
             self.particle = FireParticleSystem(
             self.fixture, self.points, self.center)
         elseif self.element.t == 'water' then
-            self:initMesh()
+            self:initMesh('ice.jpg')
+        elseif self.element.t == 'earth' then
+            self:initMesh('earth.jpg')
+        elseif self.element.t == 'air' then
+            self:initMesh('air.jpg')
         end
         self.eleObjFirstUpdate = false
     end
@@ -106,7 +109,6 @@ end
 
 function ElementalObject:beginCollision(other, contact, world)
     --TODO: Separate elements into 4 classes? Kind of annoying.
-    --print('expireTime: '..self.expireTime)
     if (self.element.t == 'fire' or self.element.t == 'water')
     and self.expireTime == 0 then --TODO bug with fire!
         local deleteSeconds = nil
