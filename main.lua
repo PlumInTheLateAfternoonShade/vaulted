@@ -2,6 +2,8 @@ ShouldProfile = false
 local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')
+local Graphics = require('menus.graphics')
+local Resolution = require('menus.resolution')
 local Gestures = require('gestures')
 require('lib.deepcopy.deepcopy')
 local SaveAndExit = require('saveAndExit')
@@ -10,6 +12,44 @@ if ShouldProfile then
     ProFi = require('ProFi')
 end
 local state = Menu()
+local stateInitializers = {
+    ["continue"] = function()
+        if savedGame == nil then
+            state = Game()
+        else
+            print('Returning to saved game.')
+            state = savedGame
+        end
+    end,
+    ["new game"] = function()
+        state = Game()
+    end,
+    ["exit"] = function()
+        SaveAndExit:close()
+    end,
+    ["settings"] = function()
+        state = Settings()
+    end,
+    ["graphics"] = function()
+        state = Graphics()
+    end,
+    ["resolution"] = function()
+        state = Resolution()
+    end,
+    ["back to main menu"] = function()
+        if state.shouldSave then
+            savedGame = objectDeepcopy(state)
+        end
+        state = Menu()
+    end,
+    ["gestures"] = function()
+        if state.shouldSave then
+            savedGame = objectDeepcopy(state)
+        end
+        state = Gestures()
+    end
+}
+
 local savedGame = Game(true)
 main = {}
 
@@ -80,30 +120,9 @@ function love.mousereleased(button, x, y)
 end
 
 function updateState(choice)
-    if choice == "continue" then
-        if savedGame == nil then
-            state = Game()
-        else
-            print('Returning to saved game.')
-            state = savedGame
-        end
-    elseif choice == "new game" then
-        state = Game()
-    elseif choice == "exit" then
-        SaveAndExit:close()
-    elseif choice == "settings" then
-        state = Settings()
-    elseif choice == "back to main menu" then
-        if state.shouldSave then
-            savedGame = objectDeepcopy(state)
-        end
-        state = Menu()
-    elseif choice == "gestures" then
-        if state.shouldSave then
-            savedGame = objectDeepcopy(state)
-        end
-        state = Gestures()
-    end
+    --TODO DEL
+    print(choice)
+    stateInitializers[choice]()
 end
 
 function objectDeepcopy(object)

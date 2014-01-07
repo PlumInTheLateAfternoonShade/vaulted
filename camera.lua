@@ -22,8 +22,8 @@ local Camera = Class
 }
 
 function Camera:setAdjPosition(x, y, dt)
-    self.x = x - screenWidth/(2*self.scaleX)
-    self.y = y - screenHeight/(2*self.scaleY)
+    self.x = x - conf.screenWidth/(2*self.scaleX)
+    self.y = y - conf.screenHeight/(2*self.scaleY)
     if self.shakeFactor == 0 then
         -- Short circuit to prevent needless computations.
         return
@@ -71,7 +71,7 @@ end
 
 function Camera:shake(a, b, contact)
     -- Begin a camera shake if the contact force is great enough
-    if not ShouldCameraShake then
+    if not conf.ShouldCameraShake then
         return
     end
     -- This is a bit of an unscientific hack. Might be able to get

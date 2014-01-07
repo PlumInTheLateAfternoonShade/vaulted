@@ -56,7 +56,7 @@ end
 
 function GenMenu:drawItems()
     for i = 1, self.numItems do
-        self:drawText(self.items[i], 
+        self:drawText(tostring(self.items[i]), 
         self.fontYSize + i*self.fontYSize*scale, 
         i == self.pos)
     end
@@ -80,6 +80,14 @@ function GenMenu:drawText(text, pos, inverted)
     -- Draw text
     love.graphics.printf(text,
     0, pos, love.graphics.getWidth(), "center")
+end
+
+function GenMenu:getCurrentItem()
+    return self.items[self.pos]
+end
+
+function GenMenu:setToLastItem()
+    self.pos = #self.items
 end
 
 return GenMenu

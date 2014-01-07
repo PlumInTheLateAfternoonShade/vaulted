@@ -1,5 +1,6 @@
 require 'utils'
 local Class = require 'class'
+local img = require 'images.img'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local CollidableObject = require 'collidableObject'
@@ -24,11 +25,34 @@ local ElementalObject = Class
 }
 ElementalObject:inherit(CollidableObject)
 
+function ElementalObject:initMesh()
+    local image = img.load("ice.jpg")
+    self.mesh = love.graphics.newMesh(self:getMeshVertices(), image)
+end
+
+function ElementalObject:getMeshVertices()
+    local wPoints = {self.body:getWorldPoints(self.shape:getPoints())}
+    local vertices = {}
+    for i = 1, #wPoints, 2 do
+        table.insert(vertices,
+        {
+            wPoints[i], -- x coord
+            wPoints[i + 1], -- y coord
+            0, 0, -- texture coords
+            255, 0, 0
+        })
+    end
+    return vertices
+end
+
 function ElementalObject:draw()
     setColor(self.color)
     if self.particle then
         self.particle:draw(self.body:getX(), self.body:getY(), 
         self.body:getAngle())
+    elseif self.mesh then
+        self.mesh:setVertices(self:getMeshVertices())
+        love.graphics.draw(self.mesh, 0, 0)
     else
         love.graphics.polygon("fill",
         self.body:getWorldPoints(self.shape:getPoints()))
@@ -44,6 +68,8 @@ function ElementalObject:update(dt)
         if self.element.t == 'fire' then
             self.particle = FireParticleSystem(
             self.fixture, self.points, self.center)
+        elseif self.element.t == 'water' then
+            self:initMesh()
         end
         self.eleObjFirstUpdate = false
     end

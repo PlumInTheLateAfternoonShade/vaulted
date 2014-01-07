@@ -61,8 +61,8 @@ function Point:getReflectAcrossPoint(point)
 end
 
 function Point:compress()
-    gapX = (screenWidth - 2*gridXOffset) / gridSize
-    gapY = (screenHeight - 2*gridYOffset) / gridSize
+    gapX = (conf.screenWidth - 2*gridXOffset) / gridSize
+    gapY = (conf.screenHeight - 2*gridYOffset) / gridSize
     self.x = (self.x - gridXOffset) / gapX
     self.y = (self.y - gridYOffset) / gapY
 end

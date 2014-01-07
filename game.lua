@@ -139,22 +139,22 @@ function Game:draw()
     setColorInverted(fontColor)
     -- draw the FPS counter
     love.graphics.print("FPS: "..string.format("%d", self.fps),
-    screenWidth * 0.9375, screenHeight * 0.0625)
+    conf.screenWidth * 0.9, conf.screenHeight * 0.1)
 
     -- debug prints
     local vX, vY = hero.body:getLinearVelocity()
     love.graphics.print(string.format("vX: %.2f vY: %.2f", vX, vY),
-    screenWidth*0.7, screenHeight*0.7)
+    conf.screenWidth*0.7, conf.screenHeight*0.7)
 
     love.graphics.print("WrappedAngle: "
     ..string.format("%.2f", hero:getWrappedAngle()),
-    screenWidth * 0.6, screenHeight * 0.6)
+    conf.screenWidth * 0.6, conf.screenHeight * 0.6)
     love.graphics.print("AngVel: "
     ..string.format("%.2f", hero.body:getAngularVelocity()).." IsFixed: "
     ..tostring(hero.body:isFixedRotation()),
-    screenWidth * 0.6, screenHeight * 0.4)
+    conf.screenWidth * 0.6, conf.screenHeight * 0.4)
     love.graphics.print("Mass: "..string.format("%.2f", hero.body:getMass()),
-    screenWidth * 0.4, screenHeight * 0.4)
+    conf.screenWidth * 0.4, conf.screenHeight * 0.4)
 end
 
 function beginContact(a, b, coll)

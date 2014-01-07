@@ -125,8 +125,8 @@ function Gestures:mousereleased(x, y, button)
 end
 
 function Gestures:initGrid()
-    gapX = (screenWidth - 2*gridXOffset) / gridSize
-    gapY = (screenHeight - 2*gridYOffset) / gridSize
+    gapX = (conf.screenWidth - 2*gridXOffset) / gridSize
+    gapY = (conf.screenHeight - 2*gridYOffset) / gridSize
     grid = {}
     for i = 1, gridSize do
         grid[i] = {}
@@ -139,7 +139,7 @@ end
 
 function Gestures:getNearestGridPoint(x, y)
     -- Find the nearest grid point to the given point.
-    local min = screenWidth
+    local min = conf.screenWidth
     for i = 1, gridSize do
         for j = 1, gridSize do
             dist = distance(grid[i][j].x, grid[i][j].y, x, y)
@@ -154,7 +154,7 @@ end
 
 function Gestures:deleteNearestLine(p)
     --TODO this funct is wrong. Unsure if table indexing or dist algo problem.
-    local min = screenWidth*screenWidth
+    local min = conf.screenWidth*conf.screenWidth
     local minIndex = 1
     local dist = min
     -- Find the nearest line in the current gesture to the given point
