@@ -64,15 +64,12 @@ end
 
 function ElementalObject:draw()
     setColor(self.color)
+    self.mesh:setVertices(self:getMeshVertices())
     if self.particle then
         self.particle:draw(self.body:getX(), self.body:getY(), 
         self.body:getAngle())
-    elseif self.mesh then
-        self.mesh:setVertices(self:getMeshVertices())
-        love.graphics.draw(self.mesh, 0, 0)
     else
-        love.graphics.polygon("fill",
-        self.body:getWorldPoints(self.shape:getPoints()))
+        love.graphics.draw(self.mesh, 0, 0)
     end
 end
 
@@ -83,8 +80,9 @@ function ElementalObject:update(dt)
         self.body:setGravityScale(self.element.gravScale)
         self.body:resetMassData()
         if self.element.t == 'fire' then
+            self:initMesh('ice.jpg')
             self.particle = FireParticleSystem(
-            self.fixture, self.points, self.center)
+            self.fixture, self.points, self.center, self.mesh)
         elseif self.element.t == 'water' then
             self:initMesh('ice.jpg')
         elseif self.element.t == 'earth' then

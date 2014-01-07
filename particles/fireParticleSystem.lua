@@ -1,5 +1,4 @@
 local Class = require('class')
-local FireImage = require('images.spells.FireImage')
 
 local initDir = 3*math.pi/2
 local cosInitDir = math.cos(initDir)
@@ -14,13 +13,12 @@ local initVY2 = sinInitDir * initSpeed2
 local FireParticleSystem = Class
 {
     name = 'FireParticleSystem',
-    function(self, fixture, points, center)
+    function(self, fixture, points, center, image)
         self.points = points
         self.fixture = fixture
         self.body = fixture:getBody()
         self.center = center
-        local fireImage = FireImage(points, center)
-        self.image = fireImage.image
+        self.image = image
         self.emRate = 15
         self.speed1 = initSpeed1
         self.speed2 = initSpeed2
@@ -36,9 +34,6 @@ local FireParticleSystem = Class
         p:setSpread(math.pi/8)
         p:start()
         self.p = p
-        --TODO
-        --self.xOff = 0--1*fireImage.left
-        --self.yOff = 0--1*fireImage.top
     end
 }
 
