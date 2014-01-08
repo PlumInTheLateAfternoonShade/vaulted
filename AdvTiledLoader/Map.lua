@@ -178,9 +178,9 @@ function Map:autoDrawRange(tx, ty, scale, pad)
 end
 
 -- Adds the tile layers to a physics world
-function Map:addToWorld(world, objects)
+function Map:addToWorld(world, entitySys)
     for _, tl in pairs(self.tl) do
-        tl:addToWorld(world, objects)
+        tl:addToWorld(world, entitySys)
     end
 end
 

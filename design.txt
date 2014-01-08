@@ -42,3 +42,19 @@ Caster who has it in his/her spellBook.
 --world-- defines the physics world.
 
 --objects-- a table of CollidableObjects.
+
+
+
+ECS:
+
+systems
+    entitySystem - register entities, delete entities
+        An entity is just an integer.
+        A component is a struct-like set of data.
+        deleteEntity - Remove all components from all systems containing this id
+        registerEntity - Return a new unique integer key
+    objectFactory - convenience methods to create objects with an entity and multiple components.
+    physicsSystem - controls and updates physics. Has a table of all colliders.
+components
+    collider - a physics component
+

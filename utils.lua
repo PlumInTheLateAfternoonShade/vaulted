@@ -92,7 +92,6 @@ function tableCompare(table, field, compare)
     if (not table) or #table == 0 then
         return nil
     end
-    printTable('tableCompare', table)
     local max = table[1][field]
     local maxI = 1
     local maxEntry = table[1]

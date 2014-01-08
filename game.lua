@@ -1,3 +1,4 @@
+local entitySystem = require('systems.entitySystem')
 local State = require('state')
 local Camera = require('camera')
 require('utils')
@@ -36,6 +37,7 @@ local Game = Class
         world = love.physics.newWorld(0, 50*tileSize, true)
         world:setCallbacks(beginContact, endContact, preSolve,
         postSolve)
+        entitySystem.init(world) -- TODO world inside entitySys
         local loadedHero
         if shouldLoadHero then
             loadedHero = tLoader:unpack("Hero")
@@ -72,6 +74,8 @@ function Game:update(dt)
         self.fps = love.timer.getFPS()
     end
     world:update(dt)
+    entitySystem.update(dt)
+
     for i = #objects, 1, -1 do
         objects[i]:update(dt)
     end
@@ -91,6 +95,7 @@ end
 
 function Game:draw()
     camera:set()
+    entitySystem.draw()
     for i = 1, #objects do
         -- draw the objects as rectangles
         objects[i]:draw()
@@ -105,7 +110,7 @@ function Game:draw()
     -- set the tile map's draw range so we only draw the tiles on screen
     self.map:setDrawRange(camera.x, camera.y, conf.screenWidth, conf.screenHeight)
     -- draw the tile map
-    self.map:draw()
+    --self.map:draw()
 
     camera:unset()
     -- draw the ui
@@ -136,7 +141,8 @@ function beginContact(a, b, coll)
     -- If the force of the impact is high enough, shake the screen.
     camera:shake(a:getBody(), b:getBody(), coll)
     -- Handle the collision of the individual CollidableObjects.
-    local done = 0
+    -- TODO Reimplement
+    --[[local done = 0
     local aIndex, bIndex
     for i = #objects, 1, -1 do
         if objects[i].fixture == a then
@@ -154,7 +160,7 @@ function beginContact(a, b, coll)
         end
     end
     objects[aIndex]:beginCollision(objects[bIndex], coll, world)
-    objects[bIndex]:beginCollision(objects[aIndex], coll, world)
+    objects[bIndex]:beginCollision(objects[aIndex], coll, world)]]--
 end
 
 function endContact(a, b, coll)

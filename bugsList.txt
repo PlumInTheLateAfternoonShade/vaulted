@@ -1,6 +1,5 @@
 ====Hero====
-Sometimes falls thru floor.
 YVeloc gets zeroed even when colliding with vertical things.
 
 ====Game/graphics====
-
+The tile compression in TileLayer.lua sometimes doesn't include certain tiles properly.
