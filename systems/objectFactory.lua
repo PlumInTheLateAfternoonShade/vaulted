@@ -1,22 +1,26 @@
 local entitySystem = require('systems.entitySystem')
 local collider = require('components.collider')
 local polygonRenderer = require('components.polygonRenderer')
+local meshRenderer = require('components.meshRenderer')
 local position = require('components.position')
-local physicsSystem = require('systems.physicsSystem')
-local graphicsSystem = require('systems.graphicsSystem')
-local positionSystem = require('systems.positionSystem')
+local element = require('components.element')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
 
 function objectFactory.createTile(points, center)
     local id = entitySystem.register()
-    local pos = position.create(id, points, center)
-    positionSystem.addAndTranslateToCoords(pos)
-    local col = collider.create(id, points, center, 0.5, 'static')
-    physicsSystem.add(col)
-    local rend = polygonRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
-    graphicsSystem.add(rend)
+    position.create(id, points, center)
+    collider.create(id, points, center, 0.5, 'static')
+    polygonRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
+end
+
+function objectFactory.createElemental(points, center, eleName)
+    local id = entitySystem.register()
+    position.create(id, points, center)
+    local ele = element.create(id, eleName)
+    collider.create(id, points, center, ele.friction, 'dynamic', eleName == 'ice')
+    meshRenderer.create(id, ele.color, eleName..'.jpg')
 end
 
 return objectFactory

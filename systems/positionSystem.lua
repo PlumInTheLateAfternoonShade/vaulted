@@ -1,3 +1,5 @@
+local Point = require('geometry.Point')
+
 -- Handles position components.
 local positionSystem = {}
 
@@ -17,10 +19,21 @@ function positionSystem.add(comp)
 end
 
 function positionSystem.update(id, center, coords)
-    if positionSystem[id] then
-        positionSystem[id].center = center
-        positionSystem[id].coords = coords
+    positionSystem[id].center = center
+    positionSystem[id].coords = coords
+end
+
+function positionSystem.getPoints(id)
+    local coords = positionSystem[id].coords
+    local points = {}
+    for i = 1, #coords, 2 do
+        table.insert(points, Point(coords[i], coords[i + 1]))
     end
+    return points
+end
+
+function positionSystem.getCoords(id)
+    return positionSystem[id].coords
 end
 
 return positionSystem

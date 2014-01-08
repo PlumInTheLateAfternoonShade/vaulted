@@ -110,7 +110,7 @@ function Game:draw()
     -- set the tile map's draw range so we only draw the tiles on screen
     self.map:setDrawRange(camera.x, camera.y, conf.screenWidth, conf.screenHeight)
     -- draw the tile map
-    --self.map:draw()
+    self.map:draw()
 
     camera:unset()
     -- draw the ui

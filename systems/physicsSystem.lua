@@ -1,6 +1,7 @@
 require 'lib.deepcopy.deepcopy'
 local Point = require 'geometry.Point'
 local positionSystem = require 'systems.positionSystem'
+local eleSystem = require 'systems.eleSystem'
 
 -- Handles physics components.
 local physicsSystem = {}
@@ -75,6 +76,12 @@ function physicsSystem.update(dt)
             comp.fixture = love.physics.newFixture(comp.body, comp.shape)
             comp.fixture:setFriction(comp.friction)
             comp.fixture:setUserData(comp.id)
+            local ele = eleSystem.get(comp.id)
+            if ele then
+                comp.fixture:setDensity(ele.density)
+                comp.body:setGravityScale(ele.gravScale)
+                comp.body:resetMassData()
+            end
         end
         comp.center.x, comp.center.y = comp.body:getWorldCenter()
         if positionSystem[comp.id] then
@@ -83,19 +90,6 @@ function physicsSystem.update(dt)
     end
 end
 
---[[function CollidableObject:beginCollision(other, contact, world)
-    --Update the temp as a weighted average.
-    --This should really happen non-instantaneously and when things
-    --are near each other, but this is good enough for now.
-    if other.type == 'dynamic' and self.type == 'dynamic' then
-        local m1 = self.body:getMass()
-        local m2 = other.body:getMass()
-        self.temp = (self.temp + (m1*self.temp + m2*other.temp)/(m1 + m2))/2
-    end
-end
 
-function CollidableObject:endCollision(other, contact, world)
-    --Do nothing special.
-end]]--
 
 return physicsSystem
