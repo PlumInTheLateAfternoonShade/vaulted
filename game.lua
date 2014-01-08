@@ -35,9 +35,9 @@ local Game = Class
         objects = {}
         love.physics.setMeter(tileSize)
         world = love.physics.newWorld(0, 50*tileSize, true)
-        world:setCallbacks(beginContact, endContact, preSolve,
-        postSolve)
-        entitySystem.init(world) -- TODO world inside entitySys
+        -- init camera
+        camera = Camera()
+        entitySystem.init(world, camera) -- TODO world inside entitySys
         local loadedHero
         if shouldLoadHero then
             loadedHero = tLoader:unpack("Hero")
@@ -56,9 +56,6 @@ local Game = Class
         self.maxXp = 2000
 
         self.shouldSave = true
-
-        -- init camera
-        camera = Camera()
     end
 }
 Game:inherit(State)
@@ -135,57 +132,6 @@ function Game:draw()
     conf.screenWidth * 0.6, conf.screenHeight * 0.4)
     love.graphics.print("Mass: "..string.format("%.2f", hero.body:getMass()),
     conf.screenWidth * 0.4, conf.screenHeight * 0.4)
-end
-
-function beginContact(a, b, coll)
-    -- If the force of the impact is high enough, shake the screen.
-    camera:shake(a:getBody(), b:getBody(), coll)
-    -- Handle the collision of the individual CollidableObjects.
-    -- TODO Reimplement
-    --[[local done = 0
-    local aIndex, bIndex
-    for i = #objects, 1, -1 do
-        if objects[i].fixture == a then
-            aIndex = i
-            done = done + 1
-            if done == 2 then
-                break
-            end
-        elseif objects[i].fixture == b then
-            bIndex = i
-            done = done + 1
-            if done == 2 then
-                break
-            end
-        end
-    end
-    objects[aIndex]:beginCollision(objects[bIndex], coll, world)
-    objects[bIndex]:beginCollision(objects[aIndex], coll, world)]]--
-end
-
-function endContact(a, b, coll)
-    local done = 0
-    for i = 1, #objects do
-        if objects[i].fixture == a then
-            objects[i]:endCollision(b, coll, world)
-            done = done + 1
-            if done == 2 then
-                break
-            end
-        elseif objects[i].fixture == b then
-            objects[i]:endCollision(a, coll, world)
-            done = done + 1
-            if done == 2 then
-                break
-            end
-        end
-    end
-end
-
-function preSolve(a, b, coll)
-end
-
-function postSolve(a, b, coll)
 end
 
 -------------------------------
