@@ -5,6 +5,7 @@
 -- Setup
 local Ground = require("ground")
 local Point = require("geometry.Point")
+require 'lib.deepcopy.deepcopy'
 local floor = math.floor
 local type = type
 local love = love
@@ -253,29 +254,75 @@ function TileLayer:addToWorldNaive(world, objects)
     end
 end
 
+local ADDED_TO_RECT = -1
+
+local function validTile(tile)
+    return tile ~= nil and tile ~= 0 and tile ~= ADDED_TO_RECT
+end
+
+local function goRightWhileValid(x, y, targetWidth, tiles, tileData, tileWidth)
+    local lengthRight = 0
+    -- go right until we hit an invalid tile.
+    -- we want to go horz first to make sure
+    -- platforms are as smooth-feeling as possible
+    for rightIter = x, targetWidth do
+        if validTile(tiles[tileData[y][rightIter]]) then
+            -- save the amount we went right in a variable
+            lengthRight = lengthRight + tile.width
+        else
+            return lengthRight
+        end
+    end
+    return lengthRight
+end
+
+local function setAddedToRect(x, y, targetWidth, tileData)
+    for rightIter = x, targetWidth do
+        -- set the tile as belonging to a rect.
+        tileData[y][rightIter] = ADDED_TO_RECT
+    end
+end
+
+function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWidth, tileHeight)
+    -- used to compress the map into rectangles instead of a large number of square tiles
+    -- go down and right that var amount until we hit a row
+    -- where at least one tile is invalid.
+    -- set each tile to -1 as we go.
+    local targetRight = goRightWhileValid(x, y, mWidth, tiles, tileData, tileWidth)
+    local targetWidth = x + math.floor(targetRight / tileWidth)
+    setAddedToRect(x, y, targetWidth, tileData)
+    for downIter = y + 1, mHeight do
+        local lengthRight = goRightWhileValid(x, downIter,
+              targetWidth, tiles, tileData, tileWidth)
+        if targetRight > lengthRight then
+            return (downIter - y)*tileHeight, targetRight
+        end
+        setAddedToRect(x, downIter, targetWidth, tileData)
+    end
+    return (mHeight - y)*tileHeight, targetRight
+end
+
 function TileLayer:addToWorld(world, objects)
     print('Populating...')
     local physX, physY
+    local addedToRect = -1
+    local rectifiedTileData = table.deepcopy(self.tileData)
     for y = 1, self.map.height do
         for x = 1, self.map.width do
-            tile = self.map.tiles[self.tileData[y][x]]
-            if tile ~= nil and tile ~= 0 then
-                -- check if part of a rect already
-                -- if it isn't, go right until hit an invalid tile.
-                -- save the amount we went right in a variable
-                -- then go down and right that var amount until we hit a row
-                -- where at least one tile is invalid.
-                -- set each tile to -1 as we go.
+            tile = self.map.tiles[rectifiedTileData[y][x]]
+            if validTile(tile) then
+                lengthDown, lengthRight = goDownAndRightWhileValid(x, y, self.map.width,
+                              self.map.height, self.map.tiles, rectifiedTileData, tile.width, tile.height)
                 physX, physY = x*tile.width, y*tile.height
-                halfW, halfH = tile.width*0.5, tile.height*0.5
+                halfW, halfH = (lengthRight)*0.5, (lengthDown)*0.5
                 local groundPoints =
                 {
-                    Point(physX - tile.width, physY - tile.height), -- top left
-                    Point(physX, physY - tile.height), -- top right
-                    Point(physX, physY), -- bottom right
-                    Point(physX - tile.width, physY), -- bottom left
+                    Point(physX, physY), -- top left
+                    Point(physX + lengthRight, physY), -- top right
+                    Point(physX + lengthRight, physY + lengthDown), -- bottom right
+                    Point(physX, physY + lengthDown), -- bottom left
                 }
-                local ground = Ground(world, groundPoints, Point(physX - halfW, physY - halfH))
+                local ground = Ground(world, groundPoints, Point(physX + halfW - tile.width, physY + halfH - tile.height))
                 table.insert(objects, ground)
             end
         end
