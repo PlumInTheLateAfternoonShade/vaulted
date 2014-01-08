@@ -18,8 +18,8 @@ local Hero = Class
             points = 
             {
                 Point(0, 0),
-                Point(0, tileSize*3),
-                Point(tileSize, tileSize*3),
+                Point(0, tileSize*2),
+                Point(tileSize, tileSize*2),
                 Point(tileSize, 0)
             }
         end

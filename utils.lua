@@ -65,6 +65,7 @@ function tableSwap(table, index1, index2)
 end
 
 function printTable(preMessage, table, postMessage)
+    postMessage = postMessage or "==================================="
     if preMessage then
         print(preMessage)
     end
@@ -72,9 +73,7 @@ function printTable(preMessage, table, postMessage)
     for k, v in pairs(table) do
         print(tostring(k)..' = '..tostring(v))
     end
-    if postMessage then
-        print(postMessage)
-    end
+    print(postMessage)
 end
 
 function tableMax(table, field)

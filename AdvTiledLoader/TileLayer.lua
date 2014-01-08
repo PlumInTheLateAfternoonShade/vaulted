@@ -3,6 +3,8 @@
 ---------------------------------------------------------------------------------------------------
 
 -- Setup
+local Ground = require("ground")
+local Point = require("geometry.Point")
 local floor = math.floor
 local type = type
 local love = love
@@ -221,6 +223,64 @@ function TileLayer:draw()
 	love.graphics.setColor(r,g,b,a)
 end
 
+-- Adds the tile layer to a physics world
+function TileLayer:addToWorldNaive(world, objects)
+    print('Populating...')
+    local physX, physY
+    for y = 1, self.map.height do
+        for x = 1, self.map.width do
+            tile = self.map.tiles[self.tileData[y][x]]
+            if tile ~= nil and tile ~= 0 then
+                -- check if part of a rect already
+                -- if it isn't, go right until hit an invalid tile.
+                -- save the amount we went right in a variable
+                -- then go down and right that var amount until we hit a row
+                -- where at least one tile is invalid.
+                -- set each tile to -1 as we go.
+                physX, physY = x*tile.width, y*tile.height
+                halfW, halfH = tile.width*0.5, tile.height*0.5
+                local groundPoints =
+                {
+                    Point(physX - tile.width, physY - tile.height), -- top left
+                    Point(physX, physY - tile.height), -- top right
+                    Point(physX, physY), -- bottom right
+                    Point(physX - tile.width, physY), -- bottom left
+                }
+                local ground = Ground(world, groundPoints, Point(physX - halfW, physY - halfH))
+                table.insert(objects, ground)
+            end
+        end
+    end
+end
+
+function TileLayer:addToWorld(world, objects)
+    print('Populating...')
+    local physX, physY
+    for y = 1, self.map.height do
+        for x = 1, self.map.width do
+            tile = self.map.tiles[self.tileData[y][x]]
+            if tile ~= nil and tile ~= 0 then
+                -- check if part of a rect already
+                -- if it isn't, go right until hit an invalid tile.
+                -- save the amount we went right in a variable
+                -- then go down and right that var amount until we hit a row
+                -- where at least one tile is invalid.
+                -- set each tile to -1 as we go.
+                physX, physY = x*tile.width, y*tile.height
+                halfW, halfH = tile.width*0.5, tile.height*0.5
+                local groundPoints =
+                {
+                    Point(physX - tile.width, physY - tile.height), -- top left
+                    Point(physX, physY - tile.height), -- top right
+                    Point(physX, physY), -- bottom right
+                    Point(physX - tile.width, physY), -- bottom left
+                }
+                local ground = Ground(world, groundPoints, Point(physX - halfW, physY - halfH))
+                table.insert(objects, ground)
+            end
+        end
+    end
+end
 ----------------------------------------------------------------------------------------------------
 -- Private
 ----------------------------------------------------------------------------------------------------

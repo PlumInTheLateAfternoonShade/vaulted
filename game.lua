@@ -18,12 +18,12 @@ local VisibleIcons = require('spells.visibleIcons')
 local collider
 local allSolidTiles
 
-local camera
 local world
 objects = {} -- a table of all collidable objects in the world
 rayCastStack = {}
 local visibleIcons -- The spell icons made by gestures.
 local visuals -- Visible effects in the world, like bolts of lightning.
+local camera -- Need this static for now because the callback funcs need it.
 
 local Game = Class
 {
@@ -36,16 +36,6 @@ local Game = Class
         world = love.physics.newWorld(0, 50*tileSize, true)
         world:setCallbacks(beginContact, endContact, preSolve,
         postSolve)
-        local groundPoints =
-        {
-            Point(-tileSize*50, -tileSize),
-            Point(-tileSize*50, tileSize),
-            Point(tileSize*50, tileSize),
-            Point(tileSize*50, -tileSize)
-        }
-        local ground = Ground(world, groundPoints, Point(tileSize*25, 0),
-        {r = 150, g = 75, b = 75})
-        table.insert(objects, ground)
         local loadedHero
         if shouldLoadHero then
             loadedHero = tLoader:unpack("Hero")
@@ -53,18 +43,10 @@ local Game = Class
         hero = Hero(world, nil, Point(200, -550), loadedHero)
         table.insert(objects, hero)
         -- load the level and bind to variable map
-        --[[map = loader.load("level.tmx")
-        map.tileWidth = tileSize
-        map.widthInPixels = map.tileWidth * map.width
-        - load HardonCollider, set callback to on_collide and size of 100
-        collider = HC(100, on_collide)
-
-        -- find all the tiles that we can collide with
-        allSolidTiles = findSolidTiles(map)
-
-        -- set up the hero object, set him to position 32, 32
-        self:setupHero(32, 32)]]--
-
+        self.map = loader.load("level1.tmx")
+        self.map.tileWidth = tileSize
+        self.map.widthInPixels = self.map.tileWidth * self.map.width
+        self.map:addToWorld(world, objects)
         -- init debug vars
         self.fps = 0
         self.secondCount = 1.1
@@ -75,7 +57,6 @@ local Game = Class
 
         -- init camera
         camera = Camera()
-        camera:scale(0.25, 0.25)
     end
 }
 Game:inherit(State)
@@ -110,19 +91,21 @@ end
 
 function Game:draw()
     camera:set()
-
-    love.graphics.setColor(72, 160, 14) -- set the drawing color to green for the ground
     for i = 1, #objects do
         -- draw the objects as rectangles
         objects[i]:draw()
     end
     -- draw all visible spell icons
     visibleIcons:draw()
-
     -- draw all visual effects
     for i = 1, #visuals do
         visuals[i]:draw()
     end
+    setColor({r=255, g=255, b=255})
+    -- set the tile map's draw range so we only draw the tiles on screen
+    self.map:setDrawRange(camera.x, camera.y, conf.screenWidth, conf.screenHeight)
+    -- draw the tile map
+    self.map:draw()
 
     camera:unset()
     -- draw the ui

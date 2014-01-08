@@ -37,7 +37,7 @@ conf = loader:unpackIfExists(
     ShouldCameraShake = true
 })
 -- Map settings
-tileSize = 64
+tileSize = 32
 iconSize = tileSize * 2
 worldXEnd = 10000 --TODO: should be calculated based on map.
 

@@ -9,7 +9,6 @@ local TileLayer = require( TILED_LOADER_PATH .. "TileLayer")
 local Object = require( TILED_LOADER_PATH .. "Object")
 local ObjectLayer = require( TILED_LOADER_PATH .. "ObjectLayer")
 
-
 -- Localize some functions so they are faster
 local pairs = pairs
 local ipairs = ipairs 
@@ -176,6 +175,13 @@ function Map:autoDrawRange(tx, ty, scale, pad)
 		self:setDrawRange(-tx-pad,-ty-pad,love.graphics.getWidth()/scale+pad*2,
 						  love.graphics.getHeight()/scale+pad*2)
 	end
+end
+
+-- Adds the tile layers to a physics world
+function Map:addToWorld(world, objects)
+    for _, tl in pairs(self.tl) do
+        tl:addToWorld(world, objects)
+    end
 end
 
 ----------------------------------------------------------------------------------------------------

@@ -8,10 +8,14 @@ local Ground = Class
 {
     name = 'Ground',
     function(self, world, points, center, color)
+        color = color or {r=255, g=255, b=255}
         CollidableObject.construct(self, world, points, center, 0.5, 'static', 
         color, 'Ground')
     end
 }
 Ground:inherit(CollidableObject)
+
+function Ground:draw()
+end
 
 return Ground
