@@ -8,7 +8,7 @@ function position.create(id, coords, center)
     c.id = id
     c.center = center
     c.coords = coords
-    positionSystem.addAndTranslateToCoords(c)
+    positionSystem:addAndTranslateToCoords(c)
     return c
 end
 

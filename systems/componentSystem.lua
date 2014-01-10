@@ -1,26 +1,27 @@
--- Abstract class to define a template for handling components.
-local ComponentSystem = Class
-{
-    name = 'ComponentSystem',
-    function(self)
-        self.components = {}
-    end
-}
+-- Table to define a template for handling components.
+local componentSystem = {}
 
+function componentSystem:init()
+    self.components = {}
+end
 
-function ComponentSystem:add(comp)
+function componentSystem:add(comp)
     self.components[comp.id] = comp
 end
 
-function ComponentSystem:get(id)
+function componentSystem:get(id)
     return self.components[id]
 end
 
-function ComponentSystem:delete(id)
+function componentSystem:delete(id)
     self.components[id] = nil
 end
 
-function ComponentSystem:update(dt)
+function componentSystem:update(dt)
 end
 
-return ComponentSystem
+function componentSystem:inherit(table)
+    setmetatable(table, {__index = self})
+end
+
+return componentSystem

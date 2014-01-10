@@ -19,7 +19,7 @@ function collider.create(id, points, center, friction, type, breakable)
     c.type = type
     c.breakable = breakable or false
     c.maxMassToBreak = 10
-    physicsSystem.add(c)
+    physicsSystem:add(c)
     return c
 end
 

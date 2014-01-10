@@ -37,7 +37,7 @@ function element.create(id, name)
     c.id = id
     -- Make the color slightly varied
     colorVary(c.color)
-    eleSystem.add(c)
+    eleSystem:add(c)
     return c
 end
 

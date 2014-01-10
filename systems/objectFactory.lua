@@ -9,7 +9,7 @@ local element = require('components.element')
 local objectFactory = {}
 
 function objectFactory.init(world, cam)
-    entitySystem.init(world, cam, objectFactory)
+    entitySystem:init(world, cam, objectFactory)
 end
 
 function objectFactory.createTile(points, center)

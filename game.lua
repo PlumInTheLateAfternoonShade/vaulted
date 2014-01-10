@@ -12,13 +12,8 @@ local tLoader = require('loader')
 local loader = require "AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
-local HC = require "HardonCollider"
-local Class = require 'HardonCollider.class'
 local SpellBook = require('spellBook')
 local VisibleIcons = require('spells.visibleIcons')
-
-local collider
-local allSolidTiles
 
 local world
 objects = {} -- a table of all collidable objects in the world
@@ -72,7 +67,7 @@ function Game:update(dt)
         self.fps = love.timer.getFPS()
     end
     world:update(dt)
-    entitySystem.update(dt)
+    entitySystem:update(dt)
 
     for i = #objects, 1, -1 do
         objects[i]:update(dt)
@@ -93,7 +88,7 @@ end
 
 function Game:draw()
     camera:set()
-    entitySystem.draw()
+    entitySystem:draw()
     for i = 1, #objects do
         -- draw the objects as rectangles
         objects[i]:draw()
@@ -173,35 +168,6 @@ end
 function limitedInc(var, inc, limit)
     result = var + inc
     return math.max(math.min(result, limit), -limit)
-end
-
-function findSolidTiles(map)
-    local collidable_tiles = {}
-    -- get the layer that the tiles are on by name
-    local layer = map.tl["ground"]
-
-
-    for tileX=1,map.width do
-        for tileY=1,map.height do
-
-            local tile
-
-            if layer.tileData[tileY] then
-                tile = map.tiles[layer.tileData[tileY][tileX]]
-            end
-
-            if tile and tile.properties.solid then
-                local ctile = collider:addRectangle((tileX-1)*tileSize,
-                (tileY-1)*tileSize,
-                tileSize, tileSize)
-                ctile.type = "tile"
-                collider:addToGroup("tiles", ctile)
-                collider:setPassive(ctile)
-                table.insert(collidable_tiles, ctile)
-            end
-        end
-    end
-    return collidable_tiles
 end
 
 return Game

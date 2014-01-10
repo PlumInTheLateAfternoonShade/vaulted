@@ -9,19 +9,23 @@ local currId = -1
 local deleteQueue = {}
 local camera
 
-function entitySystem.init(world, cam, objectFactory)
+function entitySystem:init(world, cam, objectFactory)
     camera = cam
-    physicsSystem.init(world, objectFactory, entitySystem)
+    physicsSystem:init(world, objectFactory, entitySystem)
+    eleSystem:init()
+    positionSystem:init()
+    graphicsSystem:init()
+
     world:setCallbacks(beginContact, endContact, preSolve,
     postSolve)
 end
 
 local function delete(id)
     -- Remove all components from all systems containing this id.
-    physicsSystem.delete(id)
-    graphicsSystem.delete(id)
-    eleSystem.delete(id)
-    positionSystem.delete(id)
+    physicsSystem:delete(id)
+    graphicsSystem:delete(id)
+    eleSystem:delete(id)
+    positionSystem:delete(id)
 end
 
 local function clearDeleteQueue()
@@ -33,24 +37,24 @@ local function clearDeleteQueue()
     deleteQueue = {}
 end
 
-function entitySystem.update(dt)
+function entitySystem:update(dt)
     clearDeleteQueue()    
-    physicsSystem.update(dt)
-    eleSystem.update(dt)
+    physicsSystem:update(dt)
+    eleSystem:update(dt)
 end
 
-function entitySystem.draw()
-    graphicsSystem.draw()
+function entitySystem:draw()
+    graphicsSystem:draw()
 end
 
 -- Returns a new unique entity id. An entity is just an integer.
-function entitySystem.register()
+function entitySystem:register()
     currId = currId + 1
     print('Registering entity '..currId)
     return currId
 end
 
-function entitySystem.queueDelete(id)
+function entitySystem:queueDelete(id)
     table.insert(deleteQueue, id)
 end
 
@@ -62,12 +66,12 @@ function beginContact(a, b, coll)
     -- If the force of the impact is high enough, shake the screen.
     camera:shake(a:getBody(), b:getBody(), coll)
     local aId, bId = getIds(a, b)
-    physicsSystem.beginCollision(aId, bId, coll)
+    physicsSystem:beginCollision(aId, bId, coll)
 end
 
 function endContact(a, b, coll)
     local aId, bId = getIds(a, b)
-    physicsSystem.endCollision(aId, bId, coll)
+    physicsSystem:endCollision(aId, bId, coll)
 end
 
 function preSolve(a, b, coll)

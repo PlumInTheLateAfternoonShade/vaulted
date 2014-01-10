@@ -7,7 +7,7 @@ function polygonRenderer.create(id, color)
     local c = {}
     c.id = id
     c.color = color
-    graphicsSystem.addPolygon(c)
+    graphicsSystem:addPolygon(c)
     return c
 end
 

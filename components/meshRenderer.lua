@@ -11,7 +11,7 @@ function meshRenderer.create(id, color, imageName)
     c.color = color
     c.imageName = imageName
     c.needsInit = true
-    graphicsSystem.addMesh(c)
+    graphicsSystem:addMesh(c)
     return c
 end
 

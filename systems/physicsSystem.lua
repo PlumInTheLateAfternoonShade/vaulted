@@ -7,30 +7,23 @@ local eleSystem = require 'systems.eleSystem'
 -- Handles physics components.
 local physicsSystem = {}
 
-local components = {}
+require('systems.componentSystem'):inherit(physicsSystem)
 
 --TODO
 local world, objectFactory, entitySystem
 
-function physicsSystem.init(w, objFact, eSys)
+function physicsSystem:init(w, objFact, eSys)
     world = w
     objectFactory = objFact
     entitySystem = eSys
+    self.components = {}
 end
 
-function physicsSystem.add(comp)
-    components[comp.id] = comp
-end
-
-function physicsSystem.get(id)
-    return components[id]
-end
-
-function physicsSystem.delete(id)
-    if components[id] then
-        components[id].fixture:destroy()
+function physicsSystem:delete(id)
+    if self.components[id] then
+        self.components[id].fixture:destroy()
     end
-    components[id] = nil
+    self.components[id] = nil
 end
 
 local function centralize(points, c)
@@ -88,7 +81,7 @@ local function updateComponent(comp)
         comp.fixture = love.physics.newFixture(comp.body, comp.shape)
         comp.fixture:setFriction(comp.friction)
         comp.fixture:setUserData(comp.id)
-        local ele = eleSystem.get(comp.id)
+        local ele = eleSystem:get(comp.id)
         if ele then
             comp.fixture:setDensity(ele.density)
             comp.body:setGravityScale(ele.gravScale)
@@ -96,13 +89,13 @@ local function updateComponent(comp)
         end
     end
     comp.center.x, comp.center.y = comp.body:getWorldCenter()
-    if positionSystem[comp.id] then
-        positionSystem.update(comp.id, comp.center, {comp.body:getWorldPoints(comp.shape:getPoints())})
+    if positionSystem:get(comp.id) then
+        positionSystem:update(comp.id, comp.center, {comp.body:getWorldPoints(comp.shape:getPoints())})
     end
 end
 
-function physicsSystem.update(dt)
-    each(updateComponent, components)
+function physicsSystem:update(dt)
+    each(updateComponent, self.components)
 end
 
 --[[function ElementalObject:getNewVelocity(v, newCenter)
@@ -180,8 +173,8 @@ local function breakNearSeg(points, center, seg)
     return side1, side2
 end
 
-local function handleCollision(id, contact)
-    local comp = components[id]
+function physicsSystem:handleCollision(id, contact)
+    local comp = self.components[id]
     if not comp then return end
     if comp.breakable and comp.body:getMass() > comp.maxMassToBreak then
         centralize(comp.points, computeCentroid(comp.points))
@@ -205,8 +198,8 @@ local function handleCollision(id, contact)
             printTable('points2: ', points2)
 
             -- Construct the elemental objects.
-            objectFactory.createElemental(points1, newCenter1, eleSystem.get(id).name)
-            objectFactory.createElemental(points2, newCenter2, eleSystem.get(id).name)
+            objectFactory.createElemental(points1, newCenter1, eleSystem:get(id).name)
+            objectFactory.createElemental(points2, newCenter2, eleSystem:get(id).name)
 
             -- Assign their velocities
             --local vX, vY = comp.body:getLinearVelocity()
@@ -215,17 +208,17 @@ local function handleCollision(id, contact)
             --local newV2 = comp:getNewVelocity(v, newCenter2)
             --obj1:queueVelocity(newV1)
             --obj2:queueVelocity(newV2)
-            entitySystem.queueDelete(id)
+            entitySystem:queueDelete(id)
         end
     end
 end
 
-function physicsSystem.beginCollision(aId, bId, coll)
-    handleCollision(aId, coll)
-    handleCollision(bId, coll)
+function physicsSystem:beginCollision(aId, bId, coll)
+    self:handleCollision(aId, coll)
+    self:handleCollision(bId, coll)
 end
 
-function physicsSystem.endCollision(aId, bId, coll)
+function physicsSystem:endCollision(aId, bId, coll)
 
 end
 
