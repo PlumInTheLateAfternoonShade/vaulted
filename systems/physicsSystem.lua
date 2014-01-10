@@ -1,5 +1,6 @@
 require 'lib.deepcopy.deepcopy'
 local Point = require 'geometry.Point'
+local Seg = require 'geometry.Seg'
 local positionSystem = require 'systems.positionSystem'
 local eleSystem = require 'systems.eleSystem'
 
@@ -9,14 +10,27 @@ local physicsSystem = {}
 local components = {}
 
 --TODO
-local world
+local world, objectFactory, entitySystem
 
-function physicsSystem.init(w)
+function physicsSystem.init(w, objFact, eSys)
     world = w
+    objectFactory = objFact
+    entitySystem = eSys
 end
 
 function physicsSystem.add(comp)
     components[comp.id] = comp
+end
+
+function physicsSystem.get(id)
+    return components[id]
+end
+
+function physicsSystem.delete(id)
+    if components[id] then
+        components[id].fixture:destroy()
+    end
+    components[id] = nil
 end
 
 local function centralize(points, c)
@@ -33,105 +47,94 @@ local function translateCoordsToPoints(comp)
     end
 end
 
-function physicsSystem.update(dt)
-    for i = #components, 1, -1 do
-        local comp = components[i]
-        if comp.firstUpdate then
-            --Need to construct here rather than constructor,
-            --in case construct occurs during middle of physics calcs.
-            comp.firstUpdate = false
-            removeRedundantPoints(comp.points)
-            centralize(comp.points, computeCentroid(comp.points))
-            comp.body = love.physics.newBody(world,
-            comp.center.x, comp.center.y, comp.type)
-            --This is perhaps the ugliest thing I've ever written.
-            --There must be a clever way to do it with unpack.
-            --Or maybe a function in Point that returns x, y?
-            local a, b, c, d, e, f, g, h = unpack(comp.points)
-            if h then
-                comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-                b.x, b.y, c.x,
-                c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y, h.x, h.y)
-            elseif g then
-                comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-                b.x, b.y, c.x,
-                c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y)
-            elseif f then
-                comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-                b.x, b.y, c.x,
-                c.y, d.x, d.y, e.x, e.y, f.x, f.y)
-            elseif e then
-                comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-                b.x, b.y, c.x,
-                c.y, d.x, d.y, e.x, e.y)
-            elseif d then
-                comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-                b.x, b.y, c.x,
-                c.y, d.x, d.y)
-            else
-                comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-                b.x, b.y, c.x,
-                c.y)
-            end
-            comp.fixture = love.physics.newFixture(comp.body, comp.shape)
-            comp.fixture:setFriction(comp.friction)
-            comp.fixture:setUserData(comp.id)
-            local ele = eleSystem.get(comp.id)
-            if ele then
-                comp.fixture:setDensity(ele.density)
-                comp.body:setGravityScale(ele.gravScale)
-                comp.body:resetMassData()
-            end
+local function updateComponent(comp)
+    if comp.firstUpdate then
+        --Need to construct here rather than constructor,
+        --in case construct occurs during middle of physics calcs.
+        comp.firstUpdate = false
+        removeRedundantPoints(comp.points)
+        centralize(comp.points, computeCentroid(comp.points))
+        comp.body = love.physics.newBody(world,
+        comp.center.x, comp.center.y, comp.type)
+        --This is perhaps the ugliest thing I've ever written.
+        --There must be a clever way to do it with unpack.
+        --Or maybe a function in Point that returns x, y?
+        local a, b, c, d, e, f, g, h = unpack(comp.points)
+        if h then
+            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y, h.x, h.y)
+        elseif g then
+            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y)
+        elseif f then
+            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y, f.x, f.y)
+        elseif e then
+            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
+            c.y, d.x, d.y, e.x, e.y)
+        elseif d then
+            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
+            c.y, d.x, d.y)
+        else
+            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
+            b.x, b.y, c.x,
+            c.y)
         end
-        comp.center.x, comp.center.y = comp.body:getWorldCenter()
-        if positionSystem[comp.id] then
-            positionSystem.update(comp.id, comp.center, {comp.body:getWorldPoints(comp.shape:getPoints())})
+        comp.fixture = love.physics.newFixture(comp.body, comp.shape)
+        comp.fixture:setFriction(comp.friction)
+        comp.fixture:setUserData(comp.id)
+        local ele = eleSystem.get(comp.id)
+        if ele then
+            comp.fixture:setDensity(ele.density)
+            comp.body:setGravityScale(ele.gravScale)
+            comp.body:resetMassData()
         end
     end
-end
---[[
-function ElementalObject:beginCollision(other, contact, world)
-    CollidableObject.beginCollision(self, other, contact, world)
+    comp.center.x, comp.center.y = comp.body:getWorldCenter()
+    if positionSystem[comp.id] then
+        positionSystem.update(comp.id, comp.center, {comp.body:getWorldPoints(comp.shape:getPoints())})
+    end
 end
 
-function ElementalObject:getNewVelocity(v, newCenter)
+function physicsSystem.update(dt)
+    each(updateComponent, components)
+end
+
+--[[function ElementalObject:getNewVelocity(v, newCenter)
     local speed = v:magnitude()
-    local newV = Seg(self.center, newCenter):normalize()
+    local newV = Seg(comp.center, newCenter):normalize()
     newV:scale(speed)
     return newV
 end
 
 function ElementalObject:makeChildObject(points, center)
-    return ElementalObject(self.world, points, center, self.element)
-end
+    return ElementalObject(comp.world, points, center, comp.element)
+end]]--
 
-function coordsToPoints(...)
-    local num = select('#', ...)
-    local points = {}
-    for i = 1, num, 2 do
-        local x = select(i, ...)
-        local y = select(i + 1, ...)
-        table.insert(points, Point(x, y))
-    end
-    return points
-end
-
-function ElementalObject:getContactSeg(contact)
+local function getContactSeg(contact, center)
     local cx, cy = contact:getPositions() --Gets the first pos only.
     -- Generate another point to make a line
     local c = Point(cx, cy)
-    local p = c:getReflectAcrossPoint(self.center)
-    c:offset(-self.center.x, -self.center.y)
-    p:offset(-self.center.x, -self.center.y)
+    local p = c:getReflectAcrossPoint(center)
+    c:offset(-center.x, -center.y)
+    p:offset(-center.x, -center.y)
     return Seg(c, p)
 end
 
-function breakNearSeg(points, seg)
+local function breakNearSeg(points, center, seg)
     -- Finds the two points closest to the seg's endpoints
     -- and returns two collections of points on either side.
     print('breaking near seg '..tostring(seg))
     printTable('points:\n====', points, '===')
-    local ps = table.deepcopy(points)
+    --local ps = table.deepcopy(points)
+    -- Move points around their center.
+    local ps = map(function(p) return p + center end, points)
+    printTable('centered points:\n====', ps, '===')
     local p0, i = nearestPoint(ps, seg.p0)
     local p1, j = nearestPoint(ps, seg.p1)
     if #points == 3 then
@@ -177,72 +180,13 @@ function breakNearSeg(points, seg)
     return side1, side2
 end
 
-function ElementalObject:breakAlongNormal(contact)
-    local nx, ny = contact:getNormal()
-    local cx, cy = contact:getPositions() --Gets the first pos only.
-    -- Generate another point to make a line
-    local px = cx + nx - self.center.x
-    local py = cy + ny - self.center.y
-    self:centralize(self:computeCentroid())
-    local seg = Seg(
-    Point(cx - self.center.x, cy - self.center.y), Point(px, py))
-    print('seg: '..tostring(seg))
-    local normPoints = {}
-    for i = 1, #self.points do
-        print('self.points[i]: '..tostring(self.points[i]))
-        local nextP
-        if i == #self.points then
-            nextP = self.points[1]
-        else
-            nextP = self.points[i + 1]
-        end
-        print('nextP: '..tostring(nextP))
-        local eleSeg = Seg(self.points[i], nextP)
-        local interPoint = eleSeg:getIntersectionAsLines(seg)
-        print('interPoint: '..tostring(interPoint))
-        if interPoint and eleSeg:hasPoint(interPoint) then
-            table.insert(normPoints, interPoint)
-        else
-            print 'no'
-        end
-    end
-    print('num of normPoints: '..#normPoints)
-    return self:sortPointsIntoTwo(normPoints)
-end
-
-function ElementalObject:sortPointsIntoTwo(guidePoints)
-    -- Sort points into two groups based on the guide.
-    -- Points above and to the left get sorted into one group,
-    -- the rest go into the other. Then, the guidePoints get added
-    -- to both groups.
-    if #guidePoints < 2 then
-        return self.points
-    end
-    local guideSeg = Seg(guidePoints[1], guidePoints[2])
-    local points1 = {}
-    local points2 = {}
-    for i = 1, #self.points do
-        local result = guideSeg:findSidePointIsOn(self.points[i])
-        if result > 0 then
-            table.insert(points2, self.points[i])
-        elseif result <= 0 then --TODO?
-            table.insert(points1, self.points[i])
-        end
-    end
-    for i = 1, #guidePoints do
-        table.insert(points1, guidePoints[i])
-        table.insert(points2, guidePoints[i])
-    end
-    print('num points1: '..#points1..' num points2: '..#points2)
-    return points1, points2
-end]]--
-
-local function handleCollision(id, coll)
+local function handleCollision(id, contact)
     local comp = components[id]
+    if not comp then return end
     if comp.breakable and comp.body:getMass() > comp.maxMassToBreak then
         centralize(comp.points, computeCentroid(comp.points))
-        local conSeg = self:getContactSeg(contact)
-        local points1, points2 = breakNearSeg(self.points, conSeg)
+        local conSeg = getContactSeg(contact, comp.center)
+        local points1, points2 = breakNearSeg(comp.points, comp.center, conSeg)
         if points1 and points2 and #points1 > 2 and #points2 > 2 then
             -- Order the points so they form a valid convex polygon.
             points1 = convexHull(points1)
@@ -250,9 +194,9 @@ local function handleCollision(id, coll)
             
             -- Compute their new center points.
             local newCenter1 =
-            computeCentroid(points1) + self.center
+            computeCentroid(points1) --+ comp.center Not needed because we add
             local newCenter2 = 
-            computeCentroid(points2) + self.center
+            computeCentroid(points2) --+ comp.center
 
             -- Debug prints
             print('area1: '..computeArea(points1))
@@ -261,25 +205,18 @@ local function handleCollision(id, coll)
             printTable('points2: ', points2)
 
             -- Construct the elemental objects.
-            local obj1 = self:makeChildObject(points1, newCenter1)
-            local obj2 = self:makeChildObject(points2, newCenter2)
+            objectFactory.createElemental(points1, newCenter1, eleSystem.get(id).name)
+            objectFactory.createElemental(points2, newCenter2, eleSystem.get(id).name)
 
             -- Assign their velocities
-            local vX, vY = self.body:getLinearVelocity()
-            local v = Point(vX, vY)
-            local newV1 = self:getNewVelocity(v, newCenter1)
-            local newV2 = self:getNewVelocity(v, newCenter2)
-            obj1:queueVelocity(newV1)
-            obj2:queueVelocity(newV2)
-            -- Insert them into the object table.
-            table.insert(objects, obj1)
-            table.insert(objects, obj2)
-            self:setDeleteTime(-1)
+            --local vX, vY = comp.body:getLinearVelocity()
+            --local v = Point(vX, vY)
+            --local newV1 = comp:getNewVelocity(v, newCenter1)
+            --local newV2 = comp:getNewVelocity(v, newCenter2)
+            --obj1:queueVelocity(newV1)
+            --obj2:queueVelocity(newV2)
+            entitySystem.queueDelete(id)
         end
-    end
-    if deleteSeconds then
-        print('Deleting in '..deleteSeconds..'.')
-        self:setDeleteTime(deleteSeconds)
     end
 end
 

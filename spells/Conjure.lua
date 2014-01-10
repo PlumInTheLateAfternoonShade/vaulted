@@ -22,7 +22,8 @@ function Conjure:apply(world, caster)
     print('Applying a conjure of '..self.element.t)
     print('Scaled Conjure center apply: '..tostring(self.center))
     local points, center = self:mirrorIfLeftFacing(caster.facingRight)
-    if self.element.t == 'earth' or self.element.t == 'air'then
+    if self.element.t == 'water' then self.element.t = 'ice' end -- TODO Delete
+    if self.element.t == 'earth' or self.element.t == 'air' or self.element.t == 'ice' then
         objectFactory.createElemental(points, 
         Point(caster.body:getX() + center.x, 
         caster.body:getY() + center.y),

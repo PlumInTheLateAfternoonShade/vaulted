@@ -18,6 +18,14 @@ function positionSystem.add(comp)
     positionSystem[comp.id] = comp
 end
 
+function positionSystem.get(id)
+    return positionSystem[id]
+end
+
+function positionSystem.delete(id)
+    positionSystem[id] = nil
+end
+
 function positionSystem.update(id, center, coords)
     positionSystem[id].center = center
     positionSystem[id].coords = coords

@@ -1,4 +1,5 @@
 local entitySystem = require('systems.entitySystem')
+local objectFactory = require('systems.objectFactory')
 local State = require('state')
 local Camera = require('camera')
 require('utils')
@@ -37,7 +38,7 @@ local Game = Class
         world = love.physics.newWorld(0, 50*tileSize, true)
         -- init camera
         camera = Camera()
-        entitySystem.init(world, camera) -- TODO world inside entitySys
+        objectFactory.init(world, camera) -- TODO world inside entitySys
         local loadedHero
         if shouldLoadHero then
             loadedHero = tLoader:unpack("Hero")

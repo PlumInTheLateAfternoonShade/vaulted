@@ -1,4 +1,6 @@
 ShouldProfile = false
+require "lib.luafun.fun" ()
+Class = require('class')
 local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')
