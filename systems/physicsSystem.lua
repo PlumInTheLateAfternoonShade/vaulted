@@ -25,6 +25,10 @@ function physicsSystem:delete(id)
     self.components[id] = nil
 end
 
+function physicsSystem:getMass(id)
+    return self.components[id].body:getMass()
+end
+
 function physicsSystem:clearDestroyQueue()
     -- Remove all fixtures that have been flagged for deletion
     for _, fixture in pairs(self.destroyQueue) do fixture:destroy() end

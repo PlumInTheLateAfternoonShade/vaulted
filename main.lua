@@ -89,11 +89,12 @@ function love.load(args)
 end
 
 function love.resize(w, h)
-    print(("Window resized to width: %d and height: %d."):format(w, h))
     conf.screenWidth = w
     conf.screenHeight = h
-    --camera.scaleY = conf.canonicalScreenHeight
-    --camera.scaleX = conf.canonicalScreenWidth
+    -- TODO Set camera's scaleY and scaleX properly
+    local sc = conf.screenHeight / conf.canonicalScreenHeight
+    love.graphics.scale(sc, sc)
+    print(("Window resized to width: %d and height: %d. Scale: %3.2f"):format(w, h, sc))
 end
 
 function love.draw()

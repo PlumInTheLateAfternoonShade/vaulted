@@ -37,7 +37,6 @@ end
 
 function Camera:set()
     love.graphics.push()
-    love.graphics.scale(self.scaleX, self.scaleY)
     love.graphics.translate(-self.x, -self.y)
 end
 

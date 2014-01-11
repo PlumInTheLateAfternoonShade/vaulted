@@ -1,4 +1,5 @@
 local physicsSystem = require('systems.physicsSystem')
+local temperatureSystem = require('systems.temperatureSystem')
 local graphicsSystem = require('systems.graphicsSystem')
 local eleSystem = require('systems.eleSystem')
 local positionSystem = require('systems.positionSystem')
@@ -11,6 +12,7 @@ function entitySystem:init(world, cam, objectFactory)
     self.currId = -1
     camera = cam
     physicsSystem:init(world, objectFactory, entitySystem)
+    temperatureSystem:init()
     eleSystem:init()
     positionSystem:init()
     graphicsSystem:init()
@@ -22,6 +24,7 @@ end
 function entitySystem:delete(id)
     -- Remove all components from all systems containing this id.
     physicsSystem:delete(id)
+    temperatureSystem:delete(id)
     graphicsSystem:delete(id)
     eleSystem:delete(id)
     positionSystem:delete(id)
@@ -29,6 +32,7 @@ end
 
 function entitySystem:update(dt)
     physicsSystem:update(dt)
+    temperatureSystem:update(dt)
     eleSystem:update(dt)
 end
 
@@ -55,11 +59,13 @@ function beginContact(a, b, coll)
     camera:shake(a:getBody(), b:getBody(), coll)
     local aId, bId = getIds(a, b)
     physicsSystem:beginCollision(aId, bId, coll)
+    temperatureSystem:beginCollision(aId, bId, coll)
 end
 
 function endContact(a, b, coll)
     local aId, bId = getIds(a, b)
     physicsSystem:endCollision(aId, bId, coll)
+    temperatureSystem:endCollision(aId, bId, coll)
 end
 
 function preSolve(a, b, coll)

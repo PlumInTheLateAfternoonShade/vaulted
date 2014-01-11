@@ -39,6 +39,9 @@ conf = loader:unpackIfExists(
     -- Camera settings
     ShouldCameraShake = true
 })
+conf.canonicalScreenWidth = canonicalScreenWidth
+conf.canonicalScreenHeight = canonicalScreenHeight
+
 -- Map settings
 tileSize = 32
 iconSize = tileSize * 2

@@ -25,6 +25,10 @@ function graphicsSystem:delete(id)
     meshes[id] = nil
 end
 
+local function setToComponentColor(comp)
+    setColor(temperatureSystem:getAdjustedColor(comp.id, comp.color))
+end
+
 local function drawPolygons()
     for id, comp in pairs(polygons) do
         setColor(comp.color)
@@ -64,7 +68,6 @@ local function getMeshVertices(comp)
     end
     return vertices
 end
-
 
 local function initMesh(comp)
     comp.mesh = love.graphics.newMesh(getMeshVertices(comp), img.load(comp.imageName))
