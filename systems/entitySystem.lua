@@ -5,11 +5,10 @@ local positionSystem = require('systems.positionSystem')
 
 -- controls registering and deleting entities in the entity system, as well as updating each component system.
 local entitySystem = {}
-local currId = -1
-local deleteQueue = {}
 local camera
 
 function entitySystem:init(world, cam, objectFactory)
+    self.currId = -1
     camera = cam
     physicsSystem:init(world, objectFactory, entitySystem)
     eleSystem:init()
@@ -39,9 +38,9 @@ end
 
 -- Returns a new unique entity id. An entity is just an integer.
 function entitySystem:register()
-    currId = currId + 1
-    print('Registering entity '..currId)
-    return currId
+    self.currId = self.currId + 1
+    print('Registering entity '..self.currId)
+    return self.currId
 end
 
 function entitySystem:queueDelete(id)

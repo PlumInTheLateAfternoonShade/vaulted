@@ -1,6 +1,5 @@
 local Class = require('class')
 local Effect = require('spells.Effect')
-local ElementalObject = require('spells.ElementalObject')
 local Point = require('geometry.Point')
 local Seg = require('geometry.Seg')
 local objectFactory = require 'systems.objectFactory'

@@ -5,7 +5,6 @@
 -- Setup
 local objectFactory = require("systems.objectFactory")
 local Point = require("geometry.Point")
-local Ground = require("ground") --TODO DEL
 require 'lib.deepcopy.deepcopy'
 local floor = math.floor
 local type = type

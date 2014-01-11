@@ -1,6 +1,5 @@
 require 'lib.deepcopy.deepcopy'
 local Effect = require('spells.Effect')
-require('spells.Element')
 local Force = require('spells.Force')
 local Conjure = require('spells.Conjure')
 local Point = require('geometry.Point')

@@ -13,7 +13,7 @@ function objectFactory.init(world, cam)
 end
 
 function objectFactory.createTile(points, center)
-    local id = entitySystem.register()
+    local id = entitySystem:register()
     position.create(id, points, center)
     collider.create(id, points, center, 0.5, 'static')
     polygonRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
@@ -22,7 +22,7 @@ end
 
 function objectFactory.createElemental(points, center, eleName, initV)
     local initV = initV or Point(0, 0)
-    local id = entitySystem.register()
+    local id = entitySystem:register()
     position.create(id, points, center)
     local ele = element.create(id, eleName)
     collider.create(id, points, center, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV)

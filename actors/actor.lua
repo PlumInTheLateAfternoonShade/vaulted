@@ -1,6 +1,5 @@
 local Class = require 'class'
 local CollidableObject = require 'collidableObject'
-local Element = require 'spells.Element'
 local maxAngVToRight = 30
 local maxVertVToRight = 2000
 local xpMult = 2000
@@ -85,7 +84,7 @@ end
 function Actor:update(dt)
     CollidableObject.update(self, dt)
     if self.actorFirstUpdate then
-        self.fixture:setDensity(water.density)
+        self.fixture:setDensity(7)
         self.body:resetMassData()
         self.maxWalkingForce = self.body:getMass()*2500
         self.actorFirstUpdate = false
