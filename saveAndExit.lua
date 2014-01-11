@@ -13,7 +13,7 @@ function SaveAndExit:close()
         ProFi:stop()
         ProFi:writeReport('profile.txt')
     end
-    os.exit()
+    love.event.quit()
 end
 
 return SaveAndExit
