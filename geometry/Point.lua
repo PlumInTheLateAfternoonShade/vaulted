@@ -1,4 +1,6 @@
 require 'lib.deepcopy.deepcopy'
+-- TODO: Change global funcs to Point. funcs.
+-- Represents a 2d point.
 local Point = require('class')
 {
     name = 'Point',
@@ -299,6 +301,23 @@ function testPoint(p, points)
         j = i
     end
     return c
+end
+
+function Point.pointsToCoords(points)
+    local coords = {}
+    for i = 1, #points do
+        table.insert(coords, points.x)
+        table.insert(coords, points.y)
+    end
+    return unpack(coords)
+end
+
+function Point.coordsToPoints(coords)
+    local points = {}
+    for i = 1, #coords, 2 do
+        table.insert(points, Point(coords[i], coords[i + 1]))
+    end
+    return points
 end
 
 return Point

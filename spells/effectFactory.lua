@@ -60,12 +60,15 @@ local choose = {
     end,
     function(lines, element, power)
         print('Trying conjure. #lines = '..#lines..' element = '..element.name)
-        -- TODO check is polygon and is convex
         -- love.physics polygons can have at most 8 sides
         if #lines > 8 then
             return nil
         end
         local points = connectLinesIntoPolygon(lines)
+        -- TODO Convex check returns false even when it is convex
+        --[[if not love.math.isConvex(Point.pointsToCoords(points)) then
+            return nil
+        end]]--
         return make.conjure(points, element)
     end
 }
