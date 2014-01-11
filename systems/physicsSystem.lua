@@ -17,13 +17,18 @@ function physicsSystem:init(w, objFact, eSys)
     objectFactory = objFact
     entitySystem = eSys
     self.components = {}
+    self.destroyQueue = {}
 end
 
 function physicsSystem:delete(id)
-    if self.components[id] then
-        self.components[id].fixture:destroy()
-    end
+    table.insert(self.destroyQueue, self.components[id].fixture)
     self.components[id] = nil
+end
+
+function physicsSystem:clearDestroyQueue()
+    -- Remove all fixtures that have been flagged for deletion
+    for _, fixture in pairs(self.destroyQueue) do fixture:destroy() end
+    self.destroyQueue = {}
 end
 
 local function centralize(points, c)
@@ -49,6 +54,8 @@ local function updateComponent(comp)
         centralize(comp.points, computeCentroid(comp.points))
         comp.body = love.physics.newBody(world,
         comp.center.x, comp.center.y, comp.type)
+        comp.body:setLinearVelocity(
+        comp.initV.x, comp.initV.y)
         --This is perhaps the ugliest thing I've ever written.
         --There must be a clever way to do it with unpack.
         --Or maybe a function in Point that returns x, y?
@@ -95,19 +102,17 @@ local function updateComponent(comp)
 end
 
 function physicsSystem:update(dt)
-    each(updateComponent, self.components)
+    self:clearDestroyQueue()
+    for id, comp in pairs(self.components) do updateComponent(comp) end
+    world:update(dt)
 end
 
---[[function ElementalObject:getNewVelocity(v, newCenter)
+local function getNewVelocity(comp, v, newCenter)
     local speed = v:magnitude()
     local newV = Seg(comp.center, newCenter):normalize()
     newV:scale(speed)
     return newV
 end
-
-function ElementalObject:makeChildObject(points, center)
-    return ElementalObject(comp.world, points, center, comp.element)
-end]]--
 
 local function getContactSeg(contact, center)
     local cx, cy = contact:getPositions() --Gets the first pos only.
@@ -124,10 +129,10 @@ local function breakNearSeg(points, center, seg)
     -- and returns two collections of points on either side.
     print('breaking near seg '..tostring(seg))
     printTable('points:\n====', points, '===')
-    --local ps = table.deepcopy(points)
     -- Move points around their center.
-    local ps = map(function(p) return p + center end, points)
-    printTable('centered points:\n====', ps, '===')
+    local ps = objectDeepcopy(points)
+    --for i = 1, #ps do ps[i] = ps[i] + center end
+    printTable('centered points:', ps)
     local p0, i = nearestPoint(ps, seg.p0)
     local p1, j = nearestPoint(ps, seg.p1)
     if #points == 3 then
@@ -141,7 +146,7 @@ local function breakNearSeg(points, center, seg)
         local mP = midPoint(ps[1], ps[2])
         print('p0: '..tostring(p0)..' opp1: '..tostring(ps[1])..' opp2: '..tostring(ps[2])..' mP: '..tostring(mP))
         -- Return two triangles formed by a cut through p0 and the midpoint.
-        return {p0, ps[1], mP}, {p0, ps[2], mP}
+        return {p0 + center, ps[1] + center, mP + center}, {p0 + center, ps[2] + center, mP + center}
     end
     if math.abs(i - j) <= 1 then
         print('Wouldn\'t get two polygons. i = '..i..' j = '..j..' # = '..#points)
@@ -170,6 +175,8 @@ local function breakNearSeg(points, center, seg)
     -- debug
     printTable('Broken side1:\n====', side1, '===')
     printTable('Broken side2:\n====', side2, '===')
+    for i = 1, #side1 do side1[i] = side1[i] + center end
+    for i = 1, #side2 do side2[i] = side2[i] + center end
     return side1, side2
 end
 
@@ -196,19 +203,18 @@ function physicsSystem:handleCollision(id, contact)
             printTable('points1: ', points1)
             print('area2: '..computeArea(points2))
             printTable('points2: ', points2)
+            
+            -- Assign their velocities
+            local v = Point(comp.body:getLinearVelocity())
+            local newV1 = getNewVelocity(comp, v, newCenter1)
+            local newV2 = getNewVelocity(comp, v, newCenter2)
 
             -- Construct the elemental objects.
-            objectFactory.createElemental(points1, newCenter1, eleSystem:get(id).name)
-            objectFactory.createElemental(points2, newCenter2, eleSystem:get(id).name)
+            objectFactory.createElemental(points1, newCenter1, eleSystem:get(id).name, newV1)
+            objectFactory.createElemental(points2, newCenter2, eleSystem:get(id).name, newV2)
 
-            -- Assign their velocities
-            --local vX, vY = comp.body:getLinearVelocity()
-            --local v = Point(vX, vY)
-            --local newV1 = comp:getNewVelocity(v, newCenter1)
-            --local newV2 = comp:getNewVelocity(v, newCenter2)
-            --obj1:queueVelocity(newV1)
-            --obj2:queueVelocity(newV2)
-            entitySystem:queueDelete(id)
+            -- Delete the old entitiy
+            entitySystem:delete(id)
         end
     end
 end

@@ -1,6 +1,5 @@
 require 'lib.deepcopy.deepcopy'
-local Class = require('class')
-local Point = Class
+local Point = require('class')
 {
     name = 'Point',
     function(self, x, y, table)

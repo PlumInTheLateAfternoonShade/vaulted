@@ -6,13 +6,13 @@ local Seg = require 'geometry.Seg'
 local Class = require 'HardonCollider.class'
 local State = require 'state'
 local ui = require 'ui'
+local element = require 'components.element'
 local lines
 local spellBook
 local Gestures = Class
 {
     name = 'Gestures',
     function(self)
-        setColor(eles[eles.i].c)
         spellBook = hero.spellBook
         -- The lines in the currently loaded gesture
         print(spellBook.i)
@@ -34,7 +34,7 @@ function Gestures:draw()
     -- Draw the cursor
     local mouseX = love.mouse.getX()
     local mouseY = love.mouse.getY()
-    setColor(eles[eles.i].c)
+    element:setAsColor()
     love.graphics.circle("fill", mouseX, mouseY, 10, 100)
     -- Draw the preview line if necessary
     if drawPreviewLine then
@@ -45,7 +45,6 @@ end
 function Gestures:drawGrid()
     local smallDotRad = 5
     local bigDotRad = 8
-    local red, green, blue = love.graphics.getColor()
     setColor({r=255, g=255, b=255})
     for i = 1, gridSize do
         for j = 1, gridSize do
@@ -59,7 +58,6 @@ function Gestures:drawGrid()
             grid[i][j].y, dotRad, 100)
         end
     end
-    setColor({r=red, g=green, b=blue})
 end
 
 function Gestures:isPlayerDot(i, j)
@@ -68,28 +66,24 @@ end
 
 function Gestures:drawLines()
     love.graphics.setLineWidth(5)
-    local red, green, blue = love.graphics.getColor()
-    --TODO convert to sensible for loop
     for i = 1, #lines do
         local line = lines[i]
         setColor(line.c)
         love.graphics.line(line.p0.x, line.p0.y, line.p1.x, line.p1.y)
     end
-    setColor({r=red, g=green, b=blue})
 end
 
 function Gestures:keypressed(key)
     if key == up then
-        eles.inc(-1)
+        element:inc(-1)
     elseif key == down then
-        eles.inc(1)
+        element:inc()
     elseif spellBook:keyMatch(key) ~= nil then
         lines = spellBook[spellBook.i].lines
     elseif key == confirm or key == gesture then
         -- Finalize and save spells
         spellBook:finalize()
         -- Go back to game.
-        setColorInverted(fontColor)
         print('Returning to game from gestures.')
         updateState("continue")
     end
@@ -107,16 +101,16 @@ function Gestures:mousepressed(x, y, button)
             self:deleteNearestLine(Point(x, y))
         end
     elseif button == "wu" then
-        eles.inc(1)
+        element:inc()
     elseif button == "wd" then
-        eles.inc(-1)
+        element:inc(-1)
     end
 end
 
 function Gestures:mousereleased(x, y, button)
     if button == "l" then
         local endPoint = self:getNearestGridPoint(x, y)
-        local line = Seg(startPoint, endPoint, eles[eles.i].c)
+        local line = Seg(startPoint, endPoint, element:getColor())
         if line:lengthSquared() > 0 then
             table.insert(lines, line)
         end

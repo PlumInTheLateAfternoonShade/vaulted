@@ -20,7 +20,7 @@ function entitySystem:init(world, cam, objectFactory)
     postSolve)
 end
 
-local function delete(id)
+function entitySystem:delete(id)
     -- Remove all components from all systems containing this id.
     physicsSystem:delete(id)
     graphicsSystem:delete(id)
@@ -28,17 +28,7 @@ local function delete(id)
     positionSystem:delete(id)
 end
 
-local function clearDeleteQueue()
-    -- Remove all entities that have been flagged for deletion
-    
-    if #deleteQueue > 0 then printTable("deleteQueue", deleteQueue) end
-    each(print, deleteQueue)
-    each(delete, deleteQueue)
-    deleteQueue = {}
-end
-
 function entitySystem:update(dt)
-    clearDeleteQueue()    
     physicsSystem:update(dt)
     eleSystem:update(dt)
 end

@@ -88,6 +88,15 @@ function love.load(args)
     love.graphics.setLineStyle('rough')
 end
 
+function love.resize(w, h)
+    print(("Window resized to width: %d and height: %d."):format(w, h))
+    conf.screenWidth = w
+    conf.screenHeight = h
+    camera.scaleY = 2
+    --camera.scaleY = conf.canonicalScreenHeight
+    --camera.scaleX = conf.canonicalScreenWidth
+end
+
 function love.draw()
     -- call the state's draw function
     state:draw()

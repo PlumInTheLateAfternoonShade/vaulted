@@ -1,7 +1,7 @@
 require('lib.deepcopy.deepcopy')
 local Seg = require('geometry.Seg')
 local Point = require('geometry.Point')
-local Element = require('spells.Element')
+local element = require('components.element')
 require('spells.effectFactory')
 local Class = require('class')
 
@@ -24,8 +24,8 @@ local Region = Class
         else
             print('Making new region. Element = '..seedLine.c.r)
             self.seed = seedLine
-            self.element = eles.getEleFromColor(self.seed.c)
-            print('Element chosen was '..self.element.t)
+            self.element = element:getEleFromColor(self.seed.c)
+            print('Element chosen was '..self.element.name)
             self.lines = {self.seed}
             self.effect = nil
             self.power = 0

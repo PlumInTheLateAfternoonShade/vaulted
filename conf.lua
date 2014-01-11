@@ -27,12 +27,15 @@ spellKey =
 
 local saveDirectory = "saves"
 love.filesystem.setIdentity(saveDirectory)
+local canonicalScreenWidth = 1600
+local canonicalScreenHeight = 900
+
 conf = loader:unpackIfExists(
 {
     name = "conf",
     -- Screen settings
-    screenWidth = 1600,
-    screenHeight = 900,
+    screenWidth = canonicalScreenWidth,
+    screenHeight = canonicalScreenHeight,
     -- Camera settings
     ShouldCameraShake = true
 })
@@ -40,12 +43,6 @@ conf = loader:unpackIfExists(
 tileSize = 32
 iconSize = tileSize * 2
 worldXEnd = 10000 --TODO: should be calculated based on map.
-
--- Element colors
-fireColor = {r = 240, b = 0, g = 70}
-waterColor = {r = 40, b = 240, g = 70}
-earthColor = {r = 100, b = 50, g = 120}
-airColor = {r = 220, b = 255, g = 225}
 
 -- Other colors
 fontColor = {r=0,g=0,b=0}
@@ -59,6 +56,9 @@ function love.conf(t)
     t.title = "Vaulted"
     t.window.width = conf.screenWidth
     t.window.height = conf.screenHeight
+    t.window.resizable = true
+    t.window.minwidth = 400
+    t.window.minheight = 300
     t.modules.joystick = false
     t.vsync = false
     t.window.fullscreen = false

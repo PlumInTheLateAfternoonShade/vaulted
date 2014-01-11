@@ -5,20 +5,20 @@ local physicsSystem = require 'systems.physicsSystem'
 -- Allows an object in the game world with this component to be collided with.
 local collider = {}
 
-function collider.create(id, points, center, friction, type, breakable)
+function collider.create(id, points, center, friction, type, breakable, initV)
     local c = {}
     c.id = id
-    local t = savedSelf or {points = points, center = center}
-    c.center = t.center
+    c.center = center
     c.points = {}
-    for i = 1, #t.points do
-        c.points[i] = Point(t.points[i].x, t.points[i].y)
+    for i = 1, #points do
+        c.points[i] = Point(points[i].x, points[i].y)
     end
     c.firstUpdate = true
     c.friction = friction
     c.type = type
     c.breakable = breakable or false
-    c.maxMassToBreak = 10
+    c.initV = initV or Point(0, 0)
+    c.maxMassToBreak = 40
     physicsSystem:add(c)
     return c
 end

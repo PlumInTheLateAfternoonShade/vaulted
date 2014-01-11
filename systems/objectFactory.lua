@@ -20,12 +20,19 @@ function objectFactory.createTile(points, center)
     return id
 end
 
-function objectFactory.createElemental(points, center, eleName)
+function objectFactory.createElemental(points, center, eleName, initV)
+    local initV = initV or Point(0, 0)
     local id = entitySystem.register()
     position.create(id, points, center)
     local ele = element.create(id, eleName)
-    collider.create(id, points, center, ele.friction, 'dynamic', eleName == 'ice')
-    meshRenderer.create(id, ele.color, eleName..'.jpg')
+    collider.create(id, points, center, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV)
+    local textureName
+    if eleName == 'fire' then
+        textureName = eleName..'.png'
+    else
+        textureName = eleName..'.jpg'
+    end
+    meshRenderer.create(id, ele.color, textureName)
     return id
 end
 

@@ -291,8 +291,6 @@ function TileLayer:addToWorld(world, objects)
                     Point(physX + lengthRight, physY + lengthDown), -- bottom right
                     Point(physX, physY + lengthDown), -- bottom left
                 }
-                --local ground = Ground(world, groundPoints, Point(physX + halfW - tile.width, physY + halfH - tile.height)) --TODO DEL
-                --table.insert(objects, ground) --TODO DEL
                 objectFactory.createTile(groundPoints, Point(physX + halfW - tile.width, physY + halfH - tile.height))
             end
         end

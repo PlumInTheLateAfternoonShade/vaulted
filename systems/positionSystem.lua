@@ -24,6 +24,8 @@ end
 function positionSystem:getPoints(id)
     local coords = self.components[id].coords
     local points = {}
+    if #coords % 2 ~= 0 then print 'EEEEEEEEEEEP!!@!@!@!#!$!!!'
+        each(print, coords) end
     for i = 1, #coords, 2 do
         table.insert(points, Point(coords[i], coords[i + 1]))
     end

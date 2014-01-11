@@ -15,8 +15,8 @@ local forceConst = 500
 
 local choose = {
     function(lines, element, power)
-        print('Trying force. #lines = '..#lines..' element = '..element.t)
-        if #lines == 3 and element.t == air.t then
+        print('Trying force. #lines = '..#lines..' element = '..element.name)
+        if #lines == 3 and element.name == 'air' then
             local longestLine, shorterLines = getLongestLine(lines)
             local frontP0 = longestLine:sharesAPoint(shorterLines[1])
             local frontP1 = longestLine:sharesAPoint(shorterLines[2])
@@ -60,7 +60,7 @@ local choose = {
         return make.bolt(lines, element, power)
     end,
     function(lines, element, power)
-        print('Trying conjure. #lines = '..#lines..' element = '..element.t)
+        print('Trying conjure. #lines = '..#lines..' element = '..element.name)
         -- TODO check is polygon and is convex
         -- love.physics polygons can have at most 8 sides
         if #lines > 8 then
@@ -90,7 +90,7 @@ function make.conjure(points, element)
     if points == nil then
         return nil
     end
-    print('Making a conjure effect with element = '..element.t)
+    print('Making a conjure effect with element = '..element.name)
     -- TODO this is a hack.
     points = translatePolygonToWorldCoords(points)
     local center = computeCentroid(points)

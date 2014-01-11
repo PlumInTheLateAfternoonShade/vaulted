@@ -19,21 +19,13 @@ local Conjure = Class
 Conjure:inherit(Effect)
 
 function Conjure:apply(world, caster)
-    print('Applying a conjure of '..self.element.t)
+    print('Applying a conjure of '..self.element.name)
     print('Scaled Conjure center apply: '..tostring(self.center))
     local points, center = self:mirrorIfLeftFacing(caster.facingRight)
-    if self.element.t == 'water' then self.element.t = 'ice' end -- TODO Delete
-    if self.element.t == 'earth' or self.element.t == 'air' or self.element.t == 'ice' then
-        objectFactory.createElemental(points, 
-        Point(caster.body:getX() + center.x, 
-        caster.body:getY() + center.y),
-        self.element.t)
-    else
-        table.insert(objects, ElementalObject(world, points,
-        Point(caster.body:getX() + center.x, 
-        caster.body:getY() + center.y),
-        self.element))
-    end
+    objectFactory.createElemental(points, 
+    Point(caster.body:getX() + center.x, 
+    caster.body:getY() + center.y),
+    self.element.name)
 end
 
 return Conjure

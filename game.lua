@@ -66,7 +66,6 @@ function Game:update(dt)
         -- update the FPS counter
         self.fps = love.timer.getFPS()
     end
-    world:update(dt)
     entitySystem:update(dt)
 
     for i = #objects, 1, -1 do

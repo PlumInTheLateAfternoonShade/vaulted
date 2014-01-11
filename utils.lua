@@ -2,11 +2,11 @@
 
 function setColorInverted(color)
     love.graphics.setColor(255 - color.r, 255 - color.g,
-    255 - color.b)
+    255 - color.b, color.a)
 end
 
 function setColor(color)
-    love.graphics.setColor(color.r, color.g, color.b)
+    love.graphics.setColor(color.r, color.g, color.b, color.a)
 end
 
 function getColor()
