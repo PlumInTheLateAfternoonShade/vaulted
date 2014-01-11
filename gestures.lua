@@ -1,15 +1,13 @@
 -- Provides the UI for making new spell gestures.
 require('utils')
---local Class = require "HardonCollider/class"
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
-local Class = require 'HardonCollider.class'
 local State = require 'state'
 local ui = require 'ui'
 local element = require 'components.element'
 local lines
 local spellBook
-local Gestures = Class
+local Gestures = require 'class'
 {
     name = 'Gestures',
     function(self)

@@ -1,7 +1,7 @@
 -- The settings menu for the game
 
 local GenMenu = require('menus.genMenu')
-local Class = require('HardonCollider.class')
+local Class = require('class')
 local State = require('state')
 
 local Settings = Class

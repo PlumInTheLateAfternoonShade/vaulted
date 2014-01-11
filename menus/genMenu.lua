@@ -1,7 +1,7 @@
 -- Generate and draw a generic menu.
 
 require ('utils')
-local Class = require('HardonCollider.class')
+local Class = require('class')
 local GenMenu = Class
 {
     name = 'GenMenu',

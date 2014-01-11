@@ -8,7 +8,7 @@ local UI = require('ui')
 local Hero = require('actors.hero')
 local Point = require('geometry.Point')
 local tLoader = require('loader')
-local loader = require "AdvTiledLoader/Loader"
+local loader = require "lib/AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
 local SpellBook = require('spellBook')
@@ -43,7 +43,7 @@ local Game = Class
         self.map = loader.load("level1.tmx")
         self.map.tileWidth = tileSize
         self.map.widthInPixels = self.map.tileWidth * self.map.width
-        self.map:addToWorld(world, objects)
+        self.map:addToWorld()
         -- init debug vars
         self.fps = 0
         self.secondCount = 1.1

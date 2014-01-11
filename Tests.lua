@@ -1,4 +1,4 @@
-local LuaUnit = require('luaunit.luaunit')
+local LuaUnit = require('lib.luaunit.luaunit')
 require('geometry.Seg')
 require('geometry.Point')
 require('spells.effectFactory')

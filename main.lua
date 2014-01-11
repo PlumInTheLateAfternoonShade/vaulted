@@ -11,7 +11,7 @@ require('lib.deepcopy.deepcopy')
 local SaveAndExit = require('saveAndExit')
 if ShouldProfile then
     print('Got here')
-    ProFi = require('ProFi')
+    ProFi = require('lib.ProFi')
 end
 local state = Menu()
 local stateInitializers = {

@@ -1,6 +1,6 @@
 local loader = require('loader')
 if ShouldProfile then
-    ProFi = require 'ProFi'
+    ProFi = require 'lib.ProFi'
 end
 local SaveAndExit = {}
 
