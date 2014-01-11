@@ -1,5 +1,6 @@
 ShouldProfile = false
-require "lib.luafun.fun" ()
+--require 'lib.strict' -- TODO Only apply strictness to our code, not code in lib directory.
+require 'lib.luafun.fun' ()
 Class = require('class')
 local Game = require('game')
 local Menu = require('menus.menu')
@@ -10,7 +11,6 @@ local Gestures = require('gestures')
 require('lib.deepcopy.deepcopy')
 local SaveAndExit = require('saveAndExit')
 if ShouldProfile then
-    print('Got here')
     ProFi = require('lib.ProFi')
 end
 local state = Menu()
@@ -92,7 +92,6 @@ function love.resize(w, h)
     print(("Window resized to width: %d and height: %d."):format(w, h))
     conf.screenWidth = w
     conf.screenHeight = h
-    camera.scaleY = 2
     --camera.scaleY = conf.canonicalScreenHeight
     --camera.scaleX = conf.canonicalScreenWidth
 end
@@ -138,6 +137,7 @@ function updateState(choice)
 end
 
 function objectDeepcopy(object)
+    -- TODO Attribute. This is not mine.
     local lookup_table = {}
     local function _copy(object)
         if type(object) ~= "table" then

@@ -39,7 +39,6 @@ end
 -- Returns a new unique entity id. An entity is just an integer.
 function entitySystem:register()
     self.currId = self.currId + 1
-    print('Registering entity '..self.currId)
     return self.currId
 end
 
