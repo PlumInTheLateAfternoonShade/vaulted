@@ -5,7 +5,7 @@ end
 local SaveAndExit = {}
 
 function SaveAndExit:close()
-    loader:pack(hero)
+    --loader:pack(hero)
     loader:pack(conf)
     if ShouldProfile then
         -- prof only

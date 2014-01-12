@@ -1,5 +1,5 @@
 local entitySystem = require('systems.entitySystem')
-local physicsSystem = require('systems.physicsSystem') --TODO DEL
+local positionSystem = require('systems.positionSystem') --TODO DEL
 local objectFactory = require('systems.objectFactory')
 local State = require('state')
 local Camera = require('camera')
@@ -34,7 +34,10 @@ local Game = Class
         world = love.physics.newWorld(0, 50*tileSize, true)
         -- init camera
         camera = Camera()
-        objectFactory.init(world, camera) -- TODO world inside entitySys
+        self.map = loader.load("level1.tmx")
+        self.map.tileWidth = tileSize
+        self.map.widthInPixels = self.map.tileWidth * self.map.width
+        objectFactory.init(world, camera, self.map) -- TODO world inside entitySys
         heroId = objectFactory.createPlayer({
         points = {
             Point(0, 0),
@@ -50,9 +53,6 @@ local Game = Class
         --hero = Hero(world, nil, Point(200, -550), loadedHero)
         --table.insert(objects, hero)
         -- load the level and bind to variable map
-        self.map = loader.load("level1.tmx")
-        self.map.tileWidth = tileSize
-        self.map.widthInPixels = self.map.tileWidth * self.map.width
         self.map:addToWorld()
         -- init debug vars
         self.fps = 0
@@ -91,19 +91,15 @@ function Game:update(dt)
         world:rayCast(r.x1, r.y1, r.x2, r.y2, r.func)
         table.remove(rayCastStack, #rayCastStack)
     end
-    local heroBody = physicsSystem:get(heroId).body
-    camera:setAdjPosition(heroBody:getX(), heroBody:getY(), dt)
+    local heroCenter = positionSystem:getCenter(heroId)
+    camera:setAdjPosition(heroCenter.x, heroCenter.y, dt)
 end
 
 function Game:draw()
-    camera:set()
+    --camera:set()
     entitySystem:draw()
-    for i = 1, #objects do
-        -- draw the objects as rectangles
-        objects[i]:draw()
-    end
-    -- draw all visible spell icons
-    visibleIcons:draw()
+    --[[ draw all visible spell icons
+    --[[visibleIcons:draw()
     -- draw all visual effects
     for i = 1, #visuals do
         visuals[i]:draw()
@@ -114,7 +110,7 @@ function Game:draw()
     -- draw the tile map
     self.map:draw()
 
-    camera:unset()
+    camera:unset()]]--
     -- draw the ui
     --UI:draw() TODO Reimplement
 

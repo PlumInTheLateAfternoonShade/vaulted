@@ -5,12 +5,15 @@ local eleSystem = require('systems.eleSystem')
 local positionSystem = require('systems.positionSystem')
 local walkingSystem = require('systems.walkingSystem')
 local inputSystem = require('systems.inputSystem')
+local experienceSystem = require('systems.experienceSystem')
+local manaSystem = require('systems.manaSystem')
+local healthSystem = require('systems.healthSystem')
 
 -- controls registering and deleting entities in the entity system, as well as updating each component system.
 local entitySystem = {}
 local camera
 
-function entitySystem:init(world, cam, objectFactory)
+function entitySystem:init(world, cam, map, objectFactory)
     self.currId = -1
     camera = cam
     physicsSystem:init(world, objectFactory, entitySystem)
@@ -19,7 +22,10 @@ function entitySystem:init(world, cam, objectFactory)
     positionSystem:init()
     walkingSystem:init()
     inputSystem:init()
-    graphicsSystem:init()
+    experienceSystem:init()
+    manaSystem:init()
+    healthSystem:init()
+    graphicsSystem:init(cam, map)
 
     world:setCallbacks(beginContact, endContact, preSolve,
     postSolve)
@@ -33,6 +39,9 @@ function entitySystem:delete(id)
     eleSystem:delete(id)
     positionSystem:delete(id)
     inputSystem:delete(id)
+    experienceSystem:delete(id)
+    manaSystem:delete(id)
+    healthSystem:delete(id)
     walkingSystem:delete(id)
 end
 
@@ -40,6 +49,9 @@ function entitySystem:update(dt)
     physicsSystem:update(dt)
     temperatureSystem:update(dt)
     eleSystem:update(dt)
+    manaSystem:update(dt)
+    healthSystem:update(dt)
+    experienceSystem:update(dt)
     walkingSystem:update(dt)
 end
 

@@ -6,11 +6,14 @@ local img = require('images.img')
 -- System for rendering graphics
 local graphicsSystem = {}
 
-local meshes, polygons
+local meshes, polygons, statBars, camera
 
-function graphicsSystem:init()
+function graphicsSystem:init(cam, map)
+    camera = cam
+    self.map = map
     meshes = {}
     polygons = {}
+    statBars = {}
 end
 
 function graphicsSystem:addMesh(comp)
@@ -21,9 +24,14 @@ function graphicsSystem:addPolygon(comp)
     polygons[comp.id] = comp
 end
 
+function graphicsSystem:addStatBar(comp)
+    statBars[comp.id] = comp
+end
+
 function graphicsSystem:delete(id)
     polygons[id] = nil
     meshes[id] = nil
+    statBars[id] = nil
 end
 
 local function setToComponentColor(comp)
@@ -97,9 +105,24 @@ local function drawMeshes()
     end
 end
 
+local function drawStatBars()
+    for id, comp in pairs(statBars) do
+        setColor(comp.color)
+        love.graphics.rectangle("fill", 0, conf.screenHeight*comp.topPercent,
+        conf.screenWidth*comp.getPercent(), conf.screenHeight*comp.heightPercent)
+    end
+end
 function graphicsSystem:draw()
+    camera:set()
+    -- set the tile map's draw range so we only draw the tiles on screen
+    self.map:setDrawRange(camera.x, camera.y, conf.screenWidth, conf.screenHeight)
+    -- draw the tile map
+    self.map:draw()
+    -- draw the components
     drawPolygons()
     drawMeshes()
+    camera:unset()
+    drawStatBars()
 end
 
 return graphicsSystem

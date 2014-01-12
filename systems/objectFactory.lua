@@ -1,18 +1,24 @@
 local entitySystem = require('systems.entitySystem')
+local manaSystem = require('systems.manaSystem')
+local healthSystem = require('systems.healthSystem')
 local collider = require('components.collider')
 local polygonRenderer = require('components.polygonRenderer')
 local meshRenderer = require('components.meshRenderer')
 local position = require('components.position')
 local element = require('components.element')
 local temperature = require('components.temperature')
+local mana = require('components.mana')
+local health = require('components.health')
+local statBar = require('components.statBar')
+local experience = require('components.experience')
 local walker = require('components.walker')
 local input = require('components.input')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
 
-function objectFactory.init(world, cam)
-    entitySystem:init(world, cam, objectFactory)
+function objectFactory.init(world, cam, map)
+    entitySystem:init(world, cam, map, objectFactory)
 end
 
 function objectFactory.createTile(points, center)
@@ -47,8 +53,15 @@ function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, 
     position.create(id, positionComp.points, positionComp.center)
     -- TODO wrong points
     collider.create(id, 0.5, 'dynamic')
-    walker.create(id, 10000)
+    walker.create(id, 5001)
     input.create(id)
+    experience.create(id)
+    mana.create(id)
+    health.create(id)
+    statBar.create(entitySystem:register(), 0.95, 0.025, {r=230, g=100, b=100},
+                   function () return healthSystem:getHealthPercent(id) end)
+    statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},
+                   function () return manaSystem:getManaPercent(id) end)
     polygonRenderer.create(id, {r=255, g=255, b=255})
     return id
 
