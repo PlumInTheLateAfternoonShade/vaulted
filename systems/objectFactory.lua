@@ -47,8 +47,8 @@ function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, 
     position.create(id, positionComp.points, positionComp.center)
     -- TODO wrong points
     collider.create(id, 0.5, 'dynamic')
-    walker.create(id, 10000) -- TODO DEL
-    input.create(id) -- TODO DEL
+    walker.create(id, 10000)
+    input.create(id)
     polygonRenderer.create(id, {r=255, g=255, b=255})
     return id
 

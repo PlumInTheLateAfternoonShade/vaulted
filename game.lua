@@ -1,4 +1,5 @@
 local entitySystem = require('systems.entitySystem')
+local physicsSystem = require('systems.physicsSystem') --TODO DEL
 local objectFactory = require('systems.objectFactory')
 local State = require('state')
 local Camera = require('camera')
@@ -20,6 +21,7 @@ rayCastStack = {}
 local visibleIcons -- The spell icons made by gestures.
 local visuals -- Visible effects in the world, like bolts of lightning.
 local camera -- Need this static for now because the callback funcs need it.
+local heroId
 
 local Game = Class
 {
@@ -33,13 +35,20 @@ local Game = Class
         -- init camera
         camera = Camera()
         objectFactory.init(world, camera) -- TODO world inside entitySys
-        --objectFactory.createPlayer(
-        local loadedHero
-        if shouldLoadHero then
-            loadedHero = tLoader:unpack("Hero")
-        end
-        hero = Hero(world, nil, Point(200, -550), loadedHero)
-        table.insert(objects, hero)
+        heroId = objectFactory.createPlayer({
+        points = {
+            Point(0, 0),
+            Point(0, tileSize*2),
+            Point(tileSize, tileSize*2),
+            Point(tileSize, 0)
+        },
+        center = Point(200, -550)})
+        --local loadedHero
+        --if shouldLoadHero then
+        --    loadedHero = tLoader:unpack("Hero")
+        --end
+        --hero = Hero(world, nil, Point(200, -550), loadedHero)
+        --table.insert(objects, hero)
         -- load the level and bind to variable map
         self.map = loader.load("level1.tmx")
         self.map.tileWidth = tileSize
@@ -82,7 +91,8 @@ function Game:update(dt)
         world:rayCast(r.x1, r.y1, r.x2, r.y2, r.func)
         table.remove(rayCastStack, #rayCastStack)
     end
-    camera:setAdjPosition(hero.body:getX(), hero.body:getY(), dt)
+    local heroBody = physicsSystem:get(heroId).body
+    camera:setAdjPosition(heroBody:getX(), heroBody:getY(), dt)
 end
 
 function Game:draw()
@@ -106,27 +116,12 @@ function Game:draw()
 
     camera:unset()
     -- draw the ui
-    UI:draw()
+    --UI:draw() TODO Reimplement
 
     setColorInverted(fontColor)
     -- draw the FPS counter
     love.graphics.print("FPS: "..string.format("%d", self.fps),
     conf.screenWidth * 0.9, conf.screenHeight * 0.1)
-
-    -- debug prints
-    local vX, vY = hero.body:getLinearVelocity()
-    love.graphics.print(string.format("vX: %.2f vY: %.2f", vX, vY),
-    conf.screenWidth*0.7, conf.screenHeight*0.7)
-
-    love.graphics.print("WrappedAngle: "
-    ..string.format("%.2f", hero:getWrappedAngle()),
-    conf.screenWidth * 0.6, conf.screenHeight * 0.6)
-    love.graphics.print("AngVel: "
-    ..string.format("%.2f", hero.body:getAngularVelocity()).." IsFixed: "
-    ..tostring(hero.body:isFixedRotation()),
-    conf.screenWidth * 0.6, conf.screenHeight * 0.4)
-    love.graphics.print("Mass: "..string.format("%.2f", hero.body:getMass()),
-    conf.screenWidth * 0.4, conf.screenHeight * 0.4)
 end
 
 -------------------------------
@@ -135,7 +130,7 @@ end
 
 function Game:keypressed(key)
     entitySystem:keyPressed(key)
-    if key == right then
+    --[[if key == right then
         hero:setWalkingRight()
     elseif key == left then
         hero:setWalkingLeft()
@@ -148,20 +143,20 @@ function Game:keypressed(key)
             for i = 1, #vis do
                 table.insert(visuals, vis[i])
             end
-        end
+        end]]--
     --[[elseif key == openMenu then
         updateState("back to main menu")
     elseif key == gesture then
-        updateState("gestures")]]--
-    end
+        updateState("gestures")
+    end]]--
 end
 
 function Game:keyreleased(key)
     entitySystem:keyReleased(key)
-    if (key == right and hero:isWalkingRight())
+    --[[if (key == right and hero:isWalkingRight())
         or (key == left and hero:isWalkingLeft()) then
         hero:setStanding()
-    end
+    end]]--
 end
 
 --------------
