@@ -26,7 +26,9 @@ function physicsSystem:delete(id)
 end
 
 function physicsSystem:getMass(id)
-    return self.components[id].body:getMass()
+    local comp = self.components[id]
+    if not comp or not comp.body then return 0 end
+    return comp.body:getMass()
 end
 
 function physicsSystem:clearDestroyQueue()

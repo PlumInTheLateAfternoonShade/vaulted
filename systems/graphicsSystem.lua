@@ -1,5 +1,6 @@
 local Point = require('geometry.Point')
 local positionSystem = require('systems.positionSystem')
+local temperatureSystem = require('systems.temperatureSystem')
 local img = require('images.img')
 
 -- System for rendering graphics
@@ -31,7 +32,7 @@ end
 
 local function drawPolygons()
     for id, comp in pairs(polygons) do
-        setColor(comp.color)
+        setToComponentColor(comp)
         love.graphics.polygon("fill", unpack(positionSystem:getCoords(id)))
     end
 end
@@ -74,7 +75,7 @@ local function initMesh(comp)
 end
 
 local function drawMesh(comp)
-    setColor(comp.color)
+    setToComponentColor(comp)
     comp.mesh:setVertices(getMeshVertices(comp))
     love.graphics.draw(comp.mesh, 0, 0)
     -- TESTING

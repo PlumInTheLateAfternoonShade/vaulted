@@ -4,6 +4,7 @@ local polygonRenderer = require('components.polygonRenderer')
 local meshRenderer = require('components.meshRenderer')
 local position = require('components.position')
 local element = require('components.element')
+local temperature = require('components.temperature')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
@@ -33,6 +34,7 @@ function objectFactory.createElemental(points, center, eleName, initV)
         textureName = eleName..'.jpg'
     end
     meshRenderer.create(id, ele.color, textureName)
+    temperature.create(id, ele.temp)
     return id
 end
 
