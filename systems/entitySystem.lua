@@ -3,6 +3,8 @@ local temperatureSystem = require('systems.temperatureSystem')
 local graphicsSystem = require('systems.graphicsSystem')
 local eleSystem = require('systems.eleSystem')
 local positionSystem = require('systems.positionSystem')
+local walkingSystem = require('systems.walkingSystem')
+local inputSystem = require('systems.inputSystem')
 
 -- controls registering and deleting entities in the entity system, as well as updating each component system.
 local entitySystem = {}
@@ -15,6 +17,8 @@ function entitySystem:init(world, cam, objectFactory)
     temperatureSystem:init()
     eleSystem:init()
     positionSystem:init()
+    walkingSystem:init()
+    inputSystem:init()
     graphicsSystem:init()
 
     world:setCallbacks(beginContact, endContact, preSolve,
@@ -28,16 +32,27 @@ function entitySystem:delete(id)
     graphicsSystem:delete(id)
     eleSystem:delete(id)
     positionSystem:delete(id)
+    inputSystem:delete(id)
+    walkingSystem:delete(id)
 end
 
 function entitySystem:update(dt)
     physicsSystem:update(dt)
     temperatureSystem:update(dt)
     eleSystem:update(dt)
+    walkingSystem:update(dt)
 end
 
 function entitySystem:draw()
     graphicsSystem:draw()
+end
+
+function entitySystem:keyPressed(key)
+    inputSystem:keyPressed(key)
+end
+
+function entitySystem:keyReleased(key)
+    inputSystem:keyReleased(key)
 end
 
 -- Returns a new unique entity id. An entity is just an integer.

@@ -5,6 +5,8 @@ local meshRenderer = require('components.meshRenderer')
 local position = require('components.position')
 local element = require('components.element')
 local temperature = require('components.temperature')
+local walker = require('components.walker')
+local input = require('components.input')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
@@ -16,7 +18,7 @@ end
 function objectFactory.createTile(points, center)
     local id = entitySystem:register()
     position.create(id, points, center)
-    collider.create(id, points, center, 0.5, 'static')
+    collider.create(id, 0.5, 'static')
     polygonRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
     return id
 end
@@ -26,7 +28,7 @@ function objectFactory.createElemental(points, center, eleName, initV)
     local id = entitySystem:register()
     position.create(id, points, center)
     local ele = element.create(id, eleName)
-    collider.create(id, points, center, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV)
+    collider.create(id, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV)
     local textureName
     if eleName == 'fire' then
         textureName = eleName..'.png'
@@ -35,7 +37,21 @@ function objectFactory.createElemental(points, center, eleName, initV)
     end
     meshRenderer.create(id, ele.color, textureName)
     temperature.create(id, ele.temp)
+    walker.create(id, 10000) -- TODO DEL
+    input.create(id) -- TODO DEL
     return id
+end
+
+function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, spellBookComp)
+    local id = entitySystem:register()
+    position.create(id, positionComp.points, positionComp.center)
+    -- TODO wrong points
+    collider.create(id, 0.5, 'dynamic')
+    walker.create(id, 10000) -- TODO DEL
+    input.create(id) -- TODO DEL
+    polygonRenderer.create(id, {r=255, g=255, b=255})
+    return id
+
 end
 
 return objectFactory

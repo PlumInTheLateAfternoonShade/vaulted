@@ -96,6 +96,10 @@ function tableCompare(table, field, compare)
     local maxI = 1
     local maxEntry = table[1]
     for i = 1, #table do
+        if not table[i] then
+            print 'NOT table[i]!!' --TODO trying to diagnose rare bug. Delete when found.
+            each(print, table)
+        end
         if compare(table[i][field], max) then
             max = table[i][field]
             maxI = i

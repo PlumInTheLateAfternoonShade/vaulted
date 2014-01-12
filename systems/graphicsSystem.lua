@@ -79,10 +79,7 @@ local function drawMesh(comp)
     comp.mesh:setVertices(getMeshVertices(comp))
     love.graphics.draw(comp.mesh, 0, 0)
     -- TESTING
-    local cen = require('systems.physicsSystem'):get(comp.id).center
-    setColor({r = 255, g = 0, b = 0})
-    love.graphics.circle("fill", cen.x, cen.y, 5, 10)
-    cen = positionSystem:get(comp.id).center
+    local cen = positionSystem:get(comp.id).center
     setColor({r = 255, g = 0, b = 200})
     love.graphics.circle("fill", cen.x, cen.y, 5, 10)
     setColor({r = 255, g = 200, b = 0})

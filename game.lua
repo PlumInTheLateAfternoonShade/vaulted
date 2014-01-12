@@ -33,6 +33,7 @@ local Game = Class
         -- init camera
         camera = Camera()
         objectFactory.init(world, camera) -- TODO world inside entitySys
+        --objectFactory.createPlayer(
         local loadedHero
         if shouldLoadHero then
             loadedHero = tLoader:unpack("Hero")
@@ -133,6 +134,7 @@ end
 -------------------------------
 
 function Game:keypressed(key)
+    entitySystem:keyPressed(key)
     if key == right then
         hero:setWalkingRight()
     elseif key == left then
@@ -147,14 +149,15 @@ function Game:keypressed(key)
                 table.insert(visuals, vis[i])
             end
         end
-    elseif key == openMenu then
+    --[[elseif key == openMenu then
         updateState("back to main menu")
     elseif key == gesture then
-        updateState("gestures")
+        updateState("gestures")]]--
     end
 end
 
 function Game:keyreleased(key)
+    entitySystem:keyReleased(key)
     if (key == right and hero:isWalkingRight())
         or (key == left and hero:isWalkingLeft()) then
         hero:setStanding()

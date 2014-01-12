@@ -43,54 +43,20 @@ local function centralize(points, c)
     end
 end
 
-local function translateCoordsToPoints(comp)
-    local coords = {comp.body:getWorldPoints(comp.shape:getPoints())}
-    comp.points = {}
-    for i = 1, #coords, 2 do
-        table.insert(comp.points, Point(coords[i], coords[i + 1]))
-    end
-end
-
 local function updateComponent(comp)
     if comp.firstUpdate then
         --Need to construct here rather than constructor,
         --in case construct occurs during middle of physics calcs.
         comp.firstUpdate = false
-        removeRedundantPoints(comp.points)
-        centralize(comp.points, computeCentroid(comp.points))
+        local points = positionSystem:getPoints(comp.id)
+        local center = positionSystem:getCenter(comp.id)
+        removeRedundantPoints(points)
+        centralize(points, computeCentroid(points))
         comp.body = love.physics.newBody(world,
-        comp.center.x, comp.center.y, comp.type)
+        center.x, center.y, comp.type)
         comp.body:setLinearVelocity(
         comp.initV.x, comp.initV.y)
-        --This is perhaps the ugliest thing I've ever written.
-        --There must be a clever way to do it with unpack.
-        --Or maybe a function in Point that returns x, y?
-        local a, b, c, d, e, f, g, h = unpack(comp.points)
-        if h then
-            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-            b.x, b.y, c.x,
-            c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y, h.x, h.y)
-        elseif g then
-            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-            b.x, b.y, c.x,
-            c.y, d.x, d.y, e.x, e.y, f.x, f.y, g.x, g.y)
-        elseif f then
-            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-            b.x, b.y, c.x,
-            c.y, d.x, d.y, e.x, e.y, f.x, f.y)
-        elseif e then
-            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-            b.x, b.y, c.x,
-            c.y, d.x, d.y, e.x, e.y)
-        elseif d then
-            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-            b.x, b.y, c.x,
-            c.y, d.x, d.y)
-        else
-            comp.shape = love.physics.newPolygonShape(a.x, a.y, 
-            b.x, b.y, c.x,
-            c.y)
-        end
+        comp.shape = love.physics.newPolygonShape(Point.pointsToCoords(points))
         comp.fixture = love.physics.newFixture(comp.body, comp.shape)
         comp.fixture:setFriction(comp.friction)
         comp.fixture:setUserData(comp.id)
@@ -101,10 +67,7 @@ local function updateComponent(comp)
             comp.body:resetMassData()
         end
     end
-    comp.center.x, comp.center.y = comp.body:getWorldCenter()
-    if positionSystem:get(comp.id) then
-        positionSystem:update(comp.id, comp.center, {comp.body:getWorldPoints(comp.shape:getPoints())})
-    end
+    positionSystem:update(comp.id, Point(comp.body:getWorldCenter()), {comp.body:getWorldPoints(comp.shape:getPoints())})
 end
 
 function physicsSystem:update(dt)
@@ -113,9 +76,9 @@ function physicsSystem:update(dt)
     world:update(dt)
 end
 
-local function getNewVelocity(comp, v, newCenter)
+local function getNewVelocity(v, center, newCenter)
     local speed = v:magnitude()
-    local newV = Seg(comp.center, newCenter):normalize()
+    local newV = Seg(center, newCenter):normalize()
     newV:scale(speed)
     return newV
 end
@@ -190,19 +153,18 @@ function physicsSystem:handleCollision(id, contact)
     local comp = self.components[id]
     if not comp then return end
     if comp.breakable and comp.body:getMass() > comp.maxMassToBreak then
-        centralize(comp.points, computeCentroid(comp.points))
-        local conSeg = getContactSeg(contact, comp.center)
-        local points1, points2 = breakNearSeg(comp.points, comp.center, conSeg)
+        local points, center = positionSystem:getPoints(id), positionSystem:getCenter(id)
+        centralize(points, computeCentroid(points))
+        local conSeg = getContactSeg(contact, center)
+        local points1, points2 = breakNearSeg(points, center, conSeg)
         if points1 and points2 and #points1 > 2 and #points2 > 2 then
             -- Order the points so they form a valid convex polygon.
             points1 = convexHull(points1)
             points2 = convexHull(points2)
             
             -- Compute their new center points.
-            local newCenter1 =
-            computeCentroid(points1) --+ comp.center Not needed because we add
-            local newCenter2 = 
-            computeCentroid(points2) --+ comp.center
+            local newCenter1 = computeCentroid(points1)
+            local newCenter2 = computeCentroid(points2)
 
             -- Debug prints
             print('area1: '..computeArea(points1))
@@ -212,8 +174,8 @@ function physicsSystem:handleCollision(id, contact)
             
             -- Assign their velocities
             local v = Point(comp.body:getLinearVelocity())
-            local newV1 = getNewVelocity(comp, v, newCenter1)
-            local newV2 = getNewVelocity(comp, v, newCenter2)
+            local newV1 = getNewVelocity(v, center, newCenter1)
+            local newV2 = getNewVelocity(v, center, newCenter2)
 
             -- Construct the elemental objects.
             objectFactory.createElemental(points1, newCenter1, eleSystem:get(id).name, newV1)

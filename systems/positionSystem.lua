@@ -21,6 +21,10 @@ function positionSystem:update(id, center, coords)
     self.components[id].coords = coords
 end
 
+function positionSystem:getCenter(id)
+    return self.components[id].center
+end
+
 function positionSystem:getPoints(id)
     return Point.coordsToPoints(self.components[id].coords)
 end

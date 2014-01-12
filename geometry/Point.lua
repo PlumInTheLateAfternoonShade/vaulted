@@ -306,8 +306,8 @@ end
 function Point.pointsToCoords(points)
     local coords = {}
     for i = 1, #points do
-        table.insert(coords, points.x)
-        table.insert(coords, points.y)
+        table.insert(coords, points[i].x)
+        table.insert(coords, points[i].y)
     end
     return unpack(coords)
 end
