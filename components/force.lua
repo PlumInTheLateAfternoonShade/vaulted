@@ -3,22 +3,22 @@ local forceSystem = require('systems.forceSystem')
 -- An effect that imparts a force on objects it encounters.
 local force = {}
 
-function force.prototype(id, h, v, x, y)
+function force.prototype(h, v, x, y)
     local c = {}
-    c.id = id
     c.h = h
     c.v = v
     c.x = x
     c.y = y
-    function c:addToSystems()
+    function c:addToSystems(id)
+        self.id = id
         forceSystem:add(self)
     end
     return c
 end
 
 function force.create(id, h, v, x, y)
-    local c = force.prototype(id, h, v, x, y)
-    c:addToSystems()
+    local c = force.prototype(h, v, x, y)
+    c:addToSystems(id)
     return c
 end
 

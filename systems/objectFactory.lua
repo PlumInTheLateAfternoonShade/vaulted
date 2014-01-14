@@ -46,9 +46,26 @@ function objectFactory.createElemental(points, center, eleName, initV)
     end
     meshRenderer.create(id, ele.color, textureName)
     temperature.create(id, ele.temp)
-    walker.create(id, 10000) -- TODO DEL
-    input.create(id) -- TODO DEL
     return id
+end
+
+function objectFactory.prototypeElemental(points, center, eleName)
+    local ele = element[eleName]
+    local textureName
+    if eleName == 'fire' then
+        textureName = eleName..'.png'
+    else
+        textureName = eleName..'.jpg'
+    end
+
+    return
+    {
+        ele,
+        collider.prototype(ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire'),
+        position.prototype(points, center),
+        meshRenderer.prototype(ele.color, textureName),
+        temperature.prototype(ele.temp),
+    }
 end
 
 function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, spellBookComp)
@@ -61,9 +78,7 @@ function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, 
     experience.create(id)
     mana.create(id)
     health.create(id)
-    local sB = spellBook.create(id)
-    sB[1]:addComponent(force.prototype(id, 0, -1000, 0, 100))
-
+    spellBook.create(id)
     statBar.create(entitySystem:register(), 0.95, 0.025, {r=230, g=100, b=100},
                    function () return healthSystem:getHealthPercent(id) end)
     statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},

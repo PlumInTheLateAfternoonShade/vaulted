@@ -30,9 +30,26 @@ function entitySystem:init(world, cam, map, objectFactory)
     healthSystem:init()
     spellBookSystem:init()
     graphicsSystem:init(cam, map)
-
-    world:setCallbacks(beginContact, endContact, preSolve,
-    postSolve)
+    local getIds = function(a, b)
+        return a:getUserData(), b:getUserData()
+    end
+    local beginContact = function(a, b, coll)
+        -- If the force of the impact is high enough, shake the screen.
+        camera:shake(a:getBody(), b:getBody(), coll)
+        local aId, bId = getIds(a, b)
+        physicsSystem:beginCollision(aId, bId, coll)
+        temperatureSystem:beginCollision(aId, bId, coll)
+    end
+    local endContact = function(a, b, coll)
+        local aId, bId = getIds(a, b)
+        physicsSystem:endCollision(aId, bId, coll)
+        temperatureSystem:endCollision(aId, bId, coll)
+    end
+    local preSolve = function(a, b, coll)
+    end
+    local postSolve = function(a, b, coll)
+    end
+    world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 end
 
 function entitySystem:delete(id)
@@ -83,30 +100,6 @@ end
 
 function entitySystem:queueDelete(id)
     table.insert(deleteQueue, id)
-end
-
-    local function getIds(a, b)
-        return a:getUserData(), b:getUserData()
-    end
-
-    function beginContact(a, b, coll)
-        -- If the force of the impact is high enough, shake the screen.
-        camera:shake(a:getBody(), b:getBody(), coll)
-        local aId, bId = getIds(a, b)
-        physicsSystem:beginCollision(aId, bId, coll)
-        temperatureSystem:beginCollision(aId, bId, coll)
-    end
-
-function endContact(a, b, coll)
-    local aId, bId = getIds(a, b)
-    physicsSystem:endCollision(aId, bId, coll)
-    temperatureSystem:endCollision(aId, bId, coll)
-end
-
-function preSolve(a, b, coll)
-end
-
-function postSolve(a, b, coll)
 end
 
 return entitySystem

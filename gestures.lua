@@ -5,18 +5,16 @@ local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local spellBookSystem = require 'systems.spellBookSystem'
 local graphicsSystem = require 'systems.graphicsSystem'
+local objectFactory = require 'systems.objectFactory'
 local State = require 'state'
 local element = require 'components.element'
-local lines
-local spellBook
 local Gestures = require 'class'
 {
     name = 'Gestures',
     function(self)
-        --spellBook = spellBookSystem:get(heroId)
-        -- The lines in the currently loaded gesture
-        --print(spellBook.i)
-        lines = {} --spellBook[spellBook.i].lines
+        self.spellBook = spellBookSystem:get(heroId)
+        -- The lines in the currently loaded drawable gesture
+        self.lines = {} --spellBook[spellBook.i].lines
         -- Set up the drawing grid
         self:initGrid()
         -- Set up the GUI
@@ -46,7 +44,46 @@ function Gestures:draw()
     end
 end
 
+local function getOtherPointFromLines(lines, point)
+    for i = 1, #lines do
+        local otherPoint = table.deepcopy(lines[i]:getOtherPoint(point))
+        if otherPoint then
+            table.remove(lines, i)
+            return otherPoint
+        end
+    end
+    return false
+end
+
+local function connectLinesIntoPolygon(lines)
+    if #lines < 3 then return nil end
+    local segs = table.deepcopy(lines)
+    local points = {segs[1].p0, segs[1].p1}
+    local lastPoint = points[2]
+    table.remove(segs, 1)
+    -- TODO look at the logic of this loop
+    while #segs > 0 do
+        lastPoint = getOtherPointFromLines(segs, lastPoint)
+        if lastPoint then
+            table.insert(points, lastPoint)
+        else
+            return nil
+        end
+    end
+    if equals(lastPoint, points[1]) then
+        table.remove(points, #points)
+        return points
+    end
+    return nil
+end
+
 function Gestures:update(dt)
+    local points = connectLinesIntoPolygon(self.lines)
+    if points then
+        self.spellBook[self.spellBook.i]:addComponentTable(
+            objectFactory.prototypeElemental(points, Point(200, 200), element:get().name))
+        self.lines = {}
+    end
     loveframes.update(dt)
 end
 
@@ -74,8 +111,8 @@ end
 
 function Gestures:drawLines()
     love.graphics.setLineWidth(5)
-    for i = 1, #lines do
-        local line = lines[i]
+    for i = 1, #self.lines do
+        local line = self.lines[i]
         setColor(line.c)
         love.graphics.line(line.p0.x, line.p0.y, line.p1.x, line.p1.y)
     end
@@ -106,7 +143,7 @@ function Gestures:mousepressed(x, y, button)
         drawPreviewLine = true
     elseif button == "r" then
         --right mouse deletes the closest line
-        if #lines > 0 then
+        if #self.lines > 0 then
             self:deleteNearestLine(Point(x, y))
         end
     elseif button == "wu" then
@@ -122,7 +159,7 @@ function Gestures:mousereleased(x, y, button)
         local endPoint = self:getNearestGridPoint(x, y)
         local line = Seg(startPoint, endPoint, element:getColor())
         if line:lengthSquared() > 0 then
-            table.insert(lines, line)
+            table.insert(self.lines, line)
         end
         drawPreviewLine = false
     end
@@ -175,14 +212,14 @@ function Gestures:deleteNearestLine(p)
     local minIndex = 1
     local dist = min
     -- Find the nearest line in the current gesture to the given point
-    for i = 1, #lines do
-        dist = lines[i]:distToPointSquared(p)
+    for i = 1, #self.lines do
+        dist = self.lines[i]:distToPointSquared(p)
         if dist < min then
             minIndex = i
             min = dist
         end
     end
-    table.remove(lines, minIndex)
+    table.remove(self.lines, minIndex)
 end
 
 return Gestures

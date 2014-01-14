@@ -2,6 +2,16 @@ require 'lib.deepcopy.deepcopy'
 local Point = require 'geometry.Point'
 local eleSystem = require 'systems.eleSystem'
 
+local function rgbVary(num)
+    return limit(num + math.random()*40 - 20, 0, 255)
+end
+
+local function colorVary(color)
+    color.r = rgbVary(color.r)
+    color.g = rgbVary(color.g)
+    color.b = rgbVary(color.b)
+end
+
 local function createElementPrototype(name, color, friction, density, temp, gravScale)
     local e = {}
     e.name = name
@@ -10,6 +20,17 @@ local function createElementPrototype(name, color, friction, density, temp, grav
     e.density = density
     e.temp = temp
     e.gravScale = gravScale or 1
+    function e:addToSystems(id)
+        self.id = id
+        -- Make the color slightly varied
+        local function rgbVary(num)
+            return limit(num + math.random()*40 - 20, 0, 255)
+        end
+        self.color.r = rgbVary(color.r)
+        self.color.g = rgbVary(color.g)
+        self.color.b = rgbVary(color.b)
+        eleSystem:add(self)
+    end
     return e
 end
 
@@ -55,22 +76,9 @@ function element:setAsColor()
     setColor(self[self.i].color)
 end
 
-local function rgbVary(num)
-    return limit(num + math.random()*40 - 20, 0, 255)
-end
-
-local function colorVary(color)
-    color.r = rgbVary(color.r)
-    color.g = rgbVary(color.g)
-    color.b = rgbVary(color.b)
-end
-
 function element.create(id, name)
     local c = table.deepcopy(element[name])
-    c.id = id
-    -- Make the color slightly varied
-    colorVary(c.color)
-    eleSystem:add(c)
+    c:addToSystems(id)
     return c
 end
 
