@@ -1,3 +1,4 @@
+local force = require('components.force') -- TODO delete
 local inputSystem = require('systems.inputSystem')
 local walkingSystem = require('systems.walkingSystem')
 
@@ -13,6 +14,9 @@ function input.create(id)
         [left] = function () return walkingSystem:startWalkingLeft(id) end,
         [openMenu] = function () return updateState("back to main menu") end,
         [gesture] = function () return updateState("gestures") end,
+        [spell1] = function () return --[[spellBookSystem:cast(id, 1)]]--
+            force.create(id, 1000, 0, -100, 0) --TODO delete
+        end,
     }
     c.keyReleases = 
     {

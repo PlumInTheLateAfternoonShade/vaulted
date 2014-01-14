@@ -58,3 +58,10 @@ systems
 components
     collider - a physics component
 
+Gestures/Spells:
+
+Each Spell is a cast factory method to create a cluster of entities (and each entity is a cluster of components)
+The Spell drawing draws the graphical components (by directly accessing the graphics system?)
+
+OR: Pass closures from gestures that describe how to cast the spell to Spell.
+The input component contains closure that map keys to spellBook indices.

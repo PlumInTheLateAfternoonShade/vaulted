@@ -12,7 +12,6 @@ local tLoader = require('loader')
 local loader = require "lib/AdvTiledLoader/Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
-local SpellBook = require('spellBook')
 local VisibleIcons = require('spells.visibleIcons')
 
 local world
@@ -21,7 +20,6 @@ rayCastStack = {}
 local visibleIcons -- The spell icons made by gestures.
 local visuals -- Visible effects in the world, like bolts of lightning.
 local camera -- Need this static for now because the callback funcs need it.
-local heroId
 
 local Game = Class
 {
@@ -77,14 +75,14 @@ function Game:update(dt)
     end
     entitySystem:update(dt)
 
-    for i = #objects, 1, -1 do
+    --[[for i = #objects, 1, -1 do
         objects[i]:update(dt)
     end
     for i = #visuals, 1, -1 do
         if not visuals[i]:update(dt) then
             table.remove(visuals, i)
         end
-    end
+    end]]--
 
     while #rayCastStack > 0 do
         local r = rayCastStack[#rayCastStack]
@@ -115,9 +113,13 @@ function Game:draw()
     --UI:draw() TODO Reimplement
 
     setColorInverted(fontColor)
+    -- Debug
+    local heroCenter = positionSystem:getCenter(heroId)
+    love.graphics.print(string.format("x: %d y: %d", heroCenter.x, heroCenter.y),
+    conf.screenWidth * 0.8, conf.screenHeight * 0.1)
     -- draw the FPS counter
-    love.graphics.print("FPS: "..string.format("%d", self.fps),
-    conf.screenWidth * 0.9, conf.screenHeight * 0.1)
+    love.graphics.print(string.format("FPS: %d", self.fps),
+    conf.screenWidth * 0.9, conf.screenHeight * 0.2)
 end
 
 -------------------------------

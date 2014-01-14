@@ -13,6 +13,13 @@ function walkingSystem:update(dt)
     end
 end
 
+function walkingSystem:getDirection(id)
+    if self.components[id] then
+        return self.components[id].direction
+    end
+    return 0
+end
+
 function walkingSystem:startWalkingRight(id)
     if self.components[id] then
         self.components[id].direction = 1

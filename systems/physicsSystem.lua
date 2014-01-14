@@ -14,6 +14,7 @@ local world, objectFactory, entitySystem
 
 function physicsSystem:init(w, objFact, eSys)
     world = w
+    world:setSleepingAllowed(true)
     objectFactory = objFact
     entitySystem = eSys
     self.components = {}

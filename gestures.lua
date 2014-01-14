@@ -2,8 +2,9 @@
 require('utils')
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
+local spellBookSystem = require 'systems.spellBookSystem'
+local graphicsSystem = require 'systems.graphicsSystem'
 local State = require 'state'
-local ui = require 'ui'
 local element = require 'components.element'
 local lines
 local spellBook
@@ -11,10 +12,10 @@ local Gestures = require 'class'
 {
     name = 'Gestures',
     function(self)
-        spellBook = hero.spellBook
+        --spellBook = spellBookSystem:get(heroId)
         -- The lines in the currently loaded gesture
-        print(spellBook.i)
-        lines = spellBook[spellBook.i].lines
+        --print(spellBook.i)
+        lines = {} --spellBook[spellBook.i].lines
         -- Set up the drawing grid
         self:initGrid()
         drawPreviewLine = false
@@ -23,8 +24,8 @@ local Gestures = require 'class'
 Gestures:inherit(State)
 
 function Gestures:draw()
-    -- Draw the UI
-    ui:draw()
+    -- Draw the world of gestures
+    graphicsSystem:draw()
     -- Draw the grid of possible gesture points
     self:drawGrid()
     -- Draw each line in the current gesture
@@ -76,11 +77,11 @@ function Gestures:keypressed(key)
         element:inc(-1)
     elseif key == down then
         element:inc()
-    elseif spellBook:keyMatch(key) ~= nil then
-        lines = spellBook[spellBook.i].lines
+    --[[elseif spellBook:keyMatch(key) ~= nil then
+        lines = spellBook[spellBook.i].lines]]--
     elseif key == confirm or key == gesture then
         -- Finalize and save spells
-        spellBook:finalize()
+        --spellBook:finalize()
         -- Go back to game.
         print('Returning to game from gestures.')
         updateState("continue")

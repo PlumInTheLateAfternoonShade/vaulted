@@ -14,6 +14,8 @@ if ShouldProfile then
     ProFi = require('lib.ProFi')
 end
 local state = Menu()
+-- TODO - Refactor to pass in old state and return new one instead
+-- of mutating global state.
 local stateInitializers = {
     ["continue"] = function()
         if savedGame == nil then

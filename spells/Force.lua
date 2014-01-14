@@ -35,13 +35,13 @@ function Force:mirrorIfLeftFacing(rightFacing)
     return x, h
 end
 
-function forceRayCallBack(fixture, x, y, xn, yn, fraction)
+--[[function forceRayCallBack(fixture, x, y, xn, yn, fraction)
     local h = rayCastStack[#rayCastStack].h
     local v = rayCastStack[#rayCastStack].v
     print('Applying an impulse of'..string.format('h: %.2f v: %.2f', 
     h, v)..' to '..fixture:getUserData()..'.')
     fixture:getBody():applyLinearImpulse(h, v)
     return 1
-end
+end]]--
 
 return Force
