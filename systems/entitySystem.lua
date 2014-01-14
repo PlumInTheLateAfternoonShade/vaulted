@@ -9,6 +9,7 @@ local experienceSystem = require('systems.experienceSystem')
 local manaSystem = require('systems.manaSystem')
 local healthSystem = require('systems.healthSystem')
 local forceSystem = require('systems.forceSystem')
+local spellBookSystem = require('systems.spellBookSystem')
 
 -- controls registering and deleting entities in the entity system, as well as updating each component system.
 local entitySystem = {}
@@ -27,6 +28,7 @@ function entitySystem:init(world, cam, map, objectFactory)
     experienceSystem:init()
     manaSystem:init()
     healthSystem:init()
+    spellBookSystem:init()
     graphicsSystem:init(cam, map)
 
     world:setCallbacks(beginContact, endContact, preSolve,
@@ -44,6 +46,7 @@ function entitySystem:delete(id)
     experienceSystem:delete(id)
     manaSystem:delete(id)
     healthSystem:delete(id)
+    spellBookSystem:delete(id)
     walkingSystem:delete(id)
     forceSystem:delete(id)
 end
@@ -54,6 +57,7 @@ function entitySystem:update(dt)
     eleSystem:update(dt)
     manaSystem:update(dt)
     healthSystem:update(dt)
+    spellBookSystem:update(dt)
     experienceSystem:update(dt)
     walkingSystem:update(dt)
     forceSystem:update(dt)
@@ -81,17 +85,17 @@ function entitySystem:queueDelete(id)
     table.insert(deleteQueue, id)
 end
 
-local function getIds(a, b)
-    return a:getUserData(), b:getUserData()
-end
+    local function getIds(a, b)
+        return a:getUserData(), b:getUserData()
+    end
 
-function beginContact(a, b, coll)
-    -- If the force of the impact is high enough, shake the screen.
-    camera:shake(a:getBody(), b:getBody(), coll)
-    local aId, bId = getIds(a, b)
-    physicsSystem:beginCollision(aId, bId, coll)
-    temperatureSystem:beginCollision(aId, bId, coll)
-end
+    function beginContact(a, b, coll)
+        -- If the force of the impact is high enough, shake the screen.
+        camera:shake(a:getBody(), b:getBody(), coll)
+        local aId, bId = getIds(a, b)
+        physicsSystem:beginCollision(aId, bId, coll)
+        temperatureSystem:beginCollision(aId, bId, coll)
+    end
 
 function endContact(a, b, coll)
     local aId, bId = getIds(a, b)

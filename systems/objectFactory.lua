@@ -13,6 +13,9 @@ local statBar = require('components.statBar')
 local experience = require('components.experience')
 local walker = require('components.walker')
 local input = require('components.input')
+local spellBook = require('components.spellBook')
+local force = require('components.force')
+local Spell = require('Spell')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
@@ -58,6 +61,9 @@ function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, 
     experience.create(id)
     mana.create(id)
     health.create(id)
+    local sB = spellBook.create(id)
+    sB[1]:addComponent(force.prototype(id, 0, -1000, 0, 100))
+
     statBar.create(entitySystem:register(), 0.95, 0.025, {r=230, g=100, b=100},
                    function () return healthSystem:getHealthPercent(id) end)
     statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},

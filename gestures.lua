@@ -1,5 +1,6 @@
 -- Provides the UI for making new spell gestures.
 require('utils')
+local img = require 'images.img'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local spellBookSystem = require 'systems.spellBookSystem'
@@ -18,6 +19,8 @@ local Gestures = require 'class'
         lines = {} --spellBook[spellBook.i].lines
         -- Set up the drawing grid
         self:initGrid()
+        -- Set up the GUI
+        self:initGUI()
         drawPreviewLine = false
     end
 }
@@ -30,6 +33,8 @@ function Gestures:draw()
     self:drawGrid()
     -- Draw each line in the current gesture
     self:drawLines()
+    -- Draw the buttons
+    loveframes.draw()
     -- Draw the cursor
     local mouseX = love.mouse.getX()
     local mouseY = love.mouse.getY()
@@ -39,6 +44,10 @@ function Gestures:draw()
     if drawPreviewLine then
         love.graphics.line(startPoint.x, startPoint.y, mouseX, mouseY)
     end
+end
+
+function Gestures:update(dt)
+    loveframes.update(dt)
 end
 
 function Gestures:drawGrid()
@@ -90,6 +99,7 @@ end
 
 function Gestures:mousepressed(x, y, button)
     if not main.state == 'gesture' then return end
+    loveframes.mousepressed(x, y, button)
     if button == "l" then
         --left mouse starts drawing a line
         startPoint = self:getNearestGridPoint(x, y)
@@ -107,6 +117,7 @@ function Gestures:mousepressed(x, y, button)
 end
 
 function Gestures:mousereleased(x, y, button)
+    loveframes.mousereleased(x, y, button)
     if button == "l" then
         local endPoint = self:getNearestGridPoint(x, y)
         local line = Seg(startPoint, endPoint, element:getColor())
@@ -115,6 +126,19 @@ function Gestures:mousereleased(x, y, button)
         end
         drawPreviewLine = false
     end
+end
+
+local function createImageButton(image, x, y, func)
+    local button = loveframes.Create("imagebutton")
+    button:SetPos(x, y)
+    button:SetText("")
+    button.OnClick = func
+    button:SetImage(img.load(image))
+    button:SizeToImage()
+end
+
+function Gestures:initGUI()
+    createImageButton("fireRune.png", 10, 200, function(object) print("hello") end)
 end
 
 function Gestures:initGrid()

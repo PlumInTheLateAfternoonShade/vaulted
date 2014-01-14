@@ -1,6 +1,7 @@
 ShouldProfile = false
 --require 'lib.strict' -- TODO Only apply strictness to our code, not code in lib directory.
 require 'lib.luafun.fun' ()
+require 'lib.LoveFrames'
 Class = require('class')
 local Game = require('game')
 local Menu = require('menus.menu')
