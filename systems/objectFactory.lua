@@ -72,6 +72,13 @@ function objectFactory.prototypeElemental(points, center, eleName)
     }
 end
 
+function objectFactory.prototypeForce(h, v, x, y, casterId)
+    local forceComp = force.prototype(h, v, x, y, casterId)
+    local previewId = entitySystem:register()
+    forceComp:addToSystems(previewId)
+    return {forceComp, previewId = previewId}
+end
+
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     local id = entitySystem:register()
     position.create(id, serializedPosition.points, serializedPosition.center)

@@ -50,11 +50,6 @@ worldXEnd = 10000 --TODO: should be calculated based on map.
 -- Other colors
 fontColor = {r=0,g=0,b=0}
 
--- Gesture grid settings
-gridSize = 16
-gridXOffset = conf.screenWidth / 4
-gridYOffset = conf.screenHeight / 8
-
 function love.conf(t)
     t.title = "Vaulted"
     t.window.width = conf.screenWidth

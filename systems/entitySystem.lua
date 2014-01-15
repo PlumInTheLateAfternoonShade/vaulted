@@ -9,6 +9,7 @@ local experienceSystem = require('systems.experienceSystem')
 local manaSystem = require('systems.manaSystem')
 local healthSystem = require('systems.healthSystem')
 local forceSystem = require('systems.forceSystem')
+local runeSystem = require('systems.runeSystem')
 local spellBookSystem = require('systems.spellBookSystem')
 
 -- controls registering and deleting entities in the entity system, as well as updating each component system.
@@ -19,6 +20,7 @@ function entitySystem:init(world, cam, map, objectFactory)
     self.currId = -1
     camera = cam
     physicsSystem:init(world, objectFactory, entitySystem)
+    runeSystem:init(objectFactory)
     forceSystem:init(world)
     temperatureSystem:init()
     eleSystem:init()
@@ -66,6 +68,7 @@ function entitySystem:delete(id)
     spellBookSystem:delete(id)
     walkingSystem:delete(id)
     forceSystem:delete(id)
+    runeSystem:delete(id)
 end
 
 function entitySystem:deleteAllInRange(lowerId, upperId)
@@ -84,11 +87,13 @@ function entitySystem:update(dt)
     experienceSystem:update(dt)
     walkingSystem:update(dt)
     forceSystem:update(dt)
+    runeSystem:update(dt)
 end
 
 function entitySystem:draw(raw)
     graphicsSystem:draw(raw)
     spellBookSystem:draw(heroId)
+    forceSystem:draw()
 end
 
 function entitySystem:keyPressed(key)

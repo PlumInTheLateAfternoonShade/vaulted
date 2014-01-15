@@ -62,6 +62,9 @@ function Spell:cast(casterId)
                     comp.coords = Point.pointsToCoordsTable(Point.mirrorXListOfPoints(positionSystem:getPoints(casterId)))
                 end
             end
+            if comp.casterId then
+                comp.casterId = casterId
+            end
             comp:addToSystems(id)
         end
     end

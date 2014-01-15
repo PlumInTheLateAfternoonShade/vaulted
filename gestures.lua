@@ -5,6 +5,7 @@ local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local spellBookSystem = require 'systems.spellBookSystem'
 local positionSystem = require 'systems.positionSystem'
+local runeSystem = require 'systems.runeSystem'
 local entitySystem = require 'systems.entitySystem'
 local objectFactory = require 'systems.objectFactory'
 local element = require 'components.element'
@@ -12,6 +13,7 @@ local Gestures = require 'class'
 {
     name = 'Gestures',
     function(self)
+        -- Entity system preview setup
         self.firstGestureId = entitySystem.currId + 1
         self.spellBook = spellBookSystem:get(heroId)
         spellBookSystem:preview(heroId)
@@ -61,38 +63,6 @@ function Gestures:draw()
     end
 end
 
-local function getOtherPointFromLines(lines, point)
-    for i = 1, #lines do
-        local otherPoint = table.deepcopy(lines[i]:getOtherPoint(point))
-        if otherPoint then
-            table.remove(lines, i)
-            return otherPoint
-        end
-    end
-    return false
-end
-
-local function connectLinesIntoPolygon(lines)
-    if #lines < 3 then return nil end
-    local segs = table.deepcopy(lines)
-    local points = {segs[1].p0, segs[1].p1}
-    local lastPoint = points[2]
-    table.remove(segs, 1)
-    while #segs > 0 do
-        lastPoint = getOtherPointFromLines(segs, lastPoint)
-        if lastPoint then
-            table.insert(points, lastPoint)
-        else
-            return nil
-        end
-    end
-    if equals(lastPoint, points[1]) then
-        table.remove(points, #points)
-        return points
-    end
-    return nil
-end
-
 function Gestures:update(dt)
     loveframes.update(dt)
 end
@@ -101,16 +71,16 @@ function Gestures:drawGrid()
     local smallDotRad = 5
     local bigDotRad = 8
     setColor({r=255, g=255, b=255})
-    for i = 1, gridSize do
-        for j = 1, gridSize do
+    for i = 1, self.gridSize do
+        for j = 1, self.gridSize do
             local dotRad
             if self:isPlayerDot(i, j) then
                 dotRad = bigDotRad
             else
                 dotRad = smallDotRad
             end
-            love.graphics.circle("fill", grid[i][j].x, 
-            grid[i][j].y, dotRad, 100)
+            love.graphics.circle("fill", self.grid[i][j].x, 
+            self.grid[i][j].y, dotRad, 100)
         end
     end
 end
@@ -162,6 +132,7 @@ end
 function Gestures:mousepressed(x, y, button)
     if not main.state == 'gesture' then return end
     loveframes.mousepressed(x, y, button)
+    if self:inButtonSpace(x) then return end
     if button == "l" then
         --left mouse starts drawing a line
         self.startPoint = self:getNearestGridPoint(x, y)
@@ -184,20 +155,25 @@ end
 
 function Gestures:mousereleased(x, y, button)
     loveframes.mousereleased(x, y, button)
-    if button == "l" then
-        local endPoint = self:getNearestGridPoint(x, y)
-        local line = Seg(self.startPoint, endPoint, element:getColor())
-        if line:lengthSquared() > 0 then
-            table.insert(self.lines, line)
-        end
-        self.drawPreviewLine = false
-        local points = connectLinesIntoPolygon(self.lines)
-        if points then
-            self.spellBook[self.spellBook.i]:addComponentTable(
-                objectFactory.prototypeElemental(points, Point(200, 200), element:get().name))
-            self.lines = {}
+    if not self:inButtonSpace(x) then 
+        if button == "l" and self.drawPreviewLine then
+            local endPoint = self:getNearestGridPoint(x, y)
+            if self.rune == "fire" or self.rune == "ice" or self.rune == "earth" or self.rune == "air" then
+                local line = Seg(self.startPoint, endPoint, element:getColor())
+                if line:lengthSquared() > 0 then
+                    table.insert(self.lines, line)
+                end
+            end
+            print(self.startPoint, endPoint)
+            self.lines = runeSystem:handleClick(self.rune, self.spellBook, self.lines, 
+            self.startPoint, endPoint, self.firstGestureId)
         end
     end
+    self.drawPreviewLine = false
+end
+
+function Gestures:inButtonSpace(x)
+    return x < self.grid[1][1].x - conf.screenHeight*0.05
 end
 
 local function createImageButton(image, x, y, func, state)
@@ -245,26 +221,31 @@ function Gestures:initGUI()
 end
 
 function Gestures:initGrid()
-    gapX = (conf.screenWidth - 2*gridXOffset) / gridSize
-    gapY = (conf.screenHeight - 2*gridYOffset) / gridSize
-    grid = {}
-    for i = 1, gridSize do
-        grid[i] = {}
-        for j = 1, gridSize do
-            grid[i][j] = {x = gapX*i + gridXOffset, 
-            y = gapY*j + gridYOffset}
+    -- Gesture grid settings
+    self.gridSize = 16
+    self.gridXOffset = conf.screenWidth / 4
+    self.gridYOffset = conf.screenHeight / 8
+    local gapX = (conf.screenWidth - 2*self.gridXOffset) / self.gridSize
+    local gapY = (conf.screenHeight - 2*self.gridYOffset) / self.gridSize
+    self.grid = {}
+    for i = 1, self.gridSize do
+        self.grid[i] = {}
+        for j = 1, self.gridSize do
+            self.grid[i][j] = {x = gapX*i + self.gridXOffset, 
+            y = gapY*j + self.gridYOffset}
         end
     end
 end
 
 function Gestures:getNearestGridPoint(x, y)
     -- Find the nearest grid point to the given point.
+    local dist
     local min = conf.screenWidth
-    for i = 1, gridSize do
-        for j = 1, gridSize do
-            dist = distance(grid[i][j].x, grid[i][j].y, x, y)
+    for i = 1, self.gridSize do
+        for j = 1, self.gridSize do
+            dist = distance(self.grid[i][j].x, self.grid[i][j].y, x, y)
             if dist < min then
-                minPoint = Point(grid[i][j].x, grid[i][j].y)
+                minPoint = Point(self.grid[i][j].x, self.grid[i][j].y)
                 min = dist
             end
         end

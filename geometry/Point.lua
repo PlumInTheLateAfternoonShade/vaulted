@@ -324,4 +324,36 @@ function Point.coordsToPoints(coords)
     return points
 end
 
+local function getOtherPointFromLines(lines, point)
+    for i = 1, #lines do
+        local otherPoint = table.deepcopy(lines[i]:getOtherPoint(point))
+        if otherPoint then
+            table.remove(lines, i)
+            return otherPoint
+        end
+    end
+    return false
+end
+
+function Point.connectLinesIntoPolygon(lines)
+    if #lines < 3 then return nil end
+    local segs = table.deepcopy(lines)
+    local points = {segs[1].p0, segs[1].p1}
+    local lastPoint = points[2]
+    table.remove(segs, 1)
+    while #segs > 0 do
+        lastPoint = getOtherPointFromLines(segs, lastPoint)
+        if lastPoint then
+            table.insert(points, lastPoint)
+        else
+            return nil
+        end
+    end
+    if equals(lastPoint, points[1]) then
+        table.remove(points, #points)
+        return points
+    end
+    return nil
+end
+
 return Point
