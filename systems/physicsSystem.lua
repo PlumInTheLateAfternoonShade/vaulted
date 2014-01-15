@@ -22,7 +22,9 @@ function physicsSystem:init(w, objFact, eSys)
 end
 
 function physicsSystem:delete(id)
-    table.insert(self.destroyQueue, self.components[id].fixture)
+    if self.components[id] then
+        table.insert(self.destroyQueue, self.components[id].fixture)
+    end
     self.components[id] = nil
 end
 

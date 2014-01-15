@@ -20,10 +20,8 @@ local state = Menu()
 local stateInitializers = {
     ["continue"] = function()
         if savedGame == nil then
-            print('savedGame nil')
             state = Game(true)
         else
-            print('Returning to saved game.')
             state = savedGame
         end
     end,

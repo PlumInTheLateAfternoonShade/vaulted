@@ -43,7 +43,7 @@ local Game = Class
             Point(tileSize, tileSize*2),
             Point(tileSize, 0)
         },
-        center = Point(200, -550)}, tLoader:unpack("spellBook.sav"))
+        center = Point(200, -550)}, tLoader:unpack("spellBook"))
         --local loadedHero
         --if shouldLoadHero then
         --    loadedHero = tLoader:unpack("Hero")

@@ -5,6 +5,7 @@ local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local spellBookSystem = require 'systems.spellBookSystem'
 local graphicsSystem = require 'systems.graphicsSystem'
+local entitySystem = require 'systems.entitySystem'
 local objectFactory = require 'systems.objectFactory'
 local State = require 'state'
 local element = require 'components.element'
@@ -13,8 +14,9 @@ local Gestures = require 'class'
     name = 'Gestures',
     function(self)
         self.spellBook = spellBookSystem:get(heroId)
+        self.finalGameId = entitySystem.currId
         -- The lines in the currently loaded drawable gesture
-        self.lines = {} --spellBook[spellBook.i].lines
+        self.lines = {}
         -- Set up the drawing grid
         self:initGrid()
         -- Set up the GUI
@@ -26,7 +28,7 @@ Gestures:inherit(State)
 
 function Gestures:draw()
     -- Draw the world of gestures
-    graphicsSystem:draw()
+    graphicsSystem:drawRaw()
     -- Draw the grid of possible gesture points
     self:drawGrid()
     -- Draw each line in the current gesture
@@ -78,12 +80,6 @@ local function connectLinesIntoPolygon(lines)
 end
 
 function Gestures:update(dt)
-    local points = connectLinesIntoPolygon(self.lines)
-    if points then
-        self.spellBook[self.spellBook.i]:addComponentTable(
-            objectFactory.prototypeElemental(points, Point(200, 200), element:get().name))
-        self.lines = {}
-    end
     loveframes.update(dt)
 end
 
@@ -123,13 +119,10 @@ function Gestures:keypressed(key)
         element:inc(-1)
     elseif key == down then
         element:inc()
-    --[[elseif spellBook:keyMatch(key) ~= nil then
-        lines = spellBook[spellBook.i].lines]]--
     elseif key == confirm or key == gesture then
-        -- Finalize and save spells
-        --spellBook:finalize()
+        -- Remove all gesture graphics components from screen
+        entitySystem:deleteAllInRange(self.finalGameId, entitySystem.currId)
         -- Go back to game.
-        print('Returning to game from gestures.')
         updateState("continue")
     end
 end
@@ -162,6 +155,12 @@ function Gestures:mousereleased(x, y, button)
             table.insert(self.lines, line)
         end
         drawPreviewLine = false
+        local points = connectLinesIntoPolygon(self.lines)
+        if points then
+            self.spellBook[self.spellBook.i]:addComponentTable(
+                objectFactory.prototypeElemental(points, Point(200, 200), element:get().name))
+            self.lines = {}
+        end
     end
 end
 

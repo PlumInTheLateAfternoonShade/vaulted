@@ -56,13 +56,17 @@ function objectFactory.prototypeElemental(points, center, eleName)
     else
         textureName = eleName..'.jpg'
     end
-
+    local meshR = meshRenderer.prototype(ele.color, textureName)
+    local pos = position.prototype(points, center)
+    local previewId = entitySystem:register()
+    meshR:addToSystems(previewId)
+    pos:addToSystems(previewId)
     return
     {
         ele,
         collider.prototype(ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire'),
         position.prototype(points, center),
-        meshRenderer.prototype(ele.color, textureName),
+        meshR,
         temperature.prototype(ele.temp),
     }
 end

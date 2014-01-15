@@ -3,15 +3,15 @@ local positionSystem = require 'systems.positionSystem'
 
 local componentPrototypeDeserializers =
 {
-    fire = function (table) return require 'systems.element'.fire end,
-    earth = function (table) return require 'systems.element'.earth end,
-    water = function (table) return require 'systems.element'.water end,
-    air = function (table) return require 'systems.element'.air end,
-    collider = function (t) return require 'systems.collider'.prototype(t.friction, t.type, t.breakable, t.initV) end,
-    position = function (t) return require 'systems.position'.prototype(t.coords, t.center) end,
-    meshRenderer = function (t) return require 'systems.meshRenderer'.prototype(t.color, t.imageName) end,
-    temperature = function (t) return require 'systems.temperature'.prototype(t.ambientTemp) end,
-    force = function (t) return require 'systems.force'.prototype(t.h, t.v, t.x, t.y) end,
+    fire = function (table) return require 'components.element'.fire end,
+    earth = function (table) return require 'components.element'.earth end,
+    water = function (table) return require 'components.element'.water end,
+    air = function (table) return require 'components.element'.air end,
+    collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV) end,
+    position = function (t) return require 'components.position'.prototype(t.coords, t.center) end,
+    meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,
+    temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,
+    force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y) end,
 }
 
 local function deserializeComponentPrototype(table)
@@ -20,11 +20,11 @@ end
 
 local function constructComponentTables(serializedSpell)
     local compTables = {}
-    if not serializedSpell then return compTables end
-    for i = 1, #serializedSpell do
+    if not serializedSpell or not serializedSpell.componentTables then return compTables end
+    for i = 1, #serializedSpell.componentTables do
         table.insert(compTables, {})
-        for j, component in pairs(serializedSpell[i]) do
-            compTables[i][j] = objectFactory.deserializeComponentPrototype(component)
+        for j, component in pairs(serializedSpell.componentTables[i]) do
+            compTables[i][j] = deserializeComponentPrototype(component)
         end
     end
     return compTables

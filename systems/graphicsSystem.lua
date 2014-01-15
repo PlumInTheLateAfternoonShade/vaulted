@@ -112,6 +112,12 @@ local function drawStatBars()
         conf.screenWidth*comp.getPercent(), conf.screenHeight*comp.heightPercent)
     end
 end
+
+function graphicsSystem:drawRaw()
+    drawPolygons()
+    drawMeshes()
+end
+
 function graphicsSystem:draw()
     camera:set()
     -- set the tile map's draw range so we only draw the tiles on screen
@@ -119,8 +125,7 @@ function graphicsSystem:draw()
     -- draw the tile map
     self.map:draw()
     -- draw the components
-    drawPolygons()
-    drawMeshes()
+    self:drawRaw()
     camera:unset()
     drawStatBars()
 end

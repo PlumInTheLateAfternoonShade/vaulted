@@ -68,6 +68,12 @@ function entitySystem:delete(id)
     forceSystem:delete(id)
 end
 
+function entitySystem:deleteAllInRange(lowerId, upperId)
+    for id = lowerId, upperId do
+        self:delete(id)
+    end
+end
+
 function entitySystem:update(dt)
     physicsSystem:update(dt)
     temperatureSystem:update(dt)
