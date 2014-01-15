@@ -195,10 +195,38 @@ local function createImageButton(image, x, y, func, state)
     button:SizeToImage()
 end
 
+local runeButtonTemplates =
+{
+    fire = 
+    {
+        {imageName ="fireRune.png", func = function(object) print("fire") end}
+    },
+    ice = 
+    {
+        {imageName ="iceRune.png", func = function(object) print("ice") end}
+    },
+    air = 
+    {
+        {imageName ="airRune.png", func = function(object) print("air") end},
+        {imageName ="airRune.png", func = function(object) print("force") end},
+    },
+    earth = 
+    {
+        {imageName ="earthRune.png", func = function(object) print("earth") end}
+    },
+}
+
 function Gestures:initGUI()
-    -- The buttons that determine what type of effect is currently being added
-    createImageButton("fireRune.png", 10, 200, function(object) print("fire") end, "fire")
-    createImageButton("iceRune.png", 10, 200, function(object) print("ice") end, "ice")
+    -- Inits the buttons that determine what type of effect is currently being added
+    local step = conf.screenHeight / 12
+    for ele, buttons in pairs(runeButtonTemplates) do
+        for i = 1, #buttons do
+            local b = buttons[i]
+            local x = math.floor((i - 1)/10)*step + step
+            local y = ((i - 1) % 10)*step + 2*step
+            createImageButton(b.imageName, x, y, b.func, ele)
+        end
+    end
     loveframes.SetState(element:getName())
 end
 
