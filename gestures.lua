@@ -122,11 +122,16 @@ function Gestures:incrementSpell(amount)
     spellBookSystem:preview(heroId)
 end
 
+local function incrementElement(amount)
+    element:inc(amount)
+    loveframes.SetState(element:getName())
+end
+
 function Gestures:keypressed(key)
     if key == up then
-        element:inc(-1)
+        incrementElement(-1)
     elseif key == down then
-        element:inc()
+        incrementElement()
     elseif key == leftArrow then
         self:incrementSpell(-1)
     elseif key == rightArrow then
@@ -158,9 +163,9 @@ function Gestures:mousepressed(x, y, button)
             end
         end
     elseif button == "wu" then
-        element:inc()
+        incrementElement()
     elseif button == "wd" then
-        element:inc(-1)
+        incrementElement(-1)
     end
 end
 
@@ -182,8 +187,9 @@ function Gestures:mousereleased(x, y, button)
     end
 end
 
-local function createImageButton(image, x, y, func)
+local function createImageButton(image, x, y, func, state)
     local button = loveframes.Create("imagebutton")
+    button:SetState(state)
     button:SetPos(x, y)
     button:SetText("")
     button.OnClick = func
@@ -192,7 +198,10 @@ local function createImageButton(image, x, y, func)
 end
 
 function Gestures:initGUI()
-    createImageButton("fireRune.png", 10, 200, function(object) print("hello") end)
+    -- The buttons that determine what type of effect is currently being added
+    createImageButton("fireRune.png", 10, 200, function(object) print("fire") end, "fire")
+    createImageButton("iceRune.png", 10, 200, function(object) print("ice") end, "ice")
+    loveframes.SetState(element:getName())
 end
 
 function Gestures:initGrid()

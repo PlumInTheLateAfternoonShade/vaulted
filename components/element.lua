@@ -57,6 +57,10 @@ function element:get()
     return self[self.i]
 end
 
+function element:getName()
+    return self[self.i].name
+end
+
 function element:getColor()
     return self[self.i].color
 end
