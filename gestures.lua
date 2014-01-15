@@ -4,11 +4,9 @@ local img = require 'images.img'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local spellBookSystem = require 'systems.spellBookSystem'
-local graphicsSystem = require 'systems.graphicsSystem'
 local positionSystem = require 'systems.positionSystem'
 local entitySystem = require 'systems.entitySystem'
 local objectFactory = require 'systems.objectFactory'
-local State = require 'state'
 local element = require 'components.element'
 local Gestures = require 'class'
 {
@@ -16,9 +14,7 @@ local Gestures = require 'class'
     function(self)
         self.firstGestureId = entitySystem.currId + 1
         self.spellBook = spellBookSystem:get(heroId)
-        for i = 1, #self.spellBook do
-            self.spellBook[i]:preview()
-        end
+        spellBookSystem:preview(heroId)
         -- The lines in the currently loaded drawable gesture
         self.lines = {}
         -- Set up the drawing grid
@@ -28,11 +24,11 @@ local Gestures = require 'class'
         drawPreviewLine = false
     end
 }
-Gestures:inherit(State)
+Gestures:inherit(require 'state')
 
 function Gestures:draw()
     -- Draw the world of gestures
-    graphicsSystem:drawRaw()
+    entitySystem:draw(true)
     -- Draw the grid of possible gesture points
     self:drawGrid()
     -- Draw each line in the current gesture
@@ -118,11 +114,23 @@ function Gestures:drawLines()
     end
 end
 
+
+function Gestures:incrementSpell(amount)
+    entitySystem:deleteAllInRange(self.firstGestureId, entitySystem.currId)
+    self.firstGestureId = entitySystem.currId + 1
+    spellBookSystem:inc(heroId, amount)
+    spellBookSystem:preview(heroId)
+end
+
 function Gestures:keypressed(key)
     if key == up then
         element:inc(-1)
     elseif key == down then
         element:inc()
+    elseif key == leftArrow then
+        self:incrementSpell(-1)
+    elseif key == rightArrow then
+        self:incrementSpell()
     elseif key == confirm or key == gesture then
         -- Remove all gesture graphics components from screen
         entitySystem:deleteAllInRange(self.firstGestureId, entitySystem.currId)
@@ -146,9 +154,7 @@ function Gestures:mousepressed(x, y, button)
             local testId = positionSystem:testPointInRange(Point(x, y), self.firstGestureId, entitySystem.currId)
             if testId then
                 entitySystem:delete(testId)
-                for i = 1, #self.spellBook do
-                    self.spellBook[i]:delete(testId)
-                end
+                spellBookSystem:deleteFromCurrent(heroId, testId)
             end
         end
     elseif button == "wu" then

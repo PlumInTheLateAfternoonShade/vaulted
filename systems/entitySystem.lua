@@ -86,8 +86,9 @@ function entitySystem:update(dt)
     forceSystem:update(dt)
 end
 
-function entitySystem:draw()
-    graphicsSystem:draw()
+function entitySystem:draw(raw)
+    graphicsSystem:draw(raw)
+    spellBookSystem:draw(heroId)
 end
 
 function entitySystem:keyPressed(key)

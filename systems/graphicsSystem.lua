@@ -118,16 +118,20 @@ function graphicsSystem:drawRaw()
     drawMeshes()
 end
 
-function graphicsSystem:draw()
-    camera:set()
-    -- set the tile map's draw range so we only draw the tiles on screen
-    self.map:setDrawRange(camera.x, camera.y, conf.screenWidth, conf.screenHeight)
-    -- draw the tile map
-    self.map:draw()
+function graphicsSystem:draw(raw)
+    if not raw then
+        camera:set()
+        -- set the tile map's draw range so we only draw the tiles on screen
+        self.map:setDrawRange(camera.x, camera.y, conf.screenWidth, conf.screenHeight)
+        -- draw the tile map
+        self.map:draw()
+    end
     -- draw the components
     self:drawRaw()
-    camera:unset()
-    drawStatBars()
+    if not raw then
+        camera:unset()
+        drawStatBars()
+    end
 end
 
 return graphicsSystem

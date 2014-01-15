@@ -7,7 +7,7 @@ local componentPrototypeDeserializers =
 {
     fire = function (table) return require 'components.element'.fire end,
     earth = function (table) return require 'components.element'.earth end,
-    water = function (table) return require 'components.element'.water end,
+    ice = function (table) return require 'components.element'.ice end,
     air = function (table) return require 'components.element'.air end,
     collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV) end,
     position = function (t) return require 'components.position'.prototype(t.coords, t.center) end,

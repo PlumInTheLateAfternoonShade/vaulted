@@ -9,15 +9,18 @@ function spellBook.create(id, serializedSpellBook)
     {
         name = "spellBook",
         i = 1,
+        id = id
     }
     if not serializedSpellBook then
         c[1] = Spell()
+        c[2] = Spell()
+        c[3] = Spell()
+        c[4] = Spell()
     else
         for i = 1, #serializedSpellBook do
             c[i] = Spell(serializedSpellBook[i])
         end
     end
-    c.id = id
     spellBookSystem:add(c)
     return c
 end

@@ -16,6 +16,9 @@ function input.create(id)
         [openMenu] = function () return updateState("back to main menu") end,
         [gesture] = function () return updateState("gestures") end,
         [spell1] = function () return spellBookSystem:cast(id, 1) end,
+        [spell2] = function () return spellBookSystem:cast(id, 2) end,
+        [spell3] = function () return spellBookSystem:cast(id, 3) end,
+        [spell4] = function () return spellBookSystem:cast(id, 4) end,
     }
     c.keyReleases = 
     {
