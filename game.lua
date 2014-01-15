@@ -25,6 +25,10 @@ local Game = Class
         self.map.tileWidth = tileSize
         self.map.widthInPixels = self.map.tileWidth * self.map.width
         objectFactory.init(world, camera, self.map) -- TODO world inside entitySys
+        local heroSpellBook = nil
+        if shouldLoadHero then
+            heroSpellBook = tLoader:unpack("spellBook")
+        end
         heroId = objectFactory.createPlayer({
         points = {
             Point(0, 0),
@@ -32,7 +36,7 @@ local Game = Class
             Point(tileSize, tileSize*2),
             Point(tileSize, 0)
         },
-        center = Point(200, -550)}, tLoader:unpack("spellBook"))
+        center = Point(200, -550)}, heroSpellBook)
         self.map:addToWorld()
         -- init debug vars
         self.fps = 0

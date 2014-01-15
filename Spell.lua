@@ -13,7 +13,7 @@ local componentPrototypeDeserializers =
     position = function (t) return require 'components.position'.prototype(t.coords, t.center) end,
     meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,
     temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,
-    force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y) end,
+    force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y, t.casterId) end,
 }
 
 local function deserializeComponentPrototype(table)

@@ -6,6 +6,7 @@ local Seg = require 'geometry.Seg'
 local spellBookSystem = require 'systems.spellBookSystem'
 local positionSystem = require 'systems.positionSystem'
 local runeSystem = require 'systems.runeSystem'
+local forceSystem = require 'systems.forceSystem'
 local entitySystem = require 'systems.entitySystem'
 local objectFactory = require 'systems.objectFactory'
 local element = require 'components.element'
@@ -46,19 +47,11 @@ function Gestures:draw()
     love.graphics.circle("fill", mouseX, mouseY, 10, 100)
     -- Draw the preview line if necessary
     if self.drawPreviewLine then
-        love.graphics.line(self.startPoint.x, self.startPoint.y, mouseX, mouseY)
         if self.rune == "force" then
-            -- Draw the end of the force arrow.
-            local previewSeg = Seg(self.startPoint, Point(mouseX, mouseY))
-            local angle = previewSeg:getAngle() + math.pi/2
-            local length = previewSeg:length()*0.4
-            local angOffset = 0.2
-            love.graphics.line(mouseX, mouseY, 
-                mouseX + math.sin(angle - angOffset)*length,
-                mouseY + math.cos(angle - angOffset)*length)
-            love.graphics.line(mouseX, mouseY, 
-                mouseX + math.sin(angle + angOffset)*length,
-                mouseY + math.cos(angle + angOffset)*length)
+            -- Draw the force arrow.
+            forceSystem:drawPreview(self.startPoint, Point(mouseX, mouseY))
+        else
+            love.graphics.line(self.startPoint.x, self.startPoint.y, mouseX, mouseY)
         end
     end
 end
