@@ -17,6 +17,8 @@ local Gestures = require 'class'
         spellBookSystem:preview(heroId)
         -- The lines in the currently loaded drawable gesture
         self.lines = {}
+        -- The currently selected rune
+        self.rune = element:getName()
         -- Set up the drawing grid
         self:initGrid()
         -- Set up the GUI
@@ -42,7 +44,20 @@ function Gestures:draw()
     love.graphics.circle("fill", mouseX, mouseY, 10, 100)
     -- Draw the preview line if necessary
     if self.drawPreviewLine then
-        love.graphics.line(startPoint.x, startPoint.y, mouseX, mouseY)
+        love.graphics.line(self.startPoint.x, self.startPoint.y, mouseX, mouseY)
+        if self.rune == "force" then
+            -- Draw the end of the force arrow.
+            local previewSeg = Seg(self.startPoint, Point(mouseX, mouseY))
+            local angle = previewSeg:getAngle() + math.pi/2
+            local length = previewSeg:length()*0.4
+            local angOffset = 0.2
+            love.graphics.line(mouseX, mouseY, 
+                mouseX + math.sin(angle - angOffset)*length,
+                mouseY + math.cos(angle - angOffset)*length)
+            love.graphics.line(mouseX, mouseY, 
+                mouseX + math.sin(angle + angOffset)*length,
+                mouseY + math.cos(angle + angOffset)*length)
+        end
     end
 end
 
@@ -63,7 +78,6 @@ local function connectLinesIntoPolygon(lines)
     local points = {segs[1].p0, segs[1].p1}
     local lastPoint = points[2]
     table.remove(segs, 1)
-    -- TODO look at the logic of this loop
     while #segs > 0 do
         lastPoint = getOtherPointFromLines(segs, lastPoint)
         if lastPoint then
@@ -122,16 +136,17 @@ function Gestures:incrementSpell(amount)
     spellBookSystem:preview(heroId)
 end
 
-local function incrementElement(amount)
+function Gestures:incrementElement(amount)
     element:inc(amount)
     loveframes.SetState(element:getName())
+    self.lines = {}
 end
 
 function Gestures:keypressed(key)
     if key == up then
-        incrementElement(-1)
+        self:incrementElement(-1)
     elseif key == down then
-        incrementElement()
+        self:incrementElement()
     elseif key == leftArrow then
         self:incrementSpell(-1)
     elseif key == rightArrow then
@@ -149,7 +164,7 @@ function Gestures:mousepressed(x, y, button)
     loveframes.mousepressed(x, y, button)
     if button == "l" then
         --left mouse starts drawing a line
-        startPoint = self:getNearestGridPoint(x, y)
+        self.startPoint = self:getNearestGridPoint(x, y)
         self.drawPreviewLine = true
     elseif button == "r" then
         --right mouse deletes the closest line or polygon
@@ -161,9 +176,9 @@ function Gestures:mousepressed(x, y, button)
             self:deleteNearestLine(Point(x, y))
         end
     elseif button == "wu" then
-        incrementElement()
+        self:incrementElement()
     elseif button == "wd" then
-        incrementElement(-1)
+        self:incrementElement(-1)
     end
 end
 
@@ -171,7 +186,7 @@ function Gestures:mousereleased(x, y, button)
     loveframes.mousereleased(x, y, button)
     if button == "l" then
         local endPoint = self:getNearestGridPoint(x, y)
-        local line = Seg(startPoint, endPoint, element:getColor())
+        local line = Seg(self.startPoint, endPoint, element:getColor())
         if line:lengthSquared() > 0 then
             table.insert(self.lines, line)
         end
@@ -195,29 +210,28 @@ local function createImageButton(image, x, y, func, state)
     button:SizeToImage()
 end
 
-local runeButtonTemplates =
-{
-    fire = 
-    {
-        {imageName ="fireRune.png", func = function(object) print("fire") end}
-    },
-    ice = 
-    {
-        {imageName ="iceRune.png", func = function(object) print("ice") end}
-    },
-    air = 
-    {
-        {imageName ="airRune.png", func = function(object) print("air") end},
-        {imageName ="airRune.png", func = function(object) print("force") end},
-    },
-    earth = 
-    {
-        {imageName ="earthRune.png", func = function(object) print("earth") end}
-    },
-}
-
 function Gestures:initGUI()
     -- Inits the buttons that determine what type of effect is currently being added
+    local runeButtonTemplates =
+    {
+        fire = 
+        {
+            {imageName = "fireRune.png", func = function(object) self.rune = "fire" end}
+        },
+        ice = 
+        {
+            {imageName = "iceRune.png", func = function(object) self.rune = "ice" end}
+        },
+        air = 
+        {
+            {imageName = "airRune.png", func = function(object) self.rune = "air" end},
+            {imageName = "airRune.png", func = function(object) self.rune = "force" end},
+        },
+        earth = 
+        {
+            {imageName = "earthRune.png", func = function(object) self.rune = "earth" end}
+        },
+    }
     local step = conf.screenHeight / 12
     for ele, buttons in pairs(runeButtonTemplates) do
         for i = 1, #buttons do
