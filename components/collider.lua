@@ -6,7 +6,7 @@ local physicsSystem = require 'systems.physicsSystem'
 local collider = {}
 
 function collider.prototype(friction, type, breakable, initV)
-    local c = {}
+    local c = { name = 'collider' }
     c.firstUpdate = true
     c.friction = friction
     c.type = type

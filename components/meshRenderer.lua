@@ -7,6 +7,7 @@ local meshRenderer = {}
 
 function meshRenderer.prototype(color, imageName)
     local c = {}
+    c.name = 'meshRenderer'
     c.color = color
     c.imageName = imageName
     c.needsInit = true

@@ -5,6 +5,7 @@ local force = {}
 
 function force.prototype(h, v, x, y)
     local c = {}
+    c.name = 'force'
     c.h = h
     c.v = v
     c.x = x

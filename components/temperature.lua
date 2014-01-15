@@ -5,6 +5,7 @@ local temperature = {}
 
 function temperature.prototype(initTemp)
     local c = {}
+    c.name = 'temperature'
     c.ambientTemp = initTemp
     c.temp = c.ambientTemp
     function c:addToSystems(id)

@@ -15,7 +15,6 @@ local walker = require('components.walker')
 local input = require('components.input')
 local spellBook = require('components.spellBook')
 local force = require('components.force')
-local Spell = require('Spell')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
@@ -68,17 +67,16 @@ function objectFactory.prototypeElemental(points, center, eleName)
     }
 end
 
-function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, spellBookComp)
+function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     local id = entitySystem:register()
-    position.create(id, positionComp.points, positionComp.center)
-    -- TODO wrong points
+    position.create(id, serializedPosition.points, serializedPosition.center)
     collider.create(id, 0.5, 'dynamic')
     walker.create(id, 5001)
     input.create(id)
     experience.create(id)
     mana.create(id)
     health.create(id)
-    spellBook.create(id)
+    spellBook.create(id, serializedSpellBook)
     statBar.create(entitySystem:register(), 0.95, 0.025, {r=230, g=100, b=100},
                    function () return healthSystem:getHealthPercent(id) end)
     statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},
@@ -86,6 +84,24 @@ function objectFactory.createPlayer(positionComp, healthComp, manaComp, xpComp, 
     polygonRenderer.create(id, {r=255, g=255, b=255})
     return id
 
+end
+
+
+local componentPrototypeDeserializers =
+{
+    fire = function (table) return element.fire end,
+    earth = function (table) return element.earth end,
+    water = function (table) return element.water end,
+    air = function (table) return element.air end,
+    collider = function (t) return collider.prototype(t.friction, t.type, t.breakable, t.initV) end,
+    position = function (t) return position.prototype(t.coords, t.center) end,
+    meshRenderer = function (t) return meshRenderer.prototype(t.color, t.imageName) end,
+    temperature = function (t) return temperature.prototype(t.ambientTemp) end,
+    force = function (t) return force.prototype(t.h, t.v, t.x, t.y) end,
+}
+
+function objectFactory.deserializeComponentPrototype(table)
+    return componentPrototypeDeserializers[table.name](table)
 end
 
 return objectFactory

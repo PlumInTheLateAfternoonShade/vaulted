@@ -4,7 +4,7 @@ local positionSystem = require('systems.positionSystem')
 local position = {}
 
 function position.prototype(coords, center)
-    local c = {}
+    local c = { name = 'position' }
     c.center = center
     c.coords = coords
     function c:addToSystems(id)

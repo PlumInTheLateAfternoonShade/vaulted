@@ -1,11 +1,12 @@
-local loader = require('loader')
+local loader = require 'loader'
+local spellBookSystem = require 'systems.spellBookSystem'
 if ShouldProfile then
     ProFi = require 'lib.ProFi'
 end
 local SaveAndExit = {}
 
 function SaveAndExit:close()
-    --loader:pack(hero)
+    loader:pack(spellBookSystem:get(heroId))
     loader:pack(conf)
     if ShouldProfile then
         -- prof only

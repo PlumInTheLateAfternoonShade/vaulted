@@ -26,10 +26,10 @@ local function createElementPrototype(name, color, friction, density, temp, grav
         local function rgbVary(num)
             return limit(num + math.random()*40 - 20, 0, 255)
         end
-        self.color.r = rgbVary(color.r)
-        self.color.g = rgbVary(color.g)
-        self.color.b = rgbVary(color.b)
-        eleSystem:add(self)
+        self.color.r = rgbVary(self.color.r)
+        self.color.g = rgbVary(self.color.g)
+        self.color.b = rgbVary(self.color.b)
+        require 'systems.eleSystem':add(self)
     end
     return e
 end
