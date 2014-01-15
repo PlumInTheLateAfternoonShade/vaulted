@@ -23,12 +23,14 @@ end
 function walkingSystem:startWalkingRight(id)
     if self.components[id] then
         self.components[id].direction = 1
+        self.components[id].facing = 1
     end
 end
 
 function walkingSystem:startWalkingLeft(id)
     if self.components[id] then
         self.components[id].direction = -1
+        self.components[id].facing = -1
     end
 end
 

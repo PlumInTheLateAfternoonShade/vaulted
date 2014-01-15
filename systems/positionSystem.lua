@@ -7,13 +7,7 @@ require('systems.componentSystem'):inherit(positionSystem)
 
 function positionSystem:addAndTranslateToCoords(comp)
     if type(comp.coords[1]) ~= 'number' then
-        local coords = {}
-        for i = 1, #comp.coords do
-            local point = comp.coords[i]
-            table.insert(coords, point.x)
-            table.insert(coords, point.y)
-        end
-        comp.coords = coords
+        comp.coords = Point.pointsToCoordsTable(comp.coords)
     end
     self:add(comp)
 end

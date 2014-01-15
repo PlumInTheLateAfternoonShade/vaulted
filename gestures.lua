@@ -14,7 +14,7 @@ local Gestures = require 'class'
 {
     name = 'Gestures',
     function(self)
-        self.finalGameId = entitySystem.currId
+        self.firstGestureId = entitySystem.currId + 1
         self.spellBook = spellBookSystem:get(heroId)
         for i = 1, #self.spellBook do
             self.spellBook[i]:preview()
@@ -125,7 +125,7 @@ function Gestures:keypressed(key)
         element:inc()
     elseif key == confirm or key == gesture then
         -- Remove all gesture graphics components from screen
-        entitySystem:deleteAllInRange(self.finalGameId, entitySystem.currId)
+        entitySystem:deleteAllInRange(self.firstGestureId, entitySystem.currId)
         -- Go back to game.
         updateState("continue")
     end
@@ -143,7 +143,7 @@ function Gestures:mousepressed(x, y, button)
         if #self.lines > 0 then
             self:deleteNearestLine(Point(x, y))
         else
-            local testId = positionSystem:testPointInRange(Point(x, y), self.finalGameId, entitySystem.currId)
+            local testId = positionSystem:testPointInRange(Point(x, y), self.firstGestureId, entitySystem.currId)
             if testId then
                 entitySystem:delete(testId)
                 for i = 1, #self.spellBook do

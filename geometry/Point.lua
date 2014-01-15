@@ -133,7 +133,7 @@ equals = function(p0, p1)
     return p0.x == p1.x and p0.y == p1.y
 end
 
-function mirrorXListOfPoints(points)
+function Point.mirrorXListOfPoints(points)
     local mirroredPoints = {}
     for i = 1, #points do
         mirroredPoints[i] = mirrorXPoint(points[i])
@@ -303,13 +303,17 @@ function testPoint(p, points)
     return c
 end
 
-function Point.pointsToCoords(points)
+function Point.pointsToCoordsTable(points)
     local coords = {}
     for i = 1, #points do
         table.insert(coords, points[i].x)
         table.insert(coords, points[i].y)
     end
-    return unpack(coords)
+    return coords
+end
+
+function Point.pointsToCoords(points)
+    return unpack(Point.pointsToCoordsTable(points))
 end
 
 function Point.coordsToPoints(coords)

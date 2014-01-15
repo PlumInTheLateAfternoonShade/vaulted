@@ -1,5 +1,7 @@
 local entitySystem = require 'systems.entitySystem'
 local positionSystem = require 'systems.positionSystem'
+local walkingSystem = require 'systems.walkingSystem'
+local Point = require 'geometry.Point'
 
 local componentPrototypeDeserializers =
 {
@@ -23,8 +25,8 @@ local function constructComponentTables(serializedSpell)
     if not serializedSpell or not serializedSpell.componentTables then return compTables end
     for i = 1, #serializedSpell.componentTables do
         table.insert(compTables, {})
-        for j, component in pairs(serializedSpell.componentTables[i]) do
-            compTables[i][j] = deserializeComponentPrototype(component)
+        for j = 1, #serializedSpell.componentTables[i] do
+            compTables[i][j] = deserializeComponentPrototype(serializedSpell.componentTables[i][j])
         end
     end
     return compTables
@@ -53,8 +55,13 @@ function Spell:cast(casterId)
             local comp = objectDeepcopy(self.componentTables[i][j])
             if comp.center then 
                 -- Adjust the comp's center so it appears where the caster casts it.
-                -- TODO offset properly.
-                comp.center = positionSystem:getCenter(casterId) end
+                local facing = walkingSystem:get(casterId).facing
+                comp.center = Point(comp.center.x*facing, comp.center.y)
+                    + positionSystem:getCenter(casterId)
+                if facing == -1 then
+                    comp.coords = Point.pointsToCoordsTable(Point.mirrorXListOfPoints(positionSystem:getPoints(casterId)))
+                end
+            end
             comp:addToSystems(id)
         end
     end
@@ -74,7 +81,9 @@ function Spell:preview()
 end
 
 function Spell:delete(id)
-    for i = 1, #self.componentTables, -1 do
+    for i = #self.componentTables, 1, -1 do
+        print(i)
+        print(self.componentTables[i].previewId)
         if self.componentTables[i].previewId == id then
             table.remove(self.componentTables, i)
         end

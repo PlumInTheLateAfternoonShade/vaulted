@@ -7,6 +7,7 @@ function walker.create(id, force)
     local c = {}
     c.id = id
     c.force = force
+    c.facing = 1
     c.direction = 0
     walkingSystem:add(c)
     return c
