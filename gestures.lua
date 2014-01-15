@@ -21,7 +21,7 @@ local Gestures = require 'class'
         self:initGrid()
         -- Set up the GUI
         self:initGUI()
-        drawPreviewLine = false
+        self.drawPreviewLine = false
     end
 }
 Gestures:inherit(require 'state')
@@ -41,7 +41,7 @@ function Gestures:draw()
     element:setAsColor()
     love.graphics.circle("fill", mouseX, mouseY, 10, 100)
     -- Draw the preview line if necessary
-    if drawPreviewLine then
+    if self.drawPreviewLine then
         love.graphics.line(startPoint.x, startPoint.y, mouseX, mouseY)
     end
 end
@@ -150,17 +150,15 @@ function Gestures:mousepressed(x, y, button)
     if button == "l" then
         --left mouse starts drawing a line
         startPoint = self:getNearestGridPoint(x, y)
-        drawPreviewLine = true
+        self.drawPreviewLine = true
     elseif button == "r" then
         --right mouse deletes the closest line or polygon
-        if #self.lines > 0 then
+        local testId = positionSystem:testPointInRange(Point(x, y), self.firstGestureId, entitySystem.currId)
+        if testId then
+            entitySystem:delete(testId)
+            spellBookSystem:deleteFromCurrent(heroId, testId)
+        elseif #self.lines > 0 then
             self:deleteNearestLine(Point(x, y))
-        else
-            local testId = positionSystem:testPointInRange(Point(x, y), self.firstGestureId, entitySystem.currId)
-            if testId then
-                entitySystem:delete(testId)
-                spellBookSystem:deleteFromCurrent(heroId, testId)
-            end
         end
     elseif button == "wu" then
         incrementElement()
@@ -177,7 +175,7 @@ function Gestures:mousereleased(x, y, button)
         if line:lengthSquared() > 0 then
             table.insert(self.lines, line)
         end
-        drawPreviewLine = false
+        self.drawPreviewLine = false
         local points = connectLinesIntoPolygon(self.lines)
         if points then
             self.spellBook[self.spellBook.i]:addComponentTable(
