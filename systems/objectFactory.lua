@@ -68,6 +68,7 @@ function objectFactory.prototypeElemental(points, center, eleName)
         position.prototype(points, center),
         meshR,
         temperature.prototype(ele.temp),
+        previewId = previewId
     }
 end
 

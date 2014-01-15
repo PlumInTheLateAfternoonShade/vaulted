@@ -7,6 +7,7 @@ function position.prototype(coords, center)
     local c = { name = 'position' }
     c.center = center
     c.coords = coords
+    c.shouldPreview = true
     function c:addToSystems(id)
         self.id = id
         positionSystem:addAndTranslateToCoords(self)

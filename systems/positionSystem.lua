@@ -6,13 +6,15 @@ local positionSystem = {}
 require('systems.componentSystem'):inherit(positionSystem)
 
 function positionSystem:addAndTranslateToCoords(comp)
-    local coords = {}
-    for i = 1, #comp.coords do
-        local point = comp.coords[i]
-        table.insert(coords, point.x)
-        table.insert(coords, point.y)
+    if type(comp.coords[1]) ~= 'number' then
+        local coords = {}
+        for i = 1, #comp.coords do
+            local point = comp.coords[i]
+            table.insert(coords, point.x)
+            table.insert(coords, point.y)
+        end
+        comp.coords = coords
     end
-    comp.coords = coords
     self:add(comp)
 end
 
@@ -31,6 +33,15 @@ end
 
 function positionSystem:getCoords(id)
     return self.components[id].coords
+end
+
+function positionSystem:testPointInRange(point, startId, endId)
+    for id = startId, endId do
+        if self.components[id] and testPoint(point, Point.coordsToPoints(self.components[id].coords)) then
+            return id
+        end
+    end
+    return false
 end
 
 return positionSystem

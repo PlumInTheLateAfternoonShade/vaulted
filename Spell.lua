@@ -49,13 +49,34 @@ end
 function Spell:cast(casterId)
     for i = 1, #self.componentTables do
         local id = entitySystem:register()
-        for _, component in pairs(self.componentTables[i]) do
-            local comp = objectDeepcopy(component)
+        for j = 1, #self.componentTables[i] do
+            local comp = objectDeepcopy(self.componentTables[i][j])
             if comp.center then 
                 -- Adjust the comp's center so it appears where the caster casts it.
                 -- TODO offset properly.
                 comp.center = positionSystem:getCenter(casterId) end
             comp:addToSystems(id)
+        end
+    end
+end
+
+function Spell:preview()
+    for i = 1, #self.componentTables do
+        local id = entitySystem:register()
+        self.componentTables[i].previewId = id
+        for j = 1, #self.componentTables[i] do
+            local component = self.componentTables[i][j]
+            if component.shouldPreview then
+                component:addToSystems(id)
+            end
+        end
+    end
+end
+
+function Spell:delete(id)
+    for i = 1, #self.componentTables, -1 do
+        if self.componentTables[i].previewId == id then
+            table.remove(self.componentTables, i)
         end
     end
 end

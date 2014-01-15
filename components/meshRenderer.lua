@@ -11,6 +11,7 @@ function meshRenderer.prototype(color, imageName)
     c.color = color
     c.imageName = imageName
     c.needsInit = true
+    c.shouldPreview = true
     function c:addToSystems(id)
         self.id = id
         graphicsSystem:addMesh(self)

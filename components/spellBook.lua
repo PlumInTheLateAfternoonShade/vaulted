@@ -13,7 +13,6 @@ function spellBook.create(id, serializedSpellBook)
     if not serializedSpellBook then
         c[1] = Spell()
     else
-        print("non nil")
         for i = 1, #serializedSpellBook do
             c[i] = Spell(serializedSpellBook[i])
         end

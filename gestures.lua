@@ -5,6 +5,7 @@ local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local spellBookSystem = require 'systems.spellBookSystem'
 local graphicsSystem = require 'systems.graphicsSystem'
+local positionSystem = require 'systems.positionSystem'
 local entitySystem = require 'systems.entitySystem'
 local objectFactory = require 'systems.objectFactory'
 local State = require 'state'
@@ -13,8 +14,11 @@ local Gestures = require 'class'
 {
     name = 'Gestures',
     function(self)
-        self.spellBook = spellBookSystem:get(heroId)
         self.finalGameId = entitySystem.currId
+        self.spellBook = spellBookSystem:get(heroId)
+        for i = 1, #self.spellBook do
+            self.spellBook[i]:preview()
+        end
         -- The lines in the currently loaded drawable gesture
         self.lines = {}
         -- Set up the drawing grid
@@ -135,9 +139,17 @@ function Gestures:mousepressed(x, y, button)
         startPoint = self:getNearestGridPoint(x, y)
         drawPreviewLine = true
     elseif button == "r" then
-        --right mouse deletes the closest line
+        --right mouse deletes the closest line or polygon
         if #self.lines > 0 then
             self:deleteNearestLine(Point(x, y))
+        else
+            local testId = positionSystem:testPointInRange(Point(x, y), self.finalGameId, entitySystem.currId)
+            if testId then
+                entitySystem:delete(testId)
+                for i = 1, #self.spellBook do
+                    self.spellBook[i]:delete(testId)
+                end
+            end
         end
     elseif button == "wu" then
         element:inc()

@@ -7,6 +7,7 @@ function polygonRenderer.create(id, color)
     local c = {}
     c.id = id
     c.color = color
+    c.shouldPreview = true
     graphicsSystem:addPolygon(c)
     return c
 end
