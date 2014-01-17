@@ -232,7 +232,7 @@ end
 
 function Gestures:getNearestGridPoint(x, y)
     -- Find the nearest grid point to the given point.
-    local dist
+    local dist, minPoint
     local min = conf.screenWidth
     for i = 1, self.gridSize do
         for j = 1, self.gridSize do

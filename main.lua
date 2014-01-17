@@ -1,23 +1,26 @@
 ShouldProfile = false
---require 'lib.strict' -- TODO Only apply strictness to our code, not code in lib directory.
 require 'lib.luafun.fun' ()
 require 'lib.LoveFrames'
-Class = require('class')
+require 'lib.deepcopy.deepcopy'
+require 'lib.AdvTiledLoader.Loader'
+if ShouldProfile then
+    ProFi = require 'lib.ProFi'
+end
+each(print, _G)
+require 'lib.strict'
 local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')
 local Graphics = require('menus.graphics')
 local Resolution = require('menus.resolution')
 local Gestures = require('gestures')
-require('lib.deepcopy.deepcopy')
 local SaveAndExit = require('saveAndExit')
-if ShouldProfile then
-    ProFi = require('lib.ProFi')
-end
 local state = Menu()
+local savedGame = nil
 -- TODO - Refactor to pass in old state and return new one instead
 -- of mutating global state.
-local stateInitializers = {
+local stateInitializers =
+{
     ["continue"] = function()
         if savedGame == nil then
             state = Game(true)
@@ -72,18 +75,6 @@ function love.load(args)
 
     -- hide the mouse
     love.mouse.setVisible(false)
-
-    -- load images
-    imgNames = {"player", "menuTitle"}
-    imgs = {}
-    for _,v in ipairs(imgNames) do
-        imgs[v] = love.graphics.newImage("images/"..v..".gif")
-    end
-
-    -- set filter to nearest
-    for _,v in pairs(imgs) do 
-        v:setFilter("nearest", "nearest")
-    end
 
     -- set some graphics settings
     love.graphics.setLineStyle('rough')

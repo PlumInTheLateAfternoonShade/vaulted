@@ -3,6 +3,7 @@ local manaSystem = require('systems.manaSystem')
 local healthSystem = require('systems.healthSystem')
 local collider = require('components.collider')
 local polygonRenderer = require('components.polygonRenderer')
+local circleRenderer = require('components.circleRenderer')
 local meshRenderer = require('components.meshRenderer')
 local position = require('components.position')
 local element = require('components.element')
@@ -79,10 +80,19 @@ function objectFactory.prototypeForce(h, v, x, y, casterId)
     return {forceComp, previewId = previewId}
 end
 
+local playerFriction = 0.5
+
+local function createBipedalLeg(parentId, xOffset)
+    local legId = entitySystem:register()
+    referencer.create(legId, parentId)
+    collider.createCircle(legId, playerFriction)
+    circleRenderer.create(legId, {r=200, g=255, b=255}, 30)
+end
+
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     local id = entitySystem:register()
     position.create(id, serializedPosition.points, serializedPosition.center)
-    collider.create(id, 0.5, 'dynamic')
+    collider.create(id, playerFriction, 'dynamic')
     walker.create(id, 5001)
     input.create(id)
     experience.create(id)
@@ -94,8 +104,9 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},
                    function () return manaSystem:getManaPercent(id) end)
     polygonRenderer.create(id, {r=255, g=255, b=255})
+    createBipedalLeg(id, -1)
+    createBipedalLeg(id, 1)
     return id
-
 end
 
 

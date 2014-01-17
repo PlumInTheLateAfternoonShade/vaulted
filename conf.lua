@@ -25,7 +25,7 @@ spellKey =
     spell4
 }
 
-local saveDirectory = "saves"
+local saveDirectory = "vaulted"
 love.filesystem.setIdentity(saveDirectory)
 local canonicalScreenWidth = 1600
 local canonicalScreenHeight = 900

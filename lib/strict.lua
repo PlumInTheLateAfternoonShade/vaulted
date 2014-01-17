@@ -14,6 +14,10 @@ end
 
 __STRICT = true
 mt.__declared = {}
+-- Ignore globals declared before strict was required.
+for k, v in pairs(mt) do
+    mt.__declared[k] = v
+end
 
 mt.__newindex = function (t, n, v)
   if __STRICT and not mt.__declared[n] then
@@ -36,4 +40,3 @@ end
 function global(...)
    for _, v in ipairs{...} do mt.__declared[v] = true end
 end
-

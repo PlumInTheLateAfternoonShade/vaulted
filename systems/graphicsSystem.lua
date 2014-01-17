@@ -6,42 +6,54 @@ local img = require('images.img')
 -- System for rendering graphics
 local graphicsSystem = {}
 
-local meshes, polygons, statBars, camera
-
 function graphicsSystem:init(cam, map)
-    camera = cam
+    self.camera = cam
     self.map = map
-    meshes = {}
-    polygons = {}
-    statBars = {}
+    self.meshes = {}
+    self.polygons = {}
+    self.circles = {}
+    self.statBars = {}
 end
 
 function graphicsSystem:addMesh(comp)
-    meshes[comp.id] = comp
+    self.meshes[comp.id] = comp
 end
 
 function graphicsSystem:addPolygon(comp)
-    polygons[comp.id] = comp
+    self.polygons[comp.id] = comp
+end
+
+function graphicsSystem:addCircle(comp)
+    self.circles[comp.id] = comp
 end
 
 function graphicsSystem:addStatBar(comp)
-    statBars[comp.id] = comp
+    self.statBars[comp.id] = comp
 end
 
 function graphicsSystem:delete(id)
-    polygons[id] = nil
-    meshes[id] = nil
-    statBars[id] = nil
+    self.polygons[id] = nil
+    self.meshes[id] = nil
+    self.circles[id] = nil
+    self.statBars[id] = nil
 end
 
 local function setToComponentColor(comp)
     setColor(temperatureSystem:getAdjustedColor(comp.id, comp.color))
 end
 
-local function drawPolygons()
+local function drawPolygons(polygons)
     for id, comp in pairs(polygons) do
         setToComponentColor(comp)
         love.graphics.polygon("fill", unpack(positionSystem:getCoords(id)))
+    end
+end
+
+local function drawCircles(circles)
+    for id, comp in pairs(circles) do
+        setToComponentColor(comp)
+        local center = positionSystem:getCenter(id)
+        love.graphics.circle("fill", center.x, center.y, comp.radius, 30)
     end
 end
 
@@ -63,7 +75,7 @@ local function computeTextureCoords(comp)
 end
 
 local function getMeshVertices(comp)
-    local textureCoords = computeTextureCoords(comp, coords)
+    local textureCoords = computeTextureCoords(comp)
     local wPoints = positionSystem:getCoords(comp.id)
     local vertices = {}
     for i = 1, #wPoints, 2 do
@@ -92,10 +104,9 @@ local function drawMesh(comp)
     love.graphics.circle("fill", cen.x, cen.y, 5, 10)
     setColor({r = 255, g = 200, b = 0})
     each(function(p) love.graphics.circle("fill", p.x, p.y, 5, 10) end, positionSystem:getPoints(comp.id))
-    --
 end
 
-local function drawMeshes()
+local function drawMeshes(meshes)
     for id, comp in pairs(meshes) do
         if comp.needsInit then
             comp.needsInit = false
@@ -105,7 +116,7 @@ local function drawMeshes()
     end
 end
 
-local function drawStatBars()
+local function drawStatBars(statBars)
     for id, comp in pairs(statBars) do
         setColor(comp.color)
         love.graphics.rectangle("fill", 0, conf.screenHeight*comp.topPercent,
@@ -114,23 +125,24 @@ local function drawStatBars()
 end
 
 function graphicsSystem:drawRaw()
-    drawPolygons()
-    drawMeshes()
+    drawPolygons(self.polygons)
+    drawMeshes(self.meshes)
+    drawCircles(self.circles)
 end
 
 function graphicsSystem:draw(raw)
     if not raw then
-        camera:set()
+        self.camera:set()
         -- set the tile map's draw range so we only draw the tiles on screen
-        self.map:setDrawRange(camera.x, camera.y, conf.screenWidth, conf.screenHeight)
+        self.map:setDrawRange(self.camera.x, self.camera.y, conf.screenWidth, conf.screenHeight)
         -- draw the tile map
         self.map:draw()
     end
     -- draw the components
     self:drawRaw()
     if not raw then
-        camera:unset()
-        drawStatBars()
+        self.camera:unset()
+        drawStatBars(self.statBars)
     end
 end
 

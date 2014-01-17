@@ -189,7 +189,7 @@ function convexHull(unsortedPoints)
     -- using Graham's scan. See http://en.wikipedia.org/wiki/Graham_scan
     -- and http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
     printTable('Before copy', unsortedPoints)
-    local points = table.deepcopy(unsortedPoints)
+    local points = objectDeepcopy(unsortedPoints)
     printTable('Before sort', points)
     -- Sort the points by Y value.
     table.sort(points, compareXthenY)
@@ -326,7 +326,7 @@ end
 
 local function getOtherPointFromLines(lines, point)
     for i = 1, #lines do
-        local otherPoint = table.deepcopy(lines[i]:getOtherPoint(point))
+        local otherPoint = objectDeepcopy(lines[i]:getOtherPoint(point))
         if otherPoint then
             table.remove(lines, i)
             return otherPoint
@@ -337,7 +337,7 @@ end
 
 function Point.connectLinesIntoPolygon(lines)
     if #lines < 3 then return nil end
-    local segs = table.deepcopy(lines)
+    local segs = objectDeepcopy(lines)
     local points = {segs[1].p0, segs[1].p1}
     local lastPoint = points[2]
     table.remove(segs, 1)

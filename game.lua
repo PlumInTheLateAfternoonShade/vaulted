@@ -4,16 +4,17 @@ local objectFactory = require('systems.objectFactory')
 local State = require('state')
 local Camera = require('camera')
 require('utils')
-local Point = require('geometry.Point')
-local tLoader = require('loader')
-local loader = require "lib/AdvTiledLoader/Loader"
+local Point = require 'geometry.Point'
+local tLoader = require 'loader'
+local loader = require "lib.AdvTiledLoader.Loader"
 -- set the path to the Tiled map files
 loader.path = "maps/"
 
 local world
 local camera -- Need this static for now because the callback funcs need it.
+heroId = nil -- Global for entity id of hero. Hopefully remove some day.
 
-local Game = Class
+local Game = require 'class'
 {
     name = 'Game',
     function(self, shouldLoadHero)

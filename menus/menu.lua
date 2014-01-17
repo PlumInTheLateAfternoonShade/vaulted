@@ -1,8 +1,10 @@
 -- The main menu for the game
 
-local GenMenu = require('menus.genMenu')
+local GenMenu = require 'menus.genMenu'
 local Class = require 'class'
 local State = require 'state'
+local img = require 'images.img'
+
 local Menu = Class
 {
     name = 'menu',
@@ -15,7 +17,7 @@ Menu:inherit(State)
 
 function Menu:draw()
     -- draw menu title
-    love.graphics.draw(imgs["menuTitle"], 0, 50, 0, scale, scale)
+    love.graphics.draw(img.load("menuTitle.gif"), 0, 50, 0, scale, scale)
     -- draw menu text
     self.genMenu:drawItems()
 end

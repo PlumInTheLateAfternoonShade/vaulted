@@ -6,7 +6,10 @@ end
 local SaveAndExit = {}
 
 function SaveAndExit:close()
-    loader:pack(spellBookSystem:get(heroId))
+    local heroSpellBook = spellBookSystem:get(heroId)
+    if heroSpellBook then
+        loader:pack(heroSpellBook)
+    end
     loader:pack(conf)
     if ShouldProfile then
         -- prof only

@@ -1,8 +1,9 @@
 -- Table to define a template for handling components.
 local componentSystem = {}
 
-function componentSystem:init()
+function componentSystem:init(referenceSystem)
     self.components = {}
+    self.referenceSystem = referenceSystem
 end
 
 function componentSystem:add(comp)
@@ -10,7 +11,14 @@ function componentSystem:add(comp)
 end
 
 function componentSystem:get(id)
-    return self.components[id]
+    if self.components then
+        if self.components[id] then
+            return self.components[id]
+        elseif self.referenceSystem then
+            return self.referenceSystem:getRef(id)
+        end
+    end
+    return nil
 end
 
 function componentSystem:delete(id)

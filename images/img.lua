@@ -3,7 +3,7 @@ function img.load(name)
     if img[name] then
         return img[name]
     end
-    image = love.graphics.newImage(name)
+    local image = love.graphics.newImage("images/"..name)
     img[name] = image
     return image
 end

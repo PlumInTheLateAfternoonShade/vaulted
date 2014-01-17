@@ -273,7 +273,7 @@ function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWi
 end
 
 function TileLayer:addToWorld()
-    local physX, physY
+    local physX, physY, lengthDown, lengthRight
     local rectifiedTileData = table.deepcopy(self.tileData)
     for y = 1, self.map.height do
         for x = 1, self.map.width do

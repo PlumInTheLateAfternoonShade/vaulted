@@ -11,15 +11,14 @@ local GenMenu = Class
         self.numItems = table.getn(items)
         self.pos = 1
         -- self font initialization
-        font = love.graphics.newFont("fonts/Latine.ttf", 24*scale)
-        love.graphics.setFont(font)
+        love.graphics.setFont(love.graphics.newFont("fonts/Latine.ttf", 24*scale))
         self.fontColor = {r=0,g=0,b=0}
         self.fontYSize = 500*scale/self.numItems
         -- play menu audio
         -- From http://upload.wikimedia.org/wikipedia/commons/8/8e/CELLO_LIVE_PERFORMANCES_JOHN_MICHEL-Schumann_Folk_Pieces_Op_102_1st_mvt_.ogg
         -- on http://en.wikipedia.org/wiki/Wikipedia:Sound/list
         -- by http://johnmichel.com/johnmichel.com/Discography.html.
-        music = love.audio.newSource("music/menuMusic1.ogg", "stream")
+        local music = love.audio.newSource("music/menuMusic1.ogg", "stream")
         music:setLooping(true)
         love.audio.play(music)
     end

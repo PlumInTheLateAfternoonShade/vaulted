@@ -169,7 +169,7 @@ end
 function offsetListOfSegs(segs, x, y)
     local newSegs = {}
     for i = 1, #segs do
-        newSegs[i] = table.deepcopy(segs[i])
+        newSegs[i] = objectDeepcopy(segs[i])
         newSegs[i]:offset(x, y)
     end
     return newSegs

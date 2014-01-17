@@ -81,7 +81,7 @@ function element:setAsColor()
 end
 
 function element.create(id, name)
-    local c = table.deepcopy(element[name])
+    local c = objectDeepcopy(element[name])
     c:addToSystems(id)
     return c
 end
