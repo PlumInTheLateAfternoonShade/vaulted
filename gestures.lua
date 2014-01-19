@@ -1,5 +1,6 @@
 -- Provides the UI for making new spell gestures.
-require('utils')
+require 'utils'
+require 'lib.LoveFrames'
 local img = require 'images.img'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'

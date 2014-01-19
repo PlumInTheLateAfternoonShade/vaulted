@@ -10,8 +10,7 @@ function graphicsSystem:init(cam, map)
     self.camera = cam
     self.map = map
     self.meshes = {}
-    self.polygons = {}
-    self.circles = {}
+    self.shapes = {}
     self.statBars = {}
 end
 
@@ -19,12 +18,8 @@ function graphicsSystem:addMesh(comp)
     self.meshes[comp.id] = comp
 end
 
-function graphicsSystem:addPolygon(comp)
-    self.polygons[comp.id] = comp
-end
-
-function graphicsSystem:addCircle(comp)
-    self.circles[comp.id] = comp
+function graphicsSystem:addShape(comp)
+    self.shapes[comp.id] = comp
 end
 
 function graphicsSystem:addStatBar(comp)
@@ -32,9 +27,8 @@ function graphicsSystem:addStatBar(comp)
 end
 
 function graphicsSystem:delete(id)
-    self.polygons[id] = nil
+    self.shapes[id] = nil
     self.meshes[id] = nil
-    self.circles[id] = nil
     self.statBars[id] = nil
 end
 
@@ -42,18 +36,21 @@ local function setToComponentColor(comp)
     setColor(temperatureSystem:getAdjustedColor(comp.id, comp.color))
 end
 
-local function drawPolygons(polygons)
-    for id, comp in pairs(polygons) do
-        setToComponentColor(comp)
-        love.graphics.polygon("fill", unpack(positionSystem:getCoords(id)))
-    end
-end
-
-local function drawCircles(circles)
-    for id, comp in pairs(circles) do
-        setToComponentColor(comp)
+local drawShape =
+{
+    circle = function(id)
         local center = positionSystem:getCenter(id)
-        love.graphics.circle("fill", center.x, center.y, comp.radius, 30)
+        love.graphics.circle("fill", center.x, center.y, positionSystem:getRadius(id), 30)
+    end,
+    polygon = function(id)
+        love.graphics.polygon("fill", unpack(positionSystem:getCoords(id)))
+    end,
+}
+
+local function drawShapes(shapes)
+    for id, comp in pairs(shapes) do
+        setToComponentColor(comp)
+        drawShape[positionSystem:getShape(id)](id)
     end
 end
 
@@ -125,9 +122,8 @@ local function drawStatBars(statBars)
 end
 
 function graphicsSystem:drawRaw()
-    drawPolygons(self.polygons)
+    drawShapes(self.shapes)
     drawMeshes(self.meshes)
-    drawCircles(self.circles)
 end
 
 function graphicsSystem:draw(raw)

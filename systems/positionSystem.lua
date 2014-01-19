@@ -29,6 +29,14 @@ function positionSystem:getCoords(id)
     return self.components[id].coords
 end
 
+function positionSystem:getRadius(id)
+    return self.components[id].radius
+end
+
+function positionSystem:getShape(id)
+    return self.components[id].shape
+end
+
 function positionSystem:testPointInRange(point, startId, endId)
     for id = startId, endId do
         if self.components[id] and testPoint(point, Point.coordsToPoints(self.components[id].coords)) then

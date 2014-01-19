@@ -1,13 +1,3 @@
-ShouldProfile = false
-require 'lib.luafun.fun' ()
-require 'lib.LoveFrames'
-require 'lib.deepcopy.deepcopy'
-require 'lib.AdvTiledLoader.Loader'
-if ShouldProfile then
-    ProFi = require 'lib.ProFi'
-end
-each(print, _G)
-require 'lib.strict'
 local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')

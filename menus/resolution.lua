@@ -32,7 +32,7 @@ function Graphics:keypressed(key)
 end
 
 function Graphics:setResolution(stringRepresentation)
-    splitIndex = stringRepresentation:find('x')
+    local splitIndex = stringRepresentation:find('x')
     if splitIndex == nil then
         return
     end

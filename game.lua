@@ -60,6 +60,7 @@ function Game:update(dt)
         self.fps = love.timer.getFPS()
     end
     entitySystem:update(dt)
+    -- TODO move to camera system
     local heroCenter = positionSystem:getCenter(heroId)
     camera:setAdjPosition(heroCenter.x, heroCenter.y, dt)
 end

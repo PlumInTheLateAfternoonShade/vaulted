@@ -2,8 +2,7 @@ local entitySystem = require('systems.entitySystem')
 local manaSystem = require('systems.manaSystem')
 local healthSystem = require('systems.healthSystem')
 local collider = require('components.collider')
-local polygonRenderer = require('components.polygonRenderer')
-local circleRenderer = require('components.circleRenderer')
+local shapeRenderer = require('components.shapeRenderer')
 local meshRenderer = require('components.meshRenderer')
 local position = require('components.position')
 local element = require('components.element')
@@ -16,6 +15,8 @@ local walker = require('components.walker')
 local input = require('components.input')
 local spellBook = require('components.spellBook')
 local force = require('components.force')
+local welder = require('components.welder')
+local referencer = require('components.referencer')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
@@ -28,7 +29,7 @@ function objectFactory.createTile(points, center)
     local id = entitySystem:register()
     position.create(id, points, center)
     collider.create(id, 0.5, 'static')
-    polygonRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
+    shapeRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
     return id
 end
 
@@ -82,11 +83,14 @@ end
 
 local playerFriction = 0.5
 
-local function createBipedalLeg(parentId, xOffset)
+local function createBipedalLeg(parentId, weldPoint, parentCenter, legRadius)
     local legId = entitySystem:register()
     referencer.create(legId, parentId)
-    collider.createCircle(legId, playerFriction)
-    circleRenderer.create(legId, {r=200, g=255, b=255}, 30)
+    position.create(legId, {}, parentCenter, 'circle', legRadius)
+    shapeRenderer.create(legId, {r=200, g=255, b=255}, 30)
+    collider.create(legId, playerFriction, 'dynamic')
+    local weldId = entitySystem:register()
+    welder.create(weldId, legId, parentId, weldPoint)
 end
 
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
@@ -103,28 +107,10 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
                    function () return healthSystem:getHealthPercent(id) end)
     statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},
                    function () return manaSystem:getManaPercent(id) end)
-    polygonRenderer.create(id, {r=255, g=255, b=255})
-    createBipedalLeg(id, -1)
-    createBipedalLeg(id, 1)
+    shapeRenderer.create(id, {r=255, g=255, b=255})
+    createBipedalLeg(id, serializedPosition.points[3], serializedPosition.center, 5)
+    --createBipedalLeg(id, serializedPosition.points[4], serializedPosition.center, 5)
     return id
-end
-
-
-local componentPrototypeDeserializers =
-{
-    fire = function (table) return element.fire end,
-    earth = function (table) return element.earth end,
-    water = function (table) return element.water end,
-    air = function (table) return element.air end,
-    collider = function (t) return collider.prototype(t.friction, t.type, t.breakable, t.initV) end,
-    position = function (t) return position.prototype(t.coords, t.center) end,
-    meshRenderer = function (t) return meshRenderer.prototype(t.color, t.imageName) end,
-    temperature = function (t) return temperature.prototype(t.ambientTemp) end,
-    force = function (t) return force.prototype(t.h, t.v, t.x, t.y) end,
-}
-
-function objectFactory.deserializeComponentPrototype(table)
-    return componentPrototypeDeserializers[table.name](table)
 end
 
 return objectFactory

@@ -9,12 +9,12 @@ local physicsSystem = {}
 
 require('systems.componentSystem'):inherit(physicsSystem)
 
---TODO
-local world, objectFactory, entitySystem
+--TODO remove static fields
+local objectFactory, entitySystem
 
 function physicsSystem:init(w, objFact, eSys)
-    world = w
-    world:setSleepingAllowed(true)
+    self.world = w
+    self.world:setSleepingAllowed(true)
     objectFactory = objFact
     entitySystem = eSys
     self.components = {}
@@ -46,23 +46,51 @@ local function centralize(points, c)
     end
 end
 
-local function updateComponent(comp)
+local function initBody(world, type, initV, center)
+    local body = love.physics.newBody(world,
+    center.x, center.y, type)
+    body:setLinearVelocity(
+    initV.x, initV.y)
+    return body
+end
+
+local function initPolygonShape(id)
+    local points = positionSystem:getPoints(id)
+    removeRedundantPoints(points)
+    centralize(points, computeCentroid(points))
+    return love.physics.newPolygonShape(Point.pointsToCoords(points))
+end
+
+local function initCircleShape(id)
+    return love.physics.newCircleShape(positionSystem:getRadius(id))
+end
+
+local function initFixture(comp)
+    local fixture = love.physics.newFixture(comp.body, comp.shape)
+    fixture:setFriction(comp.friction)
+    fixture:setUserData(comp.id)
+    return fixture
+end
+
+local shapeInits =
+{
+    polygon = initPolygonShape,
+    circle = initCircleShape,
+}
+
+local function initShape(id)
+    return shapeInits[positionSystem:getShape(id)](id)
+end
+
+local function updateComponent(comp, world)
     if comp.firstUpdate then
         --Need to construct here rather than constructor,
         --in case construct occurs during middle of physics calcs.
         comp.firstUpdate = false
-        local points = positionSystem:getPoints(comp.id)
-        local center = positionSystem:getCenter(comp.id)
-        removeRedundantPoints(points)
-        centralize(points, computeCentroid(points))
-        comp.body = love.physics.newBody(world,
-        center.x, center.y, comp.type)
-        comp.body:setLinearVelocity(
-        comp.initV.x, comp.initV.y)
-        comp.shape = love.physics.newPolygonShape(Point.pointsToCoords(points))
-        comp.fixture = love.physics.newFixture(comp.body, comp.shape)
-        comp.fixture:setFriction(comp.friction)
-        comp.fixture:setUserData(comp.id)
+        comp.body = initBody(world, comp.type, comp.initV, positionSystem:getCenter(comp.id))
+        comp.shape = initShape(comp.id)
+        comp.fixture = initFixture(comp)
+        -- Adjust stats if elemental object.
         local ele = eleSystem:get(comp.id)
         if ele then
             comp.fixture:setDensity(ele.density)
@@ -70,13 +98,19 @@ local function updateComponent(comp)
             comp.body:resetMassData()
         end
     end
-    positionSystem:update(comp.id, Point(comp.body:getWorldCenter()), {comp.body:getWorldPoints(comp.shape:getPoints())})
+    -- TODO refactor branching
+    local shapeName = positionSystem:getShape(comp.id)
+    if shapeName == 'polygon' then
+        positionSystem:update(comp.id, Point(comp.body:getWorldCenter()), {comp.body:getWorldPoints(comp.shape:getPoints())})
+    elseif shapeName == 'circle' then
+        positionSystem:get(comp.id).center = Point(comp.body:getWorldCenter())
+    end
 end
 
 function physicsSystem:update(dt)
     self:clearDestroyQueue()
-    for id, comp in pairs(self.components) do updateComponent(comp) end
-    world:update(dt)
+    for id, comp in pairs(self.components) do updateComponent(comp, self.world) end
+    self.world:update(dt)
 end
 
 local function getNewVelocity(v, center, newCenter)
@@ -103,8 +137,6 @@ local function breakNearSeg(points, center, seg)
     printTable('points:\n====', points, '===')
     -- Move points around their center.
     local ps = objectDeepcopy(points)
-    --for i = 1, #ps do ps[i] = ps[i] + center end
-    printTable('centered points:', ps)
     local p0, i = nearestPoint(ps, seg.p0)
     local p1, j = nearestPoint(ps, seg.p1)
     if #points == 3 then
@@ -152,6 +184,17 @@ local function breakNearSeg(points, center, seg)
     return side1, side2
 end
 
+local function makeElementalObjectFromPoints(id, points, center, v)
+    -- Order the points so they form a valid convex polygon.
+    points = convexHull(points)
+    -- Compute the new center point.
+    local newCenter = computeCentroid(points)
+    -- Assign the velocity
+    local newV = getNewVelocity(v, center, newCenter)
+    -- Construct the elemental object.
+    objectFactory.createElemental(points, newCenter, eleSystem:get(id).name, newV)
+end
+
 function physicsSystem:handleCollision(id, contact)
     local comp = self.components[id]
     if not comp then return end
@@ -161,29 +204,10 @@ function physicsSystem:handleCollision(id, contact)
         local conSeg = getContactSeg(contact, center)
         local points1, points2 = breakNearSeg(points, center, conSeg)
         if points1 and points2 and #points1 > 2 and #points2 > 2 then
-            -- Order the points so they form a valid convex polygon.
-            points1 = convexHull(points1)
-            points2 = convexHull(points2)
-            
-            -- Compute their new center points.
-            local newCenter1 = computeCentroid(points1)
-            local newCenter2 = computeCentroid(points2)
-
-            -- Debug prints
-            print('area1: '..computeArea(points1))
-            printTable('points1: ', points1)
-            print('area2: '..computeArea(points2))
-            printTable('points2: ', points2)
-            
-            -- Assign their velocities
             local v = Point(comp.body:getLinearVelocity())
-            local newV1 = getNewVelocity(v, center, newCenter1)
-            local newV2 = getNewVelocity(v, center, newCenter2)
-
-            -- Construct the elemental objects.
-            objectFactory.createElemental(points1, newCenter1, eleSystem:get(id).name, newV1)
-            objectFactory.createElemental(points2, newCenter2, eleSystem:get(id).name, newV2)
-
+            -- Make the new entities
+            makeElementalObjectFromPoints(id, points1, center, v)
+            makeElementalObjectFromPoints(id, points2, center, v)
             -- Delete the old entitiy
             entitySystem:delete(id)
         end

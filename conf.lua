@@ -1,3 +1,12 @@
+ShouldProfile = false
+require 'lib.luafun.fun' ()
+require 'lib.deepcopy.deepcopy'
+require 'lib.AdvTiledLoader.Loader'
+if ShouldProfile then
+    ProFi = require 'lib.ProFi'
+end
+each(print, _G)
+require 'lib.strict'
 local loader = require('loader')
 
 -- Game Scale

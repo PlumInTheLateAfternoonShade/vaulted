@@ -2,6 +2,8 @@ local physicsSystem = require('systems.physicsSystem')
 local temperatureSystem = require('systems.temperatureSystem')
 local graphicsSystem = require('systems.graphicsSystem')
 local eleSystem = require('systems.eleSystem')
+local jointSystem = require('systems.jointSystem')
+local referenceSystem = require('systems.referenceSystem')
 local positionSystem = require('systems.positionSystem')
 local walkingSystem = require('systems.walkingSystem')
 local inputSystem = require('systems.inputSystem')
@@ -14,30 +16,31 @@ local spellBookSystem = require('systems.spellBookSystem')
 
 -- controls registering and deleting entities in the entity system, as well as updating each component system.
 local entitySystem = {}
-local camera
 
 function entitySystem:init(world, cam, map, objectFactory)
     self.currId = -1
-    camera = cam
+    self.camera = cam
+    referenceSystem:init()
     physicsSystem:init(world, objectFactory, entitySystem)
     runeSystem:init(objectFactory)
     forceSystem:init(world)
-    temperatureSystem:init()
-    eleSystem:init()
-    positionSystem:init()
-    walkingSystem:init()
-    inputSystem:init()
-    experienceSystem:init()
-    manaSystem:init()
-    healthSystem:init()
-    spellBookSystem:init()
+    temperatureSystem:init(referenceSystem)
+    eleSystem:init(referenceSystem)
+    jointSystem:init()
+    positionSystem:init(referenceSystem)
+    walkingSystem:init(referenceSystem)
+    inputSystem:init(referenceSystem)
+    experienceSystem:init(referenceSystem)
+    manaSystem:init(referenceSystem)
+    healthSystem:init(referenceSystem)
+    spellBookSystem:init(referenceSystem)
     graphicsSystem:init(cam, map)
     local getIds = function(a, b)
         return a:getUserData(), b:getUserData()
     end
     local beginContact = function(a, b, coll)
         -- If the force of the impact is high enough, shake the screen.
-        camera:shake(a:getBody(), b:getBody(), coll)
+        self.camera:shake(a:getBody(), b:getBody(), coll)
         local aId, bId = getIds(a, b)
         physicsSystem:beginCollision(aId, bId, coll)
         temperatureSystem:beginCollision(aId, bId, coll)
@@ -60,6 +63,8 @@ function entitySystem:delete(id)
     temperatureSystem:delete(id)
     graphicsSystem:delete(id)
     eleSystem:delete(id)
+    jointSystem:delete(id)
+    referenceSystem:delete(id)
     positionSystem:delete(id)
     inputSystem:delete(id)
     experienceSystem:delete(id)
@@ -78,9 +83,12 @@ function entitySystem:deleteAllInRange(lowerId, upperId)
 end
 
 function entitySystem:update(dt)
+    dt = dt / 4
     physicsSystem:update(dt)
     temperatureSystem:update(dt)
+    referenceSystem:update(dt)
     eleSystem:update(dt)
+    jointSystem:update(dt)
     manaSystem:update(dt)
     healthSystem:update(dt)
     spellBookSystem:update(dt)
@@ -108,10 +116,6 @@ end
 function entitySystem:register()
     self.currId = self.currId + 1
     return self.currId
-end
-
-function entitySystem:queueDelete(id)
-    table.insert(deleteQueue, id)
 end
 
 return entitySystem

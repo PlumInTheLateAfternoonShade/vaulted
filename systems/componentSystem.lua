@@ -11,11 +11,11 @@ function componentSystem:add(comp)
 end
 
 function componentSystem:get(id)
-    if self.components then
+    if self.components and id then
         if self.components[id] then
             return self.components[id]
         elseif self.referenceSystem then
-            return self.referenceSystem:getRef(id)
+            return self:get(self.referenceSystem:getParent(id))
         end
     end
     return nil
