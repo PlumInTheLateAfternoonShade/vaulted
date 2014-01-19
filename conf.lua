@@ -5,34 +5,8 @@ require 'lib.AdvTiledLoader.Loader'
 if ShouldProfile then
     ProFi = require 'lib.ProFi'
 end
-each(print, _G)
 require 'lib.strict'
 local loader = require('loader')
-
--- Game Scale
-scale = 1
-
--- Keyboard settings
-gesture = "g"
-up = "up"
-down = "down"
-leftArrow = "left"
-rightArrow = "right"
-openMenu = "escape"
-confirm = "return"
-left = "a"
-right = "d"
-spell1 = " "
-spell2 = "w"
-spell3 = "s"
-spell4 = "q"
-spellKey =
-{
-    spell1,
-    spell2,
-    spell3,
-    spell4
-}
 
 local saveDirectory = "vaulted"
 love.filesystem.setIdentity(saveDirectory)
@@ -45,19 +19,19 @@ conf = loader:unpackIfExists(
     -- Screen settings
     screenWidth = canonicalScreenWidth,
     screenHeight = canonicalScreenHeight,
+    canonicalScreenWidth = canonicalScreenWidth,
+    canonicalScreenHeight = canonicalScreenHeight,
     -- Camera settings
-    ShouldCameraShake = true
+    ShouldCameraShake = true,
+    -- Map settings
+    tileSize = 32,
+    iconSize = 64,
+    worldXEnd = 10000, --TODO: should be calculated based on map.
+    -- Colors
+    fontColor = {r=0,g=0,b=0},
+    -- Game Scale
+    scale = 1,
 })
-conf.canonicalScreenWidth = canonicalScreenWidth
-conf.canonicalScreenHeight = canonicalScreenHeight
-
--- Map settings
-tileSize = 32
-iconSize = tileSize * 2
-worldXEnd = 10000 --TODO: should be calculated based on map.
-
--- Other colors
-fontColor = {r=0,g=0,b=0}
 
 function love.conf(t)
     t.title = "Vaulted"

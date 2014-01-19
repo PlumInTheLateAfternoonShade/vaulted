@@ -18,12 +18,12 @@ local Game = require 'class'
 {
     name = 'Game',
     function(self, shouldLoadHero)
-        love.physics.setMeter(tileSize)
-        world = love.physics.newWorld(0, 50*tileSize, true)
+        love.physics.setMeter(conf.tileSize)
+        world = love.physics.newWorld(0, 50*conf.tileSize, true)
         -- init camera
         camera = Camera()
         self.map = loader.load("level1.tmx")
-        self.map.tileWidth = tileSize
+        self.map.tileWidth = conf.tileSize
         self.map.widthInPixels = self.map.tileWidth * self.map.width
         objectFactory.init(world, camera, self.map) -- TODO world inside entitySys
         local heroSpellBook = nil
@@ -33,9 +33,9 @@ local Game = require 'class'
         heroId = objectFactory.createPlayer({
         points = {
             Point(0, 0),
-            Point(0, tileSize*2),
-            Point(tileSize, tileSize*2),
-            Point(tileSize, 0)
+            Point(0, conf.tileSize*2),
+            Point(conf.tileSize, conf.tileSize*2),
+            Point(conf.tileSize, 0)
         },
         center = Point(200, -550)}, heroSpellBook)
         self.map:addToWorld()
@@ -68,7 +68,7 @@ end
 function Game:draw()
     entitySystem:draw(false)
 
-    setColorInverted(fontColor)
+    setColorInverted(conf.fontColor)
     -- Debug
     local heroCenter = positionSystem:getCenter(heroId)
     love.graphics.print(string.format("x: %d y: %d", heroCenter.x, heroCenter.y),

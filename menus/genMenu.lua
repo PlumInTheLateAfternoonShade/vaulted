@@ -1,6 +1,7 @@
 -- Generate and draw a generic menu.
 
 require ('utils')
+local keys = require 'keys'
 local Class = require('class')
 local GenMenu = Class
 {
@@ -11,9 +12,9 @@ local GenMenu = Class
         self.numItems = table.getn(items)
         self.pos = 1
         -- self font initialization
-        love.graphics.setFont(love.graphics.newFont("fonts/Latine.ttf", 24*scale))
+        love.graphics.setFont(love.graphics.newFont("fonts/Latine.ttf", 24*conf.scale))
         self.fontColor = {r=0,g=0,b=0}
-        self.fontYSize = 500*scale/self.numItems
+        self.fontYSize = 500*conf.scale/self.numItems
         -- play menu audio
         -- From http://upload.wikimedia.org/wikipedia/commons/8/8e/CELLO_LIVE_PERFORMANCES_JOHN_MICHEL-Schumann_Folk_Pieces_Op_102_1st_mvt_.ogg
         -- on http://en.wikipedia.org/wiki/Wikipedia:Sound/list
@@ -34,11 +35,11 @@ function GenMenu:update(dt)
 end
 
 function GenMenu:keypressed(key)
-    if key == up then
+    if key == keys.up then
         self:incMenu(-1)
-    elseif key == down then
+    elseif key == keys.down then
         self:incMenu(1)
-    elseif key == confirm then
+    elseif key == keys.confirm then
         love.audio.stop()
         updateState(self.items[self.pos])
     end
@@ -56,7 +57,7 @@ end
 function GenMenu:drawItems()
     for i = 1, self.numItems do
         self:drawText(tostring(self.items[i]), 
-        self.fontYSize + i*self.fontYSize*scale, 
+        self.fontYSize + i*self.fontYSize*conf.scale, 
         i == self.pos)
     end
     setColorInverted(self.fontColor)
@@ -67,9 +68,9 @@ function GenMenu:drawText(text, pos, inverted)
         -- Set unselected color
         setColorInverted(self.fontColor)
         -- Draw a box around selected one
-        love.graphics.rectangle("fill", 0, pos - (self.fontYSize / 2)*scale, 
+        love.graphics.rectangle("fill", 0, pos - (self.fontYSize / 2)*conf.scale, 
         love.graphics.getWidth(), 
-        self.fontYSize*scale)
+        self.fontYSize*conf.scale)
         -- Set selected text color
         setColor(self.fontColor)
     else

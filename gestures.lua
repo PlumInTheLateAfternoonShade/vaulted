@@ -1,6 +1,7 @@
 -- Provides the UI for making new spell gestures.
 require 'utils'
 require 'lib.LoveFrames'
+local keys = require 'keys'
 local img = require 'images.img'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
@@ -107,15 +108,15 @@ function Gestures:incrementElement(amount)
 end
 
 function Gestures:keypressed(key)
-    if key == up then
+    if key == keys.up then
         self:incrementElement(-1)
-    elseif key == down then
+    elseif key == keys.down then
         self:incrementElement()
-    elseif key == leftArrow then
+    elseif key == keys.leftArrow then
         self:incrementSpell(-1)
-    elseif key == rightArrow then
+    elseif key == keys.rightArrow then
         self:incrementSpell()
-    elseif key == confirm or key == gesture then
+    elseif key == keys.confirm or key == keys.gesture then
         -- Remove all gesture graphics components from screen
         entitySystem:deleteAllInRange(self.firstGestureId, entitySystem.currId)
         -- Go back to game.

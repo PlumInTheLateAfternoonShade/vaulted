@@ -8,7 +8,7 @@ require('systems.componentSystem'):inherit(experienceSystem)
 local function updateExperience(id, comp, dt)
     --XP is simply the farthest an actor has gone in the world.
     comp.farthestX = math.max(positionSystem:getCenter(id).x, comp.farthestX)
-    comp.xp = comp.farthestX / worldXEnd * comp.xpMult + comp.xpOffset
+    comp.xp = comp.farthestX / conf.worldXEnd * comp.xpMult + comp.xpOffset
 end
 
 function experienceSystem:update(dt)

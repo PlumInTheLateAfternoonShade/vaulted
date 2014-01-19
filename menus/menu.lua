@@ -17,7 +17,7 @@ Menu:inherit(State)
 
 function Menu:draw()
     -- draw menu title
-    love.graphics.draw(img.load("menuTitle.gif"), 0, 50, 0, scale, scale)
+    love.graphics.draw(img.load("menuTitle.gif"), 0, 50, 0, conf.scale, conf.scale)
     -- draw menu text
     self.genMenu:drawItems()
 end

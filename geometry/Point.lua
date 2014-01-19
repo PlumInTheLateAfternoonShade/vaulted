@@ -260,7 +260,7 @@ end
 
 function nearestPoint(points, point)
     local nearestIndex = 1
-    local nearestDist = worldXEnd
+    local nearestDist = conf.worldXEnd
     for i = 1, #points do
         local dist = points[i]:distanceSquared(point)
         if dist < nearestDist then
