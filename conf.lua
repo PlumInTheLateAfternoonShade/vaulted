@@ -1,7 +1,8 @@
 ShouldProfile = false
 require 'lib.luafun.fun' ()
 require 'lib.deepcopy.deepcopy'
---require 'lib.AdvTiledLoader.Loader'
+local tempLoader = require 'lib.AdvTiledLoader.Loader'
+require 'class'
 if ShouldProfile then
     ProFi = require 'lib.ProFi'
 end

@@ -23,12 +23,16 @@ local entitySystem = {}
 
 function entitySystem:init(objectFactory)
     self.currId = -1
+    
     local camera = Camera()
+    
     local world = love.physics.newWorld(0, 50*conf.tileSize, true)
+    
     local map = loader.load("level1.tmx")
     map.tileWidth = conf.tileSize
     map.widthInPixels = map.tileWidth * map.width
-    map:addToWorld()
+    
+    graphicsSystem:init(camera, map)
     referenceSystem:init()
     physicsSystem:init(world, objectFactory, entitySystem)
     runeSystem:init(objectFactory)
@@ -43,7 +47,9 @@ function entitySystem:init(objectFactory)
     manaSystem:init(referenceSystem)
     healthSystem:init(referenceSystem)
     spellBookSystem:init(referenceSystem)
-    graphicsSystem:init(camera, map)
+    
+    map:addToWorld(objectFactory)
+    
     local getIds = function(a, b)
         return a:getUserData(), b:getUserData()
     end

@@ -3,7 +3,6 @@
 ---------------------------------------------------------------------------------------------------
 
 -- Setup
-local objectFactory = require("systems.objectFactory")
 local Point = require("geometry.Point")
 require 'lib.deepcopy.deepcopy'
 local floor = math.floor
@@ -272,7 +271,7 @@ function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWi
     return (mHeight - y)*tileHeight, targetRight
 end
 
-function TileLayer:addToWorld()
+function TileLayer:addToWorld(objectFactory)
     local physX, physY, lengthDown, lengthRight
     local rectifiedTileData = table.deepcopy(self.tileData)
     for y = 1, self.map.height do
