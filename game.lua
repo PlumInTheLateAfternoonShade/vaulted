@@ -1,17 +1,10 @@
 local entitySystem = require('systems.entitySystem')
 local positionSystem = require('systems.positionSystem') --TODO DEL
 local objectFactory = require('systems.objectFactory')
-local State = require('state')
-local Camera = require('camera')
 require('utils')
 local Point = require 'geometry.Point'
 local tLoader = require 'loader'
-local loader = require "lib.AdvTiledLoader.Loader"
--- set the path to the Tiled map files
-loader.path = "maps/"
 
-local world
-local camera -- Need this static for now because the callback funcs need it.
 heroId = nil -- Global for entity id of hero. Hopefully remove some day.
 
 local Game = require 'class'
@@ -19,13 +12,8 @@ local Game = require 'class'
     name = 'Game',
     function(self, shouldLoadHero)
         love.physics.setMeter(conf.tileSize)
-        world = love.physics.newWorld(0, 50*conf.tileSize, true)
-        -- init camera
-        camera = Camera()
-        self.map = loader.load("level1.tmx")
-        self.map.tileWidth = conf.tileSize
-        self.map.widthInPixels = self.map.tileWidth * self.map.width
-        objectFactory.init(world, camera, self.map) -- TODO world inside entitySys
+        objectFactory.init()
+        -- Add hero to world
         local heroSpellBook = nil
         if shouldLoadHero then
             heroSpellBook = tLoader:unpack("spellBook")
@@ -38,17 +26,14 @@ local Game = require 'class'
             Point(conf.tileSize, 0)
         },
         center = Point(200, -550)}, heroSpellBook)
-        self.map:addToWorld()
         -- init debug vars
         self.fps = 0
         self.secondCount = 1.1
 
-        self.maxXp = 2000
-
         self.shouldSave = true
     end
 }
-Game:inherit(State)
+Game:inherit(require 'state')
 
 function Game:update(dt)
     self.secondCount = self.secondCount + dt
@@ -60,9 +45,6 @@ function Game:update(dt)
         self.fps = love.timer.getFPS()
     end
     entitySystem:update(dt)
-    -- TODO move to camera system
-    local heroCenter = positionSystem:getCenter(heroId)
-    camera:setAdjPosition(heroCenter.x, heroCenter.y, dt)
 end
 
 function Game:draw()

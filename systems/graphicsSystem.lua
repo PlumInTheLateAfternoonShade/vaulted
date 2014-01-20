@@ -142,4 +142,9 @@ function graphicsSystem:draw(raw)
     end
 end
 
+function graphicsSystem:update(dt)
+    local heroCenter = positionSystem:getCenter(heroId)
+    self.camera:setAdjPosition(heroCenter.x, heroCenter.y, dt)
+end
+
 return graphicsSystem

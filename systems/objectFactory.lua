@@ -21,8 +21,8 @@ local referencer = require('components.referencer')
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
 
-function objectFactory.init(world, cam, map)
-    entitySystem:init(world, cam, map, objectFactory)
+function objectFactory.init()
+    entitySystem:init(objectFactory)
 end
 
 function objectFactory.createTile(points, center)

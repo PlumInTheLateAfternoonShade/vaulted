@@ -13,13 +13,22 @@ local healthSystem = require('systems.healthSystem')
 local forceSystem = require('systems.forceSystem')
 local runeSystem = require('systems.runeSystem')
 local spellBookSystem = require('systems.spellBookSystem')
+local Camera = require('camera')
+local loader = require "lib.AdvTiledLoader.Loader"
+-- set the path to the Tiled map files
+loader.path = "maps/"
 
 -- controls registering and deleting entities in the entity system, as well as updating each component system.
 local entitySystem = {}
 
-function entitySystem:init(world, cam, map, objectFactory)
+function entitySystem:init(objectFactory)
     self.currId = -1
-    self.camera = cam
+    local camera = Camera()
+    local world = love.physics.newWorld(0, 50*conf.tileSize, true)
+    local map = loader.load("level1.tmx")
+    map.tileWidth = conf.tileSize
+    map.widthInPixels = map.tileWidth * map.width
+    map:addToWorld()
     referenceSystem:init()
     physicsSystem:init(world, objectFactory, entitySystem)
     runeSystem:init(objectFactory)
@@ -34,13 +43,13 @@ function entitySystem:init(world, cam, map, objectFactory)
     manaSystem:init(referenceSystem)
     healthSystem:init(referenceSystem)
     spellBookSystem:init(referenceSystem)
-    graphicsSystem:init(cam, map)
+    graphicsSystem:init(camera, map)
     local getIds = function(a, b)
         return a:getUserData(), b:getUserData()
     end
     local beginContact = function(a, b, coll)
         -- If the force of the impact is high enough, shake the screen.
-        self.camera:shake(a:getBody(), b:getBody(), coll)
+        camera:shake(a:getBody(), b:getBody(), coll)
         local aId, bId = getIds(a, b)
         physicsSystem:beginCollision(aId, bId, coll)
         temperatureSystem:beginCollision(aId, bId, coll)
@@ -83,7 +92,6 @@ function entitySystem:deleteAllInRange(lowerId, upperId)
 end
 
 function entitySystem:update(dt)
-    dt = dt / 4
     physicsSystem:update(dt)
     temperatureSystem:update(dt)
     referenceSystem:update(dt)
@@ -96,6 +104,7 @@ function entitySystem:update(dt)
     walkingSystem:update(dt)
     forceSystem:update(dt)
     runeSystem:update(dt)
+    graphicsSystem:update(dt)
 end
 
 function entitySystem:draw(raw)
