@@ -96,6 +96,11 @@ function love.keypressed(key)
     elseif key == 'return' and love.keyboard.isDown('lalt', 'ralt') then
         toggleFullscreen()
     end
+    -- It's more convenient to have the word space
+    -- so we can draw it without ifs.
+    if key == " " then
+        key = "space"
+    end
     -- call the state's keypressed function
     state:keypressed(key)
 end

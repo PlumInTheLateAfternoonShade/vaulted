@@ -1,3 +1,4 @@
+local keys =  require 'keys'
 local manaSystem = require 'systems.manaSystem'
 
 -- Handles spellBook components.
@@ -42,11 +43,7 @@ function spellBookSystem:draw(id)
         love.graphics.rectangle("fill", height*(i-1) + adjLeft, top, height, height)
         if comp[i] then
             setColor({r=255, g=255, b=255})
-            local key = "k" --TODO fix
-            if key == " " then
-                key = "space"
-            end
-            love.graphics.print(key, 
+            love.graphics.print(keys.spells[i], 
             height*(i - 1) + adjLeft, height*0.1 + top)
         end
     end

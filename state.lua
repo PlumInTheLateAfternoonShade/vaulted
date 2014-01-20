@@ -1,8 +1,7 @@
 -- The base class for a game state, with empty methods. Useful so that we
 -- don't have to redefine each empty method in states that don't care about
 -- mouse input, for example.
-local Class = require('class')
-local State = Class
+local State = require 'class'
 {
     name = 'State',
     function(self)

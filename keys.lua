@@ -12,7 +12,7 @@ local keys =
     right = "d",
     spells =
     {
-        " ",
+        "space",
         "w",
         "s",
         "q",

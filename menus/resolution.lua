@@ -1,12 +1,10 @@
+local keys = require 'keys'
+local GenMenu = require 'menus.genMenu'
+
 -- The settings menu for the game
-
-local GenMenu = require('menus.genMenu')
-local Class = require('class')
-local State = require('state')
-
-local Graphics = Class
+local Resolution = require 'class'
 {
-    name = 'Graphics',
+    name = 'Resolution',
     function(self)
         -- menu initiliazation
         self.genMenu = GenMenu({"800 x 600",
@@ -16,22 +14,22 @@ local Graphics = Class
                                 "graphics"})
     end
 }
-Graphics:inherit(State)
+Resolution:inherit(require 'state')
 
-function Graphics:draw()
+function Resolution:draw()
     -- draw menu text
     self.genMenu:drawItems()
 end
 
-function Graphics:keypressed(key)
-    if key == confirm then
+function Resolution:keypressed(key)
+    if key == keys.confirm then
         self:setResolution(self.genMenu:getCurrentItem())
         self.genMenu:setToLastItem()
     end
     self.genMenu:keypressed(key)
 end
 
-function Graphics:setResolution(stringRepresentation)
+function Resolution:setResolution(stringRepresentation)
     local splitIndex = stringRepresentation:find('x')
     if splitIndex == nil then
         return
@@ -41,4 +39,4 @@ function Graphics:setResolution(stringRepresentation)
     love.window.setMode(conf.screenWidth, conf.screenHeight)
 end
 
-return Graphics
+return Resolution
