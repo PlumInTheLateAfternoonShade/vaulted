@@ -4,7 +4,7 @@
 
 -- Setup
 local Point = require("geometry.Point")
-require 'lib.deepcopy.deepcopy'
+require 'utils'
 local floor = math.floor
 local type = type
 local love = love
@@ -273,7 +273,7 @@ end
 
 function TileLayer:addToWorld(objectFactory)
     local physX, physY, lengthDown, lengthRight
-    local rectifiedTileData = table.deepcopy(self.tileData)
+    local rectifiedTileData = objectDeepcopy(self.tileData)
     for y = 1, self.map.height do
         for x = 1, self.map.width do
             tile = self.map.tiles[rectifiedTileData[y][x]]
