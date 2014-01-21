@@ -1,5 +1,25 @@
 -- General utility functions
 
+-- Deepcopy implementation from http://lua-users.org/wiki/CopyTable.
+-- It seems to have been replaced now.
+function objectDeepcopy(object)
+    local lookup_table = {}
+    local function _copy(object)
+        if type(object) ~= "table" then
+            return object
+        elseif lookup_table[object] then
+            return lookup_table[object]
+        end
+        local new_table = {}
+        lookup_table[object] = new_table
+        for index, value in pairs(object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+        return setmetatable(new_table, _copy(getmetatable(object)))
+    end
+    return _copy(object)
+end
+
 function setColorInverted(color)
     love.graphics.setColor(255 - color.r, 255 - color.g,
     255 - color.b, color.a)

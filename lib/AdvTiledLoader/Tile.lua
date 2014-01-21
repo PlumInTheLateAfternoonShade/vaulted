@@ -4,7 +4,7 @@
 
 -- Setup
 local assert = assert
-Tile = {}
+local Tile = {}
 Tile.__index = Tile
 
 -- Creates a new tile and returns it.

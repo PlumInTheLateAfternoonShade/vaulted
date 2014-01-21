@@ -36,6 +36,11 @@ local Game = require 'class'
 Game:inherit(require 'state')
 
 function Game:update(dt)
+    for k, v in pairs(_G) do
+        if type(v) ~= "function" then
+            print(k, v)
+        end
+    end
     self.secondCount = self.secondCount + dt
     if self.secondCount > 1 then
         -- updates which only have to happen once in a while
@@ -60,21 +65,12 @@ function Game:draw()
     conf.screenWidth * 0.9, conf.screenHeight * 0.2)
 end
 
--------------------------------
--- Key input handling functions
--------------------------------
-
 function Game:keypressed(key)
     entitySystem:keyPressed(key)
 end
 
 function Game:keyreleased(key)
     entitySystem:keyReleased(key)
-end
-
-function limitedInc(var, inc, limit)
-    result = var + inc
-    return math.max(math.min(result, limit), -limit)
 end
 
 return Game

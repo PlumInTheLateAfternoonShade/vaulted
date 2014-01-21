@@ -1,6 +1,6 @@
 require 'utils'
 require 'lib.deepcopy.deepcopy'
-Point = require('geometry.Point')
+local Point = require('geometry.Point')
 local Class = require('class')
 local Seg = Class
 {

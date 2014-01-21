@@ -126,7 +126,6 @@ function Gestures:keypressed(key)
 end
 
 function Gestures:mousepressed(x, y, button)
-    if not main.state == 'gesture' then return end
     loveframes.mousepressed(x, y, button)
     if self:inButtonSpace(x) then return end
     if button == "l" then

@@ -1,6 +1,9 @@
+local loader = require 'loader'
+
 -- Keyboard settings
-local keys =
+local keys = loader:unpackIfExists(
 {
+    name = "keys",
     gesture = "g",
     up = "up",
     down = "down",
@@ -17,8 +20,6 @@ local keys =
         "s",
         "q",
     },
-}
-
--- TODO configuration
+})
 
 return keys

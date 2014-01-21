@@ -1,4 +1,5 @@
 local loader = require 'loader'
+local keys = require 'keys'
 local spellBookSystem = require 'systems.spellBookSystem'
 if ShouldProfile then
     ProFi = require 'lib.ProFi'
@@ -11,6 +12,7 @@ function SaveAndExit:close()
         loader:pack(heroSpellBook)
     end
     loader:pack(conf)
+    loader:pack(keys)
     if ShouldProfile then
         -- prof only
         print('Stopping profiler.')

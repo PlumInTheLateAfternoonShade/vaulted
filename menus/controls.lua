@@ -70,18 +70,20 @@ function Controls:initGUI()
     local step = conf.screenHeight / 12
     local i = 0
     for purpose, key in pairs(keys) do
-        if purpose == "spells" then
-            for index, k in ipairs(key) do
+        if purpose ~= "name" then
+            if purpose == "spells" then
+                for index, k in ipairs(key) do
+                    local x = math.floor(i/10)*2*step + step
+                    local y = (i % 10)*step + 2*step
+                    i = i + 1
+                    createKeyButton("cast spell "..index, k, x, y, function () updateState("controlSet", index, k) end)
+                end
+            else
                 local x = math.floor(i/10)*2*step + step
                 local y = (i % 10)*step + 2*step
                 i = i + 1
-                createKeyButton("cast spell "..index, k, x, y, function () updateState("controlSet", index, k) end)
+                createKeyButton(purpose, key, x, y, function () updateState("controlSet", purpose, key) end)
             end
-        else
-            local x = math.floor(i/10)*2*step + step
-            local y = (i % 10)*step + 2*step
-            i = i + 1
-            createKeyButton(purpose, key, x, y, function () updateState("controlSet", purpose, key) end)
         end
     end
     createButton("back to settings", conf.screenWidth*0.8, conf.screenHeight*0.8, returnToSettings)

@@ -7,7 +7,7 @@ if ShouldProfile then
     ProFi = require 'lib.ProFi'
 end
 require 'lib.strict'
-local loader = require('loader')
+local loader = require 'loader'
 
 local saveDirectory = "vaulted"
 love.filesystem.setIdentity(saveDirectory)
