@@ -119,6 +119,7 @@ function Gestures:keypressed(key)
     elseif key == keys.confirm or key == keys.gesture then
         -- Remove all gesture graphics components from screen
         entitySystem:deleteAllInRange(self.firstGestureId, entitySystem.currId)
+        loveframes.SetState("none")
         -- Go back to game.
         updateState("continue")
     end

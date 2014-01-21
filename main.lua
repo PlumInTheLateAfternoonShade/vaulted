@@ -2,6 +2,8 @@ local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')
 local Graphics = require('menus.graphics')
+local Controls = require('menus.controls')
+local ControlSet = require('menus.controlSet')
 local Resolution = require('menus.resolution')
 local Gestures = require('gestures')
 local SaveAndExit = require('saveAndExit')
@@ -32,6 +34,12 @@ local stateInitializers =
     end,
     ["resolution"] = function()
         state = Resolution()
+    end,
+    ["controls"] = function()
+        state = Controls()
+    end,
+    ["controlSet"] = function(...)
+        state = ControlSet(...)
     end,
     ["back to main menu"] = function()
         if state.shouldSave then
@@ -118,10 +126,10 @@ function love.mousereleased(button, x, y)
     state:mousereleased(button, x, y)
 end
 
-function updateState(choice)
+function updateState(choice, ...)
     --TODO DEL
     print(choice)
-    stateInitializers[choice]()
+    stateInitializers[choice](...)
 end
 
 function objectDeepcopy(object)

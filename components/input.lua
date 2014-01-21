@@ -6,9 +6,8 @@ local spellBookSystem = require('systems.spellBookSystem')
 -- Allows an object in the game world with this component to have a dynamic input.
 local input = {}
 
-function input.create(id)
-    local c = {}
-    c.id = id
+function input.syncWithKeys(c)
+    local id = c.id
     c.keyPresses = 
     {
         [keys.right] = function () return walkingSystem:startWalkingRight(id) end,
@@ -24,6 +23,13 @@ function input.create(id)
         [keys.right] = function () return walkingSystem:stopWalkingRight(id) end,
         [keys.left] = function () return walkingSystem:stopWalkingLeft(id) end,
     }
+    return c
+end
+
+function input.create(id)
+    local c = {}
+    c.id = id
+    c = input.syncWithKeys(c)
     inputSystem:add(c)
     return c
 end

@@ -1,4 +1,3 @@
-
 -- Handles input components.
 local inputSystem = {}
 
