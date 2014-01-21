@@ -36,11 +36,6 @@ local Game = require 'class'
 Game:inherit(require 'state')
 
 function Game:update(dt)
-    for k, v in pairs(_G) do
-        if type(v) ~= "function" then
-            print(k, v)
-        end
-    end
     self.secondCount = self.secondCount + dt
     if self.secondCount > 1 then
         -- updates which only have to happen once in a while

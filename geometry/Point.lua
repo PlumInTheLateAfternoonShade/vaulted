@@ -188,12 +188,9 @@ function convexHull(unsortedPoints)
     -- Finds the smallest convex polygon that encapsulates all the points.
     -- using Graham's scan. See http://en.wikipedia.org/wiki/Graham_scan
     -- and http://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
-    printTable('Before copy', unsortedPoints)
     local points = objectDeepcopy(unsortedPoints)
-    printTable('Before sort', points)
     -- Sort the points by Y value.
     table.sort(points, compareXthenY)
-    printTable('After sort', points)
     if #points <= 2 then
         -- Can't make a polygon without a big enough input.
         return nil
@@ -201,7 +198,6 @@ function convexHull(unsortedPoints)
     -- Build lower hull
     local lower = {}
     for i = 1, #points do
-        print('cHull. '..tostring(points[i]))
         local p = points[i]
         while #lower >= 2 and ccw(lower[#lower - 1], lower[#lower], p)
         <= 0 do
@@ -219,19 +215,12 @@ function convexHull(unsortedPoints)
         end
         table.insert(upper, p)
     end
-    printTable('Lower', lower, '---')
-    printTable('Upper', upper, '---')
     -- Concatenate the hulls, but skip the last value of each
     table.remove(lower)
     for i = 1, #upper - 1 do
         table.insert(lower, upper[i])
     end
 
-    --[[ Switch from ccw to cw
-    local hull = {}
-    for i = 1, #lower, -1 do
-        table.insert(hull, lower[i])
-    end]]--
     if #lower < 3 then
         return unsortedPoints
     end
