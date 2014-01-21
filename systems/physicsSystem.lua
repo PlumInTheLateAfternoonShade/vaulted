@@ -1,4 +1,3 @@
-require 'lib.deepcopy.deepcopy'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local positionSystem = require 'systems.positionSystem'

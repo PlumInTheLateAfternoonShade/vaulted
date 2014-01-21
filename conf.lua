@@ -1,6 +1,5 @@
 ShouldProfile = false
 require 'lib.luafun.fun' ()
-require 'lib.deepcopy.deepcopy'
 local tempLoader = require 'lib.AdvTiledLoader.Loader'
 require 'class'
 if ShouldProfile then

@@ -1,4 +1,3 @@
-require 'lib.deepcopy.deepcopy'
 local Point = require 'geometry.Point'
 local physicsSystem = require 'systems.physicsSystem'
 

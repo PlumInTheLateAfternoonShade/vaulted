@@ -114,6 +114,9 @@ function love.keypressed(key)
 end
 
 function love.keyreleased(key)
+    if key == " " then
+        key = "space"
+    end
     -- call the state's keyreleased function
     state:keyreleased(key)
 end

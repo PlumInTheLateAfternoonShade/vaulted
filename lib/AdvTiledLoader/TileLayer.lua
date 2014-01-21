@@ -246,29 +246,38 @@ local function goRightWhileValid(x, y, targetWidth, tiles, tileData, tileWidth)
 end
 
 local function setAddedToRect(x, y, targetWidth, tileData)
-    for rightIter = x, targetWidth do
+    for rightIter = x, targetWidth - 1 do
         -- set the tile as belonging to a rect.
         tileData[y][rightIter] = ADDED_TO_RECT
     end
 end
 
-function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWidth, tileHeight)
+local function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWidth, tileHeight)
     -- used to compress the map into rectangles instead of a large number of square tiles
     -- go down and right that var amount until we hit a row
     -- where at least one tile is invalid.
     -- set each tile to -1 as we go.
+
+    -- First go right along starting at (x, y) until we hit an invalid tile. Store the amount we
+    -- went right in targetRight
     local targetRight = goRightWhileValid(x, y, mWidth, tiles, tileData, tileWidth)
+    -- The targetWidth in number of tiles
     local targetWidth = x + math.floor(targetRight / tileWidth)
+    -- Mark each tile as added to the current rect along that line
     setAddedToRect(x, y, targetWidth, tileData)
+    -- Starting one below the current height, go down one tile per iteration
     for downIter = y + 1, mHeight do
+        -- Find out how far we can go right at this y level.
         local lengthRight = goRightWhileValid(x, downIter,
               targetWidth, tiles, tileData, tileWidth)
+        -- If we couldn't go right as far as before, we can't extend the rectangle
+        -- to this y position.
         if targetRight > lengthRight then
             return (downIter - y)*tileHeight, targetRight
         end
         setAddedToRect(x, downIter, targetWidth, tileData)
     end
-    return (mHeight - y)*tileHeight, targetRight
+    return (mHeight + 1 - y)*tileHeight, targetRight
 end
 
 function TileLayer:addToWorld(objectFactory)

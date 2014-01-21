@@ -1,4 +1,3 @@
-require 'lib.deepcopy.deepcopy'
 -- TODO: Change global funcs to Point. funcs.
 -- Represents a 2d point.
 local Point = require('class')
