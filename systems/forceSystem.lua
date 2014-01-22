@@ -8,7 +8,7 @@ local Seg = require 'geometry.Seg'
 local forceSystem = {}
 
 local latestForce
-local forceMult = 1000
+local forceMult = 100
 
 require('systems.componentSystem'):inherit(forceSystem)
 
@@ -34,8 +34,8 @@ local function apply(id, comp, world)
     local y = comp.y
     local v = comp.v
     local center = positionSystem:getCenter(id)
-    local adjX = center.x + x
-    local adjY = center.y + y
+    local adjX = center.x + x - conf.screenWidth * 0.5
+    local adjY = center.y + y - conf.screenHeight * 0.5
     world:rayCast(adjX, adjY, adjX + h*forceMult, adjY + v*forceMult, forceRayCallBack)
     print('Applying a force at '..string.format("x: %.2f, y: %.2f, h: %.2f, v: %.2f", adjX, adjY, h, v))
 end

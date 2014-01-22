@@ -1,5 +1,5 @@
 ====Game/graphics====
 Objects and text do not scale with resolution.
 Meshes have artifacts on the edges.
-The tile compression in TileLayer.lua sometimes doesn't include certain tiles properly.
+--The tile compression in TileLayer.lua sometimes doesn't include certain tiles properly.
 computeTextureCoords in graphicsSystem rarely crashes with a nil value exception.

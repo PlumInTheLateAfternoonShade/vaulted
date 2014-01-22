@@ -4,13 +4,16 @@ local forceSystem = require('systems.forceSystem')
 local force = {}
 
 function force.prototype(h, v, x, y, casterId)
-    local c = {}
-    c.name = 'force'
-    c.h = h
-    c.v = v
-    c.x = x
-    c.y = y
-    c.casterId = casterId
+    local c = 
+    {
+        name = 'force',
+        h = h,
+        v = v,
+        x = x,
+        y = y,
+        casterId = casterId,
+        shouldPreview = true,
+    }
     function c:addToSystems(id)
         self.id = id
         forceSystem:add(self)

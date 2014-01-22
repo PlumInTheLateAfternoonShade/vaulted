@@ -56,7 +56,7 @@ function Spell:cast(casterId)
             if comp.center then 
                 -- Adjust the comp's center so it appears where the caster casts it.
                 local facing = walkingSystem:get(casterId).facing
-                comp.center = Point(comp.center.x*facing, comp.center.y)
+                comp.center = Point(comp.center.x*facing - conf.screenWidth * 0.5, comp.center.y - conf.screenHeight * 0.5)
                     + positionSystem:getCenter(casterId)
                 if facing == -1 then
                     comp.coords = Point.pointsToCoordsTable(Point.mirrorXListOfPoints(positionSystem:getPoints(casterId)))

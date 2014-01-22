@@ -29,7 +29,8 @@ function objectFactory.createTile(points, center)
     local id = entitySystem:register()
     position.create(id, points, center)
     collider.create(id, 0.5, 'static')
-    shapeRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
+    -- Draws the tile as a polygon. Uncomment for debugging.
+    --shapeRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
     return id
 end
 
