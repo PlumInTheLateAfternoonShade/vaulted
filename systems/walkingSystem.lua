@@ -7,7 +7,6 @@ require('systems.componentSystem'):inherit(walkingSystem)
 function walkingSystem:update(dt)
     for id, comp in pairs(self.components) do
         if comp.direction ~= 0 then
-            -- TODO normalize for all dts.
             physicsSystem:get(id).body:applyForce(comp.force * comp.direction, 0)
         end
     end

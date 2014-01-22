@@ -3,7 +3,6 @@ require 'utils'
 require 'lib.LoveFrames'
 local keys = require 'keys'
 local inputSystem = require 'systems.inputSystem'
-local input = require 'components.input'
 
 local Controls = require 'class'
 {
@@ -30,10 +29,7 @@ function Controls:update(dt)
 end
 
 local function returnToSettings()
-    local heroInput = inputSystem:get(heroId)
-    if heroInput then
-        input.syncWithKeys(heroInput)
-    end
+    inputSystem:syncAllWithKeys()
     loveframes.SetState("none")
     updateState("settings")
 end

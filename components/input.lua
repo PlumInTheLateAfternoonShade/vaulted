@@ -1,36 +1,32 @@
 local keys = require 'keys'
 local inputSystem = require('systems.inputSystem')
-local walkingSystem = require('systems.walkingSystem')
-local spellBookSystem = require('systems.spellBookSystem')
 
 -- Allows an object in the game world with this component to have a dynamic input.
 local input = {}
 
-function input.syncWithKeys(c)
-    local id = c.id
-    c.keyPresses = 
-    {
-        [keys.right] = function () return walkingSystem:startWalkingRight(id) end,
-        [keys.left] = function () return walkingSystem:startWalkingLeft(id) end,
-        [keys.openMenu] = function () return updateState("back to main menu") end,
-        [keys.gesture] = function () return updateState("gestures") end,
-    }
-    for i, key in ipairs(keys.spells) do
-        c.keyPresses[key] = function () return spellBookSystem:cast(id, i) end
+function input.prototype(canAdministrate, canCast)
+        
+    if canAdministrate == nil then
+        canAdministrate = true
     end
-    c.keyReleases = 
+    if canCast == nil then
+        canCast = true
+    end
+    return inputSystem:syncWithKeys(
     {
-        [keys.right] = function () return walkingSystem:stopWalkingRight(id) end,
-        [keys.left] = function () return walkingSystem:stopWalkingLeft(id) end,
-    }
-    return c
+        name = "input",
+        canAdministrate = canAdministrate,
+        canCast = canCast,
+        addToSystems = function (self, id)
+            self.id = id
+            inputSystem:add(self)
+        end
+    })
 end
 
-function input.create(id)
-    local c = {}
-    c.id = id
-    c = input.syncWithKeys(c)
-    inputSystem:add(c)
+function input.create(id, ...)
+    local c = input.prototype(...)
+    c:addToSystems(id)
     return c
 end
 

@@ -1,6 +1,7 @@
 local entitySystem = require 'systems.entitySystem'
 local positionSystem = require 'systems.positionSystem'
 local walkingSystem = require 'systems.walkingSystem'
+local inputSystem = require 'systems.inputSystem'
 local Point = require 'geometry.Point'
 
 local componentPrototypeDeserializers =
@@ -14,6 +15,8 @@ local componentPrototypeDeserializers =
     meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,
     temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,
     force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y, t.casterId) end,
+    input = function (t) return require 'components.input'.prototype(t.canAdministrate, t.canCast) end,
+    walker = function (t) return require 'components.walker'.prototype(t.force) end,
 }
 
 local function deserializeComponentPrototype(table)
@@ -68,6 +71,7 @@ function Spell:cast(casterId)
             comp:addToSystems(id)
         end
     end
+    inputSystem:syncAllWithKeys()
 end
 
 function Spell:preview()
@@ -79,6 +83,15 @@ function Spell:preview()
             if component.shouldPreview then
                 component:addToSystems(id)
             end
+        end
+    end
+end
+
+function Spell:addComponentToEntity(component, previewId)
+    for i = 1, #self.componentTables do
+        if self.componentTables[i].previewId == previewId then
+            table.insert(self.componentTables[i], component)
+            return
         end
     end
 end

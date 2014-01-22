@@ -1,5 +1,7 @@
 local Point = require 'geometry.Point'
 local element = require 'components.element'
+local input = require 'components.input'
+local walker = require 'components.walker'
 
 -- Handles rune components.
 local runeSystem = {}
@@ -12,6 +14,9 @@ function runeSystem:init(objectFactory)
 
     local addTo = function(spellBook, componentTable)
         spellBook[spellBook.i]:addComponentTable(componentTable)
+    end
+    local addToExisting = function(spellBook, component, previewId)
+        spellBook[spellBook.i]:addComponentToEntity(component, previewId)
     end
     local elementCreate = function(spellBook, lines, startPoint, endPoint, firstGestureId)
         local points = Point.connectLinesIntoPolygon(lines)
@@ -32,9 +37,14 @@ function runeSystem:init(objectFactory)
         force = function(spellBook, lines, startPoint, endPoint, firstGestureId)
             local h = endPoint.x - startPoint.x
             local v = endPoint.y - startPoint.y
-            print("force", startPoint, endPoint, h, v)
             addTo(spellBook, objectFactory.prototypeForce(h, v, startPoint.x, startPoint.y, heroId))
             return lines
+        end,
+        input = function(spellBook, previewId)
+            addToExisting(spellBook, input.prototype(false, false), previewId)
+        end,
+        walker = function(spellBook, previewId)
+            addToExisting(spellBook, walker.prototype(5001), previewId)
         end,
     }
 end

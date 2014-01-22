@@ -93,7 +93,6 @@ function Gestures:drawLines()
     end
 end
 
-
 function Gestures:incrementSpell(amount)
     entitySystem:deleteAllInRange(self.firstGestureId, entitySystem.currId)
     self.firstGestureId = entitySystem.currId + 1
@@ -125,10 +124,14 @@ function Gestures:keypressed(key)
     end
 end
 
+local function isNewEntityMaker(rune)
+    return rune == "fire" or rune == "ice" or rune == "earth" or rune == "air" or rune == "force"
+end
+
 function Gestures:mousepressed(x, y, button)
     loveframes.mousepressed(x, y, button)
     if self:inButtonSpace(x) then return end
-    if button == "l" then
+    if button == "l" and isNewEntityMaker(self.rune) then
         --left mouse starts drawing a line
         self.startPoint = self:getNearestGridPoint(x, y)
         self.drawPreviewLine = true
@@ -151,17 +154,26 @@ end
 function Gestures:mousereleased(x, y, button)
     loveframes.mousereleased(x, y, button)
     if not self:inButtonSpace(x) then 
-        if button == "l" and self.drawPreviewLine then
-            local endPoint = self:getNearestGridPoint(x, y)
-            if self.rune == "fire" or self.rune == "ice" or self.rune == "earth" or self.rune == "air" then
-                local line = Seg(self.startPoint, endPoint, element:getColor())
-                if line:lengthSquared() > 0 then
-                    table.insert(self.lines, line)
+        if button == "l" then
+            if self.drawPreviewLine then
+                -- Runes which add a new entity to the spell
+                local endPoint = self:getNearestGridPoint(x, y)
+                if self.rune == "fire" or self.rune == "ice" or self.rune == "earth" or self.rune == "air" then
+                    local line = Seg(self.startPoint, endPoint, element:getColor())
+                    if line:lengthSquared() > 0 then
+                        table.insert(self.lines, line)
+                    end
                 end
+                print(self.startPoint, endPoint)
+                self.lines = runeSystem:handleClick(self.rune, self.spellBook, self.lines, 
+                self.startPoint, endPoint, self.firstGestureId)
+            else
+                -- Runes which add a component to an existing entity
+                local testId = positionSystem:testPointInRange(Point(x, y), self.firstGestureId, entitySystem.currId)
+                if testId then
+                    runeSystem:handleClick(self.rune, self.spellBook, testId)
+                end 
             end
-            print(self.startPoint, endPoint)
-            self.lines = runeSystem:handleClick(self.rune, self.spellBook, self.lines, 
-            self.startPoint, endPoint, self.firstGestureId)
         end
     end
     self.drawPreviewLine = false
@@ -197,6 +209,8 @@ function Gestures:initGUI()
         {
             {imageName = "airRune.png", func = function(object) self.rune = "air" end},
             {imageName = "airRune.png", func = function(object) self.rune = "force" end},
+            {imageName = "airRune.png", func = function(object) self.rune = "input" end},
+            {imageName = "airRune.png", func = function(object) self.rune = "walker" end},
         },
         earth = 
         {

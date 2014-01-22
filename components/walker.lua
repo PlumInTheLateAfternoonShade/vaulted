@@ -3,13 +3,23 @@ local walkingSystem = require('systems.walkingSystem')
 -- Allows an object in the game world with this component to have a dynamic walker.
 local walker = {}
 
-function walker.create(id, force)
-    local c = {}
-    c.id = id
-    c.force = force
-    c.facing = 1
-    c.direction = 0
-    walkingSystem:add(c)
+function walker.prototype(force)
+    local c = 
+    {
+        name = "walker",
+        force = force,
+        facing = 1,
+        direction = 0,
+    }
+    function c:addToSystems(id)
+        self.id = id
+        walkingSystem:add(self)
+    end
+    return c
+end
+function walker.create(id, ...)
+    local c = walker.prototype(...)
+    c:addToSystems(id)
     return c
 end
 

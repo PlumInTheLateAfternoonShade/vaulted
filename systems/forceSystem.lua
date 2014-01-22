@@ -8,7 +8,7 @@ local Seg = require 'geometry.Seg'
 local forceSystem = {}
 
 local latestForce
-local forceMult = 100
+local forceMult = 10
 
 require('systems.componentSystem'):inherit(forceSystem)
 
