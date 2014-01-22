@@ -100,9 +100,11 @@ local function updateComponent(comp, world)
     -- TODO refactor branching
     local shapeName = positionSystem:getShape(comp.id)
     if shapeName == 'polygon' then
-        positionSystem:update(comp.id, Point(comp.body:getWorldCenter()), {comp.body:getWorldPoints(comp.shape:getPoints())})
+        local centerX, centerY = comp.body:getWorldCenter()
+        positionSystem:setPos(comp.id, centerX, centerY, {comp.body:getWorldPoints(comp.shape:getPoints())})
     elseif shapeName == 'circle' then
-        positionSystem:get(comp.id).center = Point(comp.body:getWorldCenter())
+        local centerX, centerY = comp.body:getWorldCenter()
+        positionSystem:setCenter(comp.id, centerX, centerY)
     end
 end
 

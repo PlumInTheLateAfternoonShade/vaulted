@@ -12,9 +12,17 @@ function positionSystem:addAndTranslateToCoords(comp)
     self:add(comp)
 end
 
-function positionSystem:update(id, center, coords)
-    self.components[id].center = center
-    self.components[id].coords = coords
+function positionSystem:setPos(id, centerX, centerY, coords)
+    local comp = self.components[id]
+    comp.center.x = centerX
+    comp.center.y = centerY
+    comp.coords = coords
+end
+
+function positionSystem:setCenter(id, centerX, centerY)
+    local comp = self.components[id]
+    comp.center.x = centerX
+    comp.center.y = centerY
 end
 
 function positionSystem:getCenter(id)
