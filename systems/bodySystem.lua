@@ -3,40 +3,27 @@ local Seg = require 'geometry.Seg'
 local positionSystem = require 'systems.positionSystem'
 local eleSystem = require 'systems.eleSystem'
 
--- Handles physics components.
-local physicsSystem = {}
+-- Handles body components.
+local bodySystem = {}
 
-require('systems.componentSystem'):inherit(physicsSystem)
+require('systems.componentSystem'):inherit(bodySystem)
 
 --TODO remove static fields
 local objectFactory, entitySystem
 
-function physicsSystem:init(w, objFact, eSys)
+function bodySystem:init(w, objFact, eSys)
     self.world = w
     self.world:setSleepingAllowed(true)
     objectFactory = objFact
     entitySystem = eSys
     self.components = {}
-    self.destroyQueue = {}
+    self.addQueue = {}
 end
 
-function physicsSystem:delete(id)
-    if self.components[id] then
-        table.insert(self.destroyQueue, self.components[id].fixture)
-    end
-    self.components[id] = nil
-end
-
-function physicsSystem:getMass(id)
+function bodySystem:getMass(id)
     local comp = self.components[id]
     if not comp or not comp.body then return 0 end
     return comp.body:getMass()
-end
-
-function physicsSystem:clearDestroyQueue()
-    -- Remove all fixtures that have been flagged for deletion
-    for _, fixture in pairs(self.destroyQueue) do fixture:destroy() end
-    self.destroyQueue = {}
 end
 
 local function centralize(points, c)
@@ -53,34 +40,20 @@ local function initBody(world, type, initV, center)
     return body
 end
 
-local function initFixture(comp)
-    local fixture = love.physics.newFixture(comp.body, comp.shape)
-    fixture:setFriction(comp.friction)
-    fixture:setUserData(comp.id)
-    return fixture
-end
-
-
-local function updateComponent(comp, world)
-    if comp.firstUpdate then
-        --Need to construct here rather than constructor,
-        --in case construct occurs during middle of physics calcs.
-        comp.firstUpdate = false
-        comp.body = initBody(world, comp.type, comp.initV, positionSystem:getCenter(comp.id))
-        comp.fixture = initFixture(comp)
-        -- Adjust stats if elemental object.
-        local ele = eleSystem:get(comp.id)
-        if ele then
-            comp.fixture:setDensity(ele.density)
-            comp.body:setGravityScale(ele.gravScale)
-            comp.body:resetMassData()
+function bodySystem:update(dt)
+    if #self.addQueue > 0 then
+        for id, comp in pairs(self.addQueue) do
+            comp.body = initBody(world, comp.type, comp.initV, positionSystem:getCenter(comp.id))
+            -- Adjust stats if elemental object.
+            local ele = eleSystem:get(comp.id)
+            if ele then
+                comp.body:setGravityScale(ele.gravScale)
+                comp.body:resetMassData()
+            end
+            self.components[id] = comp
         end
+        self.addQueue = {}
     end
-end
-
-function physicsSystem:update(dt)
-    self:clearDestroyQueue()
-    for id, comp in pairs(self.components) do updateComponent(comp, self.world) end
     self.world:update(dt)
 end
 
@@ -166,7 +139,7 @@ local function makeElementalObjectFromPoints(id, points, center, v)
     objectFactory.createElemental(points, newCenter, eleSystem:get(id).name, newV)
 end
 
-function physicsSystem:handleCollision(id, contact)
+function bodySystem:handleCollision(id, contact)
     local comp = self.components[id]
     if not comp then return end
     if comp.breakable and comp.body:getMass() > comp.maxMassToBreak then
@@ -185,13 +158,13 @@ function physicsSystem:handleCollision(id, contact)
     end
 end
 
-function physicsSystem:beginCollision(aId, bId, coll)
+function bodySystem:beginCollision(aId, bId, coll)
     self:handleCollision(aId, coll)
     self:handleCollision(bId, coll)
 end
 
-function physicsSystem:endCollision(aId, bId, coll)
+function bodySystem:endCollision(aId, bId, coll)
 
 end
 
-return physicsSystem
+return bodySystem

@@ -1,4 +1,4 @@
-ShouldProfile = true
+ShouldProfile = false
 require 'lib.luafun.fun' ()
 local tempLoader = require 'lib.AdvTiledLoader.Loader'
 require 'class'
