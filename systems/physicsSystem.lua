@@ -53,6 +53,17 @@ local function initBody(world, type, initV, center)
     return body
 end
 
+local function initPolygonShape(id)
+    local points = positionSystem:getPoints(id)
+    removeRedundantPoints(points)
+    centralize(points, computeCentroid(points))
+    return love.physics.newPolygonShape(Point.pointsToCoords(points))
+end
+
+local function initCircleShape(id)
+    return love.physics.newCircleShape(positionSystem:getRadius(id))
+end
+
 local function initFixture(comp)
     local fixture = love.physics.newFixture(comp.body, comp.shape)
     fixture:setFriction(comp.friction)
@@ -60,6 +71,15 @@ local function initFixture(comp)
     return fixture
 end
 
+local shapeInits =
+{
+    polygon = initPolygonShape,
+    circle = initCircleShape,
+}
+
+local function initShape(id)
+    return shapeInits[positionSystem:getShape(id)](id)
+end
 
 local function updateComponent(comp, world)
     if comp.firstUpdate then
@@ -67,6 +87,7 @@ local function updateComponent(comp, world)
         --in case construct occurs during middle of physics calcs.
         comp.firstUpdate = false
         comp.body = initBody(world, comp.type, comp.initV, positionSystem:getCenter(comp.id))
+        comp.shape = initShape(comp.id)
         comp.fixture = initFixture(comp)
         -- Adjust stats if elemental object.
         local ele = eleSystem:get(comp.id)
@@ -75,6 +96,15 @@ local function updateComponent(comp, world)
             comp.body:setGravityScale(ele.gravScale)
             comp.body:resetMassData()
         end
+    end
+    -- TODO refactor branching
+    local shapeName = positionSystem:getShape(comp.id)
+    if shapeName == 'polygon' then
+        local centerX, centerY = comp.body:getWorldCenter()
+        positionSystem:setPos(comp.id, centerX, centerY, {comp.body:getWorldPoints(comp.shape:getPoints())})
+    elseif shapeName == 'circle' then
+        local centerX, centerY = comp.body:getWorldCenter()
+        positionSystem:setCenter(comp.id, centerX, centerY)
     end
 end
 

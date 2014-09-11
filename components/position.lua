@@ -3,13 +3,13 @@ local positionSystem = require('systems.positionSystem')
 -- Allows an object in the game world with this component to have a dynamic position.
 local position = {}
 
-function position.prototype(coords, center, shapeName, radius)
+function position.prototype(coords, center, shape, radius)
     local c = 
     {
         name = 'position',
         center = center,
         coords = coords,
-        shapeName = shapeName or 'polygon',
+        shape = shape or 'polygon',
         radius = radius,
         shouldPreview = true,
     }
