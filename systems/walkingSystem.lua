@@ -7,7 +7,12 @@ require('systems.componentSystem'):inherit(walkingSystem)
 function walkingSystem:update(dt)
     for id, comp in pairs(self.components) do
         if comp.direction ~= 0 then
-            physicsSystem:get(id).body:applyForce(comp.force * comp.direction, 0)
+            local body = physicsSystem:get(id).body
+            -- Current v on x axis in direction we want to go
+            local currentVeloc = body:getLinearVelocity() * comp.direction
+            local push = comp.force * math.min(comp.targetVeloc / 4, math.max(
+                0, comp.targetVeloc - currentVeloc))
+            body:applyForce(push * comp.direction, 0)
         end
     end
 end

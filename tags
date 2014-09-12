@@ -1595,7 +1595,7 @@ version	lib/luafun/doc/conf.py	/^version = '0.1'$/;"	v
 walker 	Spell.lua	/^    walker = function (t) return require 'components.walker'.prototype(t.force) end,$/;"	f
 walker 	systems/runeSystem.lua	/^        walker = function(spellBook, previewId)$/;"	f
 walker.create	components/walker.lua	/^function walker.create(id, ...)$/;"	f
-walker.prototype	components/walker.lua	/^function walker.prototype(force)$/;"	f
+walker.prototype	components/walker.lua	/^function walker.prototype(force, targetVeloc)$/;"	f
 walkingSystem:getDirection	systems/walkingSystem.lua	/^function walkingSystem:getDirection(id)$/;"	f
 walkingSystem:startWalkingLeft	systems/walkingSystem.lua	/^function walkingSystem:startWalkingLeft(id)$/;"	f
 walkingSystem:startWalkingRight	systems/walkingSystem.lua	/^function walkingSystem:startWalkingRight(id)$/;"	f

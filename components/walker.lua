@@ -3,11 +3,12 @@ local walkingSystem = require('systems.walkingSystem')
 -- Allows an object in the game world with this component to have a dynamic walker.
 local walker = {}
 
-function walker.prototype(force)
+function walker.prototype(force, targetVeloc)
     local c = 
     {
         name = "walker",
         force = force,
+        targetVeloc = targetVeloc,
         facing = 1,
         direction = 0,
     }

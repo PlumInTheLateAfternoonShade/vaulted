@@ -44,7 +44,7 @@ function runeSystem:init(objectFactory)
             addToExisting(spellBook, input.prototype(false, false), previewId)
         end,
         walker = function(spellBook, previewId)
-            addToExisting(spellBook, walker.prototype(5001), previewId)
+            addToExisting(spellBook, walker.prototype(250, 500), previewId)
         end,
     }
 end
