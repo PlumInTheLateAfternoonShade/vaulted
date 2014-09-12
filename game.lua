@@ -53,8 +53,9 @@ function Game:draw()
     setColorInverted(conf.fontColor)
     -- Debug
     local heroCenter = positionSystem:getCenter(heroId)
-    love.graphics.print(string.format("x: %d y: %d", heroCenter.x, heroCenter.y),
-    conf.screenWidth * 0.8, conf.screenHeight * 0.1)
+    local vx, vy = require 'systems.physicsSystem':get(heroId).body:getLinearVelocity()
+    love.graphics.print(string.format("x: %d y: %d vx: %d vy: %d", heroCenter.x, heroCenter.y, vx, vy),
+    conf.screenWidth * 0.77, conf.screenHeight * 0.1)
     -- draw the FPS counter
     love.graphics.print(string.format("FPS: %d", self.fps),
     conf.screenWidth * 0.9, conf.screenHeight * 0.2)
