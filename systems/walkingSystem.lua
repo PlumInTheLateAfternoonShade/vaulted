@@ -10,7 +10,7 @@ function walkingSystem:update(dt)
             local body = physicsSystem:get(id).body
             -- Current v on x axis in direction we want to go
             local currentVeloc = body:getLinearVelocity() * comp.direction
-            local push = comp.force * math.min(comp.targetVeloc / 4, math.max(
+            local push = comp.force * math.min(comp.targetVeloc / 16, math.max(
                 0, comp.targetVeloc - currentVeloc))
             body:applyForce(push * comp.direction, 0)
         end
