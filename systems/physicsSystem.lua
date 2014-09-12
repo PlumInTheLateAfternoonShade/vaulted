@@ -81,7 +81,7 @@ local function initShape(id)
     return shapeInits[positionSystem:getShape(id)](id)
 end
 
-local function updateComponent(comp, world)
+local function updateComponent(comp, world, dt)
     if comp.firstUpdate then
         -- Need to construct here rather than constructor,
         -- in case construct occurs during middle of physics calcs.
@@ -95,6 +95,9 @@ local function updateComponent(comp, world)
             comp.fixture:setDensity(ele.density)
             comp.body:setGravityScale(ele.gravScale)
             comp.body:resetMassData()
+        elseif comp.density then
+            comp.fixture:setDensity(comp.density)
+            comp.body:resetMassData()
         end
     end
     -- TODO refactor branching
@@ -106,11 +109,22 @@ local function updateComponent(comp, world)
         local centerX, centerY = comp.body:getWorldCenter()
         positionSystem:setCenter(comp.id, centerX, centerY)
     end
+    if comp.shouldBalance then
+        local standupAccel = -250
+        local angle = (comp.body:getAngle() % (math.pi * 2))
+        if angle > math.pi then
+            angle = angle - 2 * math.pi
+        end
+        if angle ~= 0 then
+            local v = standupAccel*angle*dt
+            comp.body:setAngularVelocity(v)
+        end
+    end
 end
 
 function physicsSystem:update(dt)
     self:clearDestroyQueue()
-    for id, comp in pairs(self.components) do updateComponent(comp, self.world) end
+    for id, comp in pairs(self.components) do updateComponent(comp, self.world, dt) end
     self.world:update(dt)
 end
 

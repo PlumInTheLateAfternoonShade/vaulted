@@ -342,8 +342,8 @@ clearBuffer	lib/AdvTiledLoader/base64.lua	/^local function clearBuffer()$/;"	f
 close.OnClick 	lib/LoveFrames/objects/frame.lua	/^	close.OnClick = function(x, y, object)$/;"	f
 collect	lib/AdvTiledLoader/external/xml.lua	/^local function collect(s)$/;"	f
 collider 	Spell.lua	/^    collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV) end,$/;"	f
-collider.create	components/collider.lua	/^function collider.create(id, friction, type, breakable, initV)$/;"	f
-collider.prototype	components/collider.lua	/^function collider.prototype(friction, type, breakable, initV)$/;"	f
+collider.create	components/collider.lua	/^function collider.create(id, ...)$/;"	f
+collider.prototype	components/collider.lua	/^function collider.prototype(friction, type, breakable, initV, density,$/;"	f
 colorEquals	utils.lua	/^function colorEquals(color1, color2)$/;"	f
 colorVary	components/element.lua	/^local function colorVary(color)$/;"	f
 common.class	class.lua	/^	function common.class(name, prototype, parent)$/;"	f
@@ -1584,7 +1584,7 @@ type(self.super.isSubclassOf) 	lib/LoveFrames/third-party/middleclass.lua	/^    
 unm 	lib/luafun/fun.lua	/^    unm = function(a) return -a end, -- an alias$/;"	f
 unpacks	utils.lua	/^function unpacks( ... )$/;"	f
 upbutton.Update		lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		upbutton.Update	= function(object, dt)$/;"	f
-updateComponent	systems/physicsSystem.lua	/^local function updateComponent(comp, world)$/;"	f
+updateComponent	systems/physicsSystem.lua	/^local function updateComponent(comp, world, dt)$/;"	f
 updateExperience	systems/experienceSystem.lua	/^local function updateExperience(id, comp, dt)$/;"	f
 updateHealth	systems/healthSystem.lua	/^local function updateHealth(id, comp, dt)$/;"	f
 updateMana	systems/manaSystem.lua	/^local function updateMana(id, comp, dt)$/;"	f

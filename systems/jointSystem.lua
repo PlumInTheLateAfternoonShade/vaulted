@@ -15,7 +15,6 @@ end
 
 function jointSystem:update(dt)
     for id, comp in pairs(self.addQueue) do
-        print('making new joint')
         comp.joint = love.physics.newWeldJoint(
             physicsSystem:get(comp.id1).body,
             physicsSystem:get(comp.id2).body,
