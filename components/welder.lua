@@ -10,6 +10,7 @@ function welder.prototype(id1, id2, point, shouldCollide)
         id2 = id2,
         point = point,
         shouldCollide = shouldCollide or false,
+        joint = nil,
     }
     function c:addToSystems(id)
         self.id = id

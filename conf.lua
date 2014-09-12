@@ -1,7 +1,6 @@
-ShouldProfile = true
+ShouldProfile = false
 require 'lib.luafun.fun' ()
 local tempLoader = require 'lib.AdvTiledLoader.Loader'
-require 'class'
 if ShouldProfile then
     ProFi = require 'lib.ProFi'
 end

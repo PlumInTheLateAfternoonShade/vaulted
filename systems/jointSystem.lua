@@ -15,11 +15,11 @@ end
 
 function jointSystem:update(dt)
     for id, comp in pairs(self.addQueue) do
-        local centerX, centerY = physicsSystem:get(comp.id1).body:getWorldCenter()
-        love.physics.newWeldJoint(
+        print('making new joint')
+        comp.joint = love.physics.newWeldJoint(
             physicsSystem:get(comp.id1).body,
             physicsSystem:get(comp.id2).body,
-            centerX, centerY,
+            comp.point.x, comp.point.y,
             comp.shouldCollide)
         self.components[id] = comp
     end

@@ -1,0 +1,1631 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALLSPHINXOPTS	lib/luafun/doc/Makefile	/^ALLSPHINXOPTS   = -d $(BUILDDIR)\/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .$/;"	m
+ALLSPHINXOPTS	lib/luafun/doc/make.bat	/^	set ALLSPHINXOPTS=-D latex_paper_size=%PAPER% %ALLSPHINXOPTS%$/;"	v
+ALLSPHINXOPTS	lib/luafun/doc/make.bat	/^set ALLSPHINXOPTS=-d %BUILDDIR%\/doctrees %SPHINXOPTS% .$/;"	v
+Actor:applyBolt	actors/actor.lua	/^function Actor:applyBolt(power, element)$/;"	f
+Actor:beginCollision	actors/actor.lua	/^function Actor:beginCollision(other, contact, world)$/;"	f
+Actor:damageFromPhysicalImpact	actors/actor.lua	/^function Actor:damageFromPhysicalImpact(impact)$/;"	f
+Actor:damageFromTemp	actors/actor.lua	/^function Actor:damageFromTemp(dt)$/;"	f
+Actor:endCollision	actors/actor.lua	/^function Actor:endCollision(other, contact, world)$/;"	f
+Actor:getWrappedAngle	actors/actor.lua	/^function Actor:getWrappedAngle()$/;"	f
+Actor:initAttributes	actors/actor.lua	/^function Actor:initAttributes()$/;"	f
+Actor:isStanding	actors/actor.lua	/^function Actor:isStanding()$/;"	f
+Actor:isWalkingLeft	actors/actor.lua	/^function Actor:isWalkingLeft()$/;"	f
+Actor:isWalkingRight	actors/actor.lua	/^function Actor:isWalkingRight()$/;"	f
+Actor:rightSelf	actors/actor.lua	/^function Actor:rightSelf(dt)$/;"	f
+Actor:setRighting	actors/actor.lua	/^function Actor:setRighting(value)$/;"	f
+Actor:setStanding	actors/actor.lua	/^function Actor:setStanding()$/;"	f
+Actor:setWalkingLeft	actors/actor.lua	/^function Actor:setWalkingLeft()$/;"	f
+Actor:setWalkingRight	actors/actor.lua	/^function Actor:setWalkingRight()$/;"	f
+Actor:update	actors/actor.lua	/^function Actor:update(dt)$/;"	f
+Actor:updateAttributes	actors/actor.lua	/^function Actor:updateAttributes(dt)$/;"	f
+Actor:updateHealth	actors/actor.lua	/^function Actor:updateHealth(dt)$/;"	f
+Actor:updateMana	actors/actor.lua	/^function Actor:updateMana(dt)$/;"	f
+Actor:updateXp	actors/actor.lua	/^function Actor:updateXp()$/;"	f
+Actor:walk	actors/actor.lua	/^function Actor:walk(dt)$/;"	f
+BUILDDIR	lib/luafun/doc/Makefile	/^BUILDDIR      = _build$/;"	m
+BUILDDIR	lib/luafun/doc/make.bat	/^set BUILDDIR=_build$/;"	v
+Camera:move	camera.lua	/^function Camera:move(dx, dy)$/;"	f
+Camera:rotate	camera.lua	/^function Camera:rotate(dr)$/;"	f
+Camera:scale	camera.lua	/^function Camera:scale(sx, sy)$/;"	f
+Camera:set	camera.lua	/^function Camera:set()$/;"	f
+Camera:setAdjPosition	camera.lua	/^function Camera:setAdjPosition(x, y, dt)$/;"	f
+Camera:setPosition	camera.lua	/^function Camera:setPosition(x, y)$/;"	f
+Camera:setScale	camera.lua	/^function Camera:setScale(sx, sy)$/;"	f
+Camera:shake	camera.lua	/^function Camera:shake(a, b, contact)$/;"	f
+Camera:unset	camera.lua	/^function Camera:unset()$/;"	f
+ControlSet:draw	menus/controlSet.lua	/^function ControlSet:draw()$/;"	f
+ControlSet:keypressed	menus/controlSet.lua	/^function ControlSet:keypressed(key)$/;"	f
+Controls:draw	menus/controls.lua	/^function Controls:draw()$/;"	f
+Controls:initGUI	menus/controls.lua	/^function Controls:initGUI()$/;"	f
+Controls:keypressed	menus/controls.lua	/^function Controls:keypressed(key)$/;"	f
+Controls:mousepressed	menus/controls.lua	/^function Controls:mousepressed(x, y, button)$/;"	f
+Controls:mousereleased	menus/controls.lua	/^function Controls:mousereleased(x, y, button)$/;"	f
+Controls:update	menus/controls.lua	/^function Controls:update(dt)$/;"	f
+CreateObjects	lib/LoveFrames/init.lua	/^		local function CreateObjects(t, o, c)$/;"	f
+FireParticleSystem:draw	particles/fireParticleSystem.lua	/^function FireParticleSystem:draw(x, y, angle)$/;"	f
+FireParticleSystem:reduce	particles/fireParticleSystem.lua	/^function FireParticleSystem:reduce(deathTime, deathSeconds)$/;"	f
+FireParticleSystem:update	particles/fireParticleSystem.lua	/^function FireParticleSystem:update(dt, vX, vY, color)$/;"	f
+Game:draw	game.lua	/^function Game:draw()$/;"	f
+Game:keypressed	game.lua	/^function Game:keypressed(key)$/;"	f
+Game:keyreleased	game.lua	/^function Game:keyreleased(key)$/;"	f
+Game:update	game.lua	/^function Game:update(dt)$/;"	f
+GenMenu:draw	menus/genMenu.lua	/^function GenMenu:draw()$/;"	f
+GenMenu:drawItems	menus/genMenu.lua	/^function GenMenu:drawItems()$/;"	f
+GenMenu:drawText	menus/genMenu.lua	/^function GenMenu:drawText(text, pos, inverted)$/;"	f
+GenMenu:getCurrentItem	menus/genMenu.lua	/^function GenMenu:getCurrentItem()$/;"	f
+GenMenu:incMenu	menus/genMenu.lua	/^function GenMenu:incMenu(inc)$/;"	f
+GenMenu:keypressed	menus/genMenu.lua	/^function GenMenu:keypressed(key)$/;"	f
+GenMenu:setToLastItem	menus/genMenu.lua	/^function GenMenu:setToLastItem()$/;"	f
+GenMenu:update	menus/genMenu.lua	/^function GenMenu:update(dt)$/;"	f
+Gestures:deleteNearestLine	gestures.lua	/^function Gestures:deleteNearestLine(p)$/;"	f
+Gestures:draw	gestures.lua	/^function Gestures:draw()$/;"	f
+Gestures:drawGrid	gestures.lua	/^function Gestures:drawGrid()$/;"	f
+Gestures:drawLines	gestures.lua	/^function Gestures:drawLines()$/;"	f
+Gestures:getNearestGridPoint	gestures.lua	/^function Gestures:getNearestGridPoint(x, y)$/;"	f
+Gestures:inButtonSpace	gestures.lua	/^function Gestures:inButtonSpace(x)$/;"	f
+Gestures:incrementElement	gestures.lua	/^function Gestures:incrementElement(amount)$/;"	f
+Gestures:incrementSpell	gestures.lua	/^function Gestures:incrementSpell(amount)$/;"	f
+Gestures:initGUI	gestures.lua	/^function Gestures:initGUI()$/;"	f
+Gestures:initGrid	gestures.lua	/^function Gestures:initGrid()$/;"	f
+Gestures:isPlayerDot	gestures.lua	/^function Gestures:isPlayerDot(i, j)$/;"	f
+Gestures:keypressed	gestures.lua	/^function Gestures:keypressed(key)$/;"	f
+Gestures:mousepressed	gestures.lua	/^function Gestures:mousepressed(x, y, button)$/;"	f
+Gestures:mousereleased	gestures.lua	/^function Gestures:mousereleased(x, y, button)$/;"	f
+Gestures:update	gestures.lua	/^function Gestures:update(dt)$/;"	f
+GetParents	lib/LoveFrames/objects/base.lua	/^	local function GetParents(object, t)$/;"	f
+Graphics:draw	menus/graphics.lua	/^function Graphics:draw()$/;"	f
+Graphics:keypressed	menus/graphics.lua	/^function Graphics:keypressed(key)$/;"	f
+HuffmanTable	lib/AdvTiledLoader/external/deflatelua.lua	/^local function HuffmanTable(init, is_full)$/;"	f
+I18NSPHINXOPTS	lib/luafun/doc/Makefile	/^I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .$/;"	m
+I18NSPHINXOPTS	lib/luafun/doc/make.bat	/^	set I18NSPHINXOPTS=-D latex_paper_size=%PAPER% %I18NSPHINXOPTS%$/;"	v
+I18NSPHINXOPTS	lib/luafun/doc/make.bat	/^set I18NSPHINXOPTS=%SPHINXOPTS% .$/;"	v
+IsChild	lib/LoveFrames/objects/base.lua	/^	local function IsChild(object)$/;"	f
+Loader._checkName	lib/AdvTiledLoader/Loader.lua	/^function Loader._checkName(t, str)$/;"	f
+Loader._checkXML	lib/AdvTiledLoader/Loader.lua	/^function Loader._checkXML(t)$/;"	f
+Loader._newImage	lib/AdvTiledLoader/Loader.lua	/^function Loader._newImage(info)$/;"	f
+Loader._processMap	lib/AdvTiledLoader/Loader.lua	/^function Loader._processMap(name, t)$/;"	f
+Loader._processObjectLayer	lib/AdvTiledLoader/Loader.lua	/^function Loader._processObjectLayer(t, map)$/;"	f
+Loader._processProperties	lib/AdvTiledLoader/Loader.lua	/^function Loader._processProperties(t)$/;"	f
+Loader._processTileLayer	lib/AdvTiledLoader/Loader.lua	/^function Loader._processTileLayer(t, map)$/;"	f
+Loader._processTileLayerData	lib/AdvTiledLoader/Loader.lua	/^function Loader._processTileLayerData(t)$/;"	f
+Loader._processTileSet	lib/AdvTiledLoader/Loader.lua	/^function Loader._processTileSet(t, map)$/;"	f
+Loader.load	lib/AdvTiledLoader/Loader.lua	/^function Loader.load(filename)$/;"	f
+Map:_updateTileRange	lib/AdvTiledLoader/Map.lua	/^function Map:_updateTileRange()$/;"	f
+Map:addToWorld	lib/AdvTiledLoader/Map.lua	/^function Map:addToWorld(objectFactory)$/;"	f
+Map:autoDrawRange	lib/AdvTiledLoader/Map.lua	/^function Map:autoDrawRange(tx, ty, scale, pad)$/;"	f
+Map:draw	lib/AdvTiledLoader/Map.lua	/^function Map:draw()$/;"	f
+Map:drawPosition	lib/AdvTiledLoader/Map.lua	/^function Map:drawPosition(item)$/;"	f
+Map:forceRedraw	lib/AdvTiledLoader/Map.lua	/^function Map:forceRedraw()$/;"	f
+Map:fromIso	lib/AdvTiledLoader/Map.lua	/^function Map:fromIso(x, y)$/;"	f
+Map:getDrawRange	lib/AdvTiledLoader/Map.lua	/^function Map:getDrawRange()$/;"	f
+Map:new	lib/AdvTiledLoader/Map.lua	/^function Map:new(name, width, height, tileWidth, tileHeight, orientation, properties)$/;"	f
+Map:newObjectLayer	lib/AdvTiledLoader/Map.lua	/^function Map:newObjectLayer(name, color, opacity, prop, draw)$/;"	f
+Map:newTileLayer	lib/AdvTiledLoader/Map.lua	/^function Map:newTileLayer(name, opacity, prop, draw)$/;"	f
+Map:newTileSet	lib/AdvTiledLoader/Map.lua	/^function Map:newTileSet(img, name, tilew, tileh, width, height, firstgid, space, marg, tprop)$/;"	f
+Map:setDrawRange	lib/AdvTiledLoader/Map.lua	/^function Map:setDrawRange(x,y,w,h)$/;"	f
+Map:toIso	lib/AdvTiledLoader/Map.lua	/^function Map:toIso(a, b)$/;"	f
+Map:updateTiles	lib/AdvTiledLoader/Map.lua	/^function Map:updateTiles()$/;"	f
+Menu:draw	menus/menu.lua	/^function Menu:draw()$/;"	f
+Menu:keypressed	menus/menu.lua	/^function Menu:keypressed(key)$/;"	f
+Object.static:allocate	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:allocate()$/;"	f
+Object.static:include	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:include( ... )$/;"	f
+Object.static:includes	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:includes(mixin)$/;"	f
+Object.static:isSubclassOf	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:isSubclassOf(other)$/;"	f
+Object.static:new	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:new(...)$/;"	f
+Object.static:subclass	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:subclass(name)$/;"	f
+Object.static:subclassed	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:subclassed(other) end$/;"	f
+Object:__tostring	lib/LoveFrames/third-party/middleclass.lua	/^function Object:__tostring() return "instance of " .. tostring(self.class) end$/;"	f
+Object:initialize	lib/LoveFrames/third-party/middleclass.lua	/^function Object:initialize() end$/;"	f
+Object:isInstanceOf	lib/LoveFrames/third-party/middleclass.lua	/^function Object:isInstanceOf(aClass)$/;"	f
+Object:move	lib/AdvTiledLoader/Object.lua	/^function Object:move(x,y)$/;"	f
+Object:moveTo	lib/AdvTiledLoader/Object.lua	/^function Object:moveTo(x,y)$/;"	f
+Object:new	lib/AdvTiledLoader/Object.lua	/^function Object:new(layer, name, type, x, y, width, height, gid, prop)$/;"	f
+Object:resize	lib/AdvTiledLoader/Object.lua	/^function Object:resize(w,h)$/;"	f
+Object:updateDrawInfo	lib/AdvTiledLoader/Object.lua	/^function Object:updateDrawInfo()$/;"	f
+ObjectLayer:draw	lib/AdvTiledLoader/ObjectLayer.lua	/^function ObjectLayer:draw()$/;"	f
+ObjectLayer:new	lib/AdvTiledLoader/ObjectLayer.lua	/^function ObjectLayer:new(map, name, color, opacity, prop)$/;"	f
+ObjectLayer:newObject	lib/AdvTiledLoader/ObjectLayer.lua	/^function ObjectLayer:newObject(name, type, x, y, width, height, gid, prop)$/;"	f
+OptionParser	lib/AdvTiledLoader/external/optparse.lua	/^local function OptionParser(t)$/;"	f
+PAPER	lib/luafun/doc/Makefile	/^PAPER         =$/;"	m
+PAPER	lib/luafun/doc/make.bat	/^	echo.  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter$/;"	v
+PAPEROPT_a4	lib/luafun/doc/Makefile	/^PAPEROPT_a4     = -D latex_paper_size=a4$/;"	m
+PAPEROPT_letter	lib/luafun/doc/Makefile	/^PAPEROPT_letter = -D latex_paper_size=letter$/;"	m
+Point.__add	geometry/Point.lua	/^function Point.__add(p0, p1)$/;"	f
+Point.__mult	geometry/Point.lua	/^function Point.__mult(p0, p1)$/;"	f
+Point.__sub	geometry/Point.lua	/^function Point.__sub(p0, p1)$/;"	f
+Point.__tostring	geometry/Point.lua	/^function Point.__tostring(p)$/;"	f
+Point.centralize	geometry/Point.lua	/^function Point.centralize(points, c)$/;"	f
+Point.connectLinesIntoPolygon	geometry/Point.lua	/^function Point.connectLinesIntoPolygon(lines)$/;"	f
+Point.coordsToPoints	geometry/Point.lua	/^function Point.coordsToPoints(coords)$/;"	f
+Point.mirrorXListOfPoints	geometry/Point.lua	/^function Point.mirrorXListOfPoints(points)$/;"	f
+Point.pointsToCoords	geometry/Point.lua	/^function Point.pointsToCoords(points)$/;"	f
+Point.pointsToCoordsTable	geometry/Point.lua	/^function Point.pointsToCoordsTable(points)$/;"	f
+Point:compress	geometry/Point.lua	/^function Point:compress()$/;"	f
+Point:distance	geometry/Point.lua	/^function Point:distance(point)$/;"	f
+Point:distanceSquared	geometry/Point.lua	/^function Point:distanceSquared(point)$/;"	f
+Point:equals	geometry/Point.lua	/^function Point:equals(point)$/;"	f
+Point:getReflectAcrossPoint	geometry/Point.lua	/^function Point:getReflectAcrossPoint(point)$/;"	f
+Point:magSquared	geometry/Point.lua	/^function Point:magSquared()$/;"	f
+Point:magnitude	geometry/Point.lua	/^function Point:magnitude()$/;"	f
+Point:normalize	geometry/Point.lua	/^function Point:normalize()$/;"	f
+Point:offset	geometry/Point.lua	/^function Point:offset(x, y)$/;"	f
+Point:reflectAcrossPoint	geometry/Point.lua	/^function Point:reflectAcrossPoint(point)$/;"	f
+Point:scale	geometry/Point.lua	/^function Point:scale(value)$/;"	f
+ProFi:checkMemory	lib/ProFi.lua	/^function ProFi:checkMemory( interval, note )$/;"	f
+ProFi:createFuncReport	lib/ProFi.lua	/^function ProFi:createFuncReport( funcInfo )$/;"	f
+ProFi:doInspection	lib/ProFi.lua	/^function ProFi:doInspection( inspect, funcReport )$/;"	f
+ProFi:formatMemoryReportWithFormatter	lib/ProFi.lua	/^function ProFi:formatMemoryReportWithFormatter( memoryReport, formatter )$/;"	f
+ProFi:getFuncReport	lib/ProFi.lua	/^function ProFi:getFuncReport( funcInfo )$/;"	f
+ProFi:getInspectionWithKeyFromInspections	lib/ProFi.lua	/^function ProFi:getInspectionWithKeyFromInspections( key, inspections )$/;"	f
+ProFi:getInspectionsFromReport	lib/ProFi.lua	/^function ProFi:getInspectionsFromReport( funcReport )$/;"	f
+ProFi:getTitleFromFuncInfo	lib/ProFi.lua	/^function ProFi:getTitleFromFuncInfo( funcInfo )$/;"	f
+ProFi:onFunctionCall	lib/ProFi.lua	/^function ProFi:onFunctionCall( funcInfo )$/;"	f
+ProFi:onFunctionReturn	lib/ProFi.lua	/^function ProFi:onFunctionReturn( funcInfo )$/;"	f
+ProFi:reset	lib/ProFi.lua	/^function ProFi:reset()$/;"	f
+ProFi:resetReports	lib/ProFi.lua	/^function ProFi:resetReports( reports )$/;"	f
+ProFi:setGetTimeMethod	lib/ProFi.lua	/^function ProFi:setGetTimeMethod( getTimeMethod )$/;"	f
+ProFi:setHighestMemoryReport	lib/ProFi.lua	/^function ProFi:setHighestMemoryReport( memoryReport )$/;"	f
+ProFi:setHookCount	lib/ProFi.lua	/^function ProFi:setHookCount( hookCount )$/;"	f
+ProFi:setInspect	lib/ProFi.lua	/^function ProFi:setInspect( methodName, levels )$/;"	f
+ProFi:setLowestMemoryReport	lib/ProFi.lua	/^function ProFi:setLowestMemoryReport( memoryReport )$/;"	f
+ProFi:setSortMethod	lib/ProFi.lua	/^function ProFi:setSortMethod( sortType )$/;"	f
+ProFi:shouldInspect	lib/ProFi.lua	/^function ProFi:shouldInspect( funcInfo )$/;"	f
+ProFi:shouldReturn	lib/ProFi.lua	/^function ProFi:shouldReturn( )$/;"	f
+ProFi:sortInspectionsIntoList	lib/ProFi.lua	/^function ProFi:sortInspectionsIntoList( inspections )$/;"	f
+ProFi:sortReportsWithSortMethod	lib/ProFi.lua	/^function ProFi:sortReportsWithSortMethod( reports, sortMethod )$/;"	f
+ProFi:start	lib/ProFi.lua	/^function ProFi:start( param )$/;"	f
+ProFi:startHooks	lib/ProFi.lua	/^function ProFi:startHooks()$/;"	f
+ProFi:stop	lib/ProFi.lua	/^function ProFi:stop()$/;"	f
+ProFi:stopHooks	lib/ProFi.lua	/^function ProFi:stopHooks()$/;"	f
+ProFi:writeBannerToFile	lib/ProFi.lua	/^function ProFi:writeBannerToFile( file )$/;"	f
+ProFi:writeHighestMemoryReportToFile	lib/ProFi.lua	/^function ProFi:writeHighestMemoryReportToFile( file )$/;"	f
+ProFi:writeInpsectionsToFile	lib/ProFi.lua	/^function ProFi:writeInpsectionsToFile( inspections, file )$/;"	f
+ProFi:writeLowestMemoryReportToFile	lib/ProFi.lua	/^function ProFi:writeLowestMemoryReportToFile( file )$/;"	f
+ProFi:writeMemoryReportsToFile	lib/ProFi.lua	/^function ProFi:writeMemoryReportsToFile( reports, file )$/;"	f
+ProFi:writeProfilingReportsToFile	lib/ProFi.lua	/^function ProFi:writeProfilingReportsToFile( reports, file )$/;"	f
+ProFi:writeReport	lib/ProFi.lua	/^function ProFi:writeReport( filename )$/;"	f
+ProFi:writeReportsToFilename	lib/ProFi.lua	/^function ProFi:writeReportsToFilename( filename )$/;"	f
+Resolution:draw	menus/resolution.lua	/^function Resolution:draw()$/;"	f
+Resolution:keypressed	menus/resolution.lua	/^function Resolution:keypressed(key)$/;"	f
+Resolution:setResolution	menus/resolution.lua	/^function Resolution:setResolution(stringRepresentation)$/;"	f
+SPHINXBUILD	lib/luafun/doc/Makefile	/^SPHINXBUILD   = sphinx-build$/;"	m
+SPHINXBUILD	lib/luafun/doc/make.bat	/^	set SPHINXBUILD=sphinx-build$/;"	v
+SPHINXOPTS	lib/luafun/doc/Makefile	/^SPHINXOPTS    =$/;"	m
+SaveAndExit:close	saveAndExit.lua	/^function SaveAndExit:close()$/;"	f
+Seg.__tostring	geometry/Seg.lua	/^function Seg.__tostring(r)$/;"	f
+Seg:compress	geometry/Seg.lua	/^function Seg:compress()$/;"	f
+Seg:convertToABC	geometry/Seg.lua	/^function Seg:convertToABC()$/;"	f
+Seg:decompress	geometry/Seg.lua	/^function Seg:decompress()$/;"	f
+Seg:distToPointSquared	geometry/Seg.lua	/^function Seg:distToPointSquared(a)$/;"	f
+Seg:draw	geometry/Seg.lua	/^function Seg:draw()$/;"	f
+Seg:findSidePointIsOn	geometry/Seg.lua	/^function Seg:findSidePointIsOn(point)$/;"	f
+Seg:getAngle	geometry/Seg.lua	/^function Seg:getAngle()$/;"	f
+Seg:getIntersectionAsLines	geometry/Seg.lua	/^function Seg:getIntersectionAsLines(line)$/;"	f
+Seg:getMidPoint	geometry/Seg.lua	/^function Seg:getMidPoint()$/;"	f
+Seg:getOtherPoint	geometry/Seg.lua	/^function Seg:getOtherPoint(point)$/;"	f
+Seg:hasPoint	geometry/Seg.lua	/^function Seg:hasPoint(point)$/;"	f
+Seg:intersects	geometry/Seg.lua	/^function Seg:intersects(seg)$/;"	f
+Seg:length	geometry/Seg.lua	/^function Seg:length()$/;"	f
+Seg:lengthSquared	geometry/Seg.lua	/^function Seg:lengthSquared()$/;"	f
+Seg:normalize	geometry/Seg.lua	/^function Seg:normalize()$/;"	f
+Seg:offset	geometry/Seg.lua	/^function Seg:offset(x, y)$/;"	f
+Seg:scale	geometry/Seg.lua	/^function Seg:scale(value)$/;"	f
+Seg:sharesAPoint	geometry/Seg.lua	/^function Seg:sharesAPoint(seg)$/;"	f
+Settings:draw	menus/settings.lua	/^function Settings:draw()$/;"	f
+Settings:keypressed	menus/settings.lua	/^function Settings:keypressed(key)$/;"	f
+Spell:addComponentTable	Spell.lua	/^function Spell:addComponentTable(compTable)$/;"	f
+Spell:addComponentToEntity	Spell.lua	/^function Spell:addComponentToEntity(component, previewId)$/;"	f
+Spell:cast	Spell.lua	/^function Spell:cast(casterId)$/;"	f
+Spell:delete	Spell.lua	/^function Spell:delete(id)$/;"	f
+Spell:preview	Spell.lua	/^function Spell:preview()$/;"	f
+State:draw	state.lua	/^function State:draw()$/;"	f
+State:keypressed	state.lua	/^function State:keypressed(key)$/;"	f
+State:keyreleased	state.lua	/^function State:keyreleased(key)$/;"	f
+State:load	state.lua	/^function State:load()$/;"	f
+State:mousepressed	state.lua	/^function State:mousepressed(x, y, button)$/;"	f
+State:mousereleased	state.lua	/^function State:mousereleased(x, y, button)$/;"	f
+State:update	state.lua	/^function State:update(dt)$/;"	f
+Tests:testAverageAngle	Tests.lua	/^function Tests:testAverageAngle()$/;"	f
+Tests:testSegmentIntersects	Tests.lua	/^function Tests:testSegmentIntersects()$/;"	f
+Tests:testSegmentPointDist	Tests.lua	/^function Tests:testSegmentPointDist()$/;"	f
+Tile:draw	lib/AdvTiledLoader/Tile.lua	/^function Tile:draw(x, y, rotation, scaleX, scaleY, offsetX, offsetY)$/;"	f
+Tile:new	lib/AdvTiledLoader/Tile.lua	/^function Tile:new(id, tileset, quad, width, height, prop)$/;"	f
+TileLayer:_populate	lib/AdvTiledLoader/TileLayer.lua	/^function TileLayer:_populate(t)$/;"	f
+TileLayer:addToWorld	lib/AdvTiledLoader/TileLayer.lua	/^function TileLayer:addToWorld(objectFactory)$/;"	f
+TileLayer:clearAfterTile	lib/AdvTiledLoader/TileLayer.lua	/^function TileLayer:clearAfterTile()$/;"	f
+TileLayer:draw	lib/AdvTiledLoader/TileLayer.lua	/^function TileLayer:draw()$/;"	f
+TileLayer:drawAfterTile	lib/AdvTiledLoader/TileLayer.lua	/^function TileLayer:drawAfterTile(h, w, funct)$/;"	f
+TileLayer:new	lib/AdvTiledLoader/TileLayer.lua	/^function TileLayer:new(map, name, opacity, prop)$/;"	f
+TileSet:getTiles	lib/AdvTiledLoader/TileSet.lua	/^function TileSet:getTiles()$/;"	f
+TileSet:new	lib/AdvTiledLoader/TileSet.lua	/^function TileSet:new(img, name, tilew, tileh, width, height, firstgid, space, marg, tprop)$/;"	f
+TileSet:tilesHigh	lib/AdvTiledLoader/TileSet.lua	/^function TileSet:tilesHigh()$/;"	f
+TileSet:tilesWide	lib/AdvTiledLoader/TileSet.lua	/^function TileSet:tilesWide()$/;"	f
+Tserial.pack	lib/TLTools/Tserial.lua	/^function Tserial.pack(t, drop, indent)$/;"	f
+Tserial.unpack	lib/TLTools/Tserial.lua	/^function Tserial.unpack(s, safe)$/;"	f
+["back to main menu"] 	main.lua	/^    ["back to main menu"] = function()$/;"	f
+["continue"] 	main.lua	/^    ["continue"] = function()$/;"	f
+["controlSet"] 	main.lua	/^    ["controlSet"] = function(...)$/;"	f
+["controls"] 	main.lua	/^    ["controls"] = function()$/;"	f
+["exit"] 	main.lua	/^    ["exit"] = function()$/;"	f
+["gestures"] 	main.lua	/^    ["gestures"] = function()$/;"	f
+["graphics"] 	main.lua	/^    ["graphics"] = function()$/;"	f
+["new game"] 	main.lua	/^    ["new game"] = function()$/;"	f
+["resolution"] 	main.lua	/^    ["resolution"] = function()$/;"	f
+["settings"] 	main.lua	/^    ["settings"] = function()$/;"	f
+[keys.left] 	systems/inputSystem.lua	/^        [keys.left] = function () return walkingSystem:startWalkingLeft(c.id) end,$/;"	f
+[keys.left] 	systems/inputSystem.lua	/^        [keys.left] = function () return walkingSystem:stopWalkingLeft(c.id) end,$/;"	f
+[keys.right] 	systems/inputSystem.lua	/^        [keys.right] = function () return walkingSystem:startWalkingRight(c.id) end,$/;"	f
+[keys.right] 	systems/inputSystem.lua	/^        [keys.right] = function () return walkingSystem:stopWalkingRight(c.id) end,$/;"	f
+__NULL__	class.lua	/^local function __NULL__() end$/;"	f
+__call 	class.lua	/^		__call = function(self, ...)$/;"	f
+__call 	lib/luafun/fun.lua	/^    __call = function(t)$/;"	f
+__call     	lib/LoveFrames/third-party/middleclass.lua	/^    __call     = function(self, ...) return self:new(...) end$/;"	f
+__tostring 	class.lua	/^		__tostring = function() return name end$/;"	f
+__tostring 	lib/LoveFrames/third-party/middleclass.lua	/^    __tostring = function() return "class " .. aClass.name end,$/;"	f
+_copy	utils.lua	/^    local function _copy(object)$/;"	f
+_createClass	lib/LoveFrames/third-party/middleclass.lua	/^local function _createClass(name, super)$/;"	f
+_createLookupMetamethod	lib/LoveFrames/third-party/middleclass.lua	/^local function _createLookupMetamethod(aClass, name)$/;"	f
+_includeMixin	lib/LoveFrames/third-party/middleclass.lua	/^local function _includeMixin(aClass, mixin)$/;"	f
+_setClassDictionariesMetatables	lib/LoveFrames/third-party/middleclass.lua	/^local function _setClassDictionariesMetatables(aClass)$/;"	f
+_setClassMetamethods	lib/LoveFrames/third-party/middleclass.lua	/^local function _setClassMetamethods(aClass)$/;"	f
+_setClassMetatable	lib/LoveFrames/third-party/middleclass.lua	/^local function _setClassMetatable(aClass)$/;"	f
+_setDefaultInitializeMethod	lib/LoveFrames/third-party/middleclass.lua	/^local function _setDefaultInitializeMethod(aClass, super)$/;"	f
+aClass.initialize 	lib/LoveFrames/third-party/middleclass.lua	/^  aClass.initialize = function(instance, ...)$/;"	f
+acc, x) return acc + x end, 0, range	lib/luafun/tests/reducing.lua	/^print(foldl(function(acc, x) return acc + x end, 0, range(5)))$/;"	f
+activatorFunc	lib/LoveFrames/objects/menu.lua	/^	local function activatorFunc(object)$/;"	f
+add 	lib/luafun/fun.lua	/^    add = function(a, b) return a + b end,$/;"	f
+addRectAndMark	rectAlgo.js	/^var addRectAndMark = function(x1, y1, x2, y2) { $/;"	c
+addToSystems 	components/input.lua	/^        addToSystems = function (self, id)$/;"	f
+adler32	lib/AdvTiledLoader/external/deflatelua.lua	/^local function adler32(byte, crc)$/;"	f
+air 	Spell.lua	/^    air = function (table) return require 'components.element'.air end,$/;"	f
+apply	systems/forceSystem.lua	/^local function apply(id, comp, world)$/;"	f
+assert( type(method)	lib/LoveFrames/third-party/middleclass.lua	/^    assert( type(method)=='function', tostring(aClass) .. " doesn't implement metamethod '" .. name .. "'" )$/;"	f
+assert(type(constructor) 	class.lua	/^	assert(type(constructor) == "function", 'constructor has to be nil or a function')$/;"	f
+assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function")$/;"	f
+assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function", "invalid first argument to drop_while")$/;"	f
+assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function", "invalid first argument to take_while")$/;"	f
+band	lib/AdvTiledLoader/external/numberlua.lua	/^local function band(a,b) return ((a+b) - bxor(a,b))\/2 end$/;"	f
+bitop	lib/AdvTiledLoader/external/numberlua.lua	/^  local function bitop(a, b)$/;"	f
+bits) return pow2[minbits] + msb	lib/AdvTiledLoader/external/deflatelua.lua	/^    function(bits) return pow2[minbits] + msb(bits, minbits) end)$/;"	f
+bits_tostring	lib/AdvTiledLoader/external/deflatelua.lua	/^local function bits_tostring(bits, nbits)$/;"	f
+bitstream_from_bytestream	lib/AdvTiledLoader/external/deflatelua.lua	/^local function bitstream_from_bytestream(bys)$/;"	f
+bnot	lib/AdvTiledLoader/external/numberlua.lua	/^local function bnot(a)   return F8 - a end$/;"	f
+body.create	components/body.lua	/^function body.create(id, ...)$/;"	f
+body.prototype	components/body.lua	/^function body.prototype(type, breakable, initV)$/;"	f
+bodySystem:beginCollision	systems/bodySystem.lua	/^function bodySystem:beginCollision(aId, bId, coll)$/;"	f
+bodySystem:endCollision	systems/bodySystem.lua	/^function bodySystem:endCollision(aId, bId, coll)$/;"	f
+bodySystem:getMass	systems/bodySystem.lua	/^function bodySystem:getMass(id)$/;"	f
+bodySystem:getWorldCenter	systems/bodySystem.lua	/^function bodySystem:getWorldCenter(id)$/;"	f
+bodySystem:getWorldPoints	systems/bodySystem.lua	/^function bodySystem:getWorldPoints(id)$/;"	f
+bodySystem:handleCollision	systems/bodySystem.lua	/^function bodySystem:handleCollision(id, contact)$/;"	f
+bodySystem:init	systems/bodySystem.lua	/^function bodySystem:init(w, objFact, eSys)$/;"	f
+bodySystem:update	systems/bodySystem.lua	/^function bodySystem:update(dt)$/;"	f
+bor	lib/AdvTiledLoader/external/numberlua.lua	/^local function bor(a,b)  return F8 - band(F8 - a, F8 - b) end$/;"	f
+breakNearSeg	systems/bodySystem.lua	/^local function breakNearSeg(points, center, seg)$/;"	f
+breakNearSeg	systems/physicsSystem.lua	/^local function breakNearSeg(points, center, seg)$/;"	f
+bs 	lib/AdvTiledLoader/external/deflatelua.lua	/^    bs = bitstream_from_bytestream(bytestream_from_function(o))$/;"	f
+bs 	lib/AdvTiledLoader/external/deflatelua.lua	/^    bs = function(sbyte) o:write(string_char(sbyte)) end$/;"	f
+bytestream_from_file	lib/AdvTiledLoader/external/deflatelua.lua	/^local function bytestream_from_file(fh)$/;"	f
+bytestream_from_function	lib/AdvTiledLoader/external/deflatelua.lua	/^local function bytestream_from_function(f)$/;"	f
+bytestream_from_string	lib/AdvTiledLoader/external/deflatelua.lua	/^local function bytestream_from_string(s)$/;"	f
+c.keyPresses[key] 	systems/inputSystem.lua	/^            c.keyPresses[key] = function () return spellBookSystem:cast(c.id, i) end$/;"	f
+c.keyPresses[keys.gesture] 	systems/inputSystem.lua	/^        c.keyPresses[keys.gesture] = function () return updateState("gestures") end$/;"	f
+c.keyPresses[keys.openMenu] 	systems/inputSystem.lua	/^        c.keyPresses[keys.openMenu] = function () return updateState("back to main menu") end$/;"	f
+c:addToSystems	components/body.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/collider.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/fixture.lua	/^    function c:addToSystems(id, bodyId)$/;"	f
+c:addToSystems	components/force.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/meshRenderer.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/position.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/referencer.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/temperature.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/walker.lua	/^    function c:addToSystems(id)$/;"	f
+c:addToSystems	components/welder.lua	/^    function c:addToSystems(id)$/;"	f
+call	lib/AdvTiledLoader/external/gunziplua.lua	/^local function call(...)$/;"	f
+ccw	geometry/Point.lua	/^function ccw(p1, p2, p3)$/;"	f
+centralize	systems/physicsSystem.lua	/^local function centralize(points, c)$/;"	f
+chain_gen_r1 	lib/luafun/fun.lua	/^chain_gen_r1 = function(param, state)$/;"	f
+circle 	systems/graphicsSystem.lua	/^    circle = function(id)$/;"	f
+circle 	systems/positionSystem.lua	/^    circle = function (id, comp)$/;"	f
+circleRenderer.create	components/circleRenderer.lua	/^function circleRenderer.create(id, color, radius)$/;"	f
+class.__tostring 	class.lua	/^	class.__tostring = function() return ("<instance of %s>"):format(tostring(class)) end$/;"	f
+class.is_a 	class.lua	/^	class.is_a = function(self, other) return not not self.__is_a[other] end$/;"	f
+class:new	lib/class.lua	/^function class:new(...)$/;"	f
+class_mt:__index	lib/class.lua	/^function class_mt:__index(key)$/;"	f
+clearBuffer	lib/AdvTiledLoader/base64.lua	/^local function clearBuffer()$/;"	f
+close.OnClick 	lib/LoveFrames/objects/frame.lua	/^	close.OnClick = function(x, y, object)$/;"	f
+collect	lib/AdvTiledLoader/external/xml.lua	/^local function collect(s)$/;"	f
+collider 	Spell.lua	/^    collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV) end,$/;"	f
+collider.create	components/collider.lua	/^function collider.create(id, friction, type, breakable, initV)$/;"	f
+collider.prototype	components/collider.lua	/^function collider.prototype(friction, type, breakable, initV)$/;"	f
+colorEquals	utils.lua	/^function colorEquals(color1, color2)$/;"	f
+colorVary	components/element.lua	/^local function colorVary(color)$/;"	f
+common.class	class.lua	/^	function common.class(name, prototype, parent)$/;"	f
+compareXthenY	geometry/Point.lua	/^function compareXthenY(p0, p1)$/;"	f
+compareYthenX	geometry/Point.lua	/^function compareYthenX(p0, p1)$/;"	f
+componentSystem:add	systems/componentSystem.lua	/^function componentSystem:add(comp)$/;"	f
+componentSystem:delete	systems/componentSystem.lua	/^function componentSystem:delete(id)$/;"	f
+componentSystem:get	systems/componentSystem.lua	/^function componentSystem:get(id)$/;"	f
+componentSystem:inherit	systems/componentSystem.lua	/^function componentSystem:inherit(table)$/;"	f
+componentSystem:init	systems/componentSystem.lua	/^function componentSystem:init(referenceSystem)$/;"	f
+componentSystem:update	systems/componentSystem.lua	/^function componentSystem:update(dt)$/;"	f
+computeArea	geometry/Point.lua	/^function computeArea(points)$/;"	f
+computeCentroid	geometry/Point.lua	/^function computeCentroid(points)$/;"	f
+computeTextureCoords	systems/graphicsSystem.lua	/^local function computeTextureCoords(comp)$/;"	f
+concat 	lib/luafun/fun.lua	/^    concat = function(a, b) return a..b end,$/;"	f
+constructComponentTables	Spell.lua	/^local function constructComponentTables(serializedSpell)$/;"	f
+convexHull	geometry/Point.lua	/^function convexHull(unsortedPoints)$/;"	f
+copyright	lib/luafun/doc/conf.py	/^copyright = u'2013, Roman Tsisyk'$/;"	v
+crc32	lib/AdvTiledLoader/external/crc32lua.lua	/^local function crc32(s, crc)$/;"	f
+crc32_byte	lib/AdvTiledLoader/external/crc32lua.lua	/^local function crc32_byte(byte, crc)$/;"	f
+crc32_string	lib/AdvTiledLoader/external/crc32lua.lua	/^local function crc32_string(s, crc)$/;"	f
+createBipedalLeg	systems/objectFactory.lua	/^local function createBipedalLeg(parentId, weldPoint, center, legRadius)$/;"	f
+createButton	menus/controls.lua	/^local function createButton(string, x, y, func)$/;"	f
+createElementPrototype	components/element.lua	/^local function createElementPrototype(name, color, friction, density, temp, gravScale)$/;"	f
+createImageButton	gestures.lua	/^local function createImageButton(image, x, y, func, state)$/;"	f
+createKeyButton	menus/controls.lua	/^local function createKeyButton(purpose, key, ...)$/;"	f
+debug	lib/AdvTiledLoader/external/deflatelua.lua	/^local function debug(...)$/;"	f
+decode	lib/AdvTiledLoader/base64.lua	/^local function decode(mode, raw)$/;"	f
+decode	lib/AdvTiledLoader/external/deflatelua.lua	/^    local function decode(ncodes)$/;"	f
+decomp({input 	lib/AdvTiledLoader/Loader.lua	/^			decomp({input = base64.decode("string", t[1]), output = function (b) bytes[#bytes+1] = b end})$/;"	f
+decreasesbutton.OnClick 	lib/LoveFrames/objects/numberbox.lua	/^	decreasesbutton.OnClick = function()$/;"	f
+decreasesbutton.Update 	lib/LoveFrames/objects/numberbox.lua	/^	decreasesbutton.Update = function(object)$/;"	f
+deepcopy	lib/luafun/fun.lua	/^local function deepcopy(orig) -- used by cycle()$/;"	f
+deflate	lib/AdvTiledLoader/external/deflatelua.lua	/^local function deflate(t)$/;"	f
+deserializeComponentPrototype	Spell.lua	/^local function deserializeComponentPrototype(table)$/;"	f
+distance	utils.lua	/^function distance(x1, y1, x2, y2)$/;"	f
+distanceSquared	utils.lua	/^function distanceSquared(x1, y1, x2, y2)$/;"	f
+div 	lib/luafun/fun.lua	/^    div = function(a, b) return a \/ b end,$/;"	f
+dot 	geometry/Point.lua	/^dot = function(p0, p1)$/;"	f
+downbutton.Update 	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		downbutton.Update = function(object, dt)$/;"	f
+drawMesh	systems/graphicsSystem.lua	/^local function drawMesh(comp)$/;"	f
+drawMeshes	systems/graphicsSystem.lua	/^local function drawMeshes(meshes)$/;"	f
+drawShapes	systems/graphicsSystem.lua	/^local function drawShapes(shapes)$/;"	f
+drawSort	lib/AdvTiledLoader/ObjectLayer.lua	/^local function drawSort(o1, o2) $/;"	f
+drawStatBars	systems/graphicsSystem.lua	/^local function drawStatBars(statBars)$/;"	f
+dump	lib/luafun/tests/runtest	/^function dump(gen, init, state) each(print, gen, init, state) end$/;"	f
+dump(drop_while(function(i, a) return i ~	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(i, a) return i ~=a end, enumerate({5, 2, 1, 3, 4})))$/;"	f
+dump(drop_while(function(i, a) return i ~	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(i, a) return i ~=a end,$/;"	f
+dump(filter(function(x) return x % 3 	lib/luafun/tests/filtering.lua	/^dump(filter(function(x) return x % 3 == 0 end, range(0)))$/;"	f
+dump(filter(function(x) return x % 3 	lib/luafun/tests/filtering.lua	/^dump(filter(function(x) return x % 3 == 0 end, range(10)))$/;"	f
+dump(take(5, filter(function(i, x) return i % 3 	lib/luafun/tests/filtering.lua	/^dump(take(5, filter(function(i, x) return i % 3 == 0 end,$/;"	f
+dump(take_while(function(i, a) return i ~	lib/luafun/tests/slicing.lua	/^dump(take_while(function(i, a) return i ~=a end, enumerate({5, 2, 1, 3, 4})))$/;"	f
+dump(zip(partition(function(i, x) return i % 3 	lib/luafun/tests/filtering.lua	/^dump(zip(partition(function(i, x) return i % 3 == 0 end, range(10))))$/;"	f
+e:addToSystems	components/element.lua	/^    function e:addToSystems(id)$/;"	f
+earth 	Spell.lua	/^    earth = function (table) return require 'components.element'.earth end,$/;"	f
+element.create	components/element.lua	/^function element.create(id, name)$/;"	f
+element:get	components/element.lua	/^function element:get()$/;"	f
+element:getColor	components/element.lua	/^function element:getColor()$/;"	f
+element:getEleFromColor	components/element.lua	/^function element:getEleFromColor(color)$/;"	f
+element:getName	components/element.lua	/^function element:getName()$/;"	f
+element:inc	components/element.lua	/^function element:inc(amount)$/;"	f
+element:setAsColor	components/element.lua	/^function element:setAsColor()$/;"	f
+elseif type(at) 	lib/AdvTiledLoader/TileLayer.lua	/^									elseif type(at) == "function" then at(drawX, drawY)$/;"	f
+elseif type(at) 	lib/AdvTiledLoader/TileLayer.lua	/^							elseif type(at) == "function" then at(drawX, drawY)$/;"	f
+elseif type(drop) 	lib/TLTools/Tserial.lua	/^		elseif type(drop) == "function" then k = "["..string.format("%q",drop(k)).."]"$/;"	f
+elseif type(drop) 	lib/TLTools/Tserial.lua	/^		elseif type(drop) == "function" then v = string.format("%q",drop(v))$/;"	f
+elseif type(o) 	lib/AdvTiledLoader/external/deflatelua.lua	/^  elseif type(o) == 'function' then$/;"	f
+elseif type(obj) 	lib/luafun/fun.lua	/^    elseif type(obj) == "table" and type(obj[1]) == "function" then$/;"	f
+elseif vtype 	lib/AdvTiledLoader/Map.lua	/^		elseif vtype == "function" then $/;"	f
+end	lib/luafun/doc/make.bat	/^:end$/;"	l
+entitySystem:delete	systems/entitySystem.lua	/^function entitySystem:delete(id)$/;"	f
+entitySystem:deleteAllInRange	systems/entitySystem.lua	/^function entitySystem:deleteAllInRange(lowerId, upperId)$/;"	f
+entitySystem:draw	systems/entitySystem.lua	/^function entitySystem:draw(raw)$/;"	f
+entitySystem:init	systems/entitySystem.lua	/^function entitySystem:init(objectFactory)$/;"	f
+entitySystem:keyPressed	systems/entitySystem.lua	/^function entitySystem:keyPressed(key)$/;"	f
+entitySystem:keyReleased	systems/entitySystem.lua	/^function entitySystem:keyReleased(key)$/;"	f
+entitySystem:register	systems/entitySystem.lua	/^function entitySystem:register()$/;"	f
+entitySystem:update	systems/entitySystem.lua	/^function entitySystem:update(dt)$/;"	f
+eq  	lib/luafun/fun.lua	/^    eq  = function(a, b) return a == b end,$/;"	f
+equals 	geometry/Point.lua	/^equals = function(p0, p1)$/;"	f
+exclude_patterns	lib/luafun/doc/conf.py	/^exclude_patterns = ['_build']$/;"	v
+experience.create	components/experience.lua	/^function experience.create(id, experienceMult, experienceOffset)$/;"	f
+experienceSystem:getXp	systems/experienceSystem.lua	/^function experienceSystem:getXp(id)$/;"	f
+experienceSystem:update	systems/experienceSystem.lua	/^function experienceSystem:update(dt)$/;"	f
+extensions	lib/luafun/doc/conf.py	/^extensions = [ "redjack.sphinx.lua" ]$/;"	v
+f	lib/AdvTiledLoader/external/deflatelua.lua	/^  local function f()$/;"	f
+file_exists	lib/AdvTiledLoader/external/gunziplua.lua	/^local function file_exists(filename)$/;"	f
+file_print	lib/luafun/tests/runtest	/^function file_print(file, ...)$/;"	f
+filter_fun	lib/luafun/tests/filtering.lua	/^function filter_fun(a, b, c)$/;"	f
+filterm_gen 	lib/luafun/fun.lua	/^filterm_gen = function(fun, gen_x, param_x, state_x, ...)$/;"	f
+fire 	Spell.lua	/^    fire = function (table) return require 'components.element'.fire end,$/;"	f
+fixture.create	components/fixture.lua	/^function fixture.create(id, bodyId, ...)$/;"	f
+fixture.prototype	components/fixture.lua	/^function fixture.prototype(friction)$/;"	f
+flags_str	lib/AdvTiledLoader/external/optparse.lua	/^  local function flags_str(optdesc)$/;"	f
+floordiv 	lib/luafun/fun.lua	/^    floordiv = function(a, b) return math.floor(a\/b) end,$/;"	f
+force 	Spell.lua	/^    force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y, t.casterId) end,$/;"	f
+force 	systems/runeSystem.lua	/^        force = function(spellBook, lines, startPoint, endPoint, firstGestureId)$/;"	f
+force.create	components/force.lua	/^function force.create(id, h, v, x, y, casterId)$/;"	f
+force.prototype	components/force.lua	/^function force.prototype(h, v, x, y, casterId)$/;"	f
+forceRayCallBack	systems/forceSystem.lua	/^local function forceRayCallBack(fixture, x, y, xn, yn, fraction)$/;"	f
+forceSystem:draw	systems/forceSystem.lua	/^function forceSystem:draw()$/;"	f
+forceSystem:drawPreview	systems/forceSystem.lua	/^function forceSystem:drawPreview(startPoint, endPoint)$/;"	f
+forceSystem:init	systems/forceSystem.lua	/^function forceSystem:init(world)$/;"	f
+forceSystem:update	systems/forceSystem.lua	/^function forceSystem:update(dt)$/;"	f
+fun 	lib/luafun/fun.lua	/^        fun = function(x) return string.find(x, fun_or_regexp) ~= nil end$/;"	f
+fun 	lib/luafun/tests/transformations.lua	/^fun = function(...) return 'map', ... end$/;"	f
+ge  	lib/luafun/fun.lua	/^    ge  = function(a, b) return a >= b end,$/;"	f
+get	lib/AdvTiledLoader/external/crc32lua.lua	/^local function get(i)$/;"	f
+getByte	lib/AdvTiledLoader/base64.lua	/^local function getByte()$/;"	f
+getColor	utils.lua	/^function getColor()$/;"	f
+getContactSeg	systems/bodySystem.lua	/^local function getContactSeg(contact, center)$/;"	f
+getContactSeg	systems/physicsSystem.lua	/^local function getContactSeg(contact, center)$/;"	f
+getInt	lib/AdvTiledLoader/base64.lua	/^local function getInt()$/;"	f
+getLongestLine	geometry/Seg.lua	/^function getLongestLine(lines)$/;"	f
+getMeshVertices	systems/graphicsSystem.lua	/^local function getMeshVertices(comp)$/;"	f
+getNewVelocity	systems/bodySystem.lua	/^local function getNewVelocity(v, center, newCenter)$/;"	f
+getNewVelocity	systems/physicsSystem.lua	/^local function getNewVelocity(v, center, newCenter)$/;"	f
+getOtherPointFromLines	geometry/Point.lua	/^local function getOtherPointFromLines(lines, point)$/;"	f
+get_bitstream	lib/AdvTiledLoader/external/deflatelua.lua	/^local function get_bitstream(o)$/;"	f
+get_obytestream	lib/AdvTiledLoader/external/deflatelua.lua	/^local function get_obytestream(o)$/;"	f
+getmetatable(class).__tostring 	class.lua	/^				getmetatable(class).__tostring = function() return name end$/;"	f
+global	lib/strict.lua	/^function global(...)$/;"	f
+glueInt	lib/AdvTiledLoader/base64.lua	/^local function glueInt(b1, b2, b3, b4)$/;"	f
+goDownAndRightWhileValid	lib/AdvTiledLoader/TileLayer.lua	/^local function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWidth, tileHeight)$/;"	f
+goRightWhileValid	lib/AdvTiledLoader/TileLayer.lua	/^local function goRightWhileValid(x, y, targetWidth, tiles, tileData, tileWidth)$/;"	f
+graphicsSystem:addMesh	systems/graphicsSystem.lua	/^function graphicsSystem:addMesh(comp)$/;"	f
+graphicsSystem:addShape	systems/graphicsSystem.lua	/^function graphicsSystem:addShape(comp)$/;"	f
+graphicsSystem:addStatBar	systems/graphicsSystem.lua	/^function graphicsSystem:addStatBar(comp)$/;"	f
+graphicsSystem:delete	systems/graphicsSystem.lua	/^function graphicsSystem:delete(id)$/;"	f
+graphicsSystem:draw	systems/graphicsSystem.lua	/^function graphicsSystem:draw(raw)$/;"	f
+graphicsSystem:drawRaw	systems/graphicsSystem.lua	/^function graphicsSystem:drawRaw()$/;"	f
+graphicsSystem:init	systems/graphicsSystem.lua	/^function graphicsSystem:init(cam, map)$/;"	f
+graphicsSystem:update	systems/graphicsSystem.lua	/^function graphicsSystem:update(dt)$/;"	f
+greater	utils.lua	/^function greater(a, b)$/;"	f
+gt  	lib/luafun/fun.lua	/^    gt  = function(a, b) return a > b end,$/;"	f
+gunzip	lib/AdvTiledLoader/external/deflatelua.lua	/^local function gunzip(t)$/;"	f
+hasbit	lib/AdvTiledLoader/external/deflatelua.lua	/^local function hasbit(bits, bit)$/;"	f
+health.create	components/health.lua	/^function health.create(id, inithealth, healthMult)$/;"	f
+healthSystem:getHealth	systems/healthSystem.lua	/^function healthSystem:getHealth(id)$/;"	f
+healthSystem:getHealthPercent	systems/healthSystem.lua	/^function healthSystem:getHealthPercent(id)$/;"	f
+healthSystem:update	systems/healthSystem.lua	/^function healthSystem:update(dt)$/;"	f
+html_logo	lib/luafun/doc/conf.py	/^html_logo = "logo.png"$/;"	v
+html_static_path	lib/luafun/doc/conf.py	/^html_static_path = ['_static']$/;"	v
+html_theme	lib/luafun/doc/conf.py	/^html_theme = 'haiku'$/;"	v
+ice 	Spell.lua	/^    ice = function (table) return require 'components.element'.ice end,$/;"	f
+if (type(obj) 	lib/luafun/fun.lua	/^    if (type(obj) == "function") then$/;"	f
+if type(mixin.included)	lib/LoveFrames/third-party/middleclass.lua	/^  if type(mixin.included)=="function" then mixin:included(aClass) end$/;"	f
+if type(obj) 	lib/luafun/fun.lua	/^    if type(obj) == "function" then$/;"	f
+if type(obj.draw) 	lib/AdvTiledLoader/ObjectLayer.lua	/^		if type(obj.draw) == "function" then$/;"	f
+if type(v) 	lib/LoveFrames/libraries/skins.lua	/^				if type(v) == "function" then$/;"	f
+img.load	images/img.lua	/^function img.load(name)$/;"	f
+increasebutton.OnClick 	lib/LoveFrames/objects/numberbox.lua	/^	increasebutton.OnClick = function()$/;"	f
+increasebutton.Update 	lib/LoveFrames/objects/numberbox.lua	/^	increasebutton.Update = function(object)$/;"	f
+inflate_zlib	lib/AdvTiledLoader/external/deflatelua.lua	/^local function inflate_zlib(t)$/;"	f
+inherit	class.lua	/^local function inherit(class, interface, ...)$/;"	f
+initBody	systems/bodySystem.lua	/^local function initBody(world, type, initV, center)$/;"	f
+initBody	systems/physicsSystem.lua	/^local function initBody(world, type, initV, center)$/;"	f
+initCircleShape	systems/physicsSystem.lua	/^local function initCircleShape(id)$/;"	f
+initFixture	systems/physicsSystem.lua	/^local function initFixture(comp)$/;"	f
+initMesh	systems/graphicsSystem.lua	/^local function initMesh(comp)$/;"	f
+initPolygonShape	systems/physicsSystem.lua	/^local function initPolygonShape(id)$/;"	f
+initShape	systems/physicsSystem.lua	/^local function initShape(id)$/;"	f
+input 	Spell.lua	/^    input = function (t) return require 'components.input'.prototype(t.canAdministrate, t.canCast) end,$/;"	f
+input 	systems/runeSystem.lua	/^        input = function(spellBook, previewId)$/;"	f
+input.OnTextChanged 	lib/LoveFrames/objects/numberbox.lua	/^	input.OnTextChanged = function(object)$/;"	f
+input.Update 	lib/LoveFrames/objects/numberbox.lua	/^	input.Update = function(object)$/;"	f
+input.create	components/input.lua	/^function input.create(id, ...)$/;"	f
+input.prototype	components/input.lua	/^function input.prototype(canAdministrate, canCast)$/;"	f
+inputSystem:keyPressed	systems/inputSystem.lua	/^function inputSystem:keyPressed(key)$/;"	f
+inputSystem:keyReleased	systems/inputSystem.lua	/^function inputSystem:keyReleased(key)$/;"	f
+inputSystem:syncAllWithKeys	systems/inputSystem.lua	/^function inputSystem:syncAllWithKeys()$/;"	f
+inputSystem:syncWithKeys	systems/inputSystem.lua	/^function inputSystem:syncWithKeys(c)$/;"	f
+intdiv 	lib/luafun/fun.lua	/^    intdiv = function(a, b)$/;"	f
+interceptor:__newindex	class.lua	/^		function interceptor:__newindex(key, value)$/;"	f
+isNewEntityMaker	gestures.lua	/^local function isNewEntityMaker(rune)$/;"	f
+jointSystem:add	systems/jointSystem.lua	/^function jointSystem:add(comp)$/;"	f
+jointSystem:init	systems/jointSystem.lua	/^function jointSystem:init()$/;"	f
+jointSystem:update	systems/jointSystem.lua	/^function jointSystem:update(dt)$/;"	f
+land 	lib/luafun/fun.lua	/^    land = function(a, b) return a and b end,$/;"	f
+latex_elements	lib/luafun/doc/conf.py	/^latex_elements = {$/;"	v
+le  	lib/luafun/fun.lua	/^    le  = function(a, b) return a <= b end,$/;"	f
+leftbutton.Update 	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		leftbutton.Update = function(object, dt)$/;"	f
+leftbutton.Update 	lib/LoveFrames/objects/tabs.lua	/^	leftbutton.Update = function(object, dt)$/;"	f
+len 	lib/luafun/fun.lua	/^    len = function(a) return #a end,$/;"	f
+length 	lib/luafun/fun.lua	/^    length = function(a) return #a end, -- an alias$/;"	f
+less	utils.lua	/^function less(a, b)$/;"	f
+limit	utils.lua	/^function limit(x, little, big)$/;"	f
+lnot 	lib/luafun/fun.lua	/^    lnot = function(a) return not a end,$/;"	f
+loader:pack	loader.lua	/^function loader:pack(table)$/;"	f
+loader:unpack	loader.lua	/^function loader:unpack(tableName)$/;"	f
+loader:unpackIfExists	loader.lua	/^function loader:unpackIfExists(t)$/;"	f
+local addTo 	systems/runeSystem.lua	/^    local addTo = function(spellBook, componentTable)$/;"	f
+local addToExisting 	systems/runeSystem.lua	/^    local addToExisting = function(spellBook, component, previewId)$/;"	f
+local all 	lib/luafun/fun.lua	/^local all = function(fun, gen, param, state)$/;"	f
+local any 	lib/luafun/fun.lua	/^local any = function(fun, gen, param, state)$/;"	f
+local beginContact 	systems/entitySystem.lua	/^    local beginContact = function(a, b, coll)$/;"	f
+local call_if_not_empty 	lib/luafun/fun.lua	/^local call_if_not_empty = function(fun, state_x, ...)$/;"	f
+local chain 	lib/luafun/fun.lua	/^local chain = function(...)$/;"	f
+local chain_gen_r2 	lib/luafun/fun.lua	/^local chain_gen_r2 = function(param, state, state_x, ...)$/;"	f
+local charcheck 	lib/LoveFrames/objects/textinput.lua	/^	local charcheck = function(a)$/;"	f
+local cycle 	lib/luafun/fun.lua	/^local cycle = function(gen, param, state)$/;"	f
+local cycle_gen 	lib/luafun/fun.lua	/^local cycle_gen = function(param, state_x)$/;"	f
+local cycle_gen_call 	lib/luafun/fun.lua	/^local cycle_gen_call = function(param, state_x, ...)$/;"	f
+local drop 	lib/luafun/fun.lua	/^local drop = function(n_or_fun, gen, param, state)$/;"	f
+local drop_n 	lib/luafun/fun.lua	/^local drop_n = function(n, gen, param, state)$/;"	f
+local drop_while 	lib/luafun/fun.lua	/^local drop_while = function(fun, gen, param, state)$/;"	f
+local drop_while_x 	lib/luafun/fun.lua	/^local drop_while_x = function(fun, state_x, ...)$/;"	f
+local duplicate 	lib/luafun/fun.lua	/^local duplicate = function(...)$/;"	f
+local duplicate_fun_gen 	lib/luafun/fun.lua	/^local duplicate_fun_gen = function(param_x, state_x)$/;"	f
+local duplicate_gen 	lib/luafun/fun.lua	/^local duplicate_gen = function(param_x, state_x)$/;"	f
+local duplicate_table_gen 	lib/luafun/fun.lua	/^local duplicate_table_gen = function(param_x, state_x)$/;"	f
+local each 	lib/luafun/fun.lua	/^local each = function(fun, gen, param, state)$/;"	f
+local elementCreate 	systems/runeSystem.lua	/^    local elementCreate = function(spellBook, lines, startPoint, endPoint, firstGestureId)$/;"	f
+local endContact 	systems/entitySystem.lua	/^    local endContact = function(a, b, coll)$/;"	f
+local enumerate 	lib/luafun/fun.lua	/^local enumerate = function(gen, param, state)$/;"	f
+local enumerate_gen 	lib/luafun/fun.lua	/^local enumerate_gen = function(param, state)$/;"	f
+local enumerate_gen_call 	lib/luafun/fun.lua	/^local enumerate_gen_call = function(state, i, state_x, ...)$/;"	f
+local filter 	lib/luafun/fun.lua	/^local filter = function(fun, gen, param, state)$/;"	f
+local filter1_gen 	lib/luafun/fun.lua	/^local filter1_gen = function(fun, gen_x, param_x, state_x, a)$/;"	f
+local filter_detect 	lib/luafun/fun.lua	/^local filter_detect = function(fun, gen_x, param_x, state_x, ...)$/;"	f
+local filter_gen 	lib/luafun/fun.lua	/^local filter_gen = function(param, state_x)$/;"	f
+local filterm_gen_shrink 	lib/luafun/fun.lua	/^local filterm_gen_shrink = function(fun, gen_x, param_x, state_x)$/;"	f
+local find 	lib/luafun/fun.lua	/^local find = function(fun, gen, param, state)$/;"	f
+local foldl 	lib/luafun/fun.lua	/^local foldl = function(fun, start, gen, param, state)$/;"	f
+local foldl_call 	lib/luafun/fun.lua	/^local foldl_call = function(fun, start, state, ...)$/;"	f
+local getIds 	systems/entitySystem.lua	/^    local getIds = function(a, b)$/;"	f
+local grep 	lib/luafun/fun.lua	/^local grep = function(fun_or_regexp, gen, param, state)$/;"	f
+local head 	lib/luafun/fun.lua	/^local head = function(gen, param, state)$/;"	f
+local head_call 	lib/luafun/fun.lua	/^local head_call = function(state, ...)$/;"	f
+local index 	lib/luafun/fun.lua	/^local index = function(x, gen, param, state) $/;"	f
+local indexes 	lib/luafun/fun.lua	/^local indexes = function(x, gen, param, state)$/;"	f
+local indexes_gen 	lib/luafun/fun.lua	/^local indexes_gen = function(param, state)$/;"	f
+local intersperse 	lib/luafun/fun.lua	/^local intersperse = function(x, gen, param, state)$/;"	f
+local intersperse_call 	lib/luafun/fun.lua	/^local intersperse_call = function(i, state_x, ...)$/;"	f
+local intersperse_gen 	lib/luafun/fun.lua	/^local intersperse_gen = function(param, state)$/;"	f
+local is_null 	lib/luafun/fun.lua	/^local is_null = function(gen, param, state)$/;"	f
+local is_prefix_of 	lib/luafun/fun.lua	/^local is_prefix_of = function(iter_x, iter_y)$/;"	f
+local iter 	lib/luafun/fun.lua	/^local iter = function(obj, param, state)$/;"	f
+local iter_tab 	lib/luafun/fun.lua	/^local iter_tab = function(obj)$/;"	f
+local length 	lib/luafun/fun.lua	/^local length = function(gen, param, state)$/;"	f
+local map 	lib/luafun/fun.lua	/^local map = function(fun, gen, param, state)$/;"	f
+local map_gen 	lib/luafun/fun.lua	/^local map_gen = function(param, state)$/;"	f
+local map_gen 	lib/luafun/fun.lua	/^local map_gen = function(tab, key)$/;"	f
+local max 	lib/luafun/fun.lua	/^local max = function(gen, param, state)$/;"	f
+local max_by 	lib/luafun/fun.lua	/^local max_by = function(cmp, gen, param, state)$/;"	f
+local max_cmp 	lib/luafun/fun.lua	/^local max_cmp = function(m, n)$/;"	f
+local min 	lib/luafun/fun.lua	/^local min = function(gen, param, state)$/;"	f
+local min_by 	lib/luafun/fun.lua	/^local min_by = function(cmp, gen, param, state)$/;"	f
+local min_cmp 	lib/luafun/fun.lua	/^local min_cmp = function(m, n)$/;"	f
+local neg_fun 	lib/luafun/fun.lua	/^    local neg_fun = function(...)$/;"	f
+local nil_gen 	lib/luafun/fun.lua	/^local nil_gen = function(_param, _state)$/;"	f
+local nth 	lib/luafun/fun.lua	/^local nth = function(n, gen, param, state)$/;"	f
+local ok, err 	lib/AdvTiledLoader/external/gunziplua.lua	/^  local ok, err = xpcall(function()$/;"	f
+local ones 	lib/luafun/fun.lua	/^local ones = function()$/;"	f
+local op2 	lib/AdvTiledLoader/external/numberlua.lua	/^  local op2 = memoize(function(a)$/;"	f
+local pairs_gen 	lib/luafun/fun.lua	/^local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs$/;"	f
+local partition 	lib/luafun/fun.lua	/^local partition = function(fun, gen, param, state)$/;"	f
+local postSolve 	systems/entitySystem.lua	/^    local postSolve = function(a, b, coll)$/;"	f
+local pow2 	lib/AdvTiledLoader/external/deflatelua.lua	/^local pow2 = memoize(function(n) return 2^n end)$/;"	f
+local preSolve 	systems/entitySystem.lua	/^    local preSolve = function(a, b, coll)$/;"	f
+local product 	lib/luafun/fun.lua	/^local product = function(gen, param, state)$/;"	f
+local rands 	lib/luafun/fun.lua	/^local rands = function(n, m)$/;"	f
+local rands_gen 	lib/luafun/fun.lua	/^local rands_gen = function(param_x, _state_x)$/;"	f
+local rands_nil_gen 	lib/luafun/fun.lua	/^local rands_nil_gen = function(_param_x, _state_x)$/;"	f
+local range 	lib/luafun/fun.lua	/^local range = function(start, stop, step)$/;"	f
+local range_gen 	lib/luafun/fun.lua	/^local range_gen = function(param, state)$/;"	f
+local range_rev_gen 	lib/luafun/fun.lua	/^local range_rev_gen = function(param, state)$/;"	f
+local return_if_not_empty 	lib/luafun/fun.lua	/^local return_if_not_empty = function(state_x, ...)$/;"	f
+local split 	lib/luafun/fun.lua	/^local split = function(n_or_fun, gen, param, state)$/;"	f
+local stencilfunc 	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^	local stencilfunc = function() love.graphics.rectangle("fill", x, y, width, height) end$/;"	f
+local stencilfunc 	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^	local stencilfunc = function() love.graphics.rectangle("fill", self.parent.x, self.parent.y, self.width, self.height) end$/;"	f
+local stencilfunc 	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^	local stencilfunc = function() love.graphics.rectangle("fill", x, y, width, height) end$/;"	f
+local stencilfunc 	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^	local stencilfunc = function() love.graphics.rectangle("fill", x, y, width, height) end$/;"	f
+local stencilfunc 	lib/LoveFrames/objects/list.lua	/^	local stencilfunc = function() love.graphics.rectangle("fill", x, y, width, height) end$/;"	f
+local stencilfunc 	lib/LoveFrames/objects/tabs.lua	/^	local stencilfunc = function() love.graphics.rectangle("fill", x + self.buttonareax, y, self.buttonareawidth, height) end$/;"	f
+local stencilfunc 	lib/LoveFrames/objects/textinput.lua	/^	local stencilfunc = function() love.graphics.rectangle("fill", x, y, width, height) end$/;"	f
+local string_gen 	lib/luafun/fun.lua	/^local string_gen = function(param, state)$/;"	f
+local sum 	lib/luafun/fun.lua	/^local sum = function(gen, param, state)$/;"	f
+local tabulate 	lib/luafun/fun.lua	/^local tabulate = function(fun)$/;"	f
+local tail 	lib/luafun/fun.lua	/^local tail = function(gen, param, state)$/;"	f
+local take 	lib/luafun/fun.lua	/^local take = function(n_or_fun, gen, param, state)$/;"	f
+local take_n 	lib/luafun/fun.lua	/^local take_n = function(n, gen, param, state)$/;"	f
+local take_n_gen 	lib/luafun/fun.lua	/^local take_n_gen = function(param, state)$/;"	f
+local take_n_gen_x 	lib/luafun/fun.lua	/^local take_n_gen_x = function(i, state_x, ...)$/;"	f
+local take_while 	lib/luafun/fun.lua	/^local take_while = function(fun, gen, param, state)$/;"	f
+local take_while_gen 	lib/luafun/fun.lua	/^local take_while_gen = function(param, state_x)$/;"	f
+local take_while_gen_x 	lib/luafun/fun.lua	/^local take_while_gen_x = function(fun, state_x, ...)$/;"	f
+local zeros 	lib/luafun/fun.lua	/^local zeros = function()$/;"	f
+local zip 	lib/luafun/fun.lua	/^local zip = function(...)$/;"	f
+local zip_gen 	lib/luafun/fun.lua	/^local zip_gen = function(param, state)$/;"	f
+lor 	lib/luafun/fun.lua	/^    lor = function(a, b) return a or b end,$/;"	f
+love.conf	conf.lua	/^function love.conf(t)$/;"	f
+love.draw	main.lua	/^function love.draw()$/;"	f
+love.keypressed	main.lua	/^function love.keypressed(key)$/;"	f
+love.keyreleased	main.lua	/^function love.keyreleased(key)$/;"	f
+love.load	main.lua	/^function love.load(args)$/;"	f
+love.mousepressed	main.lua	/^function love.mousepressed(button, x, y)$/;"	f
+love.mousereleased	main.lua	/^function love.mousereleased(button, x, y)$/;"	f
+love.resize	main.lua	/^function love.resize(w, h)$/;"	f
+love.update	main.lua	/^function love.update(dt)$/;"	f
+loveframes.Create	lib/LoveFrames/init.lua	/^function loveframes.Create(data, parent)$/;"	f
+loveframes.GetState	lib/LoveFrames/init.lua	/^function loveframes.GetState()$/;"	f
+loveframes.NewObject	lib/LoveFrames/init.lua	/^function loveframes.NewObject(id, name, inherit_from_base)$/;"	f
+loveframes.SetState	lib/LoveFrames/init.lua	/^function loveframes.SetState(name)$/;"	f
+loveframes.debug.draw	lib/LoveFrames/libraries/debug.lua	/^function loveframes.debug.draw()$/;"	f
+loveframes.draw	lib/LoveFrames/init.lua	/^function loveframes.draw()$/;"	f
+loveframes.keypressed	lib/LoveFrames/init.lua	/^function loveframes.keypressed(key, unicode)$/;"	f
+loveframes.keyreleased	lib/LoveFrames/init.lua	/^function loveframes.keyreleased(key)$/;"	f
+loveframes.load	lib/LoveFrames/init.lua	/^function loveframes.load()$/;"	f
+loveframes.mousepressed	lib/LoveFrames/init.lua	/^function loveframes.mousepressed(x, y, button)$/;"	f
+loveframes.mousereleased	lib/LoveFrames/init.lua	/^function loveframes.mousereleased(x, y, button)$/;"	f
+loveframes.skins.Get	lib/LoveFrames/libraries/skins.lua	/^function loveframes.skins.Get(name)$/;"	f
+loveframes.skins.GetAvailable	lib/LoveFrames/libraries/skins.lua	/^function loveframes.skins.GetAvailable()$/;"	f
+loveframes.skins.Register	lib/LoveFrames/libraries/skins.lua	/^function loveframes.skins.Register(skin)$/;"	f
+loveframes.skins.ReloadImages	lib/LoveFrames/libraries/skins.lua	/^function loveframes.skins.ReloadImages(name)$/;"	f
+loveframes.skins.SetControl	lib/LoveFrames/libraries/skins.lua	/^function loveframes.skins.SetControl(name, control, value)$/;"	f
+loveframes.skins.SetImage	lib/LoveFrames/libraries/skins.lua	/^function loveframes.skins.SetImage(name, image, value)$/;"	f
+loveframes.skins.SetImageDirectory	lib/LoveFrames/libraries/skins.lua	/^function loveframes.skins.SetImageDirectory(name, dir)$/;"	f
+loveframes.templates.AddProperty	lib/LoveFrames/libraries/templates.lua	/^function loveframes.templates.AddProperty(templatename, object, property, value)$/;"	f
+loveframes.templates.ApplyToObject	lib/LoveFrames/libraries/templates.lua	/^function loveframes.templates.ApplyToObject(object)$/;"	f
+loveframes.templates.Get	lib/LoveFrames/libraries/templates.lua	/^function loveframes.templates.Get(name)$/;"	f
+loveframes.templates.GetAvailable	lib/LoveFrames/libraries/templates.lua	/^function loveframes.templates.GetAvailable()$/;"	f
+loveframes.templates.Register	lib/LoveFrames/libraries/templates.lua	/^function loveframes.templates.Register(template)$/;"	f
+loveframes.textinput	lib/LoveFrames/init.lua	/^function loveframes.textinput(text)$/;"	f
+loveframes.update	lib/LoveFrames/init.lua	/^function loveframes.update(dt)$/;"	f
+loveframes.util.BoundingBox	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.BoundingBox(x1, x2, y1, y2, w1, w2, h1, h2)$/;"	f
+loveframes.util.DeepCopy	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.DeepCopy(orig)$/;"	f
+loveframes.util.Error	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.Error(message)$/;"	f
+loveframes.util.GetActiveSkin	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.GetActiveSkin()$/;"	f
+loveframes.util.GetAllObjects	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.GetAllObjects(object, t)$/;"	f
+loveframes.util.GetCollisionCount	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.GetCollisionCount()$/;"	f
+loveframes.util.GetCollisions	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.GetCollisions(object, t)$/;"	f
+loveframes.util.GetDirectoryContents	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.GetDirectoryContents(dir, t)$/;"	f
+loveframes.util.GetHover	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.GetHover()$/;"	f
+loveframes.util.GetHoverObject	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.GetHoverObject()$/;"	f
+loveframes.util.IsCtrlDown	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.IsCtrlDown()$/;"	f
+loveframes.util.RectangleCollisionCheck	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.RectangleCollisionCheck(rect1, rect2)$/;"	f
+loveframes.util.RemoveAll	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.RemoveAll()$/;"	f
+loveframes.util.Round	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.Round(num, idp)$/;"	f
+loveframes.util.SetActiveSkin	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.SetActiveSkin(name)$/;"	f
+loveframes.util.SplitString	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.SplitString(str, pat)$/;"	f
+loveframes.util.TableHasKey	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.TableHasKey(table, key)$/;"	f
+loveframes.util.TableHasValue	lib/LoveFrames/libraries/util.lua	/^function loveframes.util.TableHasValue(table, value)$/;"	f
+lt  	lib/luafun/fun.lua	/^    lt  = function(a, b) return a < b end,$/;"	f
+makeElementalObjectFromPoints	systems/bodySystem.lua	/^local function makeElementalObjectFromPoints(id, points, center, v)$/;"	f
+makeElementalObjectFromPoints	systems/physicsSystem.lua	/^local function makeElementalObjectFromPoints(id, points, center, v)$/;"	f
+make_bitop	lib/AdvTiledLoader/external/numberlua.lua	/^local function make_bitop(t)$/;"	f
+make_bitop_uncached	lib/AdvTiledLoader/external/numberlua.lua	/^local function make_bitop_uncached(t, m)$/;"	f
+make_outstate	lib/AdvTiledLoader/external/deflatelua.lua	/^local function make_outstate(outbs)$/;"	f
+man_pages	lib/luafun/doc/conf.py	/^man_pages = [$/;"	v
+mana.create	components/mana.lua	/^function mana.create(id, initMana, manaMult)$/;"	f
+manaSystem:deduct	systems/manaSystem.lua	/^function manaSystem:deduct(id, amount)$/;"	f
+manaSystem:getMana	systems/manaSystem.lua	/^function manaSystem:getMana(id)$/;"	f
+manaSystem:getManaPercent	systems/manaSystem.lua	/^function manaSystem:getManaPercent(id)$/;"	f
+manaSystem:update	systems/manaSystem.lua	/^function manaSystem:update(dt)$/;"	f
+master_doc	lib/luafun/doc/conf.py	/^master_doc = 'index'$/;"	v
+max_cmp	lib/luafun/tests/reducing.lua	/^function max_cmp(a, b) if -a > -b then return a else return b end end$/;"	f
+memoize	lib/AdvTiledLoader/external/crc32lua.lua	/^local function memoize(f)$/;"	f
+memoize	lib/AdvTiledLoader/external/deflatelua.lua	/^local function memoize(f)$/;"	f
+memoize	lib/AdvTiledLoader/external/numberlua.lua	/^local function memoize(f)$/;"	f
+meshRenderer 	Spell.lua	/^    meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,$/;"	f
+meshRenderer.create	components/meshRenderer.lua	/^function meshRenderer.create(id, color, imageName)$/;"	f
+meshRenderer.prototype	components/meshRenderer.lua	/^function meshRenderer.prototype(color, imageName)$/;"	f
+midPoint	geometry/Point.lua	/^function midPoint(p0, p1)$/;"	f
+middleclass.class	lib/LoveFrames/third-party/middleclass.lua	/^function middleclass.class(name, super, ...)$/;"	f
+min_cmp	lib/luafun/tests/reducing.lua	/^function min_cmp(a, b) if -a < -b then return a else return b end end$/;"	f
+mirrorIfLeftFacing	systems/forceSystem.lua	/^local function mirrorIfLeftFacing(x, h, direction)$/;"	f
+mirrorPoint	geometry/Point.lua	/^function mirrorPoint(point, shouldX, shouldY)$/;"	f
+mirrorXListOfSegs	geometry/Seg.lua	/^function mirrorXListOfSegs(segs)$/;"	f
+mirrorXPoint	geometry/Point.lua	/^function mirrorXPoint(point)$/;"	f
+mirrorXSeg	geometry/Seg.lua	/^function mirrorXSeg(seg)$/;"	f
+mirrorXYPoint	geometry/Point.lua	/^function mirrorXYPoint(point)$/;"	f
+mirrorXYSeg	geometry/Seg.lua	/^function mirrorXYSeg(seg)$/;"	f
+mirrorYPoint	geometry/Point.lua	/^function mirrorYPoint(point)$/;"	f
+mirrorYSeg	geometry/Seg.lua	/^function mirrorYSeg(seg)$/;"	f
+mod 	lib/luafun/fun.lua	/^    mod = function(a, b) return a % b end,$/;"	f
+msb	lib/AdvTiledLoader/external/deflatelua.lua	/^  local function msb(bits, nbits)$/;"	f
+mt.__index 	lib/strict.lua	/^mt.__index = function (t, n)$/;"	f
+mt.__newindex 	lib/strict.lua	/^mt.__newindex = function (t, n, v)$/;"	f
+mt:__index	lib/AdvTiledLoader/external/crc32lua.lua	/^  function mt:__index(k)$/;"	f
+mt:__index	lib/AdvTiledLoader/external/deflatelua.lua	/^  function mt:__index(k)$/;"	f
+mt:__index	lib/AdvTiledLoader/external/numberlua.lua	/^  function mt:__index(k)$/;"	f
+mul 	lib/luafun/fun.lua	/^    mul = function(a, b) return a * b end,$/;"	f
+mypairs	lib/luafun/tests/basic.lua	/^local function mypairs(max)$/;"	f
+mypairs_gen	lib/luafun/tests/basic.lua	/^local function mypairs_gen(max, state)$/;"	f
+ne  	lib/luafun/fun.lua	/^    ne  = function(a, b) return a ~= b end,$/;"	f
+nearestPoint	geometry/Point.lua	/^function nearestPoint(points, point)$/;"	f
+neq 	lib/luafun/fun.lua	/^    neq = function(a) return -a end,$/;"	f
+new	class.lua	/^local function new(args)$/;"	f
+newobject:AddChoice	lib/LoveFrames/objects/multichoice.lua	/^function newobject:AddChoice(choice)$/;"	f
+newobject:AddColumn	lib/LoveFrames/objects/columnlist.lua	/^function newobject:AddColumn(name)$/;"	f
+newobject:AddDivider	lib/LoveFrames/objects/menu.lua	/^function newobject:AddDivider()$/;"	f
+newobject:AddIntoText	lib/LoveFrames/objects/textinput.lua	/^function newobject:AddIntoText(t, p)$/;"	f
+newobject:AddItem	lib/LoveFrames/objects/form.lua	/^function newobject:AddItem(object)$/;"	f
+newobject:AddItem	lib/LoveFrames/objects/grid.lua	/^function newobject:AddItem(object, row, column)$/;"	f
+newobject:AddItem	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:AddItem(object)$/;"	f
+newobject:AddItem	lib/LoveFrames/objects/list.lua	/^function newobject:AddItem(object)$/;"	f
+newobject:AddOption	lib/LoveFrames/objects/menu.lua	/^function newobject:AddOption(text, icon, func)$/;"	f
+newobject:AddRow	lib/LoveFrames/objects/columnlist.lua	/^function newobject:AddRow(...)$/;"	f
+newobject:AddRow	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:AddRow(data)$/;"	f
+newobject:AddScrollButtons	lib/LoveFrames/objects/tabs.lua	/^function newobject:AddScrollButtons()$/;"	f
+newobject:AddSubMenu	lib/LoveFrames/objects/menu.lua	/^function newobject:AddSubMenu(text, icon, menu)$/;"	f
+newobject:AddTab	lib/LoveFrames/objects/tabs.lua	/^function newobject:AddTab(name, object, tip, image, onopened, onclosed)$/;"	f
+newobject:AdjustColumns	lib/LoveFrames/objects/columnlist.lua	/^function newobject:AdjustColumns()$/;"	f
+newobject:CalculateSize	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:CalculateSize()$/;"	f
+newobject:CalculateSize	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:CalculateSize()$/;"	f
+newobject:CalculateSize	lib/LoveFrames/objects/list.lua	/^function newobject:CalculateSize()$/;"	f
+newobject:Center	lib/LoveFrames/objects/base.lua	/^function newobject:Center(area)$/;"	f
+newobject:CenterWithinArea	lib/LoveFrames/objects/base.lua	/^function newobject:CenterWithinArea(x, y, width, height)$/;"	f
+newobject:CenterX	lib/LoveFrames/objects/base.lua	/^function newobject:CenterX()$/;"	f
+newobject:CenterY	lib/LoveFrames/objects/base.lua	/^function newobject:CenterY()$/;"	f
+newobject:CheckHover	lib/LoveFrames/objects/base.lua	/^function newobject:CheckHover()$/;"	f
+newobject:Clear	lib/LoveFrames/objects/columnlist.lua	/^function newobject:Clear()$/;"	f
+newobject:Clear	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:Clear()$/;"	f
+newobject:Clear	lib/LoveFrames/objects/list.lua	/^function newobject:Clear()$/;"	f
+newobject:Clear	lib/LoveFrames/objects/multichoice.lua	/^function newobject:Clear()$/;"	f
+newobject:Clear	lib/LoveFrames/objects/textinput.lua	/^function newobject:Clear()$/;"	f
+newobject:Close	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:Close()$/;"	f
+newobject:Copy	lib/LoveFrames/objects/textinput.lua	/^function newobject:Copy()$/;"	f
+newobject:DeselectAll	lib/LoveFrames/objects/textinput.lua	/^function newobject:DeselectAll()$/;"	f
+newobject:DeselectRow	lib/LoveFrames/objects/columnlist.lua	/^function newobject:DeselectRow(row)$/;"	f
+newobject:DrawText	lib/LoveFrames/objects/text.lua	/^function newobject:DrawText()$/;"	f
+newobject:EnableHorizontalStacking	lib/LoveFrames/objects/list.lua	/^function newobject:EnableHorizontalStacking(bool)$/;"	f
+newobject:GetAlwaysOnTop	lib/LoveFrames/objects/frame.lua	/^function newobject:GetAlwaysOnTop()$/;"	f
+newobject:GetAlwaysUpdate	lib/LoveFrames/objects/base.lua	/^function newobject:GetAlwaysUpdate()$/;"	f
+newobject:GetAutoButtonAreaWidth	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetAutoButtonAreaWidth()$/;"	f
+newobject:GetAutoPosition	lib/LoveFrames/objects/internal/closebutton.lua	/^function newobject:GetAutoPosition()$/;"	f
+newobject:GetAutoScroll	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetAutoScroll()$/;"	f
+newobject:GetBarType	lib/LoveFrames/objects/internal/scrollable/scrollarea.lua	/^function newobject:GetBarType()$/;"	f
+newobject:GetBarType	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:GetBarType()$/;"	f
+newobject:GetBarWidth	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetBarWidth()$/;"	f
+newobject:GetBaseMenu	lib/LoveFrames/objects/menu.lua	/^function newobject:GetBaseMenu(t)$/;"	f
+newobject:GetBaseParent	lib/LoveFrames/objects/base.lua	/^function newobject:GetBaseParent(t)$/;"	f
+newobject:GetBoxHeight	lib/LoveFrames/objects/checkbox.lua	/^function newobject:GetBoxHeight()$/;"	f
+newobject:GetBoxSize	lib/LoveFrames/objects/checkbox.lua	/^function newobject:GetBoxSize()$/;"	f
+newobject:GetBoxWidth	lib/LoveFrames/objects/checkbox.lua	/^function newobject:GetBoxWidth()$/;"	f
+newobject:GetButtonAreaWidth	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetButtonAreaWidth()$/;"	f
+newobject:GetButtonAreaX	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetButtonAreaX()$/;"	f
+newobject:GetButtonScrollAmount	lib/LoveFrames/objects/columnlist.lua	/^function newobject:GetButtonScrollAmount()$/;"	f
+newobject:GetButtonScrollAmount	lib/LoveFrames/objects/list.lua	/^function newobject:GetButtonScrollAmount()$/;"	f
+newobject:GetButtonScrollAmount	lib/LoveFrames/objects/multichoice.lua	/^function newobject:GetButtonScrollAmount()$/;"	f
+newobject:GetButtonScrollAmount	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetButtonScrollAmount()$/;"	f
+newobject:GetButtonScrollAmount	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetButtonScrollAmount()$/;"	f
+newobject:GetButtonSize	lib/LoveFrames/objects/slider.lua	/^function newobject:GetButtonSize()$/;"	f
+newobject:GetCellHeight	lib/LoveFrames/objects/grid.lua	/^function newobject:GetCellHeight()$/;"	f
+newobject:GetCellPadding	lib/LoveFrames/objects/grid.lua	/^function newobject:GetCellPadding()$/;"	f
+newobject:GetCellSize	lib/LoveFrames/objects/grid.lua	/^function newobject:GetCellSize()$/;"	f
+newobject:GetCellWidth	lib/LoveFrames/objects/grid.lua	/^function newobject:GetCellWidth()$/;"	f
+newobject:GetChecked	lib/LoveFrames/objects/checkbox.lua	/^function newobject:GetChecked()$/;"	f
+newobject:GetChildren	lib/LoveFrames/objects/base.lua	/^function newobject:GetChildren()$/;"	f
+newobject:GetChoice	lib/LoveFrames/objects/multichoice.lua	/^function newobject:GetChoice()$/;"	f
+newobject:GetClickBounds	lib/LoveFrames/objects/base.lua	/^function newobject:GetClickBounds()$/;"	f
+newobject:GetClickable	lib/LoveFrames/objects/button.lua	/^function newobject:GetClickable()$/;"	f
+newobject:GetClickable	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:GetClickable()$/;"	f
+newobject:GetClosedHeight	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:GetClosedHeight()$/;"	f
+newobject:GetColor	lib/LoveFrames/objects/image.lua	/^function newobject:GetColor()$/;"	f
+newobject:GetColorIndex	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:GetColorIndex()$/;"	f
+newobject:GetColumnData	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:GetColumnData()$/;"	f
+newobject:GetColumnSize	lib/LoveFrames/objects/columnlist.lua	/^function newobject:GetColumnSize()$/;"	f
+newobject:GetColumns	lib/LoveFrames/objects/grid.lua	/^function newobject:GetColumns()$/;"	f
+newobject:GetCompleted	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetCompleted()$/;"	f
+newobject:GetDTScrolling	lib/LoveFrames/objects/columnlist.lua	/^function newobject:GetDTScrolling()$/;"	f
+newobject:GetDTScrolling	lib/LoveFrames/objects/list.lua	/^function newobject:GetDTScrolling()$/;"	f
+newobject:GetDTScrolling	lib/LoveFrames/objects/multichoice.lua	/^function newobject:GetDTScrolling()$/;"	f
+newobject:GetDTScrolling	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetDTScrolling()$/;"	f
+newobject:GetDecimals	lib/LoveFrames/objects/numberbox.lua	/^function newobject:GetDecimals()$/;"	f
+newobject:GetDecimals	lib/LoveFrames/objects/slider.lua	/^function newobject:GetDecimals()$/;"	f
+newobject:GetDecreaseAmount	lib/LoveFrames/objects/numberbox.lua	/^function newobject:GetDecreaseAmount()$/;"	f
+newobject:GetDefaultColor	lib/LoveFrames/objects/text.lua	/^function newobject:GetDefaultColor()$/;"	f
+newobject:GetDetectLinks	lib/LoveFrames/objects/text.lua	/^function newobject:GetDetectLinks()$/;"	f
+newobject:GetDisplayType	lib/LoveFrames/objects/list.lua	/^function newobject:GetDisplayType()$/;"	f
+newobject:GetDockZoneSize	lib/LoveFrames/objects/frame.lua	/^function newobject:GetDockZoneSize()$/;"	f
+newobject:GetDockable	lib/LoveFrames/objects/frame.lua	/^function newobject:GetDockable()$/;"	f
+newobject:GetDraggable	lib/LoveFrames/objects/frame.lua	/^function newobject:GetDraggable()$/;"	f
+newobject:GetDrawOrder	lib/LoveFrames/objects/base.lua	/^function newobject:GetDrawOrder()$/;"	f
+newobject:GetEditable	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetEditable()$/;"	f
+newobject:GetEnabled	lib/LoveFrames/objects/button.lua	/^function newobject:GetEnabled()$/;"	f
+newobject:GetEnabled	lib/LoveFrames/objects/checkbox.lua	/^function newobject:GetEnabled()$/;"	f
+newobject:GetEnabled	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:GetEnabled()$/;"	f
+newobject:GetEnabled	lib/LoveFrames/objects/multichoice.lua	/^function newobject:GetEnabled()$/;"	f
+newobject:GetEnabled	lib/LoveFrames/objects/slider.lua	/^function newobject:GetEnabled()$/;"	f
+newobject:GetFocus	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetFocus()$/;"	f
+newobject:GetFollowCursor	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetFollowCursor()$/;"	f
+newobject:GetFollowObject	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetFollowObject()$/;"	f
+newobject:GetFont	lib/LoveFrames/objects/checkbox.lua	/^function newobject:GetFont()$/;"	f
+newobject:GetFont	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:GetFont()$/;"	f
+newobject:GetFont	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetFont()$/;"	f
+newobject:GetFont	lib/LoveFrames/objects/text.lua	/^function newobject:GetFont()$/;"	f
+newobject:GetFont	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetFont()$/;"	f
+newobject:GetFormattedText	lib/LoveFrames/objects/text.lua	/^function newobject:GetFormattedText()$/;"	f
+newobject:GetHeight	lib/LoveFrames/objects/base.lua	/^function newobject:GetHeight()$/;"	f
+newobject:GetHeightOfButtons	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetHeightOfButtons()$/;"	f
+newobject:GetHorizontalScrollBody	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetHorizontalScrollBody()$/;"	f
+newobject:GetHorizontalStacking	lib/LoveFrames/objects/list.lua	/^function newobject:GetHorizontalStacking()$/;"	f
+newobject:GetHover	lib/LoveFrames/objects/base.lua	/^function newobject:GetHover()$/;"	f
+newobject:GetIcon	lib/LoveFrames/objects/frame.lua	/^function newobject:GetIcon()$/;"	f
+newobject:GetIcon	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:GetIcon()$/;"	f
+newobject:GetIgnoreNewlines	lib/LoveFrames/objects/text.lua	/^function newobject:GetIgnoreNewlines()$/;"	f
+newobject:GetImage	lib/LoveFrames/objects/image.lua	/^function newobject:GetImage()$/;"	f
+newobject:GetImage	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:GetImage()$/;"	f
+newobject:GetImage	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:GetImage()$/;"	f
+newobject:GetImageHeight	lib/LoveFrames/objects/image.lua	/^function newobject:GetImageHeight()$/;"	f
+newobject:GetImageHeight	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:GetImageHeight()$/;"	f
+newobject:GetImageSize	lib/LoveFrames/objects/image.lua	/^function newobject:GetImageSize()$/;"	f
+newobject:GetImageSize	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:GetImageSize()$/;"	f
+newobject:GetImageWidth	lib/LoveFrames/objects/image.lua	/^function newobject:GetImageWidth()$/;"	f
+newobject:GetImageWidth	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:GetImageWidth()$/;"	f
+newobject:GetIncreaseAmount	lib/LoveFrames/objects/numberbox.lua	/^function newobject:GetIncreaseAmount()$/;"	f
+newobject:GetIndicatorVisibility	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetIndicatorVisibility()$/;"	f
+newobject:GetIndicatorX	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetIndicatorX()$/;"	f
+newobject:GetIndicatorY	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetIndicatorY()$/;"	f
+newobject:GetInternals	lib/LoveFrames/objects/base.lua	/^function newobject:GetInternals()$/;"	f
+newobject:GetItem	lib/LoveFrames/objects/grid.lua	/^function newobject:GetItem(row, column)$/;"	f
+newobject:GetItemAutoSize	lib/LoveFrames/objects/grid.lua	/^function newobject:GetItemAutoSize()$/;"	f
+newobject:GetItemHeight	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetItemHeight()$/;"	f
+newobject:GetItemWidth	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetItemWidth()$/;"	f
+newobject:GetLayoutType	lib/LoveFrames/objects/form.lua	/^function newobject:GetLayoutType()$/;"	f
+newobject:GetLerp	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetLerp()$/;"	f
+newobject:GetLerpRate	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetLerpRate()$/;"	f
+newobject:GetLineNumbersEnabled	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetLineNumbersEnabled()$/;"	f
+newobject:GetLineNumbersPanel	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetLineNumbersPanel()$/;"	f
+newobject:GetLines	lib/LoveFrames/objects/text.lua	/^function newobject:GetLines()$/;"	f
+newobject:GetLines	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetLines()$/;"	f
+newobject:GetLinksEnabled	lib/LoveFrames/objects/text.lua	/^function newobject:GetLinksEnabled()$/;"	f
+newobject:GetMaskChar	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetMaskChar()$/;"	f
+newobject:GetMasked	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetMasked()$/;"	f
+newobject:GetMax	lib/LoveFrames/objects/numberbox.lua	/^function newobject:GetMax()$/;"	f
+newobject:GetMax	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetMax()$/;"	f
+newobject:GetMax	lib/LoveFrames/objects/slider.lua	/^function newobject:GetMax()$/;"	f
+newobject:GetMaxHeight	lib/LoveFrames/objects/frame.lua	/^function newobject:GetMaxHeight()$/;"	f
+newobject:GetMaxWidth	lib/LoveFrames/objects/frame.lua	/^function newobject:GetMaxWidth()$/;"	f
+newobject:GetMaxWidth	lib/LoveFrames/objects/text.lua	/^function newobject:GetMaxWidth()$/;"	f
+newobject:GetMin	lib/LoveFrames/objects/numberbox.lua	/^function newobject:GetMin()$/;"	f
+newobject:GetMin	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetMin()$/;"	f
+newobject:GetMin	lib/LoveFrames/objects/slider.lua	/^function newobject:GetMin()$/;"	f
+newobject:GetMinHeight	lib/LoveFrames/objects/frame.lua	/^function newobject:GetMinHeight()$/;"	f
+newobject:GetMinMax	lib/LoveFrames/objects/numberbox.lua	/^function newobject:GetMinMax()$/;"	f
+newobject:GetMinMax	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetMinMax()$/;"	f
+newobject:GetMinMax	lib/LoveFrames/objects/slider.lua	/^function newobject:GetMinMax()$/;"	f
+newobject:GetMinWidth	lib/LoveFrames/objects/frame.lua	/^function newobject:GetMinWidth()$/;"	f
+newobject:GetModal	lib/LoveFrames/objects/frame.lua	/^function newobject:GetModal()$/;"	f
+newobject:GetMultiLine	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetMultiLine()$/;"	f
+newobject:GetMultiselectEnabled	lib/LoveFrames/objects/columnlist.lua	/^function newobject:GetMultiselectEnabled()$/;"	f
+newobject:GetName	lib/LoveFrames/objects/form.lua	/^function newobject:GetName()$/;"	f
+newobject:GetName	lib/LoveFrames/objects/frame.lua	/^function newobject:GetName()$/;"	f
+newobject:GetName	lib/LoveFrames/objects/internal/columnlist/columnlistheader.lua	/^function newobject:GetName()$/;"	f
+newobject:GetObject	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:GetObject()$/;"	f
+newobject:GetObject	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetObject()$/;"	f
+newobject:GetOffset	lib/LoveFrames/objects/image.lua	/^function newobject:GetOffset()$/;"	f
+newobject:GetOffsetX	lib/LoveFrames/objects/image.lua	/^function newobject:GetOffsetX()$/;"	f
+newobject:GetOffsetX	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetOffsetX()$/;"	f
+newobject:GetOffsetX	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetOffsetX()$/;"	f
+newobject:GetOffsetY	lib/LoveFrames/objects/image.lua	/^function newobject:GetOffsetY()$/;"	f
+newobject:GetOffsetY	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^function newobject:GetOffsetY()$/;"	f
+newobject:GetOffsetY	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetOffsetY()$/;"	f
+newobject:GetOffsetY	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetOffsetY()$/;"	f
+newobject:GetOffsets	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetOffsets()$/;"	f
+newobject:GetOpen	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:GetOpen()$/;"	f
+newobject:GetOrientation	lib/LoveFrames/objects/image.lua	/^function newobject:GetOrientation()$/;"	f
+newobject:GetPadding	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetPadding()$/;"	f
+newobject:GetPadding	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetPadding()$/;"	f
+newobject:GetParent	lib/LoveFrames/objects/base.lua	/^function newobject:GetParent()$/;"	f
+newobject:GetParentLocked	lib/LoveFrames/objects/frame.lua	/^function newobject:GetParentLocked()$/;"	f
+newobject:GetParents	lib/LoveFrames/objects/base.lua	/^function newobject:GetParents()$/;"	f
+newobject:GetPlaceholderText	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetPlaceholderText()$/;"	f
+newobject:GetPos	lib/LoveFrames/objects/base.lua	/^function newobject:GetPos()$/;"	f
+newobject:GetProperty	lib/LoveFrames/objects/base.lua	/^function newobject:GetProperty(name)$/;"	f
+newobject:GetRepeatDelay	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetRepeatDelay()$/;"	f
+newobject:GetRepeatRate	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetRepeatRate()$/;"	f
+newobject:GetResizable	lib/LoveFrames/objects/frame.lua	/^function newobject:GetResizable()$/;"	f
+newobject:GetRetainSize	lib/LoveFrames/objects/base.lua	/^function newobject:GetRetainSize()$/;"	f
+newobject:GetRows	lib/LoveFrames/objects/grid.lua	/^function newobject:GetRows()$/;"	f
+newobject:GetScale	lib/LoveFrames/objects/image.lua	/^function newobject:GetScale()$/;"	f
+newobject:GetScaleX	lib/LoveFrames/objects/image.lua	/^function newobject:GetScaleX()$/;"	f
+newobject:GetScaleY	lib/LoveFrames/objects/image.lua	/^function newobject:GetScaleY()$/;"	f
+newobject:GetScreenLocked	lib/LoveFrames/objects/frame.lua	/^function newobject:GetScreenLocked()$/;"	f
+newobject:GetScrollBar	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:GetScrollBar()$/;"	f
+newobject:GetScrollBar	lib/LoveFrames/objects/list.lua	/^function newobject:GetScrollBar()$/;"	f
+newobject:GetScrollDecrease	lib/LoveFrames/objects/slider.lua	/^function newobject:GetScrollDecrease()$/;"	f
+newobject:GetScrollIncrease	lib/LoveFrames/objects/slider.lua	/^function newobject:GetScrollIncrease()$/;"	f
+newobject:GetScrollType	lib/LoveFrames/objects/internal/scrollable/scrollbutton.lua	/^function newobject:GetScrollType()$/;"	f
+newobject:GetScrollable	lib/LoveFrames/objects/slider.lua	/^function newobject:GetScrollable()$/;"	f
+newobject:GetSelected	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:GetSelected()$/;"	f
+newobject:GetSelectedRows	lib/LoveFrames/objects/columnlist.lua	/^function newobject:GetSelectedRows()$/;"	f
+newobject:GetSelectionEnabled	lib/LoveFrames/objects/columnlist.lua	/^function newobject:GetSelectionEnabled()$/;"	f
+newobject:GetShadow	lib/LoveFrames/objects/text.lua	/^function newobject:GetShadow()$/;"	f
+newobject:GetShadowColor	lib/LoveFrames/objects/text.lua	/^function newobject:GetShadowColor()$/;"	f
+newobject:GetShadowOffsets	lib/LoveFrames/objects/text.lua	/^function newobject:GetShadowOffsets()$/;"	f
+newobject:GetShear	lib/LoveFrames/objects/image.lua	/^function newobject:GetShear()$/;"	f
+newobject:GetShearX	lib/LoveFrames/objects/image.lua	/^function newobject:GetShearX()$/;"	f
+newobject:GetShearY	lib/LoveFrames/objects/image.lua	/^function newobject:GetShearY()$/;"	f
+newobject:GetSize	lib/LoveFrames/objects/base.lua	/^function newobject:GetSize()$/;"	f
+newobject:GetSkin	lib/LoveFrames/objects/base.lua	/^function newobject:GetSkin(name)$/;"	f
+newobject:GetSkinName	lib/LoveFrames/objects/base.lua	/^function newobject:GetSkinName()$/;"	f
+newobject:GetSlideType	lib/LoveFrames/objects/slider.lua	/^function newobject:GetSlideType()$/;"	f
+newobject:GetSortFunction	lib/LoveFrames/objects/multichoice.lua	/^function newobject:GetSortFunction()$/;"	f
+newobject:GetState	lib/LoveFrames/objects/base.lua	/^function newobject:GetState()$/;"	f
+newobject:GetStaticPos	lib/LoveFrames/objects/base.lua	/^function newobject:GetStaticPos()$/;"	f
+newobject:GetStaticX	lib/LoveFrames/objects/base.lua	/^function newobject:GetStaticX()$/;"	f
+newobject:GetStaticY	lib/LoveFrames/objects/base.lua	/^function newobject:GetStaticY()$/;"	f
+newobject:GetTabNumber	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:GetTabNumber()$/;"	f
+newobject:GetTabNumber	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetTabNumber()$/;"	f
+newobject:GetTabReplacement	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetTabReplacement()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/button.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/checkbox.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/multichoice.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/slider.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/text.lua	/^function newobject:GetText()$/;"	f
+newobject:GetText	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetText()$/;"	f
+newobject:GetTextCollisions	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetTextCollisions(x, y)$/;"	f
+newobject:GetTextX	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:GetTextX()$/;"	f
+newobject:GetTextX	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetTextX()$/;"	f
+newobject:GetTextY	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:GetTextY()$/;"	f
+newobject:GetTextY	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetTextY()$/;"	f
+newobject:GetTopMargin	lib/LoveFrames/objects/form.lua	/^function newobject:GetTopMargin()$/;"	f
+newobject:GetType	lib/LoveFrames/objects/base.lua	/^function newobject:GetType()$/;"	f
+newobject:GetUnusable	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetUnusable()$/;"	f
+newobject:GetUsable	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetUsable()$/;"	f
+newobject:GetValue	lib/LoveFrames/objects/multichoice.lua	/^function newobject:GetValue()$/;"	f
+newobject:GetValue	lib/LoveFrames/objects/numberbox.lua	/^function newobject:GetValue()$/;"	f
+newobject:GetValue	lib/LoveFrames/objects/progressbar.lua	/^function newobject:GetValue()$/;"	f
+newobject:GetValue	lib/LoveFrames/objects/slider.lua	/^function newobject:GetValue()$/;"	f
+newobject:GetValue	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetValue()$/;"	f
+newobject:GetVerticalScrollBody	lib/LoveFrames/objects/textinput.lua	/^function newobject:GetVerticalScrollBody()$/;"	f
+newobject:GetVisible	lib/LoveFrames/objects/base.lua	/^function newobject:GetVisible()$/;"	f
+newobject:GetWidth	lib/LoveFrames/objects/base.lua	/^function newobject:GetWidth()$/;"	f
+newobject:GetWidthOfButtons	lib/LoveFrames/objects/tabs.lua	/^function newobject:GetWidthOfButtons()$/;"	f
+newobject:GetX	lib/LoveFrames/objects/base.lua	/^function newobject:GetX()$/;"	f
+newobject:GetY	lib/LoveFrames/objects/base.lua	/^function newobject:GetY()$/;"	f
+newobject:HasHorizontalScrollBar	lib/LoveFrames/objects/textinput.lua	/^function newobject:HasHorizontalScrollBar()$/;"	f
+newobject:HasVerticalScrollBar	lib/LoveFrames/objects/textinput.lua	/^function newobject:HasVerticalScrollBar()$/;"	f
+newobject:InClickBounds	lib/LoveFrames/objects/base.lua	/^function newobject:InClickBounds()$/;"	f
+newobject:IsActive	lib/LoveFrames/objects/base.lua	/^function newobject:IsActive()$/;"	f
+newobject:IsAllTextSelected	lib/LoveFrames/objects/textinput.lua	/^function newobject:IsAllTextSelected()$/;"	f
+newobject:IsDragging	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:IsDragging()$/;"	f
+newobject:IsInList	lib/LoveFrames/objects/base.lua	/^function newobject:IsInList()$/;"	f
+newobject:IsInternal	lib/LoveFrames/objects/base.lua	/^function newobject:IsInternal()$/;"	f
+newobject:IsTopChild	lib/LoveFrames/objects/base.lua	/^function newobject:IsTopChild()$/;"	f
+newobject:IsTopInternal	lib/LoveFrames/objects/base.lua	/^function newobject:IsTopInternal()$/;"	f
+newobject:IsTopList	lib/LoveFrames/objects/base.lua	/^function newobject:IsTopList()$/;"	f
+newobject:LayoutObjects	lib/LoveFrames/objects/form.lua	/^function newobject:LayoutObjects()$/;"	f
+newobject:MakeTop	lib/LoveFrames/objects/frame.lua	/^function newobject:MakeTop()$/;"	f
+newobject:ModifyValue	lib/LoveFrames/objects/numberbox.lua	/^function newobject:ModifyValue(type)$/;"	f
+newobject:MoveIndicator	lib/LoveFrames/objects/textinput.lua	/^function newobject:MoveIndicator(num, exact)$/;"	f
+newobject:MoveToTop	lib/LoveFrames/objects/base.lua	/^function newobject:MoveToTop()$/;"	f
+newobject:MoveToX	lib/LoveFrames/objects/internal/sliderbutton.lua	/^function newobject:MoveToX(x)$/;"	f
+newobject:MoveToY	lib/LoveFrames/objects/internal/sliderbutton.lua	/^function newobject:MoveToY(y)$/;"	f
+newobject:Paste	lib/LoveFrames/objects/textinput.lua	/^function newobject:Paste()$/;"	f
+newobject:PositionText	lib/LoveFrames/objects/textinput.lua	/^function newobject:PositionText()$/;"	f
+newobject:RedoLayout	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:RedoLayout()$/;"	f
+newobject:RedoLayout	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:RedoLayout()$/;"	f
+newobject:RedoLayout	lib/LoveFrames/objects/list.lua	/^function newobject:RedoLayout()$/;"	f
+newobject:Remove	lib/LoveFrames/objects/base.lua	/^function newobject:Remove()$/;"	f
+newobject:RemoveChoice	lib/LoveFrames/objects/multichoice.lua	/^function newobject:RemoveChoice(choice)$/;"	f
+newobject:RemoveClickBounds	lib/LoveFrames/objects/base.lua	/^function newobject:RemoveClickBounds()$/;"	f
+newobject:RemoveColumn	lib/LoveFrames/objects/columnlist.lua	/^function newobject:RemoveColumn(id)$/;"	f
+newobject:RemoveFromText	lib/LoveFrames/objects/textinput.lua	/^function newobject:RemoveFromText(p)$/;"	f
+newobject:RemoveItem	lib/LoveFrames/objects/form.lua	/^function newobject:RemoveItem(data)$/;"	f
+newobject:RemoveItem	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:RemoveItem(object)$/;"	f
+newobject:RemoveItem	lib/LoveFrames/objects/list.lua	/^function newobject:RemoveItem(data)$/;"	f
+newobject:RemoveOption	lib/LoveFrames/objects/menu.lua	/^function newobject:RemoveOption(id)$/;"	f
+newobject:RemoveRow	lib/LoveFrames/objects/columnlist.lua	/^function newobject:RemoveRow(id)$/;"	f
+newobject:RemoveTab	lib/LoveFrames/objects/tabs.lua	/^function newobject:RemoveTab(id)$/;"	f
+newobject:RunKey	lib/LoveFrames/objects/textinput.lua	/^function newobject:RunKey(key, unicode, is_text)$/;"	f
+newobject:Scroll	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:Scroll(amount)$/;"	f
+newobject:SelectAll	lib/LoveFrames/objects/textinput.lua	/^function newobject:SelectAll()$/;"	f
+newobject:SelectChoice	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SelectChoice(choice)$/;"	f
+newobject:SelectRow	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SelectRow(row, ctrl)$/;"	f
+newobject:SetAlwaysOnTop	lib/LoveFrames/objects/frame.lua	/^function newobject:SetAlwaysOnTop(bool)$/;"	f
+newobject:SetAlwaysUpdate	lib/LoveFrames/objects/base.lua	/^function newobject:SetAlwaysUpdate(bool)$/;"	f
+newobject:SetAutoButtonAreaWidth	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetAutoButtonAreaWidth(bool)$/;"	f
+newobject:SetAutoPosition	lib/LoveFrames/objects/internal/closebutton.lua	/^function newobject:SetAutoPosition(bool)$/;"	f
+newobject:SetAutoScroll	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetAutoScroll(bool)$/;"	f
+newobject:SetAutoScroll	lib/LoveFrames/objects/list.lua	/^function newobject:SetAutoScroll(bool)$/;"	f
+newobject:SetAutoScroll	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetAutoScroll(bool)$/;"	f
+newobject:SetButtonAreaWidth	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetButtonAreaWidth(width)$/;"	f
+newobject:SetButtonAreaX	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetButtonAreaX(x)$/;"	f
+newobject:SetButtonScrollAmount	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetButtonScrollAmount(amount)$/;"	f
+newobject:SetButtonScrollAmount	lib/LoveFrames/objects/list.lua	/^function newobject:SetButtonScrollAmount(amount)$/;"	f
+newobject:SetButtonScrollAmount	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetButtonScrollAmount(amount)$/;"	f
+newobject:SetButtonScrollAmount	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetButtonScrollAmount(amount)$/;"	f
+newobject:SetButtonScrollAmount	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetButtonScrollAmount(amount)$/;"	f
+newobject:SetButtonSize	lib/LoveFrames/objects/slider.lua	/^function newobject:SetButtonSize(width, height)$/;"	f
+newobject:SetCellHeight	lib/LoveFrames/objects/grid.lua	/^function newobject:SetCellHeight(height)$/;"	f
+newobject:SetCellPadding	lib/LoveFrames/objects/grid.lua	/^function newobject:SetCellPadding(padding)$/;"	f
+newobject:SetCellSize	lib/LoveFrames/objects/grid.lua	/^function newobject:SetCellSize(width, height)$/;"	f
+newobject:SetCellWidth	lib/LoveFrames/objects/grid.lua	/^function newobject:SetCellWidth(width)$/;"	f
+newobject:SetChecked	lib/LoveFrames/objects/checkbox.lua	/^function newobject:SetChecked(bool)$/;"	f
+newobject:SetChoice	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetChoice(choice)$/;"	f
+newobject:SetClickBounds	lib/LoveFrames/objects/base.lua	/^function newobject:SetClickBounds(x, y, width, height)$/;"	f
+newobject:SetClickable	lib/LoveFrames/objects/button.lua	/^function newobject:SetClickable(bool)$/;"	f
+newobject:SetClickable	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:SetClickable(bool)$/;"	f
+newobject:SetClosedHeight	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:SetClosedHeight(height)$/;"	f
+newobject:SetColor	lib/LoveFrames/objects/image.lua	/^function newobject:SetColor(r, g, b, a)$/;"	f
+newobject:SetColumnData	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:SetColumnData(data)$/;"	f
+newobject:SetColumnHeight	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetColumnHeight(height)$/;"	f
+newobject:SetColumnName	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetColumnName(id, name)$/;"	f
+newobject:SetColumns	lib/LoveFrames/objects/grid.lua	/^function newobject:SetColumns(columns)$/;"	f
+newobject:SetDTScrolling	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetDTScrolling(bool)$/;"	f
+newobject:SetDTScrolling	lib/LoveFrames/objects/list.lua	/^function newobject:SetDTScrolling(bool)$/;"	f
+newobject:SetDTScrolling	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetDTScrolling(bool)$/;"	f
+newobject:SetDTScrolling	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetDTScrolling(bool)$/;"	f
+newobject:SetDecimals	lib/LoveFrames/objects/numberbox.lua	/^function newobject:SetDecimals(decimals)$/;"	f
+newobject:SetDecimals	lib/LoveFrames/objects/slider.lua	/^function newobject:SetDecimals(decimals)$/;"	f
+newobject:SetDecreaseAmount	lib/LoveFrames/objects/numberbox.lua	/^function newobject:SetDecreaseAmount(amount)$/;"	f
+newobject:SetDefaultColor	lib/LoveFrames/objects/text.lua	/^function newobject:SetDefaultColor(r, g, b, a)$/;"	f
+newobject:SetDetectLinks	lib/LoveFrames/objects/text.lua	/^function newobject:SetDetectLinks(detect)$/;"	f
+newobject:SetDisplayType	lib/LoveFrames/objects/list.lua	/^function newobject:SetDisplayType(type)$/;"	f
+newobject:SetDockZoneSize	lib/LoveFrames/objects/frame.lua	/^function newobject:SetDockZoneSize(size)$/;"	f
+newobject:SetDockable	lib/LoveFrames/objects/frame.lua	/^function newobject:SetDockable(dockable)$/;"	f
+newobject:SetDraggable	lib/LoveFrames/objects/frame.lua	/^function newobject:SetDraggable(bool)$/;"	f
+newobject:SetDrawOrder	lib/LoveFrames/objects/base.lua	/^function newobject:SetDrawOrder()$/;"	f
+newobject:SetEditable	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetEditable(bool)$/;"	f
+newobject:SetEnabled	lib/LoveFrames/objects/button.lua	/^function newobject:SetEnabled(bool)$/;"	f
+newobject:SetEnabled	lib/LoveFrames/objects/checkbox.lua	/^function newobject:SetEnabled(bool)$/;"	f
+newobject:SetEnabled	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:SetEnabled(bool)$/;"	f
+newobject:SetEnabled	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetEnabled(bool)$/;"	f
+newobject:SetEnabled	lib/LoveFrames/objects/slider.lua	/^function newobject:SetEnabled(bool)$/;"	f
+newobject:SetFocus	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetFocus(focus)$/;"	f
+newobject:SetFollowCursor	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetFollowCursor(bool)$/;"	f
+newobject:SetFollowObject	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetFollowObject(bool)$/;"	f
+newobject:SetFont	lib/LoveFrames/objects/checkbox.lua	/^function newobject:SetFont(font)$/;"	f
+newobject:SetFont	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:SetFont(font)$/;"	f
+newobject:SetFont	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetFont(font)$/;"	f
+newobject:SetFont	lib/LoveFrames/objects/text.lua	/^function newobject:SetFont(font)$/;"	f
+newobject:SetFont	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetFont(font)$/;"	f
+newobject:SetFunction	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:SetFunction(func)$/;"	f
+newobject:SetHeight	lib/LoveFrames/objects/base.lua	/^function newobject:SetHeight(height)$/;"	f
+newobject:SetHeight	lib/LoveFrames/objects/checkbox.lua	/^function newobject:SetHeight(height)$/;"	f
+newobject:SetHeight	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:SetHeight(height)$/;"	f
+newobject:SetHeight	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetHeight(height)$/;"	f
+newobject:SetHeight	lib/LoveFrames/objects/list.lua	/^function newobject:SetHeight(height)$/;"	f
+newobject:SetHeight	lib/LoveFrames/objects/text.lua	/^function newobject:SetHeight(height)$/;"	f
+newobject:SetIcon	lib/LoveFrames/objects/frame.lua	/^function newobject:SetIcon(icon)$/;"	f
+newobject:SetIcon	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:SetIcon(icon)$/;"	f
+newobject:SetIgnoreNewlines	lib/LoveFrames/objects/text.lua	/^function newobject:SetIgnoreNewlines(bool)$/;"	f
+newobject:SetImage	lib/LoveFrames/objects/image.lua	/^function newobject:SetImage(image)$/;"	f
+newobject:SetImage	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:SetImage(image)$/;"	f
+newobject:SetImage	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:SetImage(image)$/;"	f
+newobject:SetIncreaseAmount	lib/LoveFrames/objects/numberbox.lua	/^function newobject:SetIncreaseAmount(amount)$/;"	f
+newobject:SetItemAutoSize	lib/LoveFrames/objects/grid.lua	/^function newobject:SetItemAutoSize(bool)$/;"	f
+newobject:SetLayoutType	lib/LoveFrames/objects/form.lua	/^function newobject:SetLayoutType(ltype)$/;"	f
+newobject:SetLerp	lib/LoveFrames/objects/progressbar.lua	/^function newobject:SetLerp(bool)$/;"	f
+newobject:SetLerpRate	lib/LoveFrames/objects/progressbar.lua	/^function newobject:SetLerpRate(rate)$/;"	f
+newobject:SetLimit	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetLimit(limit)$/;"	f
+newobject:SetLinksEnabled	lib/LoveFrames/objects/text.lua	/^function newobject:SetLinksEnabled(enabled)$/;"	f
+newobject:SetListHeight	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetListHeight(height)$/;"	f
+newobject:SetMaskChar	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetMaskChar(char)$/;"	f
+newobject:SetMasked	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetMasked(masked)$/;"	f
+newobject:SetMax	lib/LoveFrames/objects/numberbox.lua	/^function newobject:SetMax(max)$/;"	f
+newobject:SetMax	lib/LoveFrames/objects/progressbar.lua	/^function newobject:SetMax(max)$/;"	f
+newobject:SetMax	lib/LoveFrames/objects/slider.lua	/^function newobject:SetMax(max)$/;"	f
+newobject:SetMaxColorIndex	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetMaxColorIndex(num)$/;"	f
+newobject:SetMaxHeight	lib/LoveFrames/objects/frame.lua	/^function newobject:SetMaxHeight(height)$/;"	f
+newobject:SetMaxWidth	lib/LoveFrames/objects/frame.lua	/^function newobject:SetMaxWidth(width)$/;"	f
+newobject:SetMaxWidth	lib/LoveFrames/objects/text.lua	/^function newobject:SetMaxWidth(width)$/;"	f
+newobject:SetMaxX	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:SetMaxX(x)$/;"	f
+newobject:SetMaxY	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:SetMaxY(y)$/;"	f
+newobject:SetMin	lib/LoveFrames/objects/numberbox.lua	/^function newobject:SetMin(min)$/;"	f
+newobject:SetMin	lib/LoveFrames/objects/progressbar.lua	/^function newobject:SetMin(min)$/;"	f
+newobject:SetMin	lib/LoveFrames/objects/slider.lua	/^function newobject:SetMin(min)$/;"	f
+newobject:SetMinHeight	lib/LoveFrames/objects/frame.lua	/^function newobject:SetMinHeight(height)$/;"	f
+newobject:SetMinMax	lib/LoveFrames/objects/numberbox.lua	/^function newobject:SetMinMax(min, max)$/;"	f
+newobject:SetMinMax	lib/LoveFrames/objects/progressbar.lua	/^function newobject:SetMinMax(min, max)$/;"	f
+newobject:SetMinMax	lib/LoveFrames/objects/slider.lua	/^function newobject:SetMinMax(min, max)$/;"	f
+newobject:SetMinWidth	lib/LoveFrames/objects/frame.lua	/^function newobject:SetMinWidth(width)$/;"	f
+newobject:SetModal	lib/LoveFrames/objects/frame.lua	/^function newobject:SetModal(bool)$/;"	f
+newobject:SetMouseWheelScrollAmount	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetMouseWheelScrollAmount(amount)$/;"	f
+newobject:SetMouseWheelScrollAmount	lib/LoveFrames/objects/list.lua	/^function newobject:SetMouseWheelScrollAmount(amount)$/;"	f
+newobject:SetMouseWheelScrollAmount	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetMouseWheelScrollAmount(amount)$/;"	f
+newobject:SetMouseWheelScrollAmount	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetMouseWheelScrollAmount(amount)$/;"	f
+newobject:SetMouseWheelScrollAmount	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetMouseWheelScrollAmount(amount)$/;"	f
+newobject:SetMultiline	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetMultiline(bool)$/;"	f
+newobject:SetMultiselectEnabled	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetMultiselectEnabled(bool)$/;"	f
+newobject:SetName	lib/LoveFrames/objects/form.lua	/^function newobject:SetName(name)$/;"	f
+newobject:SetName	lib/LoveFrames/objects/frame.lua	/^function newobject:SetName(name)$/;"	f
+newobject:SetObject	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:SetObject(object)$/;"	f
+newobject:SetObject	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetObject(object)$/;"	f
+newobject:SetOffset	lib/LoveFrames/objects/image.lua	/^function newobject:SetOffset(x, y)$/;"	f
+newobject:SetOffsetX	lib/LoveFrames/objects/image.lua	/^function newobject:SetOffsetX(x)$/;"	f
+newobject:SetOffsetX	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetOffsetX(xoffset)$/;"	f
+newobject:SetOffsetY	lib/LoveFrames/objects/image.lua	/^function newobject:SetOffsetY(y)$/;"	f
+newobject:SetOffsetY	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetOffsetY(yoffset)$/;"	f
+newobject:SetOffsets	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetOffsets(xoffset, yoffset)$/;"	f
+newobject:SetOpen	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:SetOpen(bool)$/;"	f
+newobject:SetOrientation	lib/LoveFrames/objects/image.lua	/^function newobject:SetOrientation(orientation)$/;"	f
+newobject:SetPadding	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:SetPadding(amount)$/;"	f
+newobject:SetPadding	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetPadding(padding)$/;"	f
+newobject:SetPadding	lib/LoveFrames/objects/list.lua	/^function newobject:SetPadding(amount)$/;"	f
+newobject:SetPadding	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetPadding(padding)$/;"	f
+newobject:SetPadding	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetPadding(padding)$/;"	f
+newobject:SetParent	lib/LoveFrames/objects/base.lua	/^function newobject:SetParent(parent)$/;"	f
+newobject:SetParentLocked	lib/LoveFrames/objects/frame.lua	/^function newobject:SetParentLocked(bool)$/;"	f
+newobject:SetPlaceholderText	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetPlaceholderText(text)$/;"	f
+newobject:SetPos	lib/LoveFrames/objects/base.lua	/^function newobject:SetPos(x, y, center)$/;"	f
+newobject:SetProperty	lib/LoveFrames/objects/base.lua	/^function newobject:SetProperty(name, value)$/;"	f
+newobject:SetRepeatDelay	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetRepeatDelay(delay)$/;"	f
+newobject:SetRepeatRate	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetRepeatRate(rate)$/;"	f
+newobject:SetResizable	lib/LoveFrames/objects/frame.lua	/^function newobject:SetResizable(bool)$/;"	f
+newobject:SetRetainSize	lib/LoveFrames/objects/base.lua	/^function newobject:SetRetainSize(bool)$/;"	f
+newobject:SetRowColumnData	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetRowColumnData(rowid, columndata)$/;"	f
+newobject:SetRowColumnText	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetRowColumnText(text, rowid, columnid)$/;"	f
+newobject:SetRows	lib/LoveFrames/objects/grid.lua	/^function newobject:SetRows(rows)$/;"	f
+newobject:SetScale	lib/LoveFrames/objects/image.lua	/^function newobject:SetScale(scalex, scaley)$/;"	f
+newobject:SetScaleX	lib/LoveFrames/objects/image.lua	/^function newobject:SetScaleX(scalex)$/;"	f
+newobject:SetScaleY	lib/LoveFrames/objects/image.lua	/^function newobject:SetScaleY(scaley)$/;"	f
+newobject:SetScreenLocked	lib/LoveFrames/objects/frame.lua	/^function newobject:SetScreenLocked(bool)$/;"	f
+newobject:SetScrollButtonSize	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetScrollButtonSize(width, height)$/;"	f
+newobject:SetScrollDecrease	lib/LoveFrames/objects/slider.lua	/^function newobject:SetScrollDecrease(decrease)$/;"	f
+newobject:SetScrollIncrease	lib/LoveFrames/objects/slider.lua	/^function newobject:SetScrollIncrease(increase)$/;"	f
+newobject:SetScrollable	lib/LoveFrames/objects/slider.lua	/^function newobject:SetScrollable(bool)$/;"	f
+newobject:SetSelected	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:SetSelected(selected)$/;"	f
+newobject:SetSelectionEnabled	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetSelectionEnabled(bool)$/;"	f
+newobject:SetShadow	lib/LoveFrames/objects/text.lua	/^function newobject:SetShadow(bool)$/;"	f
+newobject:SetShadowColor	lib/LoveFrames/objects/text.lua	/^function newobject:SetShadowColor(r, g, b, a)$/;"	f
+newobject:SetShadowOffsets	lib/LoveFrames/objects/text.lua	/^function newobject:SetShadowOffsets(offsetx, offsety)$/;"	f
+newobject:SetShear	lib/LoveFrames/objects/image.lua	/^function newobject:SetShear(shearx, sheary)$/;"	f
+newobject:SetShearX	lib/LoveFrames/objects/image.lua	/^function newobject:SetShearX(shearx)$/;"	f
+newobject:SetShearY	lib/LoveFrames/objects/image.lua	/^function newobject:SetShearY(sheary)$/;"	f
+newobject:SetSize	lib/LoveFrames/objects/base.lua	/^function newobject:SetSize(width, height)$/;"	f
+newobject:SetSize	lib/LoveFrames/objects/checkbox.lua	/^function newobject:SetSize(width, height)$/;"	f
+newobject:SetSize	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:SetSize(width, height)$/;"	f
+newobject:SetSize	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetSize(width, height)$/;"	f
+newobject:SetSize	lib/LoveFrames/objects/list.lua	/^function newobject:SetSize(width, height)$/;"	f
+newobject:SetSize	lib/LoveFrames/objects/text.lua	/^function newobject:SetSize(width, height)$/;"	f
+newobject:SetSkin	lib/LoveFrames/objects/base.lua	/^function newobject:SetSkin(name)$/;"	f
+newobject:SetSlideType	lib/LoveFrames/objects/slider.lua	/^function newobject:SetSlideType(slidetype)$/;"	f
+newobject:SetSortFunction	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetSortFunction(func)$/;"	f
+newobject:SetSpacing	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:SetSpacing(amount)$/;"	f
+newobject:SetSpacing	lib/LoveFrames/objects/list.lua	/^function newobject:SetSpacing(amount)$/;"	f
+newobject:SetSpacing	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetSpacing(spacing)$/;"	f
+newobject:SetState	lib/LoveFrames/objects/base.lua	/^function newobject:SetState(name)$/;"	f
+newobject:SetTabHeight	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetTabHeight(height)$/;"	f
+newobject:SetTabObject	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetTabObject(id, object)$/;"	f
+newobject:SetTabReplacement	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetTabReplacement(tabreplacement)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/button.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/checkbox.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/multichoice.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/progressbar.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/slider.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/text.lua	/^function newobject:SetText(t)$/;"	f
+newobject:SetText	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetText(text)$/;"	f
+newobject:SetTextMaxWidth	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:SetTextMaxWidth(width)$/;"	f
+newobject:SetTextOffsetX	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetTextOffsetX(num)$/;"	f
+newobject:SetTextOffsetY	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetTextOffsetY(num)$/;"	f
+newobject:SetTextPos	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:SetTextPos(x, y)$/;"	f
+newobject:SetToolTipFont	lib/LoveFrames/objects/tabs.lua	/^function newobject:SetToolTipFont(font)$/;"	f
+newobject:SetTopMargin	lib/LoveFrames/objects/form.lua	/^function newobject:SetTopMargin(margin)$/;"	f
+newobject:SetUnusable	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetUnusable(unusable)$/;"	f
+newobject:SetUsable	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetUsable(usable)$/;"	f
+newobject:SetValue	lib/LoveFrames/objects/numberbox.lua	/^function newobject:SetValue(value)$/;"	f
+newobject:SetValue	lib/LoveFrames/objects/progressbar.lua	/^function newobject:SetValue(value)$/;"	f
+newobject:SetValue	lib/LoveFrames/objects/slider.lua	/^function newobject:SetValue(value)$/;"	f
+newobject:SetValue	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetValue(value)$/;"	f
+newobject:SetVisible	lib/LoveFrames/objects/base.lua	/^function newobject:SetVisible(bool)$/;"	f
+newobject:SetVisible	lib/LoveFrames/objects/frame.lua	/^function newobject:SetVisible(bool)$/;"	f
+newobject:SetVisible	lib/LoveFrames/objects/menu.lua	/^function newobject:SetVisible(bool)$/;"	f
+newobject:SetVisible	lib/LoveFrames/objects/textinput.lua	/^function newobject:SetVisible(bool)$/;"	f
+newobject:SetWidth	lib/LoveFrames/objects/base.lua	/^function newobject:SetWidth(width)$/;"	f
+newobject:SetWidth	lib/LoveFrames/objects/checkbox.lua	/^function newobject:SetWidth(width)$/;"	f
+newobject:SetWidth	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SetWidth(width)$/;"	f
+newobject:SetWidth	lib/LoveFrames/objects/list.lua	/^function newobject:SetWidth(width)$/;"	f
+newobject:SetWidth	lib/LoveFrames/objects/text.lua	/^function newobject:SetWidth(width)$/;"	f
+newobject:SetX	lib/LoveFrames/objects/base.lua	/^function newobject:SetX(x, center)$/;"	f
+newobject:SetY	lib/LoveFrames/objects/base.lua	/^function newobject:SetY(y, center)$/;"	f
+newobject:ShowCloseButton	lib/LoveFrames/objects/frame.lua	/^function newobject:ShowCloseButton(bool)$/;"	f
+newobject:ShowLineNumbers	lib/LoveFrames/objects/textinput.lua	/^function newobject:ShowLineNumbers(bool)$/;"	f
+newobject:SizeToChildren	lib/LoveFrames/objects/columnlist.lua	/^function newobject:SizeToChildren(max)$/;"	f
+newobject:SizeToImage	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:SizeToImage()$/;"	f
+newobject:Sort	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:Sort(column, desc)$/;"	f
+newobject:Sort	lib/LoveFrames/objects/multichoice.lua	/^function newobject:Sort(func)$/;"	f
+newobject:SwitchToTab	lib/LoveFrames/objects/tabs.lua	/^function newobject:SwitchToTab(tabnumber)$/;"	f
+newobject:UpdateIndicator	lib/LoveFrames/objects/textinput.lua	/^function newobject:UpdateIndicator()$/;"	f
+newobject:draw	lib/LoveFrames/objects/base.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/button.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/checkbox.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/columnlist.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/form.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/frame.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/grid.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/image.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/closebutton.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/columnlist/columnlistheader.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/modalbackground.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/scrollable/scrollarea.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/scrollable/scrollbutton.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/sliderbutton.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/list.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/menu.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/multichoice.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/numberbox.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/panel.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/progressbar.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/slider.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/tabs.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/text.lua	/^function newobject:draw()$/;"	f
+newobject:draw	lib/LoveFrames/objects/textinput.lua	/^function newobject:draw()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/base.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/button.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/checkbox.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/columnlist.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/form.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/frame.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/grid.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/image.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/closebutton.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:initialize(parent)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/columnlist/columnlistheader.lua	/^function newobject:initialize(name, parent)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:initialize(parent, data)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^function newobject:initialize(parent)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:initialize(parent, option_type, menu)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/modalbackground.lua	/^function newobject:initialize(object)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:initialize(object)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/scrollable/scrollarea.lua	/^function newobject:initialize(parent, bartype)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:initialize(parent, bartype)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^function newobject:initialize(parent, bartype)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/scrollable/scrollbutton.lua	/^function newobject:initialize(scrolltype)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/sliderbutton.lua	/^function newobject:initialize(parent)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:initialize(parent, text, tabnumber, tip, image, onopened, onclosed)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:initialize(object, text)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/list.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/menu.lua	/^function newobject:initialize(menu)$/;"	f
+newobject:initialize	lib/LoveFrames/objects/multichoice.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/numberbox.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/panel.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/progressbar.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/slider.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/tabs.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/text.lua	/^function newobject:initialize()$/;"	f
+newobject:initialize	lib/LoveFrames/objects/textinput.lua	/^function newobject:initialize()$/;"	f
+newobject:keypressed	lib/LoveFrames/objects/base.lua	/^function newobject:keypressed(key, unicode)$/;"	f
+newobject:keypressed	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:keypressed(key, unicode)$/;"	f
+newobject:keypressed	lib/LoveFrames/objects/textinput.lua	/^function newobject:keypressed(key, unicode)$/;"	f
+newobject:keyreleased	lib/LoveFrames/objects/base.lua	/^function newobject:keyreleased(key)$/;"	f
+newobject:keyreleased	lib/LoveFrames/objects/textinput.lua	/^function newobject:keyreleased(key)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/base.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/button.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/checkbox.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/columnlist.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/form.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/frame.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/grid.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/closebutton.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/columnlist/columnlistheader.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/scrollable/scrollarea.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/scrollable/scrollbutton.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/sliderbutton.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/list.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/menu.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/multichoice.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/numberbox.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/panel.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/slider.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/tabs.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/text.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousepressed	lib/LoveFrames/objects/textinput.lua	/^function newobject:mousepressed(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/base.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/button.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/checkbox.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/columnlist.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/form.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/frame.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/grid.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/closebutton.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/columnlist/columnlistheader.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/scrollable/scrollarea.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/scrollable/scrollbutton.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/sliderbutton.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/menu.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/multichoice.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/panel.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/tabs.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:mousereleased	lib/LoveFrames/objects/textinput.lua	/^function newobject:mousereleased(x, y, button)$/;"	f
+newobject:textinput	lib/LoveFrames/objects/base.lua	/^function newobject:textinput(text)$/;"	f
+newobject:textinput	lib/LoveFrames/objects/textinput.lua	/^function newobject:textinput(text)$/;"	f
+newobject:update	lib/LoveFrames/objects/base.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/button.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/checkbox.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/collapsiblecategory.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/columnlist.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/form.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/frame.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/grid.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/image.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/imagebutton.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/closebutton.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/columnlist/columnlistarea.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/columnlist/columnlistheader.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/columnlist/columnlistrow.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/menuoption.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/modalbackground.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/multichoice/multichoicelist.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/multichoice/multichoicerow.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/scrollable/scrollarea.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/scrollable/scrollbar.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/scrollable/scrollbutton.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/sliderbutton.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/tabbutton.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/internal/tooltip.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/list.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/menu.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/multichoice.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/numberbox.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/panel.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/progressbar.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/slider.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/tabs.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/text.lua	/^function newobject:update(dt)$/;"	f
+newobject:update	lib/LoveFrames/objects/textinput.lua	/^function newobject:update(dt)$/;"	f
+noeof	lib/AdvTiledLoader/external/deflatelua.lua	/^local function noeof(val)$/;"	f
+o.add_option	lib/AdvTiledLoader/external/optparse.lua	/^  function o.add_option(optdesc)$/;"	f
+o.fail	lib/AdvTiledLoader/external/optparse.lua	/^  function o.fail(s) -- extension$/;"	f
+o.parse_args	lib/AdvTiledLoader/external/optparse.lua	/^  function o.parse_args()$/;"	f
+o.print_help	lib/AdvTiledLoader/external/optparse.lua	/^  function o.print_help()$/;"	f
+o:nbits_left_in_byte	lib/AdvTiledLoader/external/deflatelua.lua	/^  function o:nbits_left_in_byte()$/;"	f
+o:read	lib/AdvTiledLoader/external/deflatelua.lua	/^  function o:read()$/;"	f
+o:read	lib/AdvTiledLoader/external/deflatelua.lua	/^  function o:read(nbits)$/;"	f
+obj.draw 	lib/AdvTiledLoader/Object.lua	/^	obj.draw = nil				-- You can assign a function to this to call instead of the object's$/;"	f
+objectDeepcopy	utils.lua	/^function objectDeepcopy(object)$/;"	f
+objectFactory.createElemental	systems/objectFactory.lua	/^function objectFactory.createElemental(points, center, eleName, initV)$/;"	f
+objectFactory.createPlayer	systems/objectFactory.lua	/^function objectFactory.createPlayer(serializedPosition, serializedSpellBook)$/;"	f
+objectFactory.createTile	systems/objectFactory.lua	/^function objectFactory.createTile(points, center)$/;"	f
+objectFactory.init	systems/objectFactory.lua	/^function objectFactory.init()$/;"	f
+objectFactory.prototypeElemental	systems/objectFactory.lua	/^function objectFactory.prototypeElemental(points, center, eleName)$/;"	f
+objectFactory.prototypeForce	systems/objectFactory.lua	/^function objectFactory.prototypeForce(h, v, x, y, casterId)$/;"	f
+occ	rectAlgo.js	/^var occ = function(x, y) { return grid[y][x].length > 0; };$/;"	f
+occCol	rectAlgo.js	/^var occCol = function(x, y1, y2) {$/;"	f
+offsetListOfSegs	geometry/Seg.lua	/^function offsetListOfSegs(segs, x, y)$/;"	f
+onDebugHook 	lib/ProFi.lua	/^onDebugHook = function( hookType )$/;"	f
+output	lib/AdvTiledLoader/external/deflatelua.lua	/^local function output(outstate, byte)$/;"	f
+p) love.graphics.circle	systems/graphicsSystem.lua	/^    each(function(p) love.graphics.circle("fill", p.x, p.y, 5, 10) end, positionSystem:getPoints(comp.id))$/;"	f
+parse_block	lib/AdvTiledLoader/external/deflatelua.lua	/^local function parse_block(bs, outstate)$/;"	f
+parse_compressed_item	lib/AdvTiledLoader/external/deflatelua.lua	/^local function parse_compressed_item(bs, outstate, littable, disttable)$/;"	f
+parse_gzip_header	lib/AdvTiledLoader/external/deflatelua.lua	/^local function parse_gzip_header(bs)$/;"	f
+parse_huffmantables	lib/AdvTiledLoader/external/deflatelua.lua	/^local function parse_huffmantables(bs)$/;"	f
+parse_zlib_header	lib/AdvTiledLoader/external/deflatelua.lua	/^local function parse_zlib_header(bs)$/;"	f
+parse_zstring	lib/AdvTiledLoader/external/deflatelua.lua	/^  local function parse_zstring(bs)$/;"	f
+parseargs	lib/AdvTiledLoader/external/xml.lua	/^local function parseargs(s)$/;"	f
+physicsSystem:beginCollision	systems/physicsSystem.lua	/^function physicsSystem:beginCollision(aId, bId, coll)$/;"	f
+physicsSystem:clearDestroyQueue	systems/physicsSystem.lua	/^function physicsSystem:clearDestroyQueue()$/;"	f
+physicsSystem:delete	systems/physicsSystem.lua	/^function physicsSystem:delete(id)$/;"	f
+physicsSystem:endCollision	systems/physicsSystem.lua	/^function physicsSystem:endCollision(aId, bId, coll)$/;"	f
+physicsSystem:getMass	systems/physicsSystem.lua	/^function physicsSystem:getMass(id)$/;"	f
+physicsSystem:handleCollision	systems/physicsSystem.lua	/^function physicsSystem:handleCollision(id, contact)$/;"	f
+physicsSystem:init	systems/physicsSystem.lua	/^function physicsSystem:init(w, objFact, eSys)$/;"	f
+physicsSystem:update	systems/physicsSystem.lua	/^function physicsSystem:update(dt)$/;"	f
+polygon 	systems/graphicsSystem.lua	/^    polygon = function(id)$/;"	f
+polygon 	systems/positionSystem.lua	/^    polygon = function (id, comp)$/;"	f
+position 	Spell.lua	/^    position = function (t) return require 'components.position'.prototype(t.coords, t.center) end,$/;"	f
+position.create	components/position.lua	/^function position.create(id, ...)$/;"	f
+position.prototype	components/position.lua	/^function position.prototype(coords, center, shapeName, radius)$/;"	f
+positionSystem:add	systems/positionSystem.lua	/^function positionSystem:add(comp)$/;"	f
+positionSystem:addAndTranslateToCoords	systems/positionSystem.lua	/^function positionSystem:addAndTranslateToCoords(comp)$/;"	f
+positionSystem:getCenter	systems/positionSystem.lua	/^function positionSystem:getCenter(id)$/;"	f
+positionSystem:getCoords	systems/positionSystem.lua	/^function positionSystem:getCoords(id)$/;"	f
+positionSystem:getPoints	systems/positionSystem.lua	/^function positionSystem:getPoints(id)$/;"	f
+positionSystem:getRadius	systems/positionSystem.lua	/^function positionSystem:getRadius(id)$/;"	f
+positionSystem:getShape	systems/positionSystem.lua	/^function positionSystem:getShape(id)$/;"	f
+positionSystem:init	systems/positionSystem.lua	/^function positionSystem:init(bodySystem, referenceSystem)$/;"	f
+positionSystem:setCenter	systems/positionSystem.lua	/^function positionSystem:setCenter(id, centerX, centerY)$/;"	f
+positionSystem:setPos	systems/positionSystem.lua	/^function positionSystem:setPos(id, centerX, centerY, coords)$/;"	f
+positionSystem:testPointInRange	systems/positionSystem.lua	/^function positionSystem:testPointInRange(point, startId, endId)$/;"	f
+positionSystem:update	systems/positionSystem.lua	/^function positionSystem:update(dt)$/;"	f
+pow 	lib/luafun/fun.lua	/^    pow = function(a, b) return a ^ b end,$/;"	f
+primary_domain	lib/luafun/doc/conf.py	/^primary_domain = "lua"$/;"	v
+print 	lib/luafun/tests/runtest	/^    print = function(...) file_print(new_file, ...) end$/;"	f
+print(all(function(x) return math.floor(x) 	lib/luafun/tests/generators.lua	/^print(all(function(x) return math.floor(x) == x end, take(5, rands(10))))$/;"	f
+print(all(function(x) return math.floor(x) 	lib/luafun/tests/generators.lua	/^print(all(function(x) return math.floor(x) == x end, take(5, rands(1024))))$/;"	f
+print(all(function(x) return x >	lib/luafun/tests/generators.lua	/^print(all(function(x) return x >= 0 and x < 1 end, take(5, rands())))$/;"	f
+print(all(function(x) return x >	lib/luafun/tests/generators.lua	/^print(all(function(x) return x >= 10 and x < 20 end, take(20, rands(10, 20))))$/;"	f
+print(find(function(i, x) return i > 4 and i % 3 	lib/luafun/tests/indexing.lua	/^print(find(function(i, x) return i > 4 and i % 3 == 0 end,$/;"	f
+print(find(function(x) return x % 2 	lib/luafun/tests/indexing.lua	/^print(find(function(x) return x % 2 == 0 end, range(0)))$/;"	f
+print(find(function(x) return x > 4 and x % 3 	lib/luafun/tests/indexing.lua	/^print(find(function(x) return x > 4 and x % 3 == 0 end, range(10)))$/;"	f
+printTable	utils.lua	/^function printTable(preMessage, table, postMessage)$/;"	f
+proc	lib/TLTools/Tserial.lua	/^	local function proc(k,v, omitKey)	-- encode a key\/value pair$/;"	f
+process	lib/luafun/tests/runtest	/^function process(test_name)$/;"	f
+project	lib/luafun/doc/conf.py	/^project = u'Lua Functional'$/;"	v
+pushBase64	lib/AdvTiledLoader/base64.lua	/^local function pushBase64(n)$/;"	f
+pygments_style	lib/luafun/doc/conf.py	/^pygments_style = 'sphinx'$/;"	v
+referenceSystem:getParent	systems/referenceSystem.lua	/^function referenceSystem:getParent(id)$/;"	f
+referencer.create	components/referencer.lua	/^function referencer.create(id, ...)$/;"	f
+referencer.prototype	components/referencer.lua	/^function referencer.prototype(parentId)$/;"	f
+release	lib/luafun/doc/conf.py	/^release = '0.1-alpha'$/;"	v
+removeRedundantPoints	geometry/Point.lua	/^function removeRedundantPoints(points)$/;"	f
+returnToSettings	menus/controls.lua	/^local function returnToSettings()$/;"	f
+rgbVary	components/element.lua	/^        local function rgbVary(num)$/;"	f
+rgbVary	components/element.lua	/^local function rgbVary(num)$/;"	f
+rightbutton.Update 	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		rightbutton.Update = function(object, dt)$/;"	f
+rightbutton.Update 	lib/LoveFrames/objects/tabs.lua	/^	rightbutton.Update = function(object, dt)$/;"	f
+runeSystem:handleClick	systems/runeSystem.lua	/^function runeSystem:handleClick(rune, ...)$/;"	f
+runeSystem:init	systems/runeSystem.lua	/^function runeSystem:init(objectFactory)$/;"	f
+runtime_assert	lib/AdvTiledLoader/external/gunziplua.lua	/^local function runtime_assert(val, msg)$/;"	f
+runtime_error	lib/AdvTiledLoader/external/deflatelua.lua	/^local function runtime_error(s, level)$/;"	f
+runtime_error	lib/AdvTiledLoader/external/gunziplua.lua	/^local function runtime_error(s, level)$/;"	f
+self.OnClick 	lib/LoveFrames/objects/internal/closebutton.lua	/^	self.OnClick = function() end$/;"	f
+self.OnClick 	lib/LoveFrames/objects/internal/columnlist/columnlistheader.lua	/^	self.OnClick = function(object)$/;"	f
+self.OnClick 	lib/LoveFrames/objects/internal/scrollable/scrollbutton.lua	/^	self.OnClick = function() end$/;"	f
+self.sortfunc 	lib/LoveFrames/objects/multichoice.lua	/^	self.sortfunc = function(a, b) return a < b end$/;"	f
+setAddedToRect	lib/AdvTiledLoader/TileLayer.lua	/^local function setAddedToRect(x, y, targetWidth, tileData)$/;"	f
+setColor	utils.lua	/^function setColor(color)$/;"	f
+setColorInverted	utils.lua	/^function setColorInverted(color)$/;"	f
+setToComponentColor	systems/graphicsSystem.lua	/^local function setToComponentColor(comp)$/;"	f
+setmetatable(aClass.static, { __index 	lib/LoveFrames/third-party/middleclass.lua	/^    setmetatable(aClass.static, { __index = function(_,k) return dict[k] end })$/;"	f
+setmetatable(aClass.static, { __index 	lib/LoveFrames/third-party/middleclass.lua	/^    setmetatable(aClass.static, { __index = function(_,k) return dict[k] or superStatic[k] end })$/;"	f
+setmetatable(middleclass, { __call 	lib/LoveFrames/third-party/middleclass.lua	/^setmetatable(middleclass, { __call = function(_, ...) return middleclass.class(...) end })$/;"	f
+shapeRenderer.create	components/shapeRenderer.lua	/^function shapeRenderer.create(id, color)$/;"	f
+skin.DrawButton	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawButton(object)$/;"	f
+skin.DrawCheckBox	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawCheckBox(object)$/;"	f
+skin.DrawCloseButton	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawCloseButton(object)$/;"	f
+skin.DrawCollapsibleCategory	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawCollapsibleCategory(object)$/;"	f
+skin.DrawColumnList	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawColumnList(object)$/;"	f
+skin.DrawColumnListArea	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawColumnListArea(object)$/;"	f
+skin.DrawColumnListHeader	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawColumnListHeader(object)$/;"	f
+skin.DrawColumnListRow	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawColumnListRow(object)$/;"	f
+skin.DrawForm	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawForm(object)$/;"	f
+skin.DrawFrame	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawFrame(object)$/;"	f
+skin.DrawGrid	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawGrid(object)$/;"	f
+skin.DrawImage	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawImage(object)$/;"	f
+skin.DrawImageButton	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawImageButton(object)$/;"	f
+skin.DrawLineNumbersPanel	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawLineNumbersPanel(object)$/;"	f
+skin.DrawList	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawList(object)$/;"	f
+skin.DrawMenu	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawMenu(object)$/;"	f
+skin.DrawMenuOption	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawMenuOption(object)$/;"	f
+skin.DrawModalBackground	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawModalBackground(object)$/;"	f
+skin.DrawMultiChoice	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawMultiChoice(object)$/;"	f
+skin.DrawMultiChoiceList	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawMultiChoiceList(object)$/;"	f
+skin.DrawMultiChoiceRow	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawMultiChoiceRow(object)$/;"	f
+skin.DrawNumberBox	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawNumberBox(object)$/;"	f
+skin.DrawOverColumnListArea	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawOverColumnListArea(object)$/;"	f
+skin.DrawOverList	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawOverList(object)$/;"	f
+skin.DrawOverMultiChoiceList	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawOverMultiChoiceList(object)$/;"	f
+skin.DrawOverTabPanel	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawOverTabPanel(object)$/;"	f
+skin.DrawOverTextInput	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawOverTextInput(object)$/;"	f
+skin.DrawPanel	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawPanel(object)$/;"	f
+skin.DrawProgressBar	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawProgressBar(object)$/;"	f
+skin.DrawScrollArea	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawScrollArea(object)$/;"	f
+skin.DrawScrollBar	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawScrollBar(object)$/;"	f
+skin.DrawScrollBody	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawScrollBody(object)$/;"	f
+skin.DrawScrollButton	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawScrollButton(object)$/;"	f
+skin.DrawSlider	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawSlider(object)$/;"	f
+skin.DrawSliderButton	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawSliderButton(object)$/;"	f
+skin.DrawTabButton	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawTabButton(object)$/;"	f
+skin.DrawTabPanel	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawTabPanel(object)$/;"	f
+skin.DrawText	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawText(object)$/;"	f
+skin.DrawTextInput	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawTextInput(object)$/;"	f
+skin.DrawToolTip	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawToolTip(object)$/;"	f
+skin.OutlinedRectangle	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.OutlinedRectangle(x, y, width, height, ovt, ovb, ovl, ovr)$/;"	f
+sortByCallCount 	lib/ProFi.lua	/^sortByCallCount = function( a, b )$/;"	f
+sortByDurationDesc 	lib/ProFi.lua	/^sortByDurationDesc = function( a, b )$/;"	f
+source_suffix	lib/luafun/doc/conf.py	/^source_suffix = '.rst'$/;"	v
+spellBook.create	components/spellBook.lua	/^function spellBook.create(id, serializedSpellBook)$/;"	f
+spellBookSystem:cast	systems/spellBookSystem.lua	/^function spellBookSystem:cast(id, index)$/;"	f
+spellBookSystem:deleteFromCurrent	systems/spellBookSystem.lua	/^function spellBookSystem:deleteFromCurrent(id, deleteId)$/;"	f
+spellBookSystem:draw	systems/spellBookSystem.lua	/^function spellBookSystem:draw(id)$/;"	f
+spellBookSystem:inc	systems/spellBookSystem.lua	/^function spellBookSystem:inc(id, amount)$/;"	f
+spellBookSystem:preview	systems/spellBookSystem.lua	/^function spellBookSystem:preview(id)$/;"	f
+statBar.create	components/statBar.lua	/^function statBar.create(id, topPercent, heightPercent, color, getPercent)$/;"	f
+stencilfunc 	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^		stencilfunc = function() love.graphics.rectangle("fill", self.parent.x, self.parent.y, self.width, self.parent.height - 16) end$/;"	f
+stencilfunc 	lib/LoveFrames/objects/textinput.lua	/^		stencilfunc = function() love.graphics.rectangle("fill", x, y, width - 16, height - 16) end$/;"	f
+str 	lib/AdvTiledLoader/Loader.lua	/^		str = string.gsub(str, "%(%d+%)$", function(a) return "(" .. $/;"	f
+string.gsub(s, "(%w+)	lib/AdvTiledLoader/external/xml.lua	/^  string.gsub(s, "(%w+)=([\\"'])(.-)%2", function (w, _, a)$/;"	f
+string.gsub(t[1], "%d+", function(a) data[#data+1] 	lib/AdvTiledLoader/Loader.lua	/^        	string.gsub(t[1], "%d+", function(a) data[#data+1] = tonumber(a) or 0 end)$/;"	f
+sub 	lib/luafun/fun.lua	/^    sub = function(a, b) return a - b end,$/;"	f
+t:read	lib/AdvTiledLoader/external/deflatelua.lua	/^  function t:read(bs)$/;"	f
+tableCompare	utils.lua	/^function tableCompare(table, field, compare)$/;"	f
+tableMax	utils.lua	/^function tableMax(table, field)$/;"	f
+tableMin	utils.lua	/^function tableMin(table, field)$/;"	f
+tableSwap	utils.lua	/^function tableSwap(table, index1, index2)$/;"	f
+temperature 	Spell.lua	/^    temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,$/;"	f
+temperature.create	components/temperature.lua	/^function temperature.create(id, initTemp)$/;"	f
+temperature.prototype	components/temperature.lua	/^function temperature.prototype(initTemp)$/;"	f
+temperatureSystem:beginCollision	systems/temperatureSystem.lua	/^function temperatureSystem:beginCollision(id, otherId, contact)$/;"	f
+temperatureSystem:endCollision	systems/temperatureSystem.lua	/^function temperatureSystem:endCollision(id, otherId, contact)$/;"	f
+temperatureSystem:getAdjustedColor	systems/temperatureSystem.lua	/^function temperatureSystem:getAdjustedColor(id, ambientColor)$/;"	f
+temperatureSystem:getTemp	systems/temperatureSystem.lua	/^function temperatureSystem:getTemp(id)$/;"	f
+temperatureSystem:update	systems/temperatureSystem.lua	/^function temperatureSystem:update(dt)$/;"	f
+templates_path	lib/luafun/doc/conf.py	/^templates_path = ['_templates']$/;"	v
+test3	lib/luafun/tests/filtering.lua	/^function test3(a, b, c)$/;"	f
+testPoint	geometry/Point.lua	/^function testPoint(p, points)$/;"	f
+textobject.Update 	lib/LoveFrames/objects/checkbox.lua	/^		textobject.Update = function(object, dt)$/;"	f
+tileSize	rectAlgo.js	/^var tileSize = 4;$/;"	v
+toggleFullscreen	main.lua	/^function toggleFullscreen()$/;"	f
+truediv 	lib/luafun/fun.lua	/^    truediv = function(a, b) return a \/ b end,$/;"	f
+truth 	lib/luafun/fun.lua	/^    truth = function(a) return not not a end,$/;"	f
+type(aClass.isSubclassOf) 	lib/LoveFrames/third-party/middleclass.lua	/^           type(aClass.isSubclassOf) == 'function' and$/;"	f
+type(self.super.includes)  	lib/LoveFrames/third-party/middleclass.lua	/^           type(self.super.includes)  == 'function' and$/;"	f
+type(self.super.isSubclassOf) 	lib/LoveFrames/third-party/middleclass.lua	/^           type(self.super.isSubclassOf) == 'function' and$/;"	f
+unm 	lib/luafun/fun.lua	/^    unm = function(a) return -a end, -- an alias$/;"	f
+unpacks	utils.lua	/^function unpacks( ... )$/;"	f
+upbutton.Update		lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		upbutton.Update	= function(object, dt)$/;"	f
+updateComponent	systems/physicsSystem.lua	/^local function updateComponent(comp, world)$/;"	f
+updateExperience	systems/experienceSystem.lua	/^local function updateExperience(id, comp, dt)$/;"	f
+updateHealth	systems/healthSystem.lua	/^local function updateHealth(id, comp, dt)$/;"	f
+updateMana	systems/manaSystem.lua	/^local function updateMana(id, comp, dt)$/;"	f
+updateState	main.lua	/^function updateState(choice, ...)$/;"	f
+updateTemp	systems/temperatureSystem.lua	/^local function updateTemp(comp, dt)$/;"	f
+validTile	lib/AdvTiledLoader/TileLayer.lua	/^local function validTile(tile)$/;"	f
+version	lib/luafun/doc/conf.py	/^version = '0.1'$/;"	v
+walker 	Spell.lua	/^    walker = function (t) return require 'components.walker'.prototype(t.force) end,$/;"	f
+walker 	systems/runeSystem.lua	/^        walker = function(spellBook, previewId)$/;"	f
+walker.create	components/walker.lua	/^function walker.create(id, ...)$/;"	f
+walker.prototype	components/walker.lua	/^function walker.prototype(force)$/;"	f
+walkingSystem:getDirection	systems/walkingSystem.lua	/^function walkingSystem:getDirection(id)$/;"	f
+walkingSystem:startWalkingLeft	systems/walkingSystem.lua	/^function walkingSystem:startWalkingLeft(id)$/;"	f
+walkingSystem:startWalkingRight	systems/walkingSystem.lua	/^function walkingSystem:startWalkingRight(id)$/;"	f
+walkingSystem:stopWalkingLeft	systems/walkingSystem.lua	/^function walkingSystem:stopWalkingLeft(id) $/;"	f
+walkingSystem:stopWalkingRight	systems/walkingSystem.lua	/^function walkingSystem:stopWalkingRight(id)$/;"	f
+walkingSystem:update	systems/walkingSystem.lua	/^function walkingSystem:update(dt)$/;"	f
+warn	lib/AdvTiledLoader/external/deflatelua.lua	/^local function warn(s)$/;"	f
+welder.create	components/welder.lua	/^function welder.create(id, ...)$/;"	f
+welder.prototype	components/welder.lua	/^function welder.prototype(id1, id2, point, shouldCollide)$/;"	f
+within	utils.lua	/^function within(x, x1, x2)$/;"	f
+wrappedInc	utils.lua	/^function wrappedInc(obj, amount)$/;"	f
+x) return 2 * x end, range	lib/luafun/tests/transformations.lua	/^dump(map(function(x) return 2 * x end, range(4)))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(drop(function(x) return x < 5 end, range(10)))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(x) return x < 5 end, range(0)))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(x) return x < 5 end, range(10)))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(take(function(x) return x < 5 end, range(10)))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(take_while(function(x) return x < 5 end, range(0)))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(take_while(function(x) return x < 5 end, range(10)))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(zip(span(function(x) return x < 5 end, range(0))))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(zip(span(function(x) return x < 5 end, range(10))))$/;"	f
+x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(zip(span(function(x) return x < 5 end, range(5))))$/;"	f
+x) return x > 100 end, range	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(x) return x > 100 end, range(10)))$/;"	f
+x) return x > 100 end, range	lib/luafun/tests/slicing.lua	/^dump(take_while(function(x) return x > 100 end, range(10)))$/;"	f
+x) return x > 7 end, range	lib/luafun/tests/compositions.lua	/^dump(zip(partition(function(x) return x > 7 end, range(1, 15, 1))))$/;"	f
+zip_gen_r	lib/luafun/fun.lua	/^local function zip_gen_r(param, state, state_new, ...)$/;"	f
+{__call 	class.lua	/^	{__call = function(_,...) return new(...) end})$/;"	f
+{imageName 	gestures.lua	/^            {imageName = "airRune.png", func = function(object) self.rune = "air" end},$/;"	f
+{imageName 	gestures.lua	/^            {imageName = "airRune.png", func = function(object) self.rune = "force" end},$/;"	f
+{imageName 	gestures.lua	/^            {imageName = "airRune.png", func = function(object) self.rune = "input" end},$/;"	f
+{imageName 	gestures.lua	/^            {imageName = "airRune.png", func = function(object) self.rune = "walker" end},$/;"	f
+{imageName 	gestures.lua	/^            {imageName = "earthRune.png", func = function(object) self.rune = "earth" end}$/;"	f
+{imageName 	gestures.lua	/^            {imageName = "fireRune.png", func = function(object) self.rune = "fire" end}$/;"	f
+{imageName 	gestures.lua	/^            {imageName = "iceRune.png", func = function(object) self.rune = "ice" end}$/;"	f

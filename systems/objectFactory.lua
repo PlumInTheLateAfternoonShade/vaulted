@@ -17,6 +17,7 @@ local spellBook = require('components.spellBook')
 local force = require('components.force')
 local welder = require('components.welder')
 local referencer = require('components.referencer')
+local Point = require('geometry.Point')
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
@@ -84,14 +85,14 @@ end
 
 local playerFriction = 0.5
 
-local function createBipedalLeg(parentId, weldPoint, parentCenter, legRadius)
+local function createBipedalLeg(parentId, weldPoint, center, legRadius)
     local legId = entitySystem:register()
     referencer.create(legId, parentId)
-    position.create(legId, {}, parentCenter, 'circle', legRadius)
-    shapeRenderer.create(legId, {r=200, g=255, b=255}, 30)
+    position.create(legId, {}, center, 'circle', legRadius)
+    shapeRenderer.create(legId, {r=math.random()*255, g=255, b=255})
     collider.create(legId, playerFriction, 'dynamic')
     local weldId = entitySystem:register()
-    welder.create(weldId, legId, parentId, weldPoint)
+    welder.create(weldId, parentId, legId, weldPoint)
 end
 
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
@@ -109,8 +110,10 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},
                    function () return manaSystem:getManaPercent(id) end)
     shapeRenderer.create(id, {r=255, g=255, b=255})
-    createBipedalLeg(id, serializedPosition.points[3], serializedPosition.center, 5)
-    --createBipedalLeg(id, serializedPosition.points[4], serializedPosition.center, 5)
+    local playerLegOffsetLeft = serializedPosition.center + Point(-conf.tileSize, conf.tileSize)
+    local playerLegOffsetRight = serializedPosition.center + Point(conf.tileSize, conf.tileSize)
+    createBipedalLeg(id, playerLegOffsetLeft, playerLegOffsetLeft, 15)
+    createBipedalLeg(id, playerLegOffsetRight, playerLegOffsetRight, 15)
     return id
 end
 

@@ -1,3 +1,5 @@
+-- OBSOLETE, just for reference, soon deleted.
+
 local Class = require 'class'
 local CollidableObject = require 'collidableObject'
 local maxAngVToRight = 30

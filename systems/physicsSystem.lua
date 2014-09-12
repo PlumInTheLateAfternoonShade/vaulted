@@ -83,8 +83,8 @@ end
 
 local function updateComponent(comp, world)
     if comp.firstUpdate then
-        --Need to construct here rather than constructor,
-        --in case construct occurs during middle of physics calcs.
+        -- Need to construct here rather than constructor,
+        -- in case construct occurs during middle of physics calcs.
         comp.firstUpdate = false
         comp.body = initBody(world, comp.type, comp.initV, positionSystem:getCenter(comp.id))
         comp.shape = initShape(comp.id)
