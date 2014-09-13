@@ -199,6 +199,7 @@ SPHINXBUILD	lib/luafun/doc/make.bat	/^	set SPHINXBUILD=sphinx-build$/;"	v
 SPHINXOPTS	lib/luafun/doc/Makefile	/^SPHINXOPTS    =$/;"	m
 SaveAndExit:close	saveAndExit.lua	/^function SaveAndExit:close()$/;"	f
 Seg.__tostring	geometry/Seg.lua	/^function Seg.__tostring(r)$/;"	f
+Seg:angleWith	geometry/Seg.lua	/^function Seg:angleWith(otherSeg)$/;"	f
 Seg:compress	geometry/Seg.lua	/^function Seg:compress()$/;"	f
 Seg:convertToABC	geometry/Seg.lua	/^function Seg:convertToABC()$/;"	f
 Seg:decompress	geometry/Seg.lua	/^function Seg:decompress()$/;"	f
@@ -206,9 +207,11 @@ Seg:distToPointSquared	geometry/Seg.lua	/^function Seg:distToPointSquared(a)$/;"
 Seg:draw	geometry/Seg.lua	/^function Seg:draw()$/;"	f
 Seg:findSidePointIsOn	geometry/Seg.lua	/^function Seg:findSidePointIsOn(point)$/;"	f
 Seg:getAngle	geometry/Seg.lua	/^function Seg:getAngle()$/;"	f
+Seg:getHeight	geometry/Seg.lua	/^function Seg:getHeight()$/;"	f
 Seg:getIntersectionAsLines	geometry/Seg.lua	/^function Seg:getIntersectionAsLines(line)$/;"	f
 Seg:getMidPoint	geometry/Seg.lua	/^function Seg:getMidPoint()$/;"	f
 Seg:getOtherPoint	geometry/Seg.lua	/^function Seg:getOtherPoint(point)$/;"	f
+Seg:getWidth	geometry/Seg.lua	/^function Seg:getWidth()$/;"	f
 Seg:hasPoint	geometry/Seg.lua	/^function Seg:hasPoint(point)$/;"	f
 Seg:intersects	geometry/Seg.lua	/^function Seg:intersects(seg)$/;"	f
 Seg:length	geometry/Seg.lua	/^function Seg:length()$/;"	f
@@ -341,9 +344,10 @@ class_mt:__index	lib/class.lua	/^function class_mt:__index(key)$/;"	f
 clearBuffer	lib/AdvTiledLoader/base64.lua	/^local function clearBuffer()$/;"	f
 close.OnClick 	lib/LoveFrames/objects/frame.lua	/^	close.OnClick = function(x, y, object)$/;"	f
 collect	lib/AdvTiledLoader/external/xml.lua	/^local function collect(s)$/;"	f
-collider 	Spell.lua	/^    collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV) end,$/;"	f
+collider 	Spell.lua	/^    collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV,$/;"	f
 collider.create	components/collider.lua	/^function collider.create(id, ...)$/;"	f
 collider.prototype	components/collider.lua	/^function collider.prototype(friction, type, breakable, initV, density,$/;"	f
+collidesAtSmallAngle	systems/physicsSystem.lua	/^local function collidesAtSmallAngle(comp, colliderComp, contact)$/;"	f
 colorEquals	utils.lua	/^function colorEquals(color1, color2)$/;"	f
 colorVary	components/element.lua	/^local function colorVary(color)$/;"	f
 common.class	class.lua	/^	function common.class(name, prototype, parent)$/;"	f
@@ -367,7 +371,7 @@ crc32_byte	lib/AdvTiledLoader/external/crc32lua.lua	/^local function crc32_byte(
 crc32_string	lib/AdvTiledLoader/external/crc32lua.lua	/^local function crc32_string(s, crc)$/;"	f
 createBipedalLeg	systems/objectFactory.lua	/^local function createBipedalLeg(parentId, weldPoint, center, legRadius)$/;"	f
 createButton	menus/controls.lua	/^local function createButton(string, x, y, func)$/;"	f
-createElementPrototype	components/element.lua	/^local function createElementPrototype(name, color, friction, density, temp, gravScale)$/;"	f
+createElementPrototype	components/element.lua	/^local function createElementPrototype(name, color, friction, density, temp, gravScale, hardness)$/;"	f
 createImageButton	gestures.lua	/^local function createImageButton(image, x, y, func, state)$/;"	f
 createKeyButton	menus/controls.lua	/^local function createKeyButton(purpose, key, ...)$/;"	f
 debug	lib/AdvTiledLoader/external/deflatelua.lua	/^local function debug(...)$/;"	f
@@ -518,6 +522,7 @@ inputSystem:syncAllWithKeys	systems/inputSystem.lua	/^function inputSystem:syncA
 inputSystem:syncWithKeys	systems/inputSystem.lua	/^function inputSystem:syncWithKeys(c)$/;"	f
 intdiv 	lib/luafun/fun.lua	/^    intdiv = function(a, b)$/;"	f
 interceptor:__newindex	class.lua	/^		function interceptor:__newindex(key, value)$/;"	f
+isCloserPointToSeg	systems/physicsSystem.lua	/^    local function isCloserPointToSeg(point1, point2)$/;"	f
 isNewEntityMaker	gestures.lua	/^local function isNewEntityMaker(rune)$/;"	f
 jointSystem:add	systems/jointSystem.lua	/^function jointSystem:add(comp)$/;"	f
 jointSystem:init	systems/jointSystem.lua	/^function jointSystem:init()$/;"	f
@@ -601,7 +606,7 @@ local ones 	lib/luafun/fun.lua	/^local ones = function()$/;"	f
 local op2 	lib/AdvTiledLoader/external/numberlua.lua	/^  local op2 = memoize(function(a)$/;"	f
 local pairs_gen 	lib/luafun/fun.lua	/^local pairs_gen = pairs({ a = 0 }) -- get the generating function from pairs$/;"	f
 local partition 	lib/luafun/fun.lua	/^local partition = function(fun, gen, param, state)$/;"	f
-local postSolve 	systems/entitySystem.lua	/^    local postSolve = function(a, b, coll)$/;"	f
+local postSolve 	systems/entitySystem.lua	/^    local postSolve = function(a, b, coll, normalImpulse1,$/;"	f
 local pow2 	lib/AdvTiledLoader/external/deflatelua.lua	/^local pow2 = memoize(function(n) return 2^n end)$/;"	f
 local preSolve 	systems/entitySystem.lua	/^    local preSolve = function(a, b, coll)$/;"	f
 local product 	lib/luafun/fun.lua	/^local product = function(gen, param, state)$/;"	f
@@ -1416,6 +1421,7 @@ objectDeepcopy	utils.lua	/^function objectDeepcopy(object)$/;"	f
 objectFactory.createElemental	systems/objectFactory.lua	/^function objectFactory.createElemental(points, center, eleName, initV)$/;"	f
 objectFactory.createPlayer	systems/objectFactory.lua	/^function objectFactory.createPlayer(serializedPosition, serializedSpellBook)$/;"	f
 objectFactory.createTile	systems/objectFactory.lua	/^function objectFactory.createTile(points, center)$/;"	f
+objectFactory.createWelder	systems/objectFactory.lua	/^function objectFactory.createWelder(id1, id2, point, shouldCollide)$/;"	f
 objectFactory.init	systems/objectFactory.lua	/^function objectFactory.init()$/;"	f
 objectFactory.prototypeElemental	systems/objectFactory.lua	/^function objectFactory.prototypeElemental(points, center, eleName)$/;"	f
 objectFactory.prototypeForce	systems/objectFactory.lua	/^function objectFactory.prototypeForce(h, v, x, y, casterId)$/;"	f
@@ -1437,8 +1443,10 @@ physicsSystem:clearDestroyQueue	systems/physicsSystem.lua	/^function physicsSyst
 physicsSystem:delete	systems/physicsSystem.lua	/^function physicsSystem:delete(id)$/;"	f
 physicsSystem:endCollision	systems/physicsSystem.lua	/^function physicsSystem:endCollision(aId, bId, coll)$/;"	f
 physicsSystem:getMass	systems/physicsSystem.lua	/^function physicsSystem:getMass(id)$/;"	f
-physicsSystem:handleCollision	systems/physicsSystem.lua	/^function physicsSystem:handleCollision(id, contact)$/;"	f
+physicsSystem:handleBeginCollision	systems/physicsSystem.lua	/^function physicsSystem:handleBeginCollision(id, idOfCollider, contact)$/;"	f
+physicsSystem:handlePostSolveCollision	systems/physicsSystem.lua	/^function physicsSystem:handlePostSolveCollision(id, idOfCollider, contact,$/;"	f
 physicsSystem:init	systems/physicsSystem.lua	/^function physicsSystem:init(w, objFact, eSys)$/;"	f
+physicsSystem:postSolveCollision	systems/physicsSystem.lua	/^function physicsSystem:postSolveCollision(aId, bId, coll, normalImpulse1,$/;"	f
 physicsSystem:update	systems/physicsSystem.lua	/^function physicsSystem:update(dt)$/;"	f
 polygon 	systems/graphicsSystem.lua	/^    polygon = function(id)$/;"	f
 polygon 	systems/positionSystem.lua	/^    polygon = function (id, comp)$/;"	f
@@ -1590,6 +1598,7 @@ updateHealth	systems/healthSystem.lua	/^local function updateHealth(id, comp, dt
 updateMana	systems/manaSystem.lua	/^local function updateMana(id, comp, dt)$/;"	f
 updateState	main.lua	/^function updateState(choice, ...)$/;"	f
 updateTemp	systems/temperatureSystem.lua	/^local function updateTemp(comp, dt)$/;"	f
+utils.tableCompareNoField	utils.lua	/^function utils.tableCompareNoField(table, compare)$/;"	f
 validTile	lib/AdvTiledLoader/TileLayer.lua	/^local function validTile(tile)$/;"	f
 version	lib/luafun/doc/conf.py	/^version = '0.1'$/;"	v
 walker 	Spell.lua	/^    walker = function (t) return require 'components.walker'.prototype(t.force) end,$/;"	f
@@ -1607,6 +1616,7 @@ welder.create	components/welder.lua	/^function welder.create(id, ...)$/;"	f
 welder.prototype	components/welder.lua	/^function welder.prototype(id1, id2, point, shouldCollide)$/;"	f
 within	utils.lua	/^function within(x, x1, x2)$/;"	f
 wrappedInc	utils.lua	/^function wrappedInc(obj, amount)$/;"	f
+wrappedIndex	systems/physicsSystem.lua	/^local function wrappedIndex(length, index)$/;"	f
 x) return 2 * x end, range	lib/luafun/tests/transformations.lua	/^dump(map(function(x) return 2 * x end, range(4)))$/;"	f
 x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(drop(function(x) return x < 5 end, range(10)))$/;"	f
 x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(x) return x < 5 end, range(0)))$/;"	f

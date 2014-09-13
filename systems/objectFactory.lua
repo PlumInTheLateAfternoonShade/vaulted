@@ -40,7 +40,7 @@ function objectFactory.createElemental(points, center, eleName, initV)
     local id = entitySystem:register()
     position.create(id, points, center)
     local ele = element.create(id, eleName)
-    collider.create(id, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV)
+    collider.create(id, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV, ele.density, false, true, ele.hardness)
     local textureName
     if eleName == 'fire' then
         textureName = eleName..'.png'
@@ -68,7 +68,15 @@ function objectFactory.prototypeElemental(points, center, eleName)
     return
     {
         ele,
-        collider.prototype(ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire'),
+        collider.prototype(ele.friction, --friction
+                           'dynamic', --type
+                           eleName == 'ice' or eleName == 'fire', --breakable
+                           nil, --initV
+                           ele.density, --density
+                           false, --shouldBalance
+                           true, --shouldPierce
+                           ele.hardness --hardness
+                           ),
         position.prototype(points, center),
         meshR,
         temperature.prototype(ele.temp),
@@ -98,7 +106,16 @@ end
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     local id = entitySystem:register()
     position.create(id, serializedPosition.points, serializedPosition.center)
-    collider.create(id, playerFriction, 'dynamic', false, nil, nil, true)
+--, type, breakable, initV, density,
+--    shouldBalance, shouldPierce, hardness
+    collider.create(id, 
+        playerFriction, --friction
+        'dynamic', --type
+        false, --breakable
+        nil, --initV 
+        nil, --density
+        true) --shouldBalance
+        
     walker.create(id, 250, 400)
     input.create(id)
     experience.create(id)
@@ -115,6 +132,12 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     createBipedalLeg(id, playerLegOffsetLeft, playerLegOffsetLeft, 15)
     createBipedalLeg(id, playerLegOffsetRight, playerLegOffsetRight, 15)
     return id
+end
+
+function objectFactory.createWelder(id1, id2, point, shouldCollide)
+    local weldId = entitySystem:register()
+    welder.create(weldId, id1, id2, point, shouldCollide)
+    return weldId
 end
 
 return objectFactory

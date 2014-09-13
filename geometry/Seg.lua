@@ -25,16 +25,16 @@ function Seg:distToPointSquared(a)
     local dotProd = dot(a - self.p0, self.p1 - self.p0)
     if dotProd <= 0 then
         local sub = a - self.p0
-        print("sub: "..tostring(sub).." a: "..tostring(a).."self.p0:"..tostring(self.p0))
+        --print("sub: "..tostring(sub).." a: "..tostring(a).."self.p0:"..tostring(self.p0))
         return sub:magSquared()
     end
     local sub = self.p1 - self.p0
-    print("sub: "..tostring(sub).." self.p1: "..tostring(self.p1).."self.p0:"..tostring(self.p0))
+    --print("sub: "..tostring(sub).." self.p1: "..tostring(self.p1).."self.p0:"..tostring(self.p0))
     local l = sub:magSquared()
     local s = dotProd*dotProd/l
     if s > l then
         local sub = a - self.p1
-        print("sub: "..tostring(sub).." a: "..tostring(a).."self.p1:"..tostring(self.p1))
+        --print("sub: "..tostring(sub).." a: "..tostring(a).."self.p1:"..tostring(self.p1))
         return sub:magSquared()
     end
     return s
@@ -183,6 +183,21 @@ function Seg:getAngle()
     local dx = self.p0.x - self.p1.x
     local dy = self.p1.y - self.p0.y
     return math.atan2(dy, dx)
+end
+
+-- Inverted law of dot products
+function Seg:angleWith(otherSeg)
+    return math.acos(dot(Point(self:getWidth(), self:getHeight()),
+    Point(otherSeg:getWidth(), otherSeg:getHeight())) / 
+    (self:length() * otherSeg:length()))
+end
+
+function Seg:getWidth()
+    return self.p0.x - self.p1.x
+end
+
+function Seg:getHeight()
+    return self.p0.y - self.p1.y
 end
 
 function Seg:getMidPoint()

@@ -37,9 +37,9 @@ function entitySystem:init(objectFactory)
     physicsSystem:init(world, objectFactory, entitySystem)
     runeSystem:init(objectFactory)
     forceSystem:init(world)
+    jointSystem:init()
     temperatureSystem:init(referenceSystem)
     eleSystem:init(referenceSystem)
-    jointSystem:init()
     positionSystem:init(referenceSystem)
     walkingSystem:init(referenceSystem)
     inputSystem:init(referenceSystem)
@@ -67,7 +67,11 @@ function entitySystem:init(objectFactory)
     end
     local preSolve = function(a, b, coll)
     end
-    local postSolve = function(a, b, coll)
+    local postSolve = function(a, b, coll, normalImpulse1,
+        tangentImpulse1, normalImpulse2, tangentImpulse2)
+        local aId, bId = getIds(a, b)
+        physicsSystem:postSolveCollision(aId, bId, coll, normalImpulse1,
+            tangentImpulse1, normalImpulse2, tangentImpulse2)
     end
     world:setCallbacks(beginContact, endContact, preSolve, postSolve)
 end

@@ -1,3 +1,4 @@
+local utils = require 'utils'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local positionSystem = require 'systems.positionSystem'
@@ -33,8 +34,8 @@ function physicsSystem:getMass(id)
     return comp.body:getMass()
 end
 
+-- Remove all fixtures that have been flagged for deletion
 function physicsSystem:clearDestroyQueue()
-    -- Remove all fixtures that have been flagged for deletion
     for _, fixture in pairs(self.destroyQueue) do fixture:destroy() end
     self.destroyQueue = {}
 end
@@ -210,7 +211,7 @@ local function makeElementalObjectFromPoints(id, points, center, v)
     objectFactory.createElemental(points, newCenter, eleSystem:get(id).name, newV)
 end
 
-function physicsSystem:handleCollision(id, contact)
+function physicsSystem:handleBeginCollision(id, idOfCollider, contact)
     local comp = self.components[id]
     if not comp then return end
     if comp.breakable and comp.body:getMass() > comp.maxMassToBreak then
@@ -229,13 +230,69 @@ function physicsSystem:handleCollision(id, contact)
     end
 end
 
+local function wrappedIndex(length, index)
+    return ((index - 1) % length) + 1
+end
+
+-- Return true if the closest point to the collision makes an angle < 30
+-- degrees.
+local function collidesAtSmallAngle(comp, colliderComp, contact)
+    local contactSeg = getContactSeg(contact, positionSystem:getCenter(comp.id))
+    local function isCloserPointToSeg(point1, point2)
+        return contactSeg:distToPointSquared(point1) >
+        contactSeg:distToPointSquared(point2)
+    end
+    local points = positionSystem:getPoints(comp.id)
+    local closestPoint, closestPointIndex =
+        utils.tableCompareNoField(points, isCloserPointToSeg)
+    local beforePoint = points[wrappedIndex(#points, closestPointIndex - 1)]
+    local afterPoint = points[wrappedIndex(#points, closestPointIndex + 1)]
+    local veca = Point(closestPoint.x - beforePoint.x,
+        closestPoint.y - beforePoint.y)
+    local vecb = Point(closestPoint.x - afterPoint.x,
+        closestPoint.y - afterPoint.y)
+    -- Use inverted law of dot products to find angle
+    local angle = math.acos(dot(veca, vecb) /
+        (veca:magnitude() * vecb:magnitude()))
+    print("angle is "..angle.." veca: "..tostring(veca).." vecb: "..tostring(vecb))
+    return math.abs(angle) < math.pi / 6, closestPoint
+end
+
+-- Handles piercing
+function physicsSystem:handlePostSolveCollision(id, idOfCollider, contact,
+    normalImpulse, tangentImpulse1, colliderNormalImpulse,
+    colliderTangentImpulse)
+    --if not normalImpulse then print("nil normal") return end
+    local comp = self.components[id]
+    if not comp then return end
+    local colliderComp = self.components[idOfCollider]
+    if not colliderComp then return end
+    -- Credit to http://www.iforce2d.net/b2dtut/sticky-projectiles for idea.
+    if comp.shouldPierce then
+        local isSharp, closestPoint = collidesAtSmallAngle(comp, colliderComp, contact)
+        if isSharp then -- and colliderComp.hardness < normalImpulse then
+            print("hardness: "..tostring(colliderComp.hardness).." impulse: "..tostring(normalImpulse))
+            objectFactory.createWelder(id, idOfCollider,
+                closestPoint, false)
+        end
+    end
+end
+
 function physicsSystem:beginCollision(aId, bId, coll)
-    self:handleCollision(aId, coll)
-    self:handleCollision(bId, coll)
+    self:handleBeginCollision(aId, bId, coll)
+    self:handleBeginCollision(bId, aId, coll)
 end
 
 function physicsSystem:endCollision(aId, bId, coll)
 
+end
+
+function physicsSystem:postSolveCollision(aId, bId, coll, normalImpulse1,
+            tangentImpulse1, normalImpulse2, tangentImpulse2)
+    self:handlePostSolveCollision(aId, bId, coll, normalImpulse1,
+            tangentImpulse1, normalImpulse2, tangentImpulse2)
+    self:handlePostSolveCollision(bId, aId, coll, normalImpulse2,
+            tangentImpulse2, normalImpulse1, tangentImpulse1)
 end
 
 return physicsSystem

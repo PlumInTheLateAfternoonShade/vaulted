@@ -5,7 +5,7 @@ local physicsSystem = require 'systems.physicsSystem'
 local collider = {}
 
 function collider.prototype(friction, type, breakable, initV, density,
-    shouldBalance)
+    shouldBalance, shouldPierce, hardness)
     local c = { name = 'collider' }
     c.firstUpdate = true
     c.friction = friction
@@ -14,6 +14,8 @@ function collider.prototype(friction, type, breakable, initV, density,
     c.initV = initV or Point(0, 0)
     c.density = density
     c.shouldBalance = shouldBalance or false
+    c.shouldPierce = shouldPierce or false
+    c.hardness = hardness or 5
     c.maxMassToBreak = 40
     function c:addToSystems(id)
         self.id = id

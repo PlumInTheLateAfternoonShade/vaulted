@@ -1,3 +1,4 @@
+local utils = {}
 -- General utility functions
 
 -- Deepcopy implementation from http://lua-users.org/wiki/CopyTable.
@@ -129,6 +130,23 @@ function tableCompare(table, field, compare)
     return max, maxI, maxEntry
 end
 
+function utils.tableCompareNoField(table, compare)
+    -- Finds the entry with the value of the entry of the table
+    -- determined to maximize the compare function
+    if (not table) or #table == 0 then
+        return nil
+    end
+    local max = table[1]
+    local maxI = 1
+    for i = 1, #table do
+        if compare(table[i], max) then
+            max = table[i]
+            maxI = i
+        end
+    end
+    return max, maxI
+end
+
 function greater(a, b)
     return a > b
 end
@@ -142,3 +160,5 @@ function colorEquals(color1, color2)
     color1.g == color2.g and
     color1.b == color2.b
 end
+
+return utils

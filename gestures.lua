@@ -158,10 +158,18 @@ function Gestures:mousereleased(x, y, button)
             if self.drawPreviewLine then
                 -- Runes which add a new entity to the spell
                 local endPoint = self:getNearestGridPoint(x, y)
-                if self.rune == "fire" or self.rune == "ice" or self.rune == "earth" or self.rune == "air" then
+                if self.rune == "fire" or self.rune == "ice" or
+                   self.rune == "earth" or self.rune == "air" or
+                   self.rune == "force" then
                     local line = Seg(self.startPoint, endPoint, element:getColor())
                     if line:lengthSquared() > 0 then
+                        if self.rune == "fire" or self.rune == "ice" or
+                           self.rune == "earth" or self.rune == "air" then
                         table.insert(self.lines, line)
+                        end
+                    else
+                        self.drawPreviewLine = false
+                        return
                     end
                 end
                 print(self.startPoint, endPoint)

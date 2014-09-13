@@ -11,7 +11,7 @@ local function colorVary(color)
     color.b = rgbVary(color.b)
 end
 
-local function createElementPrototype(name, color, friction, density, temp, gravScale)
+local function createElementPrototype(name, color, friction, density, temp, gravScale, hardness)
     local e = {}
     e.name = name
     e.color = color
@@ -19,6 +19,7 @@ local function createElementPrototype(name, color, friction, density, temp, grav
     e.density = density
     e.temp = temp
     e.gravScale = gravScale or 1
+    e.hardness = hardness
     function e:addToSystems(id)
         self.id = id
         -- Make the color slightly varied
@@ -36,10 +37,10 @@ end
 -- Grants an elemental association to the entity. 
 local element = 
 {
-    fire = createElementPrototype('fire', {r = 240, b = 0, g = 70}, 0.2, 2.5, 500),
-    ice = createElementPrototype('ice', {r = 100, b = 240, g = 150, a = 200}, 0.05, 5, 100),
-    earth = createElementPrototype('earth', {r = 100, b = 50, g = 120}, 0.5, 10, 300),
-    air = createElementPrototype('air', {r = 220, b = 255, g = 225}, 0, 0, 300, 0),
+    fire = createElementPrototype('fire', {r = 240, b = 0, g = 70}, 0.2, 2.5, 500, nil, 2),
+    ice = createElementPrototype('ice', {r = 100, b = 240, g = 150, a = 200}, 0.05, 5, 100, nil, 5),
+    earth = createElementPrototype('earth', {r = 100, b = 50, g = 120}, 0.5, 10, 300, nil, 9),
+    air = createElementPrototype('air', {r = 220, b = 255, g = 225}, 0, 0, 300, 0, 1),
     i = 1 -- current index for gesture screen
 }
 -- Create numerical indexes for gesture screen
