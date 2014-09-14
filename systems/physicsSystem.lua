@@ -237,14 +237,28 @@ end
 -- Return true if the closest point to the collision makes an angle < 30
 -- degrees.
 local function collidesAtSmallAngle(comp, colliderComp, contact)
-    local contactSeg = getContactSeg(contact, positionSystem:getCenter(comp.id))
+    --[[local contactSeg = getContactSeg(contact, positionSystem:getCenter(comp.id))
     local function isCloserPointToSeg(point1, point2)
         return contactSeg:distToPointSquared(point1) >
         contactSeg:distToPointSquared(point2)
+    end]]--
+    local contactX, contactY, notOnSharpCorner = contact:getPositions()
+    -- If we contacted at two points it probably shouldn't pierce
+    if notOnSharpCorner then
+        return false
+    end
+    local contactPoint = Point(contactX, contactY)
+    local function isCloserPointToContact(point1, point2)
+        return contactPoint:distanceSquared(point1) >
+        contactPoint:distanceSquared(point2)
     end
     local points = positionSystem:getPoints(comp.id)
     local closestPoint, closestPointIndex =
-        utils.tableCompareNoField(points, isCloserPointToSeg)
+        utils.tableCompareNoField(points, isCloserPointToContact)
+    print("closestPoint: "..tostring(closestPoint).." contactPoint: "..tostring(contactPoint))
+
+    --local closestPoint, closestPointIndex =
+    --    utils.tableCompareNoField(points, isCloserPointToSeg)
     local beforePoint = points[wrappedIndex(#points, closestPointIndex - 1)]
     local afterPoint = points[wrappedIndex(#points, closestPointIndex + 1)]
     local veca = Point(closestPoint.x - beforePoint.x,

@@ -140,7 +140,6 @@ Point.__add	geometry/Point.lua	/^function Point.__add(p0, p1)$/;"	f
 Point.__mult	geometry/Point.lua	/^function Point.__mult(p0, p1)$/;"	f
 Point.__sub	geometry/Point.lua	/^function Point.__sub(p0, p1)$/;"	f
 Point.__tostring	geometry/Point.lua	/^function Point.__tostring(p)$/;"	f
-Point.centralize	geometry/Point.lua	/^function Point.centralize(points, c)$/;"	f
 Point.connectLinesIntoPolygon	geometry/Point.lua	/^function Point.connectLinesIntoPolygon(lines)$/;"	f
 Point.coordsToPoints	geometry/Point.lua	/^function Point.coordsToPoints(coords)$/;"	f
 Point.mirrorXListOfPoints	geometry/Point.lua	/^function Point.mirrorXListOfPoints(points)$/;"	f
@@ -522,6 +521,7 @@ inputSystem:syncAllWithKeys	systems/inputSystem.lua	/^function inputSystem:syncA
 inputSystem:syncWithKeys	systems/inputSystem.lua	/^function inputSystem:syncWithKeys(c)$/;"	f
 intdiv 	lib/luafun/fun.lua	/^    intdiv = function(a, b)$/;"	f
 interceptor:__newindex	class.lua	/^		function interceptor:__newindex(key, value)$/;"	f
+isCloserPointToContact	systems/physicsSystem.lua	/^    local function isCloserPointToContact(point1, point2)$/;"	f
 isCloserPointToSeg	systems/physicsSystem.lua	/^    local function isCloserPointToSeg(point1, point2)$/;"	f
 isNewEntityMaker	gestures.lua	/^local function isNewEntityMaker(rune)$/;"	f
 jointSystem:add	systems/jointSystem.lua	/^function jointSystem:add(comp)$/;"	f
