@@ -56,7 +56,7 @@ function Spell:addComponentTable(compTable)
 end
 
 local function adjustPositionForCaster(x, y, facing, casterId)
-    return (x - conf.screenWidth*0.5)*facing +
+    return (x - conf.screenWidth*0.5 - conf.tileSize)*facing +
            positionSystem:getCenter(casterId).x,
            y - conf.screenHeight*0.5 + positionSystem:getCenter(casterId).y
 end

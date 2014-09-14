@@ -21,9 +21,9 @@ function runeSystem:init(objectFactory)
     local elementCreate = function(spellBook, lines, startPoint, endPoint, firstGestureId)
         local points = Point.connectLinesIntoPolygon(lines)
         if points then
+            local center = computeCentroid(points)
             addTo(spellBook,
-                -- TODO set at centroid of points, not endpoint
-                objectFactory.prototypeElemental(points, endPoint, element:get().name))
+                objectFactory.prototypeElemental(points, center, element:get().name))
             lines = {}
         end
         return lines
