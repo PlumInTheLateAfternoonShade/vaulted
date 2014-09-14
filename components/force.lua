@@ -12,6 +12,7 @@ function force.prototype(h, v, x, y, casterId)
         x = x,
         y = y,
         casterId = casterId,
+        fired = false,
         shouldPreview = true,
     }
     function c:addToSystems(id)

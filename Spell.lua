@@ -55,23 +55,39 @@ function Spell:addComponentTable(compTable)
     table.insert(self.componentTables, compTable)
 end
 
+local function adjustPositionForCaster(x, y, facing, casterId)
+    return (x - conf.screenWidth*0.5)*facing +
+           positionSystem:getCenter(casterId).x,
+           y - conf.screenHeight*0.5 + positionSystem:getCenter(casterId).y
+end
+
+local function adjustPositionPointForCaster(point, facing, casterId)
+    point.x, point.y = adjustPositionForCaster(point.x, point.y,
+                                               facing, casterId)
+    return point
+end
+
 function Spell:cast(casterId)
+    local facing = walkingSystem:get(casterId).facing
     for i = 1, #self.componentTables do
         local id = entitySystem:register()
         for j = 1, #self.componentTables[i] do
             local comp = objectDeepcopy(self.componentTables[i][j])
+            -- Adjust the comp's pos so it appears where the caster casts it.
             if comp.center then 
-                -- Adjust the comp's center so it appears where the caster casts it.
-                local facing = walkingSystem:get(casterId).facing
-                comp.center = Point(
-                    (comp.center.x - conf.screenWidth*0.5)*facing,
-                    comp.center.y - conf.screenHeight*0.5)
-                    + positionSystem:getCenter(casterId)
-                if facing == -1 then
-                    comp.coords = Point.pointsToCoordsTable(
-                                  Point.mirrorXListOfPoints(
-                                  Point.coordsToPoints(comp.coords)))
-                end
+                adjustPositionPointForCaster(comp.center, facing, casterId)
+            end
+            if comp.coords and facing == -1 then
+                comp.coords = Point.pointsToCoordsTable(
+                Point.mirrorXListOfPoints(
+                Point.coordsToPoints(comp.coords)))
+            end
+            if comp.x and comp.y and comp.h and comp.v then
+                print("got here. x:"..comp.x.." y: "..comp.y.." h: "..comp.h.." v: "..comp.v)
+                comp.x, comp.y = adjustPositionForCaster(comp.x, comp.y,
+                                                         facing, casterId)
+                comp.h = comp.h * facing
+                print("x:"..comp.x.." y: "..comp.y.." h: "..comp.h.." v: "..comp.v)
             end
             if comp.casterId then
                 comp.casterId = casterId

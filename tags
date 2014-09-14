@@ -284,6 +284,8 @@ activatorFunc	lib/LoveFrames/objects/menu.lua	/^	local function activatorFunc(ob
 add 	lib/luafun/fun.lua	/^    add = function(a, b) return a + b end,$/;"	f
 addRectAndMark	rectAlgo.js	/^var addRectAndMark = function(x1, y1, x2, y2) { $/;"	c
 addToSystems 	components/input.lua	/^        addToSystems = function (self, id)$/;"	f
+adjustPositionForCaster	Spell.lua	/^local function adjustPositionForCaster(x, y, facing, casterId)$/;"	f
+adjustPositionPointForCaster	Spell.lua	/^local function adjustPositionPointForCaster(point, facing, casterId)$/;"	f
 adler32	lib/AdvTiledLoader/external/deflatelua.lua	/^local function adler32(byte, crc)$/;"	f
 air 	Spell.lua	/^    air = function (table) return require 'components.element'.air end,$/;"	f
 apply	systems/forceSystem.lua	/^local function apply(id, comp, world)$/;"	f
@@ -715,7 +717,6 @@ meshRenderer.prototype	components/meshRenderer.lua	/^function meshRenderer.proto
 midPoint	geometry/Point.lua	/^function midPoint(p0, p1)$/;"	f
 middleclass.class	lib/LoveFrames/third-party/middleclass.lua	/^function middleclass.class(name, super, ...)$/;"	f
 min_cmp	lib/luafun/tests/reducing.lua	/^function min_cmp(a, b) if -a < -b then return a else return b end end$/;"	f
-mirrorIfLeftFacing	systems/forceSystem.lua	/^local function mirrorIfLeftFacing(x, h, direction)$/;"	f
 mirrorPoint	geometry/Point.lua	/^function mirrorPoint(point, shouldX, shouldY)$/;"	f
 mirrorXListOfSegs	geometry/Seg.lua	/^function mirrorXListOfSegs(segs)$/;"	f
 mirrorXPoint	geometry/Point.lua	/^function mirrorXPoint(point)$/;"	f

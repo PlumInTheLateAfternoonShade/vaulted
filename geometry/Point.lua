@@ -310,7 +310,6 @@ function Point.coordsToPoints(coords)
     for i = 1, #coords, 2 do
         table.insert(points, Point(coords[i], coords[i + 1]))
     end
-    print("ctp #coords: "..#coords.." #points: "..#points)
     return points
 end
 
