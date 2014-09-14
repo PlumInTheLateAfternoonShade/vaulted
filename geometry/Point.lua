@@ -295,6 +295,8 @@ end
 function Point.pointsToCoordsTable(points)
     local coords = {}
     for i = 1, #points do
+        assert(type(points[i].x) == 'number')
+        assert(type(points[i].y) == 'number')
         table.insert(coords, points[i].x)
         table.insert(coords, points[i].y)
     end
@@ -306,8 +308,12 @@ function Point.pointsToCoords(points)
 end
 
 function Point.coordsToPoints(coords)
+    if #coords == 0 or type(coords[1]) ~= 'number' then
+        return coords
+    end
     local points = {}
     for i = 1, #coords, 2 do
+        assert(type(coords[i + 1]) == 'number')
         table.insert(points, Point(coords[i], coords[i + 1]))
     end
     return points

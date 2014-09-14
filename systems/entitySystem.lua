@@ -24,7 +24,7 @@ local entitySystem = {}
 function entitySystem:init(objectFactory)
     self.currId = -1
     
-    local camera = Camera()
+    self.camera = Camera()
     
     local world = love.physics.newWorld(0, 50*conf.tileSize, true)
     
@@ -32,7 +32,7 @@ function entitySystem:init(objectFactory)
     map.tileWidth = conf.tileSize
     map.widthInPixels = map.tileWidth * map.width
     
-    graphicsSystem:init(camera, map)
+    graphicsSystem:init(self.camera, map)
     referenceSystem:init()
     physicsSystem:init(world, objectFactory, entitySystem)
     runeSystem:init(objectFactory)
@@ -55,7 +55,7 @@ function entitySystem:init(objectFactory)
     end
     local beginContact = function(a, b, coll)
         -- If the force of the impact is high enough, shake the screen.
-        camera:shake(a:getBody(), b:getBody(), coll)
+        self.camera:shake(a:getBody(), b:getBody(), coll)
         local aId, bId = getIds(a, b)
         physicsSystem:beginCollision(aId, bId, coll)
         temperatureSystem:beginCollision(aId, bId, coll)
@@ -118,9 +118,17 @@ function entitySystem:update(dt)
 end
 
 function entitySystem:draw(raw)
-    graphicsSystem:draw(raw)
-    spellBookSystem:draw(heroId)
+    if not raw then
+        self.camera:set()
+        graphicsSystem:drawMap()
+    end
+    graphicsSystem:drawRawComponents()
     forceSystem:draw()
+    if not raw then
+        self.camera:unset()
+        graphicsSystem:drawUI()
+    end
+    spellBookSystem:draw(heroId)
 end
 
 function entitySystem:keyPressed(key)

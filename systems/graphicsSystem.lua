@@ -121,25 +121,21 @@ local function drawStatBars(statBars)
     end
 end
 
-function graphicsSystem:drawRaw()
+function graphicsSystem:drawRawComponents()
     drawShapes(self.shapes)
     drawMeshes(self.meshes)
 end
 
-function graphicsSystem:draw(raw)
-    if not raw then
-        self.camera:set()
-        -- set the tile map's draw range so we only draw the tiles on screen
-        self.map:setDrawRange(self.camera.x, self.camera.y, conf.screenWidth, conf.screenHeight)
-        -- draw the tile map
-        self.map:draw()
-    end
-    -- draw the components
-    self:drawRaw()
-    if not raw then
-        self.camera:unset()
-        drawStatBars(self.statBars)
-    end
+
+function graphicsSystem:drawMap()
+    -- set the tile map's draw range so we only draw the tiles on screen
+    self.map:setDrawRange(self.camera.x, self.camera.y, conf.screenWidth, conf.screenHeight)
+    -- draw the tile map
+    self.map:draw()
+end
+
+function graphicsSystem:drawUI()
+    drawStatBars(self.statBars)
 end
 
 function graphicsSystem:update(dt)

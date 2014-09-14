@@ -478,8 +478,9 @@ graphicsSystem:addMesh	systems/graphicsSystem.lua	/^function graphicsSystem:addM
 graphicsSystem:addShape	systems/graphicsSystem.lua	/^function graphicsSystem:addShape(comp)$/;"	f
 graphicsSystem:addStatBar	systems/graphicsSystem.lua	/^function graphicsSystem:addStatBar(comp)$/;"	f
 graphicsSystem:delete	systems/graphicsSystem.lua	/^function graphicsSystem:delete(id)$/;"	f
-graphicsSystem:draw	systems/graphicsSystem.lua	/^function graphicsSystem:draw(raw)$/;"	f
-graphicsSystem:drawRaw	systems/graphicsSystem.lua	/^function graphicsSystem:drawRaw()$/;"	f
+graphicsSystem:drawMap	systems/graphicsSystem.lua	/^function graphicsSystem:drawMap()$/;"	f
+graphicsSystem:drawRawComponents	systems/graphicsSystem.lua	/^function graphicsSystem:drawRawComponents()$/;"	f
+graphicsSystem:drawUI	systems/graphicsSystem.lua	/^function graphicsSystem:drawUI()$/;"	f
 graphicsSystem:init	systems/graphicsSystem.lua	/^function graphicsSystem:init(cam, map)$/;"	f
 graphicsSystem:update	systems/graphicsSystem.lua	/^function graphicsSystem:update(dt)$/;"	f
 greater	utils.lua	/^function greater(a, b)$/;"	f
@@ -1453,7 +1454,7 @@ polygon 	systems/graphicsSystem.lua	/^    polygon = function(id)$/;"	f
 polygon 	systems/positionSystem.lua	/^    polygon = function (id, comp)$/;"	f
 position 	Spell.lua	/^    position = function (t) return require 'components.position'.prototype(t.coords, t.center) end,$/;"	f
 position.create	components/position.lua	/^function position.create(id, ...)$/;"	f
-position.prototype	components/position.lua	/^function position.prototype(coords, center, shapeName, radius)$/;"	f
+position.prototype	components/position.lua	/^function position.prototype(coords, center, shape, radius)$/;"	f
 positionSystem:add	systems/positionSystem.lua	/^function positionSystem:add(comp)$/;"	f
 positionSystem:addAndTranslateToCoords	systems/positionSystem.lua	/^function positionSystem:addAndTranslateToCoords(comp)$/;"	f
 positionSystem:getCenter	systems/positionSystem.lua	/^function positionSystem:getCenter(id)$/;"	f
