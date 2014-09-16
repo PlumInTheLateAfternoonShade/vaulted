@@ -1,6 +1,7 @@
 local keys = require 'keys'
 local walkingSystem = require 'systems.walkingSystem'
 local spellBookSystem = require 'systems.spellBookSystem'
+local soundSystem = require 'systems.soundSystem'
 
 -- Handles input components.
 local inputSystem = {}
@@ -30,7 +31,10 @@ function inputSystem:syncWithKeys(c)
         [keys.left] = function () return walkingSystem:startWalkingLeft(c.id) end,
     }
     if c.canAdministrate then
-        c.keyPresses[keys.openMenu] = function () return updateState("back to main menu") end
+        c.keyPresses[keys.openMenu] = function ()
+            soundSystem:stopMusic()
+            return updateState("back to main menu")
+        end
         c.keyPresses[keys.gesture] = function () return updateState("gestures") end
     end
     if c.canCast then

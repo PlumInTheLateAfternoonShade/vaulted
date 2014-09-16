@@ -13,6 +13,7 @@ local healthSystem = require('systems.healthSystem')
 local forceSystem = require('systems.forceSystem')
 local runeSystem = require('systems.runeSystem')
 local spellBookSystem = require('systems.spellBookSystem')
+local soundSystem = require('systems.soundSystem')
 local Camera = require('camera')
 local loader = require "lib.AdvTiledLoader.Loader"
 -- set the path to the Tiled map files
@@ -47,6 +48,7 @@ function entitySystem:init(objectFactory)
     manaSystem:init(referenceSystem)
     healthSystem:init(referenceSystem)
     spellBookSystem:init(referenceSystem)
+    soundSystem:init(referenceSystem)
     
     map:addToWorld(objectFactory)
     
@@ -93,6 +95,7 @@ function entitySystem:delete(id)
     walkingSystem:delete(id)
     forceSystem:delete(id)
     runeSystem:delete(id)
+    soundSystem:delete(id)
 end
 
 function entitySystem:deleteAllInRange(lowerId, upperId)
@@ -113,6 +116,7 @@ function entitySystem:update(dt)
     experienceSystem:update(dt)
     walkingSystem:update(dt)
     forceSystem:update(dt)
+    soundSystem:update(dt)
     runeSystem:update(dt)
     graphicsSystem:update(dt)
 end

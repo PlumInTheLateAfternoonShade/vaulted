@@ -320,7 +320,7 @@ bytestream_from_function	lib/AdvTiledLoader/external/deflatelua.lua	/^local func
 bytestream_from_string	lib/AdvTiledLoader/external/deflatelua.lua	/^local function bytestream_from_string(s)$/;"	f
 c.keyPresses[key] 	systems/inputSystem.lua	/^            c.keyPresses[key] = function () return spellBookSystem:cast(c.id, i) end$/;"	f
 c.keyPresses[keys.gesture] 	systems/inputSystem.lua	/^        c.keyPresses[keys.gesture] = function () return updateState("gestures") end$/;"	f
-c.keyPresses[keys.openMenu] 	systems/inputSystem.lua	/^        c.keyPresses[keys.openMenu] = function () return updateState("back to main menu") end$/;"	f
+c.keyPresses[keys.openMenu] 	systems/inputSystem.lua	/^        c.keyPresses[keys.openMenu] = function ()$/;"	f
 c:addToSystems	components/body.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/collider.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/fixture.lua	/^    function c:addToSystems(id, bodyId)$/;"	f
@@ -538,6 +538,10 @@ leftbutton.Update 	lib/LoveFrames/objects/tabs.lua	/^	leftbutton.Update = functi
 len 	lib/luafun/fun.lua	/^    len = function(a) return #a end,$/;"	f
 length 	lib/luafun/fun.lua	/^    length = function(a) return #a end, -- an alias$/;"	f
 less	utils.lua	/^function less(a, b)$/;"	f
+lifetime.create	components/lifetime.lua	/^function lifetime.create(id, lifetime)$/;"	f
+lifetimeSystem:getLifetime	systems/lifetimeSystem.lua	/^function lifetimeSystem:getLifetime(id)$/;"	f
+lifetimeSystem:init	systems/lifetimeSystem.lua	/^function lifetimeSystem:init(entitySys)$/;"	f
+lifetimeSystem:update	systems/lifetimeSystem.lua	/^function lifetimeSystem:update(dt)$/;"	f
 limit	utils.lua	/^function limit(x, little, big)$/;"	f
 lnot 	lib/luafun/fun.lua	/^    lnot = function(a) return not a end,$/;"	f
 loader:pack	loader.lua	/^function loader:pack(table)$/;"	f
@@ -1553,6 +1557,11 @@ skin.DrawToolTip	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawToolTip(
 skin.OutlinedRectangle	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.OutlinedRectangle(x, y, width, height, ovt, ovb, ovl, ovr)$/;"	f
 sortByCallCount 	lib/ProFi.lua	/^sortByCallCount = function( a, b )$/;"	f
 sortByDurationDesc 	lib/ProFi.lua	/^sortByDurationDesc = function( a, b )$/;"	f
+soundSystem:delete	systems/soundSystem.lua	/^function soundSystem:delete(id)$/;"	f
+soundSystem:init	systems/soundSystem.lua	/^function soundSystem:init()$/;"	f
+soundSystem:startMusic	systems/soundSystem.lua	/^function soundSystem:startMusic()$/;"	f
+soundSystem:stopMusic	systems/soundSystem.lua	/^function soundSystem:stopMusic()$/;"	f
+soundSystem:update	systems/soundSystem.lua	/^function soundSystem:update(dt)$/;"	f
 source_suffix	lib/luafun/doc/conf.py	/^source_suffix = '.rst'$/;"	v
 spellBook.create	components/spellBook.lua	/^function spellBook.create(id, serializedSpellBook)$/;"	f
 spellBookSystem:cast	systems/spellBookSystem.lua	/^function spellBookSystem:cast(id, index)$/;"	f
