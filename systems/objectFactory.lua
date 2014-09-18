@@ -4,7 +4,7 @@ local healthSystem = require('systems.healthSystem')
 local collider = require('components.collider')
 local shapeRenderer = require('components.shapeRenderer')
 local meshRenderer = require('components.meshRenderer')
-local position = require('components.position')
+local Position = require('components.Position')
 local element = require('components.element')
 local temperature = require('components.temperature')
 local mana = require('components.mana')
@@ -28,7 +28,7 @@ end
 
 function objectFactory.createTile(points, center)
     local id = entitySystem:register()
-    position.create(id, points, center)
+    Position.create(id, points, center)
     collider.create(id, 0.5, 'static')
     -- Draws the tile as a polygon. Uncomment for debugging.
     --shapeRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
@@ -38,7 +38,7 @@ end
 function objectFactory.createElemental(points, center, eleName, initV)
     local initV = initV or Point(0, 0)
     local id = entitySystem:register()
-    position.create(id, points, center)
+    Position.create(id, points, center)
     local ele = element.create(id, eleName)
     collider.create(id, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV, ele.density, false, true, ele.hardness)
     local textureName
@@ -61,7 +61,7 @@ function objectFactory.prototypeElemental(points, center, eleName)
         textureName = eleName..'.jpg'
     end
     local meshR = meshRenderer.prototype(ele.color, textureName)
-    local pos = position.prototype(points, center)
+    local pos = Position:new(points, center)
     local previewId = entitySystem:register()
     meshR:addToSystems(previewId)
     pos:addToSystems(previewId)
@@ -77,7 +77,7 @@ function objectFactory.prototypeElemental(points, center, eleName)
                            true, --shouldPierce
                            ele.hardness --hardness
                            ),
-        position.prototype(points, center),
+        Position:new(points, center),
         meshR,
         temperature.prototype(ele.temp),
         previewId = previewId
@@ -96,7 +96,7 @@ local playerFriction = 0.5
 local function createBipedalLeg(parentId, weldPoint, center, legRadius)
     local legId = entitySystem:register()
     referencer.create(legId, parentId)
-    position.create(legId, {}, center, 'circle', legRadius)
+    Position.create(legId, {}, center, 'circle', legRadius)
     shapeRenderer.create(legId, {r=math.random()*255, g=255, b=255})
     collider.create(legId, playerFriction, 'dynamic', false, nil, nil, true)
     local weldId = entitySystem:register()
@@ -105,7 +105,7 @@ end
 
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     local id = entitySystem:register()
-    position.create(id, serializedPosition.points, serializedPosition.center)
+    Position.create(id, serializedPosition.points, serializedPosition.center)
 --, type, breakable, initV, density,
 --    shouldBalance, shouldPierce, hardness
     collider.create(id, 

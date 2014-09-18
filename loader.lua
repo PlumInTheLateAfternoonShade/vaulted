@@ -1,4 +1,5 @@
 local lady = require 'lib.Lady.lady'
+local Component = require 'components.Component'
 
 local loader = {}
 
@@ -6,10 +7,6 @@ function loader:pack(table)
     if table == nil then
         return
     end
-    -- TODO delete
-    table.mesh = nil
-    table.body = nil
-    table.fixture = nil
     local saveName = table.name..'.sav'
     lady.save_all(saveName, table)
     print('Saving '..saveName..' to '..love.filesystem.getSaveDirectory()..'.')
@@ -19,7 +16,10 @@ function loader:unpack(tableName)
     local saveName = tableName..'.sav'
     if love.filesystem.exists(saveName) then
         print(saveName..' exists, loading it.')
-        return lady.load_all(saveName)
+        local loaded = lady.load_all(saveName)
+        if loaded.static and loaded.static:isSubclassOf(Component) then
+            loaded.systems = require('component'..loaded.class).class.static.systems
+        end
     end
     return nil
 end

@@ -68,8 +68,11 @@ The input component contains closure that map keys to spellBook indices.
 
 === components changes ===
 
+middleclass
 
+entityBuilder?
 
+comp.systems = require('component'..comp.class).static.systems
 
 -- Ideas
 

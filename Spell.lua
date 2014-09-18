@@ -1,3 +1,4 @@
+local utils = require 'utils'
 local entitySystem = require 'systems.entitySystem'
 local positionSystem = require 'systems.positionSystem'
 local walkingSystem = require 'systems.walkingSystem'
@@ -15,7 +16,7 @@ local componentPrototypeDeserializers =
                                                                            t.shouldBalance,
                                                                            t.shouldPierce,
                                                                            t.hardness) end,
-    position = function (t) return require 'components.position'.prototype(t.coords, t.center) end,
+    position = function (t) return require 'components.Position':new(t.coords, t.center) end,
     meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,
     temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,
     force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y, t.casterId) end,
@@ -72,7 +73,8 @@ function Spell:cast(casterId)
     for i = 1, #self.componentTables do
         local id = entitySystem:register()
         for j = 1, #self.componentTables[i] do
-            local comp = objectDeepcopy(self.componentTables[i][j])
+            local comp = utils.objectDeepcopyWithoutMetatable(
+                self.componentTables[i][j])
             -- Adjust the comp's pos so it appears where the caster casts it.
             if comp.center then 
                 adjustPositionPointForCaster(comp.center, facing, casterId)
@@ -92,10 +94,13 @@ function Spell:cast(casterId)
             if comp.casterId then
                 comp.casterId = casterId
             end
+            print(j.." spell loop ")
             comp:addToSystems(id)
+            print(j.." spell loop pos: "..tostring(positionSystem:get(168)))
         end
     end
     inputSystem:syncAllWithKeys()
+    print("spell pos: "..tostring(positionSystem.components[168]))
 end
 
 function Spell:preview()

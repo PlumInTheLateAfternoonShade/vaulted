@@ -1,16 +1,16 @@
-local componentSystem = require('systems.componentSystem')
 local Point = require('geometry.Point')
 
 -- Handles position components.
 local positionSystem = {}
 
-componentSystem:inherit(positionSystem)
+require('systems.componentSystem'):inherit(positionSystem)
 
 function positionSystem:add(comp)
     if type(comp.coords[1]) ~= 'number' then
         comp.coords = Point.pointsToCoordsTable(comp.coords)
     end
-    componentSystem.add(self, comp)
+    self.components[comp.id] = comp
+    print('got here, id: '..comp.id..' there: '..tostring(self:get(168)))
 end
 
 function positionSystem:setPos(id, centerX, centerY, coords)
@@ -27,6 +27,7 @@ function positionSystem:setCenter(id, centerX, centerY)
 end
 
 function positionSystem:getCenter(id)
+    assert(self.components[id] ~= nil)
     return self.components[id].center
 end
 

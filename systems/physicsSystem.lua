@@ -87,6 +87,7 @@ local function updateComponent(comp, world, dt)
         -- Need to construct here rather than constructor,
         -- in case construct occurs during middle of physics calcs.
         comp.firstUpdate = false
+        print("phys id: "..comp.id)
         comp.body = initBody(world, comp.type, comp.initV, positionSystem:getCenter(comp.id))
         comp.shape = initShape(comp.id)
         comp.fixture = initFixture(comp)

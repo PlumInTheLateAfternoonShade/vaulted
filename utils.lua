@@ -6,7 +6,8 @@ local utils = {}
 function objectDeepcopy(object)
     local lookup_table = {}
     local function _copy(object)
-        if type(object) ~= "table" then
+        -- nonserializable objects should be handled like primitives.
+        if type(object) ~= "table" or object.nonserializable then
             return object
         elseif lookup_table[object] then
             return lookup_table[object]
@@ -17,6 +18,25 @@ function objectDeepcopy(object)
             new_table[_copy(index)] = _copy(value)
         end
         return setmetatable(new_table, _copy(getmetatable(object)))
+    end
+    return _copy(object)
+end
+
+function utils.objectDeepcopyWithoutMetatable(object)
+    local lookup_table = {}
+    local function _copy(object)
+        -- nonserializable objects should be handled like primitives.
+        if type(object) ~= "table" or object.nonserializable then
+            return object
+        elseif lookup_table[object] then
+            return lookup_table[object]
+        end
+        local new_table = {}
+        lookup_table[object] = new_table
+        for index, value in pairs(object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+        return setmetatable(new_table, getmetatable(object))
     end
     return _copy(object)
 end

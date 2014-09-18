@@ -105,6 +105,7 @@ function entitySystem:deleteAllInRange(lowerId, upperId)
 end
 
 function entitySystem:update(dt)
+    print("pos: "..tostring(positionSystem.components[168] ~= nil))
     physicsSystem:update(dt)
     temperatureSystem:update(dt)
     referenceSystem:update(dt)

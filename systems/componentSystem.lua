@@ -1,5 +1,5 @@
 -- Table to define a template for handling components.
-local componentSystem = {}
+local componentSystem = { nonserializable = true }
 
 function componentSystem:init(referenceSystem)
     self.components = {}

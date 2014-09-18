@@ -1,4 +1,5 @@
 require 'utils'
+require 'sertest'
 local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')

@@ -3,7 +3,7 @@ local positionSystem = require('systems.positionSystem') --TODO DEL
 local objectFactory = require('systems.objectFactory')
 require('utils')
 local Point = require 'geometry.Point'
-local tLoader = require 'loader'
+local loader = require 'loader'
 
 heroId = nil -- Global for entity id of hero. Hopefully remove some day.
 
@@ -16,7 +16,7 @@ local Game = require 'class'
         -- Add hero to world
         local heroSpellBook = nil
         if shouldLoadHero then
-            heroSpellBook = tLoader:unpack("spellBook")
+            heroSpellBook = loader:unpack("spellBook")
         end
         heroId = objectFactory.createPlayer({
         points = {
