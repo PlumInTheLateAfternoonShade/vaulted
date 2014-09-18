@@ -10,7 +10,6 @@ function positionSystem:add(comp)
         comp.coords = Point.pointsToCoordsTable(comp.coords)
     end
     self.components[comp.id] = comp
-    print('got here, id: '..comp.id..' there: '..tostring(self:get(168)))
 end
 
 function positionSystem:setPos(id, centerX, centerY, coords)

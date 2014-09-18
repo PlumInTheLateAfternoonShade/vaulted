@@ -41,6 +41,43 @@ function utils.objectDeepcopyWithoutMetatable(object)
     return _copy(object)
 end
 
+function utils.setFieldRecursive(object, fieldName, newValue)
+    local lookup_table = {}
+    local function _setRecursive(object, fieldName, newValue)
+        for index, val in pairs(object) do
+            if index == fieldName then
+                object[index] = newValue
+            elseif type(val) == "table" then
+                if not lookup_table[val] then
+                    lookup_table[val] = true
+                    _setRecursive(val, fieldName, newValue)
+                end
+            end
+        end
+    end
+    _setRecursive(object, fieldName, newValue)
+end
+
+function utils.setSystemsRecursive(object)
+    local lookup_table = {}
+    local function _setRecursive(object)
+        for index, val in pairs(object) do
+            if index == 'systems' then
+                for index, val in pairs(object) do
+                    print("i: "..tostring(index).." v: "..tostring(val))
+                end
+                object.systems = object.class.static.systems
+            elseif type(val) == "table" and index ~= "class" then
+                if not lookup_table[val] then
+                    lookup_table[val] = true
+                    _setRecursive(val)
+                end
+            end
+        end
+    end
+    _setRecursive(object)
+end
+
 function setColorInverted(color)
     love.graphics.setColor(255 - color.r, 255 - color.g,
     255 - color.b, color.a)

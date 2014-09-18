@@ -19,7 +19,10 @@ local componentPrototypeDeserializers =
     position = function (t) return require 'components.Position':new(t.coords, t.center) end,
     meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,
     temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,
-    force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y, t.casterId) end,
+    force = function (t) 
+        print("force built.")
+        return require 'components.Force':new(t.h, t.v, t.x, t.y, t.casterId)
+    end,
     input = function (t) return require 'components.input'.prototype(t.canAdministrate, t.canCast) end,
     walker = function (t) return require 'components.walker'.prototype(t.force) end,
 }
@@ -30,27 +33,29 @@ end
 
 local function constructComponentTables(serializedSpell)
     local compTables = {}
-    if not serializedSpell or not serializedSpell.componentTables then return compTables end
-    for i = 1, #serializedSpell.componentTables do
+    if not serializedSpell or not serializedSpell.componentTables then
+        return compTables
+    end
+    return serializedSpell.componentTables
+    --[[for i = 1, #serializedSpell.componentTables do
         table.insert(compTables, {})
         for j = 1, #serializedSpell.componentTables[i] do
             compTables[i][j] = deserializeComponentPrototype(serializedSpell.componentTables[i][j])
         end
     end
-    return compTables
+    return compTables]]--
 end
 
 -- Defines a spell that can be cast by a caster.
 -- A spell consists of a table of component prototype tables.
 -- When cast, it copys and adds each component to the appropriate systems.
-local Spell = require 'class'
-{
-    name = 'Spell',
-    function(self, serializedSpell)
-        self.power = 0.1
-        self.componentTables = constructComponentTables(serializedSpell)
-    end
-}
+local Spell = require 'lib.middleclass'('Spell')
+ 
+function Spell:initialize(serializedSpell)
+    print("initialized. serializedSpell: "..tostring(serializedSpell))
+    self.power = 0.1
+    self.componentTables = constructComponentTables(serializedSpell)
+end
 
 function Spell:addComponentTable(compTable)
     table.insert(self.componentTables, compTable)

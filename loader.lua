@@ -1,3 +1,4 @@
+local utils = require 'utils'
 local lady = require 'lib.Lady.lady'
 local Component = require 'components.Component'
 
@@ -8,6 +9,7 @@ function loader:pack(table)
         return
     end
     local saveName = table.name..'.sav'
+    utils.setFieldRecursive(table, 'systems', nil)
     lady.save_all(saveName, table)
     print('Saving '..saveName..' to '..love.filesystem.getSaveDirectory()..'.')
 end
@@ -17,9 +19,8 @@ function loader:unpack(tableName)
     if love.filesystem.exists(saveName) then
         print(saveName..' exists, loading it.')
         local loaded = lady.load_all(saveName)
-        if loaded.static and loaded.static:isSubclassOf(Component) then
-            loaded.systems = require('component'..loaded.class).class.static.systems
-        end
+        utils.setSystemsRecursive(loaded)
+        return loaded
     end
     return nil
 end

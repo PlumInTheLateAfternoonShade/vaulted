@@ -54,6 +54,8 @@ CreateObjects	lib/LoveFrames/init.lua	/^		local function CreateObjects(t, o, c)$
 FireParticleSystem:draw	particles/fireParticleSystem.lua	/^function FireParticleSystem:draw(x, y, angle)$/;"	f
 FireParticleSystem:reduce	particles/fireParticleSystem.lua	/^function FireParticleSystem:reduce(deathTime, deathSeconds)$/;"	f
 FireParticleSystem:update	particles/fireParticleSystem.lua	/^function FireParticleSystem:update(dt, vX, vY, color)$/;"	f
+Force.create	components/force.lua	/^function Force.create(id, ...)$/;"	f
+Force:initialize	components/force.lua	/^function Force:initialize(h, v, x, y, casterId)$/;"	f
 Game:draw	game.lua	/^function Game:draw()$/;"	f
 Game:keypressed	game.lua	/^function Game:keypressed(key)$/;"	f
 Game:keyreleased	game.lua	/^function Game:keyreleased(key)$/;"	f
@@ -247,7 +249,10 @@ Spell:addComponentTable	Spell.lua	/^function Spell:addComponentTable(compTable)$
 Spell:addComponentToEntity	Spell.lua	/^function Spell:addComponentToEntity(component, previewId)$/;"	f
 Spell:cast	Spell.lua	/^function Spell:cast(casterId)$/;"	f
 Spell:delete	Spell.lua	/^function Spell:delete(id)$/;"	f
+Spell:initialize	Spell.lua	/^function Spell:initialize(serializedSpell)$/;"	f
 Spell:preview	Spell.lua	/^function Spell:preview()$/;"	f
+SpellBook.create	components/SpellBook.lua	/^function SpellBook.create(id, ...)$/;"	f
+SpellBook:initialize	components/SpellBook.lua	/^function SpellBook:initialize(serializedSpellBook)$/;"	f
 State:draw	state.lua	/^function State:draw()$/;"	f
 State:keypressed	state.lua	/^function State:keypressed(key)$/;"	f
 State:keyreleased	state.lua	/^function State:keyreleased(key)$/;"	f
@@ -310,6 +315,8 @@ _setClassMetatable	lib/LoveFrames/third-party/middleclass.lua	/^local function _
 _setClassMetatable	lib/middleclass.lua	/^local function _setClassMetatable(aClass)$/;"	f
 _setDefaultInitializeMethod	lib/LoveFrames/third-party/middleclass.lua	/^local function _setDefaultInitializeMethod(aClass, super)$/;"	f
 _setDefaultInitializeMethod	lib/middleclass.lua	/^local function _setDefaultInitializeMethod(aClass, super)$/;"	f
+_setRecursive	utils.lua	/^    local function _setRecursive(object)$/;"	f
+_setRecursive	utils.lua	/^    local function _setRecursive(object, fieldName, newValue)$/;"	f
 aClass.initialize 	lib/LoveFrames/third-party/middleclass.lua	/^  aClass.initialize = function(instance, ...)$/;"	f
 aClass.initialize 	lib/middleclass.lua	/^  aClass.initialize = function(instance, ...)$/;"	f
 acc, x) return acc + x end, 0, range	lib/luafun/tests/reducing.lua	/^print(foldl(function(acc, x) return acc + x end, 0, range(5)))$/;"	f
@@ -359,7 +366,6 @@ c.keyPresses[keys.openMenu] 	systems/inputSystem.lua	/^        c.keyPresses[keys
 c:addToSystems	components/body.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/collider.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/fixture.lua	/^    function c:addToSystems(id, bodyId)$/;"	f
-c:addToSystems	components/force.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/meshRenderer.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/referencer.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/temperature.lua	/^    function c:addToSystems(id)$/;"	f
@@ -478,10 +484,8 @@ fixture.create	components/fixture.lua	/^function fixture.create(id, bodyId, ...)
 fixture.prototype	components/fixture.lua	/^function fixture.prototype(friction)$/;"	f
 flags_str	lib/AdvTiledLoader/external/optparse.lua	/^  local function flags_str(optdesc)$/;"	f
 floordiv 	lib/luafun/fun.lua	/^    floordiv = function(a, b) return math.floor(a\/b) end,$/;"	f
-force 	Spell.lua	/^    force = function (t) return require 'components.force'.prototype(t.h, t.v, t.x, t.y, t.casterId) end,$/;"	f
+force 	Spell.lua	/^    force = function (t) $/;"	f
 force 	systems/runeSystem.lua	/^        force = function(spellBook, lines, startPoint, endPoint, firstGestureId)$/;"	f
-force.create	components/force.lua	/^function force.create(id, h, v, x, y, casterId)$/;"	f
-force.prototype	components/force.lua	/^function force.prototype(h, v, x, y, casterId)$/;"	f
 forceRayCallBack	systems/forceSystem.lua	/^local function forceRayCallBack(fixture, x, y, xn, yn, fraction)$/;"	f
 forceSystem:draw	systems/forceSystem.lua	/^function forceSystem:draw()$/;"	f
 forceSystem:drawPreview	systems/forceSystem.lua	/^function forceSystem:drawPreview(startPoint, endPoint)$/;"	f
@@ -1683,6 +1687,8 @@ userdata_constructor:WeldJoint	lib/Lady/lady.lua	/^function userdata_constructor
 userdata_constructor:WheelJoint	lib/Lady/lady.lua	/^function userdata_constructor:WheelJoint(srefs)$/;"	f
 userdata_constructor:World	lib/Lady/lady.lua	/^function userdata_constructor:World(srefs, memo, rev_memo)$/;"	f
 utils.objectDeepcopyWithoutMetatable	utils.lua	/^function utils.objectDeepcopyWithoutMetatable(object)$/;"	f
+utils.setFieldRecursive	utils.lua	/^function utils.setFieldRecursive(object, fieldName, newValue)$/;"	f
+utils.setSystemsRecursive	utils.lua	/^function utils.setSystemsRecursive(object)$/;"	f
 utils.tableCompareNoField	utils.lua	/^function utils.tableCompareNoField(table, compare)$/;"	f
 validTile	lib/AdvTiledLoader/TileLayer.lua	/^local function validTile(tile)$/;"	f
 valid_classname	lib/Lady/lady.lua	/^local function valid_classname(s)$/;"	f

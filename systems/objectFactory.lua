@@ -13,8 +13,8 @@ local statBar = require('components.statBar')
 local experience = require('components.experience')
 local walker = require('components.walker')
 local input = require('components.input')
-local spellBook = require('components.spellBook')
-local force = require('components.force')
+local SpellBook = require('components.SpellBook')
+local Force = require('components.Force')
 local welder = require('components.welder')
 local referencer = require('components.referencer')
 local Point = require('geometry.Point')
@@ -85,7 +85,7 @@ function objectFactory.prototypeElemental(points, center, eleName)
 end
 
 function objectFactory.prototypeForce(h, v, x, y, casterId)
-    local forceComp = force.prototype(h, v, x, y, casterId)
+    local forceComp = Force:new(h, v, x, y, casterId)
     local previewId = entitySystem:register()
     forceComp:addToSystems(previewId)
     return {forceComp, previewId = previewId}
@@ -121,7 +121,7 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     experience.create(id)
     mana.create(id)
     health.create(id)
-    spellBook.create(id, serializedSpellBook)
+    SpellBook.create(id, serializedSpellBook)
     statBar.create(entitySystem:register(), 0.95, 0.025, {r=230, g=100, b=100},
                    function () return healthSystem:getHealthPercent(id) end)
     statBar.create(entitySystem:register(), 0.975, 0.025, {r=100, g=100, b=230},
