@@ -39,6 +39,8 @@ Camera:setPosition	camera.lua	/^function Camera:setPosition(x, y)$/;"	f
 Camera:setScale	camera.lua	/^function Camera:setScale(sx, sy)$/;"	f
 Camera:shake	camera.lua	/^function Camera:shake(a, b, contact)$/;"	f
 Camera:unset	camera.lua	/^function Camera:unset()$/;"	f
+Component:addToSystems	components/component.lua	/^function Component:addToSystems(id)$/;"	f
+Component:initialize	components/component.lua	/^function Component:initialize(systems)$/;"	f
 ControlSet:draw	menus/controlSet.lua	/^function ControlSet:draw()$/;"	f
 ControlSet:keypressed	menus/controlSet.lua	/^function ControlSet:keypressed(key)$/;"	f
 Controls:draw	menus/controls.lua	/^function Controls:draw()$/;"	f
@@ -96,6 +98,11 @@ Loader._processTileLayer	lib/AdvTiledLoader/Loader.lua	/^function Loader._proces
 Loader._processTileLayerData	lib/AdvTiledLoader/Loader.lua	/^function Loader._processTileLayerData(t)$/;"	f
 Loader._processTileSet	lib/AdvTiledLoader/Loader.lua	/^function Loader._processTileSet(t, map)$/;"	f
 Loader.load	lib/AdvTiledLoader/Loader.lua	/^function Loader.load(filename)$/;"	f
+M.load_all	lib/Lady/lady.lua	/^function M.load_all(savename)$/;"	f
+M.register_class	lib/Lady/lady.lua	/^function M.register_class(c, name)$/;"	f
+M.register_resource	lib/Lady/lady.lua	/^function M.register_resource(r, name)$/;"	f
+M.register_resource_table	lib/Lady/lady.lua	/^function M.register_resource_table(rt, tname)$/;"	f
+M.save_all	lib/Lady/lady.lua	/^function M.save_all(savename, ...)$/;"	f
 Map:_updateTileRange	lib/AdvTiledLoader/Map.lua	/^function Map:_updateTileRange()$/;"	f
 Map:addToWorld	lib/AdvTiledLoader/Map.lua	/^function Map:addToWorld(objectFactory)$/;"	f
 Map:autoDrawRange	lib/AdvTiledLoader/Map.lua	/^function Map:autoDrawRange(tx, ty, scale, pad)$/;"	f
@@ -114,15 +121,25 @@ Map:updateTiles	lib/AdvTiledLoader/Map.lua	/^function Map:updateTiles()$/;"	f
 Menu:draw	menus/menu.lua	/^function Menu:draw()$/;"	f
 Menu:keypressed	menus/menu.lua	/^function Menu:keypressed(key)$/;"	f
 Object.static:allocate	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:allocate()$/;"	f
+Object.static:allocate	lib/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:include	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:include( ... )$/;"	f
+Object.static:include	lib/middleclass.lua	/^function Object.static:include( ... )$/;"	f
 Object.static:includes	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:includes(mixin)$/;"	f
+Object.static:includes	lib/middleclass.lua	/^function Object.static:includes(mixin)$/;"	f
 Object.static:isSubclassOf	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:isSubclassOf(other)$/;"	f
+Object.static:isSubclassOf	lib/middleclass.lua	/^function Object.static:isSubclassOf(other)$/;"	f
 Object.static:new	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:new(...)$/;"	f
+Object.static:new	lib/middleclass.lua	/^function Object.static:new(...)$/;"	f
 Object.static:subclass	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:subclass(name)$/;"	f
+Object.static:subclass	lib/middleclass.lua	/^function Object.static:subclass(name)$/;"	f
 Object.static:subclassed	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:subclassed(other) end$/;"	f
+Object.static:subclassed	lib/middleclass.lua	/^function Object.static:subclassed(other)$/;"	f
 Object:__tostring	lib/LoveFrames/third-party/middleclass.lua	/^function Object:__tostring() return "instance of " .. tostring(self.class) end$/;"	f
+Object:__tostring	lib/middleclass.lua	/^function Object:__tostring() return "instance of " .. tostring(self.class) end$/;"	f
 Object:initialize	lib/LoveFrames/third-party/middleclass.lua	/^function Object:initialize() end$/;"	f
+Object:initialize	lib/middleclass.lua	/^function Object:initialize() end$/;"	f
 Object:isInstanceOf	lib/LoveFrames/third-party/middleclass.lua	/^function Object:isInstanceOf(aClass)$/;"	f
+Object:isInstanceOf	lib/middleclass.lua	/^function Object:isInstanceOf(aClass)$/;"	f
 Object:move	lib/AdvTiledLoader/Object.lua	/^function Object:move(x,y)$/;"	f
 Object:moveTo	lib/AdvTiledLoader/Object.lua	/^function Object:moveTo(x,y)$/;"	f
 Object:new	lib/AdvTiledLoader/Object.lua	/^function Object:new(layer, name, type, x, y, width, height, gid, prop)$/;"	f
@@ -260,6 +277,7 @@ Tserial.unpack	lib/TLTools/Tserial.lua	/^function Tserial.unpack(s, safe)$/;"	f
 ["new game"] 	main.lua	/^    ["new game"] = function()$/;"	f
 ["resolution"] 	main.lua	/^    ["resolution"] = function()$/;"	f
 ["settings"] 	main.lua	/^    ["settings"] = function()$/;"	f
+['function'] 	lib/Lady/lady.lua	/^	['function'] = true, ['goto'] = true, ['if'] = true, ['in'] = true,$/;"	f
 [keys.left] 	systems/inputSystem.lua	/^        [keys.left] = function () return walkingSystem:startWalkingLeft(c.id) end,$/;"	f
 [keys.left] 	systems/inputSystem.lua	/^        [keys.left] = function () return walkingSystem:stopWalkingLeft(c.id) end,$/;"	f
 [keys.right] 	systems/inputSystem.lua	/^        [keys.right] = function () return walkingSystem:startWalkingRight(c.id) end,$/;"	f
@@ -268,28 +286,40 @@ __NULL__	class.lua	/^local function __NULL__() end$/;"	f
 __call 	class.lua	/^		__call = function(self, ...)$/;"	f
 __call 	lib/luafun/fun.lua	/^    __call = function(t)$/;"	f
 __call     	lib/LoveFrames/third-party/middleclass.lua	/^    __call     = function(self, ...) return self:new(...) end$/;"	f
+__call     	lib/middleclass.lua	/^    __call     = function(self, ...) return self:new(...) end$/;"	f
 __tostring 	class.lua	/^		__tostring = function() return name end$/;"	f
 __tostring 	lib/LoveFrames/third-party/middleclass.lua	/^    __tostring = function() return "class " .. aClass.name end,$/;"	f
+__tostring 	lib/middleclass.lua	/^    __tostring = function() return "class " .. aClass.name end,$/;"	f
 _copy	utils.lua	/^    local function _copy(object)$/;"	f
 _createClass	lib/LoveFrames/third-party/middleclass.lua	/^local function _createClass(name, super)$/;"	f
+_createClass	lib/middleclass.lua	/^local function _createClass(name, super)$/;"	f
 _createLookupMetamethod	lib/LoveFrames/third-party/middleclass.lua	/^local function _createLookupMetamethod(aClass, name)$/;"	f
+_createLookupMetamethod	lib/middleclass.lua	/^local function _createLookupMetamethod(aClass, name)$/;"	f
 _includeMixin	lib/LoveFrames/third-party/middleclass.lua	/^local function _includeMixin(aClass, mixin)$/;"	f
+_includeMixin	lib/middleclass.lua	/^local function _includeMixin(aClass, mixin)$/;"	f
 _setClassDictionariesMetatables	lib/LoveFrames/third-party/middleclass.lua	/^local function _setClassDictionariesMetatables(aClass)$/;"	f
+_setClassDictionariesMetatables	lib/middleclass.lua	/^local function _setClassDictionariesMetatables(aClass)$/;"	f
 _setClassMetamethods	lib/LoveFrames/third-party/middleclass.lua	/^local function _setClassMetamethods(aClass)$/;"	f
+_setClassMetamethods	lib/middleclass.lua	/^local function _setClassMetamethods(aClass)$/;"	f
 _setClassMetatable	lib/LoveFrames/third-party/middleclass.lua	/^local function _setClassMetatable(aClass)$/;"	f
+_setClassMetatable	lib/middleclass.lua	/^local function _setClassMetatable(aClass)$/;"	f
 _setDefaultInitializeMethod	lib/LoveFrames/third-party/middleclass.lua	/^local function _setDefaultInitializeMethod(aClass, super)$/;"	f
+_setDefaultInitializeMethod	lib/middleclass.lua	/^local function _setDefaultInitializeMethod(aClass, super)$/;"	f
 aClass.initialize 	lib/LoveFrames/third-party/middleclass.lua	/^  aClass.initialize = function(instance, ...)$/;"	f
+aClass.initialize 	lib/middleclass.lua	/^  aClass.initialize = function(instance, ...)$/;"	f
 acc, x) return acc + x end, 0, range	lib/luafun/tests/reducing.lua	/^print(foldl(function(acc, x) return acc + x end, 0, range(5)))$/;"	f
 activatorFunc	lib/LoveFrames/objects/menu.lua	/^	local function activatorFunc(object)$/;"	f
 add 	lib/luafun/fun.lua	/^    add = function(a, b) return a + b end,$/;"	f
 addRectAndMark	rectAlgo.js	/^var addRectAndMark = function(x1, y1, x2, y2) { $/;"	c
 addToSystems 	components/input.lua	/^        addToSystems = function (self, id)$/;"	f
+add_body_joint	lib/Lady/lady.lua	/^local function add_body_joint(body, joint)$/;"	f
 adjustPositionForCaster	Spell.lua	/^local function adjustPositionForCaster(x, y, facing, casterId)$/;"	f
 adjustPositionPointForCaster	Spell.lua	/^local function adjustPositionPointForCaster(point, facing, casterId)$/;"	f
 adler32	lib/AdvTiledLoader/external/deflatelua.lua	/^local function adler32(byte, crc)$/;"	f
 air 	Spell.lua	/^    air = function (table) return require 'components.element'.air end,$/;"	f
 apply	systems/forceSystem.lua	/^local function apply(id, comp, world)$/;"	f
 assert( type(method)	lib/LoveFrames/third-party/middleclass.lua	/^    assert( type(method)=='function', tostring(aClass) .. " doesn't implement metamethod '" .. name .. "'" )$/;"	f
+assert( type(method)	lib/middleclass.lua	/^    assert( type(method)=='function', tostring(aClass) .. " doesn't implement metamethod '" .. name .. "'" )$/;"	f
 assert(type(constructor) 	class.lua	/^	assert(type(constructor) == "function", 'constructor has to be nil or a function')$/;"	f
 assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function")$/;"	f
 assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function", "invalid first argument to drop_while")$/;"	f
@@ -411,6 +441,7 @@ element:getEleFromColor	components/element.lua	/^function element:getEleFromColo
 element:getName	components/element.lua	/^function element:getName()$/;"	f
 element:inc	components/element.lua	/^function element:inc(amount)$/;"	f
 element:setAsColor	components/element.lua	/^function element:setAsColor()$/;"	f
+elseif ty 	lib/Lady/lady.lua	/^	elseif ty == 'table' or ty == 'function' or (ty == 'userdata' and userdata_constructor[t:type()] and not registered_things_by_value[t]) then$/;"	f
 elseif type(at) 	lib/AdvTiledLoader/TileLayer.lua	/^									elseif type(at) == "function" then at(drawX, drawY)$/;"	f
 elseif type(at) 	lib/AdvTiledLoader/TileLayer.lua	/^							elseif type(at) == "function" then at(drawX, drawY)$/;"	f
 elseif type(drop) 	lib/TLTools/Tserial.lua	/^		elseif type(drop) == "function" then k = "["..string.format("%q",drop(k)).."]"$/;"	f
@@ -469,6 +500,7 @@ getNewVelocity	systems/physicsSystem.lua	/^local function getNewVelocity(v, cent
 getOtherPointFromLines	geometry/Point.lua	/^local function getOtherPointFromLines(lines, point)$/;"	f
 get_bitstream	lib/AdvTiledLoader/external/deflatelua.lua	/^local function get_bitstream(o)$/;"	f
 get_obytestream	lib/AdvTiledLoader/external/deflatelua.lua	/^local function get_obytestream(o)$/;"	f
+getchr	lib/Lady/lady.lua	/^local function getchr(c)$/;"	f
 getmetatable(class).__tostring 	class.lua	/^				getmetatable(class).__tostring = function() return name end$/;"	f
 global	lib/strict.lua	/^function global(...)$/;"	f
 glueInt	lib/AdvTiledLoader/base64.lua	/^local function glueInt(b1, b2, b3, b4)$/;"	f
@@ -497,8 +529,10 @@ html_theme	lib/luafun/doc/conf.py	/^html_theme = 'haiku'$/;"	v
 ice 	Spell.lua	/^    ice = function (table) return require 'components.element'.ice end,$/;"	f
 if (type(obj) 	lib/luafun/fun.lua	/^    if (type(obj) == "function") then$/;"	f
 if type(mixin.included)	lib/LoveFrames/third-party/middleclass.lua	/^  if type(mixin.included)=="function" then mixin:included(aClass) end$/;"	f
+if type(mixin.included)	lib/middleclass.lua	/^  if type(mixin.included)=="function" then mixin:included(aClass) end$/;"	f
 if type(obj) 	lib/luafun/fun.lua	/^    if type(obj) == "function" then$/;"	f
 if type(obj.draw) 	lib/AdvTiledLoader/ObjectLayer.lua	/^		if type(obj.draw) == "function" then$/;"	f
+if type(t) 	lib/Lady/lady.lua	/^	if type(t) == 'function' then$/;"	f
 if type(v) 	lib/LoveFrames/libraries/skins.lua	/^				if type(v) == "function" then$/;"	f
 img.load	images/img.lua	/^function img.load(name)$/;"	f
 increasebutton.OnClick 	lib/LoveFrames/objects/numberbox.lua	/^	increasebutton.OnClick = function()$/;"	f
@@ -527,6 +561,7 @@ interceptor:__newindex	class.lua	/^		function interceptor:__newindex(key, value)
 isCloserPointToContact	systems/physicsSystem.lua	/^    local function isCloserPointToContact(point1, point2)$/;"	f
 isCloserPointToSeg	systems/physicsSystem.lua	/^    local function isCloserPointToSeg(point1, point2)$/;"	f
 isNewEntityMaker	gestures.lua	/^local function isNewEntityMaker(rune)$/;"	f
+is_cyclic	lib/Lady/lady.lua	/^local function is_cyclic(memo, sub, super)$/;"	f
 jointSystem:add	systems/jointSystem.lua	/^function jointSystem:add(comp)$/;"	f
 jointSystem:init	systems/jointSystem.lua	/^function jointSystem:init()$/;"	f
 jointSystem:update	systems/jointSystem.lua	/^function jointSystem:update(dt)$/;"	f
@@ -556,6 +591,7 @@ local call_if_not_empty 	lib/luafun/fun.lua	/^local call_if_not_empty = function
 local chain 	lib/luafun/fun.lua	/^local chain = function(...)$/;"	f
 local chain_gen_r2 	lib/luafun/fun.lua	/^local chain_gen_r2 = function(param, state, state_x, ...)$/;"	f
 local charcheck 	lib/LoveFrames/objects/textinput.lua	/^	local charcheck = function(a)$/;"	f
+local comp1 	components/sertest.lua	/^local comp1 = Component(function() return 10 end)$/;"	f
 local cycle 	lib/luafun/fun.lua	/^local cycle = function(gen, param, state)$/;"	f
 local cycle_gen 	lib/luafun/fun.lua	/^local cycle_gen = function(param, state_x)$/;"	f
 local cycle_gen_call 	lib/luafun/fun.lua	/^local cycle_gen_call = function(param, state_x, ...)$/;"	f
@@ -654,6 +690,16 @@ love.keyreleased	main.lua	/^function love.keyreleased(key)$/;"	f
 love.load	main.lua	/^function love.load(args)$/;"	f
 love.mousepressed	main.lua	/^function love.mousepressed(button, x, y)$/;"	f
 love.mousereleased	main.lua	/^function love.mousereleased(button, x, y)$/;"	f
+love.physics.newDistanceJoint	lib/Lady/lady.lua	/^	function love.physics.newDistanceJoint(body1, body2, ...)$/;"	f
+love.physics.newFrictionJoint	lib/Lady/lady.lua	/^	function love.physics.newFrictionJoint(body1, body2, ...)$/;"	f
+love.physics.newGearJoint	lib/Lady/lady.lua	/^	function love.physics.newGearJoint(joint1, joint2, ...)$/;"	f
+love.physics.newMouseJoint	lib/Lady/lady.lua	/^	function love.physics.newMouseJoint(body, ...)$/;"	f
+love.physics.newPrismaticJoint	lib/Lady/lady.lua	/^	function love.physics.newPrismaticJoint(body1, body2, ...)$/;"	f
+love.physics.newPulleyJoint	lib/Lady/lady.lua	/^	function love.physics.newPulleyJoint(body1, body2, ...)$/;"	f
+love.physics.newRevoluteJoint	lib/Lady/lady.lua	/^	function love.physics.newRevoluteJoint(body1, body2, ...)$/;"	f
+love.physics.newRopeJoint	lib/Lady/lady.lua	/^	function love.physics.newRopeJoint(body1, body2, ...)$/;"	f
+love.physics.newWeldJoint	lib/Lady/lady.lua	/^	function love.physics.newWeldJoint(body1, body2, ...)$/;"	f
+love.physics.newWheelJoint	lib/Lady/lady.lua	/^	function love.physics.newWheelJoint(body1, body2, ...)$/;"	f
 love.resize	main.lua	/^function love.resize(w, h)$/;"	f
 love.update	main.lua	/^function love.update(dt)$/;"	f
 loveframes.Create	lib/LoveFrames/init.lua	/^function loveframes.Create(data, parent)$/;"	f
@@ -705,6 +751,7 @@ makeElementalObjectFromPoints	systems/physicsSystem.lua	/^local function makeEle
 make_bitop	lib/AdvTiledLoader/external/numberlua.lua	/^local function make_bitop(t)$/;"	f
 make_bitop_uncached	lib/AdvTiledLoader/external/numberlua.lua	/^local function make_bitop_uncached(t, m)$/;"	f
 make_outstate	lib/AdvTiledLoader/external/deflatelua.lua	/^local function make_outstate(outbs)$/;"	f
+make_safe	lib/Lady/lady.lua	/^local function make_safe(text)$/;"	f
 man_pages	lib/luafun/doc/conf.py	/^man_pages = [$/;"	v
 mana.create	components/mana.lua	/^function mana.create(id, initMana, manaMult)$/;"	f
 manaSystem:deduct	systems/manaSystem.lua	/^function manaSystem:deduct(id, amount)$/;"	f
@@ -721,6 +768,7 @@ meshRenderer.create	components/meshRenderer.lua	/^function meshRenderer.create(i
 meshRenderer.prototype	components/meshRenderer.lua	/^function meshRenderer.prototype(color, imageName)$/;"	f
 midPoint	geometry/Point.lua	/^function midPoint(p0, p1)$/;"	f
 middleclass.class	lib/LoveFrames/third-party/middleclass.lua	/^function middleclass.class(name, super, ...)$/;"	f
+middleclass.class	lib/middleclass.lua	/^function middleclass.class(name, super, ...)$/;"	f
 min_cmp	lib/luafun/tests/reducing.lua	/^function min_cmp(a, b) if -a < -b then return a else return b end end$/;"	f
 mirrorPoint	geometry/Point.lua	/^function mirrorPoint(point, shouldX, shouldY)$/;"	f
 mirrorXListOfSegs	geometry/Seg.lua	/^function mirrorXListOfSegs(segs)$/;"	f
@@ -1435,6 +1483,7 @@ occ	rectAlgo.js	/^var occ = function(x, y) { return grid[y][x].length > 0; };$/;
 occCol	rectAlgo.js	/^var occCol = function(x, y1, y2) {$/;"	f
 offsetListOfSegs	geometry/Seg.lua	/^function offsetListOfSegs(segs, x, y)$/;"	f
 onDebugHook 	lib/ProFi.lua	/^onDebugHook = function( hookType )$/;"	f
+orderobjects	lib/Lady/lady.lua	/^local function orderobjects(a, b)$/;"	f
 output	lib/AdvTiledLoader/external/deflatelua.lua	/^local function output(outstate, byte)$/;"	f
 p) love.graphics.circle	systems/graphicsSystem.lua	/^    each(function(p) love.graphics.circle("fill", p.x, p.y, 5, 10) end, positionSystem:getPoints(comp.id))$/;"	f
 parse_block	lib/AdvTiledLoader/external/deflatelua.lua	/^local function parse_block(bs, outstate)$/;"	f
@@ -1512,7 +1561,10 @@ setColorInverted	utils.lua	/^function setColorInverted(color)$/;"	f
 setToComponentColor	systems/graphicsSystem.lua	/^local function setToComponentColor(comp)$/;"	f
 setmetatable(aClass.static, { __index 	lib/LoveFrames/third-party/middleclass.lua	/^    setmetatable(aClass.static, { __index = function(_,k) return dict[k] end })$/;"	f
 setmetatable(aClass.static, { __index 	lib/LoveFrames/third-party/middleclass.lua	/^    setmetatable(aClass.static, { __index = function(_,k) return dict[k] or superStatic[k] end })$/;"	f
+setmetatable(aClass.static, { __index 	lib/middleclass.lua	/^    setmetatable(aClass.static, { __index = function(_,k) return dict[k] end })$/;"	f
+setmetatable(aClass.static, { __index 	lib/middleclass.lua	/^    setmetatable(aClass.static, { __index = function(_,k) return dict[k] or superStatic[k] end })$/;"	f
 setmetatable(middleclass, { __call 	lib/LoveFrames/third-party/middleclass.lua	/^setmetatable(middleclass, { __call = function(_, ...) return middleclass.class(...) end })$/;"	f
+setmetatable(middleclass, { __call 	lib/middleclass.lua	/^setmetatable(middleclass, { __call = function(_, ...) return middleclass.class(...) end })$/;"	f
 shapeRenderer.create	components/shapeRenderer.lua	/^function shapeRenderer.create(id, color)$/;"	f
 skin.DrawButton	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawButton(object)$/;"	f
 skin.DrawCheckBox	lib/LoveFrames/skins/Blue/skin.lua	/^function skin.DrawCheckBox(object)$/;"	f
@@ -1598,8 +1650,11 @@ toggleFullscreen	main.lua	/^function toggleFullscreen()$/;"	f
 truediv 	lib/luafun/fun.lua	/^    truediv = function(a, b) return a \/ b end,$/;"	f
 truth 	lib/luafun/fun.lua	/^    truth = function(a) return not not a end,$/;"	f
 type(aClass.isSubclassOf) 	lib/LoveFrames/third-party/middleclass.lua	/^           type(aClass.isSubclassOf) == 'function' and$/;"	f
+type(aClass.isSubclassOf) 	lib/middleclass.lua	/^           type(aClass.isSubclassOf) == 'function' and$/;"	f
 type(self.super.includes)  	lib/LoveFrames/third-party/middleclass.lua	/^           type(self.super.includes)  == 'function' and$/;"	f
+type(self.super.includes)  	lib/middleclass.lua	/^           type(self.super.includes)  == 'function' and$/;"	f
 type(self.super.isSubclassOf) 	lib/LoveFrames/third-party/middleclass.lua	/^           type(self.super.isSubclassOf) == 'function' and$/;"	f
+type(self.super.isSubclassOf) 	lib/middleclass.lua	/^           type(self.super.isSubclassOf) == 'function' and$/;"	f
 unm 	lib/luafun/fun.lua	/^    unm = function(a) return -a end, -- an alias$/;"	f
 unpacks	utils.lua	/^function unpacks( ... )$/;"	f
 upbutton.Update		lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		upbutton.Update	= function(object, dt)$/;"	f
@@ -1609,8 +1664,28 @@ updateHealth	systems/healthSystem.lua	/^local function updateHealth(id, comp, dt
 updateMana	systems/manaSystem.lua	/^local function updateMana(id, comp, dt)$/;"	f
 updateState	main.lua	/^function updateState(choice, ...)$/;"	f
 updateTemp	systems/temperatureSystem.lua	/^local function updateTemp(comp, dt)$/;"	f
+userdata_constructor:Body	lib/Lady/lady.lua	/^function userdata_constructor:Body(srefs, memo, rev_memo)$/;"	f
+userdata_constructor:ChainShape	lib/Lady/lady.lua	/^function userdata_constructor:ChainShape(srefs)$/;"	f
+userdata_constructor:CircleShape	lib/Lady/lady.lua	/^function userdata_constructor:CircleShape(srefs)$/;"	f
+userdata_constructor:DistanceJoint	lib/Lady/lady.lua	/^function userdata_constructor:DistanceJoint(srefs)$/;"	f
+userdata_constructor:EdgeShape	lib/Lady/lady.lua	/^function userdata_constructor:EdgeShape(srefs)$/;"	f
+userdata_constructor:Fixture	lib/Lady/lady.lua	/^function userdata_constructor:Fixture(srefs, memo, rev_memo)$/;"	f
+userdata_constructor:FrictionJoint	lib/Lady/lady.lua	/^function userdata_constructor:FrictionJoint(srefs)$/;"	f
+userdata_constructor:GearJoint	lib/Lady/lady.lua	/^function userdata_constructor:GearJoint(srefs)$/;"	f
+userdata_constructor:MouseJoint	lib/Lady/lady.lua	/^function userdata_constructor:MouseJoint(srefs)$/;"	f
+userdata_constructor:ParticleSystem	lib/Lady/lady.lua	/^function userdata_constructor:ParticleSystem(srefs)$/;"	f
+userdata_constructor:PolygonShape	lib/Lady/lady.lua	/^function userdata_constructor:PolygonShape(srefs)$/;"	f
+userdata_constructor:PrismaticJoint	lib/Lady/lady.lua	/^function userdata_constructor:PrismaticJoint(srefs)$/;"	f
+userdata_constructor:PulleyJoint	lib/Lady/lady.lua	/^function userdata_constructor:PulleyJoint(srefs)$/;"	f
+userdata_constructor:RevoluteJoint	lib/Lady/lady.lua	/^function userdata_constructor:RevoluteJoint(srefs)$/;"	f
+userdata_constructor:RopeJoint	lib/Lady/lady.lua	/^function userdata_constructor:RopeJoint(srefs)$/;"	f
+userdata_constructor:WeldJoint	lib/Lady/lady.lua	/^function userdata_constructor:WeldJoint(srefs)$/;"	f
+userdata_constructor:WheelJoint	lib/Lady/lady.lua	/^function userdata_constructor:WheelJoint(srefs)$/;"	f
+userdata_constructor:World	lib/Lady/lady.lua	/^function userdata_constructor:World(srefs, memo, rev_memo)$/;"	f
 utils.tableCompareNoField	utils.lua	/^function utils.tableCompareNoField(table, compare)$/;"	f
 validTile	lib/AdvTiledLoader/TileLayer.lua	/^local function validTile(tile)$/;"	f
+valid_classname	lib/Lady/lady.lua	/^local function valid_classname(s)$/;"	f
+valid_identifier	lib/Lady/lady.lua	/^local function valid_identifier(s)$/;"	f
 version	lib/luafun/doc/conf.py	/^version = '0.1'$/;"	v
 walker 	Spell.lua	/^    walker = function (t) return require 'components.walker'.prototype(t.force) end,$/;"	f
 walker 	systems/runeSystem.lua	/^        walker = function(spellBook, previewId)$/;"	f
@@ -1628,6 +1703,9 @@ welder.prototype	components/welder.lua	/^function welder.prototype(id1, id2, poi
 within	utils.lua	/^function within(x, x1, x2)$/;"	f
 wrappedInc	utils.lua	/^function wrappedInc(obj, amount)$/;"	f
 wrappedIndex	systems/physicsSystem.lua	/^local function wrappedIndex(length, index)$/;"	f
+write	lib/Lady/lady.lua	/^local function write(t, memo, rev_memo)$/;"	f
+write_key_value_pair	lib/Lady/lady.lua	/^local function write_key_value_pair(k, v, memo, rev_memo, name)$/;"	f
+write_table_ex	lib/Lady/lady.lua	/^local function write_table_ex(t, memo, rev_memo, srefs, name)$/;"	f
 x) return 2 * x end, range	lib/luafun/tests/transformations.lua	/^dump(map(function(x) return 2 * x end, range(4)))$/;"	f
 x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(drop(function(x) return x < 5 end, range(10)))$/;"	f
 x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(x) return x < 5 end, range(0)))$/;"	f

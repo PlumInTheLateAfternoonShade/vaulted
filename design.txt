@@ -66,6 +66,11 @@ The Spell drawing draws the graphical components (by directly accessing the grap
 OR: Pass closures from gestures that describe how to cast the spell to Spell.
 The input component contains closure that map keys to spellBook indices.
 
+=== components changes ===
+
+
+
+
 -- Ideas
 
 Freefall game/minigame
