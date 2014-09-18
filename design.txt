@@ -74,6 +74,16 @@ entityBuilder?
 
 comp.systems = require('component'..comp.class).static.systems
 
+entityBuilder:withNewId()
+    :Position(...)
+    :Collider(...)
+    :addToSystems(comp)
+
+entityBuilder:withId(id)
+    :add(Position:new(...))
+    :add(Collider:new(...))
+    :add(comp3)
+
 -- Ideas
 
 Freefall game/minigame

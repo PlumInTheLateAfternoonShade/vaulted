@@ -51,6 +51,10 @@ Controls:mousepressed	menus/controls.lua	/^function Controls:mousepressed(x, y, 
 Controls:mousereleased	menus/controls.lua	/^function Controls:mousereleased(x, y, button)$/;"	f
 Controls:update	menus/controls.lua	/^function Controls:update(dt)$/;"	f
 CreateObjects	lib/LoveFrames/init.lua	/^		local function CreateObjects(t, o, c)$/;"	f
+EntityBuilder:add	systems/EntityBuilder.lua	/^function EntityBuilder:add(comp)$/;"	f
+EntityBuilder:initialize	systems/EntityBuilder.lua	/^function EntityBuilder:initialize(listOfSystems, listOfComponents, entitySystem)$/;"	f
+EntityBuilder:withId	systems/EntityBuilder.lua	/^function EntityBuilder:withId(id)$/;"	f
+EntityBuilder:withNewId	systems/EntityBuilder.lua	/^function EntityBuilder:withNewId()$/;"	f
 FireParticleSystem:draw	particles/fireParticleSystem.lua	/^function FireParticleSystem:draw(x, y, angle)$/;"	f
 FireParticleSystem:reduce	particles/fireParticleSystem.lua	/^function FireParticleSystem:reduce(deathTime, deathSeconds)$/;"	f
 FireParticleSystem:update	particles/fireParticleSystem.lua	/^function FireParticleSystem:update(dt, vX, vY, color)$/;"	f
@@ -323,6 +327,7 @@ acc, x) return acc + x end, 0, range	lib/luafun/tests/reducing.lua	/^print(foldl
 activatorFunc	lib/LoveFrames/objects/menu.lua	/^	local function activatorFunc(object)$/;"	f
 add 	lib/luafun/fun.lua	/^    add = function(a, b) return a + b end,$/;"	f
 addRectAndMark	rectAlgo.js	/^var addRectAndMark = function(x1, y1, x2, y2) { $/;"	c
+addSpecificComponentByName	systems/EntityBuilder.lua	/^        local function addSpecificComponentByName(...)$/;"	f
 addToSystems 	components/input.lua	/^        addToSystems = function (self, id)$/;"	f
 add_body_joint	lib/Lady/lady.lua	/^local function add_body_joint(body, joint)$/;"	f
 adjustPositionForCaster	Spell.lua	/^local function adjustPositionForCaster(x, y, facing, casterId)$/;"	f
@@ -549,6 +554,8 @@ inherit	class.lua	/^local function inherit(class, interface, ...)$/;"	f
 initBody	systems/bodySystem.lua	/^local function initBody(world, type, initV, center)$/;"	f
 initBody	systems/physicsSystem.lua	/^local function initBody(world, type, initV, center)$/;"	f
 initCircleShape	systems/physicsSystem.lua	/^local function initCircleShape(id)$/;"	f
+initComponentAspects	systems/EntityBuilder.lua	/^local function initComponentAspects(listOfSystems)$/;"	f
+initComponentMethods	systems/EntityBuilder.lua	/^local function initComponentMethods(self, listOfComponents)$/;"	f
 initFixture	systems/physicsSystem.lua	/^local function initFixture(comp)$/;"	f
 initMesh	systems/graphicsSystem.lua	/^local function initMesh(comp)$/;"	f
 initPolygonShape	systems/physicsSystem.lua	/^local function initPolygonShape(id)$/;"	f
