@@ -15,7 +15,7 @@ function position.prototype(coords, center, shape, radius)
     }
     function c:addToSystems(id)
         self.id = id
-        positionSystem:addAndTranslateToCoords(self)
+        positionSystem:add(self)
     end
     return c
 end

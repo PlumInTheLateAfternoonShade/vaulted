@@ -366,7 +366,6 @@ ccw	geometry/Point.lua	/^function ccw(p1, p2, p3)$/;"	f
 centralize	systems/physicsSystem.lua	/^local function centralize(points, c)$/;"	f
 chain_gen_r1 	lib/luafun/fun.lua	/^chain_gen_r1 = function(param, state)$/;"	f
 circle 	systems/graphicsSystem.lua	/^    circle = function(id)$/;"	f
-circle 	systems/positionSystem.lua	/^    circle = function (id, comp)$/;"	f
 circleRenderer.create	components/circleRenderer.lua	/^function circleRenderer.create(id, color, radius)$/;"	f
 class.__tostring 	class.lua	/^	class.__tostring = function() return ("<instance of %s>"):format(tostring(class)) end$/;"	f
 class.is_a 	class.lua	/^	class.is_a = function(self, other) return not not self.__is_a[other] end$/;"	f
@@ -1504,22 +1503,18 @@ physicsSystem:init	systems/physicsSystem.lua	/^function physicsSystem:init(w, ob
 physicsSystem:postSolveCollision	systems/physicsSystem.lua	/^function physicsSystem:postSolveCollision(aId, bId, coll, normalImpulse1,$/;"	f
 physicsSystem:update	systems/physicsSystem.lua	/^function physicsSystem:update(dt)$/;"	f
 polygon 	systems/graphicsSystem.lua	/^    polygon = function(id)$/;"	f
-polygon 	systems/positionSystem.lua	/^    polygon = function (id, comp)$/;"	f
 position 	Spell.lua	/^    position = function (t) return require 'components.position'.prototype(t.coords, t.center) end,$/;"	f
 position.create	components/position.lua	/^function position.create(id, ...)$/;"	f
 position.prototype	components/position.lua	/^function position.prototype(coords, center, shape, radius)$/;"	f
 positionSystem:add	systems/positionSystem.lua	/^function positionSystem:add(comp)$/;"	f
-positionSystem:addAndTranslateToCoords	systems/positionSystem.lua	/^function positionSystem:addAndTranslateToCoords(comp)$/;"	f
 positionSystem:getCenter	systems/positionSystem.lua	/^function positionSystem:getCenter(id)$/;"	f
 positionSystem:getCoords	systems/positionSystem.lua	/^function positionSystem:getCoords(id)$/;"	f
 positionSystem:getPoints	systems/positionSystem.lua	/^function positionSystem:getPoints(id)$/;"	f
 positionSystem:getRadius	systems/positionSystem.lua	/^function positionSystem:getRadius(id)$/;"	f
 positionSystem:getShape	systems/positionSystem.lua	/^function positionSystem:getShape(id)$/;"	f
-positionSystem:init	systems/positionSystem.lua	/^function positionSystem:init(bodySystem, referenceSystem)$/;"	f
 positionSystem:setCenter	systems/positionSystem.lua	/^function positionSystem:setCenter(id, centerX, centerY)$/;"	f
 positionSystem:setPos	systems/positionSystem.lua	/^function positionSystem:setPos(id, centerX, centerY, coords)$/;"	f
 positionSystem:testPointInRange	systems/positionSystem.lua	/^function positionSystem:testPointInRange(point, startId, endId)$/;"	f
-positionSystem:update	systems/positionSystem.lua	/^function positionSystem:update(dt)$/;"	f
 pow 	lib/luafun/fun.lua	/^    pow = function(a, b) return a ^ b end,$/;"	f
 primary_domain	lib/luafun/doc/conf.py	/^primary_domain = "lua"$/;"	v
 print 	lib/luafun/tests/runtest	/^    print = function(...) file_print(new_file, ...) end$/;"	f
