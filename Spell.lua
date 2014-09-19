@@ -4,6 +4,7 @@ local positionSystem = require 'systems.positionSystem'
 local walkingSystem = require 'systems.walkingSystem'
 local inputSystem = require 'systems.inputSystem'
 local Point = require 'geometry.Point'
+local builder
 
 local componentPrototypeDeserializers =
 {
@@ -36,14 +37,14 @@ local function constructComponentTables(serializedSpell)
     if not serializedSpell or not serializedSpell.componentTables then
         return compTables
     end
-    return serializedSpell.componentTables
-    --[[for i = 1, #serializedSpell.componentTables do
+    --return serializedSpell.componentTables TODO delete below, prototyping
+    for i = 1, #serializedSpell.componentTables do
         table.insert(compTables, {})
         for j = 1, #serializedSpell.componentTables[i] do
             compTables[i][j] = deserializeComponentPrototype(serializedSpell.componentTables[i][j])
         end
     end
-    return compTables]]--
+    return compTables
 end
 
 -- Defines a spell that can be cast by a caster.
@@ -54,6 +55,7 @@ local Spell = require 'lib.middleclass'('Spell')
 function Spell:initialize(serializedSpell)
     print("initialized. serializedSpell: "..tostring(serializedSpell))
     self.power = 0.1
+    builder = entitySystem.builder
     self.componentTables = constructComponentTables(serializedSpell)
 end
 
@@ -100,7 +102,11 @@ function Spell:cast(casterId)
                 comp.casterId = casterId
             end
             print(j.." spell loop ")
-            comp:addToSystems(id)
+            if comp.name == 'force' then
+                builder:withId(id):add(comp)
+            else
+                comp:addToSystems(id)
+            end
             print(j.." spell loop pos: "..tostring(positionSystem:get(168)))
         end
     end
@@ -115,7 +121,11 @@ function Spell:preview()
         for j = 1, #self.componentTables[i] do
             local component = self.componentTables[i][j]
             if component.shouldPreview then
-                component:addToSystems(id)
+                if component.name == 'force' then
+                    builder:withId(id):add(component)
+                else
+                    component:addToSystems(id)
+                end
             end
         end
     end

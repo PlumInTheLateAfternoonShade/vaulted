@@ -1,3 +1,4 @@
+local EntityBuilder = require('systems.EntityBuilder')
 local physicsSystem = require('systems.physicsSystem')
 local temperatureSystem = require('systems.temperatureSystem')
 local graphicsSystem = require('systems.graphicsSystem')
@@ -24,7 +25,11 @@ local entitySystem = {}
 
 function entitySystem:init(objectFactory)
     self.currId = -1
-    
+    self.entities =
+    {
+        [require 'components.Force'] = {}
+    }
+    print("compforce: "..tostring(require 'components.Force'))
     self.camera = Camera()
     
     local world = love.physics.newWorld(0, 50*conf.tileSize, true)
@@ -37,7 +42,7 @@ function entitySystem:init(objectFactory)
     referenceSystem:init()
     physicsSystem:init(world, objectFactory, entitySystem)
     runeSystem:init(objectFactory)
-    forceSystem:init(world)
+    forceSystem:init(world, self.entities)
     jointSystem:init()
     temperatureSystem:init(referenceSystem)
     eleSystem:init(referenceSystem)
@@ -49,7 +54,9 @@ function entitySystem:init(objectFactory)
     healthSystem:init(referenceSystem)
     spellBookSystem:init(referenceSystem)
     soundSystem:init(referenceSystem)
-    
+   
+    self.builder = EntityBuilder:new(self.entities, self)
+
     map:addToWorld(objectFactory)
     
     local getIds = function(a, b)

@@ -1,3 +1,4 @@
+local Force = require 'components.Force'
 local positionSystem = require 'systems.positionSystem'
 local walkingSystem = require 'systems.walkingSystem'
 local element = require 'components.element'
@@ -12,9 +13,9 @@ local forceMult = 10
 
 require('systems.componentSystem'):inherit(forceSystem)
 
-function forceSystem:init(world)
+function forceSystem:init(world, entities)
     self.world = world
-    self.components = {}
+    self.components = entities[Force]
 end
 
 local function forceRayCallBack(fixture, x, y, xn, yn, fraction)

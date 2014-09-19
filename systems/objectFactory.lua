@@ -14,16 +14,18 @@ local experience = require('components.experience')
 local walker = require('components.walker')
 local input = require('components.input')
 local SpellBook = require('components.SpellBook')
-local Force = require('components.Force')
+--local Force = require('components.Force')
 local welder = require('components.welder')
 local referencer = require('components.referencer')
 local Point = require('geometry.Point')
+local builder
 
 -- Convenience functions to create objects in the entity component system.
 local objectFactory = {}
 
 function objectFactory.init()
     entitySystem:init(objectFactory)
+    builder = entitySystem.builder
 end
 
 function objectFactory.createTile(points, center)
@@ -85,10 +87,12 @@ function objectFactory.prototypeElemental(points, center, eleName)
 end
 
 function objectFactory.prototypeForce(h, v, x, y, casterId)
+    local _, forceComp = builder:withNewId():Force(h, v, x, y, casterId)
+    --[[
     local forceComp = Force:new(h, v, x, y, casterId)
     local previewId = entitySystem:register()
-    forceComp:addToSystems(previewId)
-    return {forceComp, previewId = previewId}
+    forceComp:addToSystems(previewId)]]--
+    return {forceComp, previewId = builder.inUseId}
 end
 
 local playerFriction = 0.5

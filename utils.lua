@@ -34,7 +34,11 @@ function utils.objectDeepcopyWithoutMetatable(object)
         local new_table = {}
         lookup_table[object] = new_table
         for index, value in pairs(object) do
-            new_table[_copy(index)] = _copy(value)
+            if index == 'class' then
+                new_table.class = value
+            else 
+                new_table[_copy(index)] = _copy(value)
+            end
         end
         return setmetatable(new_table, getmetatable(object))
     end

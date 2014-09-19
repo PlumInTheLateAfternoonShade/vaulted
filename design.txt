@@ -84,6 +84,8 @@ entityBuilder:withId(id)
     :add(Collider:new(...))
     :add(comp3)
 
+forked middleclass to use table constructors?
+
 -- Ideas
 
 Freefall game/minigame

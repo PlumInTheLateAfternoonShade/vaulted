@@ -1,23 +1,8 @@
 local EntityBuilder = require 'lib.middleclass'('EntityBuilder')
 
-local function initComponentAspects(listOfSystems)
-    local componentAspects = {}
-    for i = 1, #listOfSystems do
-        for j = 1, #listOfSystems[i].aspect do
-            local cAspects = componentAspects[listOfSystems[i].aspect[j]]
-            if not cAspects then
-                cAspects = {}
-            end
-            table.insert(cAspects, listOfSystems[i])
-        end
-    end
-    return componentAspects
-end
-
-local function initComponentMethods(self, listOfComponents)
-    for i = 1, #listOfComponents do
-        local CompClass = listOfComponents[i]
-        local function addSpecificComponentByName(...)
+local function initComponentMethods(self, entities)
+    for CompClass, compTable in pairs(entities) do
+        local function addSpecificComponentByName(self, ...)
             local c = CompClass:new(...)
             self:add(c)
             return self, c
@@ -26,12 +11,11 @@ local function initComponentMethods(self, listOfComponents)
     end
 end
 
-function EntityBuilder:initialize(listOfSystems, listOfComponents, entitySystem)
+function EntityBuilder:initialize(entities, entitySystem)
     self.entitySystem = entitySystem
+    self.entities = entities
     self.inUseId = nil
-    self.listOfSystems = listOfSystems
-    self.componentAspects = initComponentAspects(listOfSystems)
-    initComponentMethods(self, listOfComponents)
+    initComponentMethods(self, entities)
 end
 
 function EntityBuilder:add(comp)
@@ -39,19 +23,20 @@ function EntityBuilder:add(comp)
         error('Must notify EntityBuilder of id to use before adding component.')
     end
     comp.id = self.inUseId
-    local cAspects = self.componentAspects[comp.class]
-    for i = 1, #cAspects do
-        cAspects[i]:add(comp)
-    end
+    print("class: "..comp.class.name)
+    assert(comp.class == require 'components.Force')
+    self.entities[comp.class][comp.id] = comp
     return self
 end
 
 function EntityBuilder:withId(id)
     self.inUseId = id
+    return self
 end
 
 function EntityBuilder:withNewId()
     self.inUseId = self.entitySystem:register()
+    return self
 end
 
 return EntityBuilder
