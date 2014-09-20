@@ -18,8 +18,7 @@ function loader:unpack(tableName)
     local saveName = tableName..'.sav'
     if love.filesystem.exists(saveName) then
         print(saveName..' exists, loading it.')
-        local loaded = lady.load_all(saveName)
-        return loaded
+        return lady.load_all(saveName)
     end
     return nil
 end

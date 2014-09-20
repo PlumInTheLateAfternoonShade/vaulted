@@ -1,0 +1,754 @@
+conf.sav exists, loading it.
+keys.sav exists, loading it.
+Collider
+Component
+ElementInstance
+Experience
+Force
+Health
+Input
+Lifetime
+Mana
+MeshRenderer
+Position
+Referencer
+ShapeRenderer
+SpellBook
+StatBar
+Temperature
+Walker
+Welder
+element
+ebadd: instance of class Position
+class: Position id: 1
+ebadd: instance of class Collider
+class: Collider id: 1
+ebadd: instance of class Position
+class: Position id: 2
+ebadd: instance of class Collider
+class: Collider id: 2
+ebadd: instance of class Position
+class: Position id: 3
+ebadd: instance of class Collider
+class: Collider id: 3
+ebadd: instance of class Position
+class: Position id: 4
+ebadd: instance of class Collider
+class: Collider id: 4
+ebadd: instance of class Position
+class: Position id: 5
+ebadd: instance of class Collider
+class: Collider id: 5
+ebadd: instance of class Position
+class: Position id: 6
+ebadd: instance of class Collider
+class: Collider id: 6
+ebadd: instance of class Position
+class: Position id: 7
+ebadd: instance of class Collider
+class: Collider id: 7
+ebadd: instance of class Position
+class: Position id: 8
+ebadd: instance of class Collider
+class: Collider id: 8
+ebadd: instance of class Position
+class: Position id: 9
+ebadd: instance of class Collider
+class: Collider id: 9
+ebadd: instance of class Position
+class: Position id: 10
+ebadd: instance of class Collider
+class: Collider id: 10
+ebadd: instance of class Position
+class: Position id: 11
+ebadd: instance of class Collider
+class: Collider id: 11
+ebadd: instance of class Position
+class: Position id: 12
+ebadd: instance of class Collider
+class: Collider id: 12
+ebadd: instance of class Position
+class: Position id: 13
+ebadd: instance of class Collider
+class: Collider id: 13
+ebadd: instance of class Position
+class: Position id: 14
+ebadd: instance of class Collider
+class: Collider id: 14
+ebadd: instance of class Position
+class: Position id: 15
+ebadd: instance of class Collider
+class: Collider id: 15
+ebadd: instance of class Position
+class: Position id: 16
+ebadd: instance of class Collider
+class: Collider id: 16
+ebadd: instance of class Position
+class: Position id: 17
+ebadd: instance of class Collider
+class: Collider id: 17
+ebadd: instance of class Position
+class: Position id: 18
+ebadd: instance of class Collider
+class: Collider id: 18
+ebadd: instance of class Position
+class: Position id: 19
+ebadd: instance of class Collider
+class: Collider id: 19
+ebadd: instance of class Position
+class: Position id: 20
+ebadd: instance of class Collider
+class: Collider id: 20
+ebadd: instance of class Position
+class: Position id: 21
+ebadd: instance of class Collider
+class: Collider id: 21
+ebadd: instance of class Position
+class: Position id: 22
+ebadd: instance of class Collider
+class: Collider id: 22
+ebadd: instance of class Position
+class: Position id: 23
+ebadd: instance of class Collider
+class: Collider id: 23
+ebadd: instance of class Position
+class: Position id: 24
+ebadd: instance of class Collider
+class: Collider id: 24
+ebadd: instance of class Position
+class: Position id: 25
+ebadd: instance of class Collider
+class: Collider id: 25
+ebadd: instance of class Position
+class: Position id: 26
+ebadd: instance of class Collider
+class: Collider id: 26
+ebadd: instance of class Position
+class: Position id: 27
+ebadd: instance of class Collider
+class: Collider id: 27
+ebadd: instance of class Position
+class: Position id: 28
+ebadd: instance of class Collider
+class: Collider id: 28
+ebadd: instance of class Position
+class: Position id: 29
+ebadd: instance of class Collider
+class: Collider id: 29
+ebadd: instance of class Position
+class: Position id: 30
+ebadd: instance of class Collider
+class: Collider id: 30
+ebadd: instance of class Position
+class: Position id: 31
+ebadd: instance of class Collider
+class: Collider id: 31
+ebadd: instance of class Position
+class: Position id: 32
+ebadd: instance of class Collider
+class: Collider id: 32
+ebadd: instance of class Position
+class: Position id: 33
+ebadd: instance of class Collider
+class: Collider id: 33
+ebadd: instance of class Position
+class: Position id: 34
+ebadd: instance of class Collider
+class: Collider id: 34
+ebadd: instance of class Position
+class: Position id: 35
+ebadd: instance of class Collider
+class: Collider id: 35
+ebadd: instance of class Position
+class: Position id: 36
+ebadd: instance of class Collider
+class: Collider id: 36
+ebadd: instance of class Position
+class: Position id: 37
+ebadd: instance of class Collider
+class: Collider id: 37
+ebadd: instance of class Position
+class: Position id: 38
+ebadd: instance of class Collider
+class: Collider id: 38
+ebadd: instance of class Position
+class: Position id: 39
+ebadd: instance of class Collider
+class: Collider id: 39
+ebadd: instance of class Position
+class: Position id: 40
+ebadd: instance of class Collider
+class: Collider id: 40
+ebadd: instance of class Position
+class: Position id: 41
+ebadd: instance of class Collider
+class: Collider id: 41
+ebadd: instance of class Position
+class: Position id: 42
+ebadd: instance of class Collider
+class: Collider id: 42
+ebadd: instance of class Position
+class: Position id: 43
+ebadd: instance of class Collider
+class: Collider id: 43
+ebadd: instance of class Position
+class: Position id: 44
+ebadd: instance of class Collider
+class: Collider id: 44
+ebadd: instance of class Position
+class: Position id: 45
+ebadd: instance of class Collider
+class: Collider id: 45
+ebadd: instance of class Position
+class: Position id: 46
+ebadd: instance of class Collider
+class: Collider id: 46
+ebadd: instance of class Position
+class: Position id: 47
+ebadd: instance of class Collider
+class: Collider id: 47
+ebadd: instance of class Position
+class: Position id: 48
+ebadd: instance of class Collider
+class: Collider id: 48
+ebadd: instance of class Position
+class: Position id: 49
+ebadd: instance of class Collider
+class: Collider id: 49
+ebadd: instance of class Position
+class: Position id: 50
+ebadd: instance of class Collider
+class: Collider id: 50
+ebadd: instance of class Position
+class: Position id: 51
+ebadd: instance of class Collider
+class: Collider id: 51
+ebadd: instance of class Position
+class: Position id: 52
+ebadd: instance of class Collider
+class: Collider id: 52
+ebadd: instance of class Position
+class: Position id: 53
+ebadd: instance of class Collider
+class: Collider id: 53
+ebadd: instance of class Position
+class: Position id: 54
+ebadd: instance of class Collider
+class: Collider id: 54
+ebadd: instance of class Position
+class: Position id: 55
+ebadd: instance of class Collider
+class: Collider id: 55
+ebadd: instance of class Position
+class: Position id: 56
+ebadd: instance of class Collider
+class: Collider id: 56
+ebadd: instance of class Position
+class: Position id: 57
+ebadd: instance of class Collider
+class: Collider id: 57
+ebadd: instance of class Position
+class: Position id: 58
+ebadd: instance of class Collider
+class: Collider id: 58
+ebadd: instance of class Position
+class: Position id: 59
+ebadd: instance of class Collider
+class: Collider id: 59
+ebadd: instance of class Position
+class: Position id: 60
+ebadd: instance of class Collider
+class: Collider id: 60
+ebadd: instance of class Position
+class: Position id: 61
+ebadd: instance of class Collider
+class: Collider id: 61
+ebadd: instance of class Position
+class: Position id: 62
+ebadd: instance of class Collider
+class: Collider id: 62
+ebadd: instance of class Position
+class: Position id: 63
+ebadd: instance of class Collider
+class: Collider id: 63
+ebadd: instance of class Position
+class: Position id: 64
+ebadd: instance of class Collider
+class: Collider id: 64
+ebadd: instance of class Position
+class: Position id: 65
+ebadd: instance of class Collider
+class: Collider id: 65
+ebadd: instance of class Position
+class: Position id: 66
+ebadd: instance of class Collider
+class: Collider id: 66
+ebadd: instance of class Position
+class: Position id: 67
+ebadd: instance of class Collider
+class: Collider id: 67
+ebadd: instance of class Position
+class: Position id: 68
+ebadd: instance of class Collider
+class: Collider id: 68
+ebadd: instance of class Position
+class: Position id: 69
+ebadd: instance of class Collider
+class: Collider id: 69
+ebadd: instance of class Position
+class: Position id: 70
+ebadd: instance of class Collider
+class: Collider id: 70
+ebadd: instance of class Position
+class: Position id: 71
+ebadd: instance of class Collider
+class: Collider id: 71
+ebadd: instance of class Position
+class: Position id: 72
+ebadd: instance of class Collider
+class: Collider id: 72
+ebadd: instance of class Position
+class: Position id: 73
+ebadd: instance of class Collider
+class: Collider id: 73
+ebadd: instance of class Position
+class: Position id: 74
+ebadd: instance of class Collider
+class: Collider id: 74
+ebadd: instance of class Position
+class: Position id: 75
+ebadd: instance of class Collider
+class: Collider id: 75
+ebadd: instance of class Position
+class: Position id: 76
+ebadd: instance of class Collider
+class: Collider id: 76
+ebadd: instance of class Position
+class: Position id: 77
+ebadd: instance of class Collider
+class: Collider id: 77
+ebadd: instance of class Position
+class: Position id: 78
+ebadd: instance of class Collider
+class: Collider id: 78
+ebadd: instance of class Position
+class: Position id: 79
+ebadd: instance of class Collider
+class: Collider id: 79
+ebadd: instance of class Position
+class: Position id: 80
+ebadd: instance of class Collider
+class: Collider id: 80
+ebadd: instance of class Position
+class: Position id: 81
+ebadd: instance of class Collider
+class: Collider id: 81
+ebadd: instance of class Position
+class: Position id: 82
+ebadd: instance of class Collider
+class: Collider id: 82
+ebadd: instance of class Position
+class: Position id: 83
+ebadd: instance of class Collider
+class: Collider id: 83
+ebadd: instance of class Position
+class: Position id: 84
+ebadd: instance of class Collider
+class: Collider id: 84
+ebadd: instance of class Position
+class: Position id: 85
+ebadd: instance of class Collider
+class: Collider id: 85
+ebadd: instance of class Position
+class: Position id: 86
+ebadd: instance of class Collider
+class: Collider id: 86
+ebadd: instance of class Position
+class: Position id: 87
+ebadd: instance of class Collider
+class: Collider id: 87
+ebadd: instance of class Position
+class: Position id: 88
+ebadd: instance of class Collider
+class: Collider id: 88
+ebadd: instance of class Position
+class: Position id: 89
+ebadd: instance of class Collider
+class: Collider id: 89
+ebadd: instance of class Position
+class: Position id: 90
+ebadd: instance of class Collider
+class: Collider id: 90
+ebadd: instance of class Position
+class: Position id: 91
+ebadd: instance of class Collider
+class: Collider id: 91
+ebadd: instance of class Position
+class: Position id: 92
+ebadd: instance of class Collider
+class: Collider id: 92
+ebadd: instance of class Position
+class: Position id: 93
+ebadd: instance of class Collider
+class: Collider id: 93
+ebadd: instance of class Position
+class: Position id: 94
+ebadd: instance of class Collider
+class: Collider id: 94
+ebadd: instance of class Position
+class: Position id: 95
+ebadd: instance of class Collider
+class: Collider id: 95
+ebadd: instance of class Position
+class: Position id: 96
+ebadd: instance of class Collider
+class: Collider id: 96
+ebadd: instance of class Position
+class: Position id: 97
+ebadd: instance of class Collider
+class: Collider id: 97
+ebadd: instance of class Position
+class: Position id: 98
+ebadd: instance of class Collider
+class: Collider id: 98
+ebadd: instance of class Position
+class: Position id: 99
+ebadd: instance of class Collider
+class: Collider id: 99
+ebadd: instance of class Position
+class: Position id: 100
+ebadd: instance of class Collider
+class: Collider id: 100
+ebadd: instance of class Position
+class: Position id: 101
+ebadd: instance of class Collider
+class: Collider id: 101
+ebadd: instance of class Position
+class: Position id: 102
+ebadd: instance of class Collider
+class: Collider id: 102
+ebadd: instance of class Position
+class: Position id: 103
+ebadd: instance of class Collider
+class: Collider id: 103
+ebadd: instance of class Position
+class: Position id: 104
+ebadd: instance of class Collider
+class: Collider id: 104
+ebadd: instance of class Position
+class: Position id: 105
+ebadd: instance of class Collider
+class: Collider id: 105
+ebadd: instance of class Position
+class: Position id: 106
+ebadd: instance of class Collider
+class: Collider id: 106
+ebadd: instance of class Position
+class: Position id: 107
+ebadd: instance of class Collider
+class: Collider id: 107
+ebadd: instance of class Position
+class: Position id: 108
+ebadd: instance of class Collider
+class: Collider id: 108
+ebadd: instance of class Position
+class: Position id: 109
+ebadd: instance of class Collider
+class: Collider id: 109
+ebadd: instance of class Position
+class: Position id: 110
+ebadd: instance of class Collider
+class: Collider id: 110
+ebadd: instance of class Position
+class: Position id: 111
+ebadd: instance of class Collider
+class: Collider id: 111
+ebadd: instance of class Position
+class: Position id: 112
+ebadd: instance of class Collider
+class: Collider id: 112
+ebadd: instance of class Position
+class: Position id: 113
+ebadd: instance of class Collider
+class: Collider id: 113
+ebadd: instance of class Position
+class: Position id: 114
+ebadd: instance of class Collider
+class: Collider id: 114
+ebadd: instance of class Position
+class: Position id: 115
+ebadd: instance of class Collider
+class: Collider id: 115
+ebadd: instance of class Position
+class: Position id: 116
+ebadd: instance of class Collider
+class: Collider id: 116
+ebadd: instance of class Position
+class: Position id: 117
+ebadd: instance of class Collider
+class: Collider id: 117
+ebadd: instance of class Position
+class: Position id: 118
+ebadd: instance of class Collider
+class: Collider id: 118
+ebadd: instance of class Position
+class: Position id: 119
+ebadd: instance of class Collider
+class: Collider id: 119
+ebadd: instance of class Position
+class: Position id: 120
+ebadd: instance of class Collider
+class: Collider id: 120
+ebadd: instance of class Position
+class: Position id: 121
+ebadd: instance of class Collider
+class: Collider id: 121
+ebadd: instance of class Position
+class: Position id: 122
+ebadd: instance of class Collider
+class: Collider id: 122
+ebadd: instance of class Position
+class: Position id: 123
+ebadd: instance of class Collider
+class: Collider id: 123
+ebadd: instance of class Position
+class: Position id: 124
+ebadd: instance of class Collider
+class: Collider id: 124
+ebadd: instance of class Position
+class: Position id: 125
+ebadd: instance of class Collider
+class: Collider id: 125
+ebadd: instance of class Position
+class: Position id: 126
+ebadd: instance of class Collider
+class: Collider id: 126
+ebadd: instance of class Position
+class: Position id: 127
+ebadd: instance of class Collider
+class: Collider id: 127
+ebadd: instance of class Position
+class: Position id: 128
+ebadd: instance of class Collider
+class: Collider id: 128
+ebadd: instance of class Position
+class: Position id: 129
+ebadd: instance of class Collider
+class: Collider id: 129
+ebadd: instance of class Position
+class: Position id: 130
+ebadd: instance of class Collider
+class: Collider id: 130
+ebadd: instance of class Position
+class: Position id: 131
+ebadd: instance of class Collider
+class: Collider id: 131
+ebadd: instance of class Position
+class: Position id: 132
+ebadd: instance of class Collider
+class: Collider id: 132
+ebadd: instance of class Position
+class: Position id: 133
+ebadd: instance of class Collider
+class: Collider id: 133
+ebadd: instance of class Position
+class: Position id: 134
+ebadd: instance of class Collider
+class: Collider id: 134
+ebadd: instance of class Position
+class: Position id: 135
+ebadd: instance of class Collider
+class: Collider id: 135
+ebadd: instance of class Position
+class: Position id: 136
+ebadd: instance of class Collider
+class: Collider id: 136
+ebadd: instance of class Position
+class: Position id: 137
+ebadd: instance of class Collider
+class: Collider id: 137
+ebadd: instance of class Position
+class: Position id: 138
+ebadd: instance of class Collider
+class: Collider id: 138
+ebadd: instance of class Position
+class: Position id: 139
+ebadd: instance of class Collider
+class: Collider id: 139
+ebadd: instance of class Position
+class: Position id: 140
+ebadd: instance of class Collider
+class: Collider id: 140
+ebadd: instance of class Position
+class: Position id: 141
+ebadd: instance of class Collider
+class: Collider id: 141
+ebadd: instance of class Position
+class: Position id: 142
+ebadd: instance of class Collider
+class: Collider id: 142
+ebadd: instance of class Position
+class: Position id: 143
+ebadd: instance of class Collider
+class: Collider id: 143
+ebadd: instance of class Position
+class: Position id: 144
+ebadd: instance of class Collider
+class: Collider id: 144
+ebadd: instance of class Position
+class: Position id: 145
+ebadd: instance of class Collider
+class: Collider id: 145
+ebadd: instance of class Position
+class: Position id: 146
+ebadd: instance of class Collider
+class: Collider id: 146
+ebadd: instance of class Position
+class: Position id: 147
+ebadd: instance of class Collider
+class: Collider id: 147
+ebadd: instance of class Position
+class: Position id: 148
+ebadd: instance of class Collider
+class: Collider id: 148
+ebadd: instance of class Position
+class: Position id: 149
+ebadd: instance of class Collider
+class: Collider id: 149
+ebadd: instance of class Position
+class: Position id: 150
+ebadd: instance of class Collider
+class: Collider id: 150
+ebadd: instance of class Position
+class: Position id: 151
+ebadd: instance of class Collider
+class: Collider id: 151
+ebadd: instance of class Position
+class: Position id: 152
+ebadd: instance of class Collider
+class: Collider id: 152
+ebadd: instance of class Position
+class: Position id: 153
+ebadd: instance of class Collider
+class: Collider id: 153
+ebadd: instance of class Position
+class: Position id: 154
+ebadd: instance of class Collider
+class: Collider id: 154
+ebadd: instance of class Position
+class: Position id: 155
+ebadd: instance of class Collider
+class: Collider id: 155
+ebadd: instance of class Position
+class: Position id: 156
+ebadd: instance of class Collider
+class: Collider id: 156
+ebadd: instance of class Position
+class: Position id: 157
+ebadd: instance of class Collider
+class: Collider id: 157
+ebadd: instance of class Position
+class: Position id: 158
+ebadd: instance of class Collider
+class: Collider id: 158
+ebadd: instance of class Position
+class: Position id: 159
+ebadd: instance of class Collider
+class: Collider id: 159
+ebadd: instance of class Position
+class: Position id: 160
+ebadd: instance of class Collider
+class: Collider id: 160
+spellBook.sav exists, loading it.
+class: Force fU: nil
+fU2: nil
+class: Force fU: nil
+fU2: nil
+class: ElementInstance fU: nil
+fU2: nil
+class: Collider fU: true
+fU2: true
+class: Position fU: nil
+fU2: nil
+class: MeshRenderer fU: nil
+fU2: nil
+class: Temperature fU: nil
+fU2: nil
+ebadd: instance of class Position
+class: Position id: 161
+ebadd: instance of class Collider
+class: Collider id: 161
+ebadd: instance of class ShapeRenderer
+class: ShapeRenderer id: 161
+initialized. serializedSpell: instance of class Spell
+class: Force fU: nil
+fU2: nil
+class: Force fU: nil
+fU2: nil
+class: ElementInstance fU: nil
+fU2: nil
+class: Collider fU: true
+fU2: true
+class: Position fU: nil
+fU2: nil
+class: MeshRenderer fU: nil
+fU2: nil
+class: Temperature fU: nil
+fU2: nil
+initialized. serializedSpell: instance of class Spell
+initialized. serializedSpell: instance of class Spell
+initialized. serializedSpell: instance of class Spell
+ebadd: instance of class SpellBook
+class: SpellBook id: 161
+ebadd: instance of class Walker
+class: Walker id: 161
+ebadd: instance of class Input
+class: Input id: 161
+ebadd: instance of class Experience
+class: Experience id: 161
+ebadd: instance of class Mana
+class: Mana id: 161
+ebadd: instance of class Health
+class: Health id: 161
+ebadd: instance of class Referencer
+class: Referencer id: 162
+ebadd: instance of class Position
+class: Position id: 162
+ebadd: instance of class Collider
+class: Collider id: 162
+ebadd: instance of class ShapeRenderer
+class: ShapeRenderer id: 162
+ebadd: instance of class Welder
+class: Welder id: 163
+ebadd: instance of class Referencer
+class: Referencer id: 164
+ebadd: instance of class Position
+class: Position id: 164
+ebadd: instance of class Collider
+class: Collider id: 164
+ebadd: instance of class ShapeRenderer
+class: ShapeRenderer id: 164
+ebadd: instance of class Welder
+class: Welder id: 165
+ebadd: instance of class StatBar
+class: StatBar id: 166
+ebadd: instance of class StatBar
+class: StatBar id: 167
+ebadd: instance of class Force
+class: Force id: 168
+ebadd: instance of class Force
+class: Force id: 169
+ebadd: instance of class Position
+class: Position id: 170
+ebadd: instance of class MeshRenderer
+class: MeshRenderer id: 170
+Error: systems/graphicsSystem.lua:88: attempt to call method 'setVertices' (a nil value)
+stack traceback:
+	systems/graphicsSystem.lua:88: in function 'drawMesh'
+	systems/graphicsSystem.lua:104: in function 'drawMeshes'
+	systems/graphicsSystem.lua:118: in function 'drawRawComponents'
+	systems/entitySystem.lua:136: in function 'draw'
+	gestures.lua:38: in function 'draw'
+	main.lua:93: in function 'draw'
+	[string "boot.lua"]:437: in function <[string "boot.lua"]:399>
+	[C]: in function 'xpcall'

@@ -79,6 +79,7 @@ local function getMeshVertices(comp)
 end
 
 local function initMesh(comp)
+    print("mesh inited, id: "..comp.id)
     comp.mesh = love.graphics.newMesh(getMeshVertices(comp), img.load(comp.imageName))
 end
 

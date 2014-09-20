@@ -8,6 +8,17 @@ local function constructComponentTables(serializedSpell)
     if not serializedSpell or not serializedSpell.componentTables then
         return {}
     end
+    for i = 1, #serializedSpell.componentTables do
+        for j = 1, #serializedSpell.componentTables[i] do
+            local comp = serializedSpell.componentTables[i][j]
+            assert(comp)
+            print("class: "..comp.class.name.." fU: "..tostring(comp.firstUpdate))
+            if comp.firstUpdate == false then
+                comp.firstUpdate = true
+            end
+            print("fU2: "..tostring(comp.firstUpdate))
+        end
+    end
     return serializedSpell.componentTables 
 end
 
