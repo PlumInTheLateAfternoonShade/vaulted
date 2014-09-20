@@ -1,10 +1,17 @@
 local physicsSystem = require 'systems.physicsSystem'
--- Handles walking components.
-local walkingSystem = {}
+local Walker = require('components.Walker')
+local ComponentSystem = require('systems.ComponentSystem')
 
-require('systems.componentSystem'):inherit(walkingSystem)
+-- Handles joint components.
+local WalkingSystem = require('lib.middleclass')(
+    'WalkingSystem', ComponentSystem)
 
-function walkingSystem:update(dt)
+function WalkingSystem:init(referenceSystem, entities)
+    self.components = entities[Walker]
+    ComponentSystem.init(self, referenceSystem)
+end
+
+function WalkingSystem:update(dt)
     for id, comp in pairs(self.components) do
         if comp.direction ~= 0 then
             local body = physicsSystem:get(id).body
@@ -17,39 +24,39 @@ function walkingSystem:update(dt)
     end
 end
 
-function walkingSystem:getDirection(id)
+function WalkingSystem:getDirection(id)
     if self.components[id] then
         return self.components[id].direction
     end
     return 0
 end
 
-function walkingSystem:startWalkingRight(id)
+function WalkingSystem:startWalkingRight(id)
     if self.components[id] then
         self.components[id].direction = 1
         self.components[id].facing = 1
     end
 end
 
-function walkingSystem:startWalkingLeft(id)
+function WalkingSystem:startWalkingLeft(id)
     if self.components[id] then
         self.components[id].direction = -1
         self.components[id].facing = -1
     end
 end
 
-function walkingSystem:stopWalkingRight(id)
+function WalkingSystem:stopWalkingRight(id)
     local comp = self.components[id]
     if comp and comp.direction == 1 then
         self.components[id].direction = 0
     end
 end 
 
-function walkingSystem:stopWalkingLeft(id) 
+function WalkingSystem:stopWalkingLeft(id) 
     local comp = self.components[id]
     if comp and comp.direction == -1 then
         self.components[id].direction = 0
     end
 end
 
-return walkingSystem
+return WalkingSystem:new()

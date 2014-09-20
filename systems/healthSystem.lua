@@ -1,25 +1,32 @@
 local experienceSystem = require 'systems.experienceSystem'
+local Health = require('components.Health')
+local ComponentSystem = require('systems.ComponentSystem')
 
 -- Handles health components.
-local healthSystem = {}
+local HealthSystem = require('lib.middleclass')(
+    'HealthSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(healthSystem)
+function HealthSystem:init(referenceSystem, entities)
+    self.components = entities[Health]
+    ComponentSystem.init(self, referenceSystem)
+end
 
 local function updateHealth(id, comp, dt)
     local xp = experienceSystem:getXp(id)
     comp.health = math.min(comp.health + xp/20*comp.healthMult*dt, xp*comp.healthMult)
 end
 
-function healthSystem:update(dt)
+function HealthSystem:update(dt)
     for id, comp in pairs(self.components) do updateHealth(id, comp, dt) end
 end
 
-function healthSystem:getHealth(id)
+function HealthSystem:getHealth(id)
     return self.components[id].health
 end
 
-function healthSystem:getHealthPercent(id)
+function HealthSystem:getHealthPercent(id)
     return self:getHealth(id) / experienceSystem:getXp(id)
 end
 
-return healthSystem
+local healthSystemInstance = HealthSystem:new()
+return healthSystemInstance

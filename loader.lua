@@ -9,7 +9,6 @@ function loader:pack(table)
         return
     end
     local saveName = table.name..'.sav'
-    utils.setFieldRecursive(table, 'systems', nil)
     lady.save_all(saveName, table)
     print('Saving '..saveName..' to '..love.filesystem.getSaveDirectory()..'.')
 end
@@ -19,7 +18,6 @@ function loader:unpack(tableName)
     if love.filesystem.exists(saveName) then
         print(saveName..' exists, loading it.')
         local loaded = lady.load_all(saveName)
-        utils.setSystemsRecursive(loaded)
         return loaded
     end
     return nil

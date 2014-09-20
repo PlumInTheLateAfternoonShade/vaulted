@@ -64,6 +64,10 @@ EntityBuilder:finalize	systems/EntityBuilder.lua	/^function EntityBuilder:finali
 EntityBuilder:initialize	systems/EntityBuilder.lua	/^function EntityBuilder:initialize(entities, entitySystem)$/;"	f
 EntityBuilder:withId	systems/EntityBuilder.lua	/^function EntityBuilder:withId(id)$/;"	f
 EntityBuilder:withNewId	systems/EntityBuilder.lua	/^function EntityBuilder:withNewId()$/;"	f
+Experience:initialize	components/experience.lua	/^function Experience:initialize(experienceMult, experienceOffset)$/;"	f
+ExperienceSystem:getXp	systems/experienceSystem.lua	/^function ExperienceSystem:getXp(id)$/;"	f
+ExperienceSystem:init	systems/experienceSystem.lua	/^function ExperienceSystem:init(referenceSystem, entities)$/;"	f
+ExperienceSystem:update	systems/experienceSystem.lua	/^function ExperienceSystem:update(dt)$/;"	f
 FireParticleSystem:draw	particles/fireParticleSystem.lua	/^function FireParticleSystem:draw(x, y, angle)$/;"	f
 FireParticleSystem:reduce	particles/fireParticleSystem.lua	/^function FireParticleSystem:reduce(deathTime, deathSeconds)$/;"	f
 FireParticleSystem:update	particles/fireParticleSystem.lua	/^function FireParticleSystem:update(dt, vX, vY, color)$/;"	f
@@ -100,11 +104,30 @@ Gestures:update	gestures.lua	/^function Gestures:update(dt)$/;"	f
 GetParents	lib/LoveFrames/objects/base.lua	/^	local function GetParents(object, t)$/;"	f
 Graphics:draw	menus/graphics.lua	/^function Graphics:draw()$/;"	f
 Graphics:keypressed	menus/graphics.lua	/^function Graphics:keypressed(key)$/;"	f
+Health:initialize	components/Health.lua	/^function Health:initialize(initHealth, healthMult)$/;"	f
+Health:initialize	components/health.lua	/^function Health:initialize(inithealth, healthMult)$/;"	f
+HealthSystem:getHealth	systems/healthSystem.lua	/^function HealthSystem:getHealth(id)$/;"	f
+HealthSystem:getHealthPercent	systems/healthSystem.lua	/^function HealthSystem:getHealthPercent(id)$/;"	f
+HealthSystem:init	systems/healthSystem.lua	/^function HealthSystem:init(referenceSystem, entities)$/;"	f
+HealthSystem:update	systems/healthSystem.lua	/^function HealthSystem:update(dt)$/;"	f
 HuffmanTable	lib/AdvTiledLoader/external/deflatelua.lua	/^local function HuffmanTable(init, is_full)$/;"	f
 I18NSPHINXOPTS	lib/luafun/doc/Makefile	/^I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .$/;"	m
 I18NSPHINXOPTS	lib/luafun/doc/make.bat	/^	set I18NSPHINXOPTS=-D latex_paper_size=%PAPER% %I18NSPHINXOPTS%$/;"	v
 I18NSPHINXOPTS	lib/luafun/doc/make.bat	/^set I18NSPHINXOPTS=%SPHINXOPTS% .$/;"	v
+Input:initialize	components/Input.lua	/^function Input:initialize(canAdministrate, canCast)$/;"	f
+InputSystem:init	systems/inputSystem.lua	/^function InputSystem:init(referenceSystem, entities)$/;"	f
+InputSystem:keyPressed	systems/inputSystem.lua	/^function InputSystem:keyPressed(key)$/;"	f
+InputSystem:keyReleased	systems/inputSystem.lua	/^function InputSystem:keyReleased(key)$/;"	f
+InputSystem:syncAllWithKeys	systems/inputSystem.lua	/^function InputSystem:syncAllWithKeys()$/;"	f
+InputSystem:syncWithKeys	systems/inputSystem.lua	/^function InputSystem:syncWithKeys(c)$/;"	f
+InputSystem:update	systems/inputSystem.lua	/^function InputSystem:update(dt)$/;"	f
 IsChild	lib/LoveFrames/objects/base.lua	/^	local function IsChild(object)$/;"	f
+JointSystem:init	systems/jointSystem.lua	/^function JointSystem:init(entities)$/;"	f
+JointSystem:update	systems/jointSystem.lua	/^function JointSystem:update(dt)$/;"	f
+Lifetime:initialize	components/lifetime.lua	/^function Lifetime:initialize(lifetime)$/;"	f
+LifetimeSystem:getLifetime	systems/lifetimeSystem.lua	/^function LifetimeSystem:getLifetime(id)$/;"	f
+LifetimeSystem:init	systems/lifetimeSystem.lua	/^function LifetimeSystem:init(referenceSystem, entitySystem)$/;"	f
+LifetimeSystem:update	systems/lifetimeSystem.lua	/^function LifetimeSystem:update(dt)$/;"	f
 Loader._checkName	lib/AdvTiledLoader/Loader.lua	/^function Loader._checkName(t, str)$/;"	f
 Loader._checkXML	lib/AdvTiledLoader/Loader.lua	/^function Loader._checkXML(t)$/;"	f
 Loader._newImage	lib/AdvTiledLoader/Loader.lua	/^function Loader._newImage(info)$/;"	f
@@ -120,6 +143,13 @@ M.register_class	lib/Lady/lady.lua	/^function M.register_class(c, name)$/;"	f
 M.register_resource	lib/Lady/lady.lua	/^function M.register_resource(r, name)$/;"	f
 M.register_resource_table	lib/Lady/lady.lua	/^function M.register_resource_table(rt, tname)$/;"	f
 M.save_all	lib/Lady/lady.lua	/^function M.save_all(savename, ...)$/;"	f
+Mana:initialize	components/Mana.lua	/^function Mana:initialize(initMana, manaMult)$/;"	f
+Mana:initialize	components/mana.lua	/^function Mana:initialize(initMana, manaMult)$/;"	f
+ManaSystem:deduct	systems/manaSystem.lua	/^function ManaSystem:deduct(id, amount)$/;"	f
+ManaSystem:getMana	systems/manaSystem.lua	/^function ManaSystem:getMana(id)$/;"	f
+ManaSystem:getManaPercent	systems/manaSystem.lua	/^function ManaSystem:getManaPercent(id)$/;"	f
+ManaSystem:init	systems/manaSystem.lua	/^function ManaSystem:init(referenceSystem, entities)$/;"	f
+ManaSystem:update	systems/manaSystem.lua	/^function ManaSystem:update(dt)$/;"	f
 Map:_updateTileRange	lib/AdvTiledLoader/Map.lua	/^function Map:_updateTileRange()$/;"	f
 Map:addToWorld	lib/AdvTiledLoader/Map.lua	/^function Map:addToWorld(objectFactory)$/;"	f
 Map:autoDrawRange	lib/AdvTiledLoader/Map.lua	/^function Map:autoDrawRange(tx, ty, scale, pad)$/;"	f
@@ -237,6 +267,9 @@ ProFi:writeMemoryReportsToFile	lib/ProFi.lua	/^function ProFi:writeMemoryReports
 ProFi:writeProfilingReportsToFile	lib/ProFi.lua	/^function ProFi:writeProfilingReportsToFile( reports, file )$/;"	f
 ProFi:writeReport	lib/ProFi.lua	/^function ProFi:writeReport( filename )$/;"	f
 ProFi:writeReportsToFilename	lib/ProFi.lua	/^function ProFi:writeReportsToFilename( filename )$/;"	f
+ReferenceSystem:getParent	systems/referenceSystem.lua	/^function ReferenceSystem:getParent(id)$/;"	f
+ReferenceSystem:init	systems/referenceSystem.lua	/^function ReferenceSystem:init(entities)$/;"	f
+Referencer:initialize	components/referencer.lua	/^function Referencer:initialize(parentId)$/;"	f
 Resolution:draw	menus/resolution.lua	/^function Resolution:draw()$/;"	f
 Resolution:keypressed	menus/resolution.lua	/^function Resolution:keypressed(key)$/;"	f
 Resolution:setResolution	menus/resolution.lua	/^function Resolution:setResolution(stringRepresentation)$/;"	f
@@ -273,10 +306,15 @@ Spell:addComponentTable	Spell.lua	/^function Spell:addComponentTable(compTable)$
 Spell:addComponentToEntity	Spell.lua	/^function Spell:addComponentToEntity(component, previewId)$/;"	f
 Spell:cast	Spell.lua	/^function Spell:cast(casterId)$/;"	f
 Spell:delete	Spell.lua	/^function Spell:delete(id)$/;"	f
-Spell:initialize	Spell.lua	/^function Spell:initialize(serializedSpell)$/;"	f
+Spell:initialize	Spell.lua	/^function Spell:initialize(entityBuilder, serializedSpell)$/;"	f
 Spell:preview	Spell.lua	/^function Spell:preview()$/;"	f
-SpellBook.create	components/SpellBook.lua	/^function SpellBook.create(id, ...)$/;"	f
-SpellBook:initialize	components/SpellBook.lua	/^function SpellBook:initialize(serializedSpellBook)$/;"	f
+SpellBook:initialize	components/SpellBook.lua	/^function SpellBook:initialize(serializedSpellBook, builder)$/;"	f
+SpellBookSystem:cast	systems/spellBookSystem.lua	/^function SpellBookSystem:cast(id, index)$/;"	f
+SpellBookSystem:deleteFromCurrent	systems/spellBookSystem.lua	/^function SpellBookSystem:deleteFromCurrent(id, deleteId)$/;"	f
+SpellBookSystem:draw	systems/spellBookSystem.lua	/^function SpellBookSystem:draw(id)$/;"	f
+SpellBookSystem:inc	systems/spellBookSystem.lua	/^function SpellBookSystem:inc(id, amount)$/;"	f
+SpellBookSystem:init	systems/spellBookSystem.lua	/^function SpellBookSystem:init(referenceSystem, entities)$/;"	f
+SpellBookSystem:preview	systems/spellBookSystem.lua	/^function SpellBookSystem:preview(id)$/;"	f
 StatBar:initialize	components/StatBar.lua	/^function StatBar:initialize(topPercent, heightPercent, color, getPercent)$/;"	f
 State:draw	state.lua	/^function State:draw()$/;"	f
 State:keypressed	state.lua	/^function State:keypressed(key)$/;"	f
@@ -309,6 +347,16 @@ TileSet:tilesHigh	lib/AdvTiledLoader/TileSet.lua	/^function TileSet:tilesHigh()$
 TileSet:tilesWide	lib/AdvTiledLoader/TileSet.lua	/^function TileSet:tilesWide()$/;"	f
 Tserial.pack	lib/TLTools/Tserial.lua	/^function Tserial.pack(t, drop, indent)$/;"	f
 Tserial.unpack	lib/TLTools/Tserial.lua	/^function Tserial.unpack(s, safe)$/;"	f
+Walker:initialize	components/walker.lua	/^function Walker:initialize(force, targetVeloc)$/;"	f
+WalkingSystem:getDirection	systems/walkingSystem.lua	/^function WalkingSystem:getDirection(id)$/;"	f
+WalkingSystem:init	systems/walkingSystem.lua	/^function WalkingSystem:init(referenceSystem, entities)$/;"	f
+WalkingSystem:startWalkingLeft	systems/walkingSystem.lua	/^function WalkingSystem:startWalkingLeft(id)$/;"	f
+WalkingSystem:startWalkingRight	systems/walkingSystem.lua	/^function WalkingSystem:startWalkingRight(id)$/;"	f
+WalkingSystem:stopWalkingLeft	systems/walkingSystem.lua	/^function WalkingSystem:stopWalkingLeft(id) $/;"	f
+WalkingSystem:stopWalkingRight	systems/walkingSystem.lua	/^function WalkingSystem:stopWalkingRight(id)$/;"	f
+WalkingSystem:update	systems/walkingSystem.lua	/^function WalkingSystem:update(dt)$/;"	f
+Welder:initialize	components/Welder.lua	/^function Welder:initialize(id1, id2, point, shouldCollide)$/;"	f
+Welder:initialize	components/welder.lua	/^function Welder:initialize(id1, id2, point, shouldCollide)$/;"	f
 ["back to main menu"] 	main.lua	/^    ["back to main menu"] = function()$/;"	f
 ["continue"] 	main.lua	/^    ["continue"] = function()$/;"	f
 ["controlSet"] 	main.lua	/^    ["controlSet"] = function(...)$/;"	f
@@ -347,7 +395,6 @@ _setClassMetatable	lib/LoveFrames/third-party/middleclass.lua	/^local function _
 _setClassMetatable	lib/middleclass.lua	/^local function _setClassMetatable(aClass)$/;"	f
 _setDefaultInitializeMethod	lib/LoveFrames/third-party/middleclass.lua	/^local function _setDefaultInitializeMethod(aClass, super)$/;"	f
 _setDefaultInitializeMethod	lib/middleclass.lua	/^local function _setDefaultInitializeMethod(aClass, super)$/;"	f
-_setRecursive	utils.lua	/^    local function _setRecursive(object)$/;"	f
 _setRecursive	utils.lua	/^    local function _setRecursive(object, fieldName, newValue)$/;"	f
 aClass.initialize 	lib/LoveFrames/third-party/middleclass.lua	/^  aClass.initialize = function(instance, ...)$/;"	f
 aClass.initialize 	lib/middleclass.lua	/^  aClass.initialize = function(instance, ...)$/;"	f
@@ -399,9 +446,6 @@ c:addToSystems	components/body.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/collider.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/fixture.lua	/^    function c:addToSystems(id, bodyId)$/;"	f
 c:addToSystems	components/meshRenderer.lua	/^    function c:addToSystems(id)$/;"	f
-c:addToSystems	components/referencer.lua	/^    function c:addToSystems(id)$/;"	f
-c:addToSystems	components/walker.lua	/^    function c:addToSystems(id)$/;"	f
-c:addToSystems	components/welder.lua	/^    function c:addToSystems(id)$/;"	f
 call	lib/AdvTiledLoader/external/gunziplua.lua	/^local function call(...)$/;"	f
 ccw	geometry/Point.lua	/^function ccw(p1, p2, p3)$/;"	f
 centralize	systems/physicsSystem.lua	/^local function centralize(points, c)$/;"	f
@@ -497,9 +541,6 @@ entitySystem:update	systems/entitySystem.lua	/^function entitySystem:update(dt)$
 eq  	lib/luafun/fun.lua	/^    eq  = function(a, b) return a == b end,$/;"	f
 equals 	geometry/Point.lua	/^equals = function(p0, p1)$/;"	f
 exclude_patterns	lib/luafun/doc/conf.py	/^exclude_patterns = ['_build']$/;"	v
-experience.create	components/experience.lua	/^function experience.create(id, experienceMult, experienceOffset)$/;"	f
-experienceSystem:getXp	systems/experienceSystem.lua	/^function experienceSystem:getXp(id)$/;"	f
-experienceSystem:update	systems/experienceSystem.lua	/^function experienceSystem:update(dt)$/;"	f
 extensions	lib/luafun/doc/conf.py	/^extensions = [ "redjack.sphinx.lua" ]$/;"	v
 f	lib/AdvTiledLoader/external/deflatelua.lua	/^  local function f()$/;"	f
 file_exists	lib/AdvTiledLoader/external/gunziplua.lua	/^local function file_exists(filename)$/;"	f
@@ -548,10 +589,6 @@ greater	utils.lua	/^function greater(a, b)$/;"	f
 gt  	lib/luafun/fun.lua	/^    gt  = function(a, b) return a > b end,$/;"	f
 gunzip	lib/AdvTiledLoader/external/deflatelua.lua	/^local function gunzip(t)$/;"	f
 hasbit	lib/AdvTiledLoader/external/deflatelua.lua	/^local function hasbit(bits, bit)$/;"	f
-health.create	components/health.lua	/^function health.create(id, inithealth, healthMult)$/;"	f
-healthSystem:getHealth	systems/healthSystem.lua	/^function healthSystem:getHealth(id)$/;"	f
-healthSystem:getHealthPercent	systems/healthSystem.lua	/^function healthSystem:getHealthPercent(id)$/;"	f
-healthSystem:update	systems/healthSystem.lua	/^function healthSystem:update(dt)$/;"	f
 html_logo	lib/luafun/doc/conf.py	/^html_logo = "logo.png"$/;"	v
 html_static_path	lib/luafun/doc/conf.py	/^html_static_path = ['_static']$/;"	v
 html_theme	lib/luafun/doc/conf.py	/^html_theme = 'haiku'$/;"	v
@@ -580,19 +617,12 @@ input.OnTextChanged 	lib/LoveFrames/objects/numberbox.lua	/^	input.OnTextChanged
 input.Update 	lib/LoveFrames/objects/numberbox.lua	/^	input.Update = function(object)$/;"	f
 input.create	components/input.lua	/^function input.create(id, ...)$/;"	f
 input.prototype	components/input.lua	/^function input.prototype(canAdministrate, canCast)$/;"	f
-inputSystem:keyPressed	systems/inputSystem.lua	/^function inputSystem:keyPressed(key)$/;"	f
-inputSystem:keyReleased	systems/inputSystem.lua	/^function inputSystem:keyReleased(key)$/;"	f
-inputSystem:syncAllWithKeys	systems/inputSystem.lua	/^function inputSystem:syncAllWithKeys()$/;"	f
-inputSystem:syncWithKeys	systems/inputSystem.lua	/^function inputSystem:syncWithKeys(c)$/;"	f
 intdiv 	lib/luafun/fun.lua	/^    intdiv = function(a, b)$/;"	f
 interceptor:__newindex	class.lua	/^		function interceptor:__newindex(key, value)$/;"	f
 isCloserPointToContact	systems/physicsSystem.lua	/^    local function isCloserPointToContact(point1, point2)$/;"	f
 isCloserPointToSeg	systems/physicsSystem.lua	/^    local function isCloserPointToSeg(point1, point2)$/;"	f
 isNewEntityMaker	gestures.lua	/^local function isNewEntityMaker(rune)$/;"	f
 is_cyclic	lib/Lady/lady.lua	/^local function is_cyclic(memo, sub, super)$/;"	f
-jointSystem:add	systems/jointSystem.lua	/^function jointSystem:add(comp)$/;"	f
-jointSystem:init	systems/jointSystem.lua	/^function jointSystem:init()$/;"	f
-jointSystem:update	systems/jointSystem.lua	/^function jointSystem:update(dt)$/;"	f
 land 	lib/luafun/fun.lua	/^    land = function(a, b) return a and b end,$/;"	f
 latex_elements	lib/luafun/doc/conf.py	/^latex_elements = {$/;"	v
 le  	lib/luafun/fun.lua	/^    le  = function(a, b) return a <= b end,$/;"	f
@@ -601,10 +631,6 @@ leftbutton.Update 	lib/LoveFrames/objects/tabs.lua	/^	leftbutton.Update = functi
 len 	lib/luafun/fun.lua	/^    len = function(a) return #a end,$/;"	f
 length 	lib/luafun/fun.lua	/^    length = function(a) return #a end, -- an alias$/;"	f
 less	utils.lua	/^function less(a, b)$/;"	f
-lifetime.create	components/lifetime.lua	/^function lifetime.create(id, lifetime)$/;"	f
-lifetimeSystem:getLifetime	systems/lifetimeSystem.lua	/^function lifetimeSystem:getLifetime(id)$/;"	f
-lifetimeSystem:init	systems/lifetimeSystem.lua	/^function lifetimeSystem:init(entitySys)$/;"	f
-lifetimeSystem:update	systems/lifetimeSystem.lua	/^function lifetimeSystem:update(dt)$/;"	f
 limit	utils.lua	/^function limit(x, little, big)$/;"	f
 lnot 	lib/luafun/fun.lua	/^    lnot = function(a) return not a end,$/;"	f
 loader:pack	loader.lua	/^function loader:pack(table)$/;"	f
@@ -782,11 +808,6 @@ make_bitop_uncached	lib/AdvTiledLoader/external/numberlua.lua	/^local function m
 make_outstate	lib/AdvTiledLoader/external/deflatelua.lua	/^local function make_outstate(outbs)$/;"	f
 make_safe	lib/Lady/lady.lua	/^local function make_safe(text)$/;"	f
 man_pages	lib/luafun/doc/conf.py	/^man_pages = [$/;"	v
-mana.create	components/mana.lua	/^function mana.create(id, initMana, manaMult)$/;"	f
-manaSystem:deduct	systems/manaSystem.lua	/^function manaSystem:deduct(id, amount)$/;"	f
-manaSystem:getMana	systems/manaSystem.lua	/^function manaSystem:getMana(id)$/;"	f
-manaSystem:getManaPercent	systems/manaSystem.lua	/^function manaSystem:getManaPercent(id)$/;"	f
-manaSystem:update	systems/manaSystem.lua	/^function manaSystem:update(dt)$/;"	f
 master_doc	lib/luafun/doc/conf.py	/^master_doc = 'index'$/;"	v
 max_cmp	lib/luafun/tests/reducing.lua	/^function max_cmp(a, b) if -a > -b then return a else return b end end$/;"	f
 memoize	lib/AdvTiledLoader/external/crc32lua.lua	/^local function memoize(f)$/;"	f
@@ -1548,9 +1569,6 @@ process	lib/luafun/tests/runtest	/^function process(test_name)$/;"	f
 project	lib/luafun/doc/conf.py	/^project = u'Lua Functional'$/;"	v
 pushBase64	lib/AdvTiledLoader/base64.lua	/^local function pushBase64(n)$/;"	f
 pygments_style	lib/luafun/doc/conf.py	/^pygments_style = 'sphinx'$/;"	v
-referenceSystem:getParent	systems/referenceSystem.lua	/^function referenceSystem:getParent(id)$/;"	f
-referencer.create	components/referencer.lua	/^function referencer.create(id, ...)$/;"	f
-referencer.prototype	components/referencer.lua	/^function referencer.prototype(parentId)$/;"	f
 release	lib/luafun/doc/conf.py	/^release = '0.1-alpha'$/;"	v
 removeRedundantPoints	geometry/Point.lua	/^function removeRedundantPoints(points)$/;"	f
 returnToSettings	menus/controls.lua	/^local function returnToSettings()$/;"	f
@@ -1627,11 +1645,6 @@ soundSystem:stopMusic	systems/soundSystem.lua	/^function soundSystem:stopMusic()
 soundSystem:update	systems/soundSystem.lua	/^function soundSystem:update(dt)$/;"	f
 source_suffix	lib/luafun/doc/conf.py	/^source_suffix = '.rst'$/;"	v
 spellBook.create	components/spellBook.lua	/^function spellBook.create(id, serializedSpellBook)$/;"	f
-spellBookSystem:cast	systems/spellBookSystem.lua	/^function spellBookSystem:cast(id, index)$/;"	f
-spellBookSystem:deleteFromCurrent	systems/spellBookSystem.lua	/^function spellBookSystem:deleteFromCurrent(id, deleteId)$/;"	f
-spellBookSystem:draw	systems/spellBookSystem.lua	/^function spellBookSystem:draw(id)$/;"	f
-spellBookSystem:inc	systems/spellBookSystem.lua	/^function spellBookSystem:inc(id, amount)$/;"	f
-spellBookSystem:preview	systems/spellBookSystem.lua	/^function spellBookSystem:preview(id)$/;"	f
 statBar.create	components/statBar.lua	/^function statBar.create(id, topPercent, heightPercent, color, getPercent)$/;"	f
 stencilfunc 	lib/LoveFrames/objects/internal/linenumberspanel.lua	/^		stencilfunc = function() love.graphics.rectangle("fill", self.parent.x, self.parent.y, self.width, self.parent.height - 16) end$/;"	f
 stencilfunc 	lib/LoveFrames/objects/textinput.lua	/^		stencilfunc = function() love.graphics.rectangle("fill", x, y, width - 16, height - 16) end$/;"	f
@@ -1690,24 +1703,13 @@ userdata_constructor:World	lib/Lady/lady.lua	/^function userdata_constructor:Wor
 utils.objectDeepcopyWithoutMetatable	utils.lua	/^function utils.objectDeepcopyWithoutMetatable(object)$/;"	f
 utils.requireAll	utils.lua	/^function utils.requireAll(folder)$/;"	f
 utils.setFieldRecursive	utils.lua	/^function utils.setFieldRecursive(object, fieldName, newValue)$/;"	f
-utils.setSystemsRecursive	utils.lua	/^function utils.setSystemsRecursive(object)$/;"	f
 utils.tableCompareNoField	utils.lua	/^function utils.tableCompareNoField(table, compare)$/;"	f
 validTile	lib/AdvTiledLoader/TileLayer.lua	/^local function validTile(tile)$/;"	f
 valid_classname	lib/Lady/lady.lua	/^local function valid_classname(s)$/;"	f
 valid_identifier	lib/Lady/lady.lua	/^local function valid_identifier(s)$/;"	f
 version	lib/luafun/doc/conf.py	/^version = '0.1'$/;"	v
 walker 	systems/runeSystem.lua	/^        walker = function(spellBook, previewId)$/;"	f
-walker.create	components/walker.lua	/^function walker.create(id, ...)$/;"	f
-walker.prototype	components/walker.lua	/^function walker.prototype(force, targetVeloc)$/;"	f
-walkingSystem:getDirection	systems/walkingSystem.lua	/^function walkingSystem:getDirection(id)$/;"	f
-walkingSystem:startWalkingLeft	systems/walkingSystem.lua	/^function walkingSystem:startWalkingLeft(id)$/;"	f
-walkingSystem:startWalkingRight	systems/walkingSystem.lua	/^function walkingSystem:startWalkingRight(id)$/;"	f
-walkingSystem:stopWalkingLeft	systems/walkingSystem.lua	/^function walkingSystem:stopWalkingLeft(id) $/;"	f
-walkingSystem:stopWalkingRight	systems/walkingSystem.lua	/^function walkingSystem:stopWalkingRight(id)$/;"	f
-walkingSystem:update	systems/walkingSystem.lua	/^function walkingSystem:update(dt)$/;"	f
 warn	lib/AdvTiledLoader/external/deflatelua.lua	/^local function warn(s)$/;"	f
-welder.create	components/welder.lua	/^function welder.create(id, ...)$/;"	f
-welder.prototype	components/welder.lua	/^function welder.prototype(id1, id2, point, shouldCollide)$/;"	f
 within	utils.lua	/^function within(x, x1, x2)$/;"	f
 wrappedInc	utils.lua	/^function wrappedInc(obj, amount)$/;"	f
 wrappedIndex	systems/physicsSystem.lua	/^local function wrappedIndex(length, index)$/;"	f

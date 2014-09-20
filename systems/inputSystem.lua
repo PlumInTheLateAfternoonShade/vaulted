@@ -2,13 +2,28 @@ local keys = require 'keys'
 local walkingSystem = require 'systems.walkingSystem'
 local spellBookSystem = require 'systems.spellBookSystem'
 local soundSystem = require 'systems.soundSystem'
+local Input = require('components.Input')
+local ComponentSystem = require('systems.ComponentSystem')
 
--- Handles input components.
-local inputSystem = {}
+-- Handles position components.
+local InputSystem = require('lib.middleclass')(
+    'InputSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(inputSystem)
+function InputSystem:init(referenceSystem, entities)
+    self.components = entities[Input]
+    ComponentSystem.init(self, referenceSystem)
+end
 
-function inputSystem:keyPressed(key)
+function InputSystem:update(dt)
+    for id, comp in pairs(self.components) do
+        if comp.firstUpdate then
+            self:syncWithKeys(comp)
+            comp.firstUpdate = false
+        end
+    end
+end
+
+function InputSystem:keyPressed(key)
     for id, comp in pairs(self.components) do
         if comp.keyPresses[key] then
             comp.keyPresses[key]()
@@ -16,7 +31,7 @@ function inputSystem:keyPressed(key)
     end
 end
 
-function inputSystem:keyReleased(key)
+function InputSystem:keyReleased(key)
     for id, comp in pairs(self.components) do
         if comp.keyReleases[key] then
             comp.keyReleases[key]()
@@ -24,7 +39,7 @@ function inputSystem:keyReleased(key)
     end
 end
 
-function inputSystem:syncWithKeys(c)
+function InputSystem:syncWithKeys(c)
     c.keyPresses = 
     {
         [keys.right] = function () return walkingSystem:startWalkingRight(c.id) end,
@@ -50,11 +65,11 @@ function inputSystem:syncWithKeys(c)
     return c
 end
 
-function inputSystem:syncAllWithKeys()
+function InputSystem:syncAllWithKeys()
     if not self.components then return end
     for id, comp in pairs(self.components) do
         self.components[id] = self:syncWithKeys(comp)
     end
 end
 
-return inputSystem
+return InputSystem:new()

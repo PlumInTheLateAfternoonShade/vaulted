@@ -1,9 +1,15 @@
 local positionSystem = require 'systems.positionSystem'
+local Experience = require('components.Experience')
+local ComponentSystem = require('systems.ComponentSystem')
 
--- Handles experience components.
-local experienceSystem = {}
+-- Handles position components.
+local ExperienceSystem = require('lib.middleclass')(
+    'ExperienceSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(experienceSystem)
+function ExperienceSystem:init(referenceSystem, entities)
+    self.components = entities[Experience]
+    ComponentSystem.init(self, referenceSystem)
+end
 
 local function updateExperience(id, comp, dt)
     --XP is simply the farthest an actor has gone in the world.
@@ -11,12 +17,13 @@ local function updateExperience(id, comp, dt)
     comp.xp = comp.farthestX / conf.worldXEnd * comp.xpMult + comp.xpOffset
 end
 
-function experienceSystem:update(dt)
+function ExperienceSystem:update(dt)
     for id, comp in pairs(self.components) do updateExperience(id, comp, dt) end
 end
 
-function experienceSystem:getXp(id)
+function ExperienceSystem:getXp(id)
     return self.components[id].xp
 end
 
-return experienceSystem
+local experienceSystemInstance = ExperienceSystem:new()
+return experienceSystemInstance

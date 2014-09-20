@@ -1,32 +1,38 @@
 local experienceSystem = require 'systems.experienceSystem'
+local Mana = require('components.Mana')
+local ComponentSystem = require('systems.ComponentSystem')
 
 -- Handles mana components.
-local manaSystem = {}
+local ManaSystem = require('lib.middleclass')(
+    'ManaSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(manaSystem)
+function ManaSystem:init(referenceSystem, entities)
+    self.components = entities[Mana]
+    ComponentSystem.init(self, referenceSystem)
+end
 
 local function updateMana(id, comp, dt)
     local xp = experienceSystem:getXp(id)
     comp.mana = math.min(comp.mana + xp/20*comp.manaMult*dt, xp*comp.manaMult)
 end
 
-function manaSystem:update(dt)
+function ManaSystem:update(dt)
     for id, comp in pairs(self.components) do updateMana(id, comp, dt) end
 end
 
-function manaSystem:deduct(id, amount)
+function ManaSystem:deduct(id, amount)
     local comp = self.components[id]
     if comp.mana < amount then return false end
     comp.mana = math.max(0, comp.mana - amount)
     return true
 end
 
-function manaSystem:getMana(id)
+function ManaSystem:getMana(id)
     return self.components[id].mana
 end
 
-function manaSystem:getManaPercent(id)
+function ManaSystem:getManaPercent(id)
     return self:getMana(id) / experienceSystem:getXp(id)
 end
 
-return manaSystem
+return ManaSystem:new()

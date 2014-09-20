@@ -7,14 +7,6 @@ local MeshRenderer = require('components.MeshRenderer')
 local Position = require('components.Position')
 local element = require('components.element')
 local Temperature = require('components.Temperature')
-local mana = require('components.mana')
-local health = require('components.health')
-local experience = require('components.experience')
-local walker = require('components.walker')
-local input = require('components.input')
-local SpellBook = require('components.SpellBook')
-local welder = require('components.welder')
-local referencer = require('components.referencer')
 local Point = require('geometry.Point')
 local builder
 
@@ -99,13 +91,13 @@ local playerFriction = 0.5
 
 local function createBipedalLeg(parentId, weldPoint, center, legRadius)
     local legId = builder:withNewId().inUseId
-    referencer.create(legId, parentId)
-    builder:Position({}, center, 'circle', legRadius)
+    builder:Referencer(parentId)
+    :Position({}, center, 'circle', legRadius)
     :Collider(playerFriction, 'dynamic', false, nil, nil, true)
     :ShapeRenderer({r=math.random()*255, g=255, b=255})
-    local weldId = entitySystem:register()
-    welder.create(weldId, parentId, legId, weldPoint)
-    builder:finalize()
+    :withNewId()
+    :Welder(parentId, legId, weldPoint)
+    :finalize()
 end
 
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
@@ -120,13 +112,12 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
         nil, --density
         true) --shouldBalance
     :ShapeRenderer({r=255, g=255, b=255})
-        
-    walker.create(id, 250, 400)
-    input.create(id)
-    experience.create(id)
-    mana.create(id)
-    health.create(id)
-    SpellBook.create(id, serializedSpellBook)
+    :SpellBook(builder, serializedSpellBook)
+    :Walker(250, 400)
+    :Input()
+    :Experience()
+    :Mana()
+    :Health()
     local playerLegOffsetLeft = serializedPosition.center + Point(-conf.tileSize, conf.tileSize)
     local playerLegOffsetRight = serializedPosition.center + Point(conf.tileSize, conf.tileSize)
     createBipedalLeg(id, playerLegOffsetLeft, playerLegOffsetLeft, 15)
@@ -140,9 +131,9 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
 end
 
 function objectFactory.createWelder(id1, id2, point, shouldCollide)
-    local weldId = entitySystem:register()
-    welder.create(weldId, id1, id2, point, shouldCollide)
-    return weldId
+    return builder:withNewId()
+    :Welder(id1, id2, point, shouldCollide)
+    .inUseId
 end
 
 return objectFactory

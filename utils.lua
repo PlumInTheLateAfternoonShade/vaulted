@@ -62,26 +62,6 @@ function utils.setFieldRecursive(object, fieldName, newValue)
     _setRecursive(object, fieldName, newValue)
 end
 
-function utils.setSystemsRecursive(object)
-    local lookup_table = {}
-    local function _setRecursive(object)
-        for index, val in pairs(object) do
-            if index == 'systems' then
-                for index, val in pairs(object) do
-                    print("i: "..tostring(index).." v: "..tostring(val))
-                end
-                object.systems = object.class.static.systems
-            elseif type(val) == "table" and index ~= "class" then
-                if not lookup_table[val] then
-                    lookup_table[val] = true
-                    _setRecursive(val)
-                end
-            end
-        end
-    end
-    _setRecursive(object)
-end
-
 -- Stashes all lua files from a folder by key in a table with the value
 -- an empty table.
 function utils.requireAll(folder)

@@ -1,8 +1,6 @@
 local utils = require 'utils'
-local entitySystem = require 'systems.entitySystem'
 local positionSystem = require 'systems.positionSystem'
 local walkingSystem = require 'systems.walkingSystem'
-local inputSystem = require 'systems.inputSystem'
 local Point = require 'geometry.Point'
 local builder
 
@@ -18,10 +16,10 @@ end
 -- When cast, it copys and adds each component to the appropriate systems.
 local Spell = require 'lib.middleclass'('Spell')
  
-function Spell:initialize(serializedSpell)
+function Spell:initialize(entityBuilder, serializedSpell)
     print("initialized. serializedSpell: "..tostring(serializedSpell))
     self.power = 0.1
-    builder = entitySystem.builder
+    builder = entityBuilder
     self.componentTables = constructComponentTables(serializedSpell)
 end
 
@@ -73,18 +71,17 @@ function Spell:cast(casterId)
             builder:add(comp)
         end
     end
-    inputSystem:syncAllWithKeys()
     print("spell pos: "..tostring(positionSystem.components[168]))
 end
 
 function Spell:preview()
     for i = 1, #self.componentTables do
-        local id = entitySystem:register()
+        builder:withNewId()
         self.componentTables[i].previewId = id
         for j = 1, #self.componentTables[i] do
             local component = self.componentTables[i][j]
             if component.shouldPreview then
-                builder:withId(id):add(component)
+                builder:add(component)
             end
         end
     end

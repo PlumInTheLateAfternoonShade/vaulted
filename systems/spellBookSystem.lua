@@ -1,33 +1,39 @@
 local keys =  require 'keys'
 local manaSystem = require 'systems.manaSystem'
+local SpellBook = require('components.SpellBook')
+local ComponentSystem = require('systems.ComponentSystem')
 
--- Handles spellBook components.
-local spellBookSystem = {}
+-- Handles joint components.
+local SpellBookSystem = require('lib.middleclass')(
+    'SpellBookSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(spellBookSystem)
+function SpellBookSystem:init(referenceSystem, entities)
+    self.components = entities[SpellBook]
+    ComponentSystem.init(self, referenceSystem)
+end
 
-function spellBookSystem:cast(id, index)
+function SpellBookSystem:cast(id, index)
     if manaSystem:deduct(id, self.components[id][index].power) then
         return self.components[id][index]:cast(id)
     end
 end
 
-function spellBookSystem:inc(id, amount)
+function SpellBookSystem:inc(id, amount)
     amount = amount or 1
     wrappedInc(self.components[id], amount)
 end
 
-function spellBookSystem:deleteFromCurrent(id, deleteId)
+function SpellBookSystem:deleteFromCurrent(id, deleteId)
     local comp = self.components[id]
     comp[comp.i]:delete(deleteId)
 end
 
-function spellBookSystem:preview(id)
+function SpellBookSystem:preview(id)
     local comp = self.components[id]
     comp[comp.i]:preview()
 end
 
-function spellBookSystem:draw(id)
+function SpellBookSystem:draw(id)
     -- Draws the spellbook UI.
     local left, top, width, height = 0, 0, conf.screenWidth, conf.screenHeight * 0.1
     local comp = self.components[id]
@@ -49,4 +55,4 @@ function spellBookSystem:draw(id)
     end
 end
 
-return spellBookSystem
+return SpellBookSystem:new()

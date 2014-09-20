@@ -1,13 +1,18 @@
 -- Handles lifetime components.
-local lifetimeSystem = {}
+local Lifetime = require('components.Lifetime')
+local ComponentSystem = require('systems.ComponentSystem')
 
-require('systems.componentSystem'):inherit(lifetimeSystem)
+-- Handles joint components.
+local LifetimeSystem = require('lib.middleclass')(
+    'LifetimeSystem', ComponentSystem)
 
-function lifetimeSystem:init(entitySys)
-    self.entitySystem = entitySys
+function LifetimeSystem:init(referenceSystem, entitySystem)
+    self.entitySystem = entitySystem
+    self.components = entitySystem.entities[Lifetime]
+    ComponentSystem.init(self, referenceSystem)
 end
 
-function lifetimeSystem:update(dt)
+function LifetimeSystem:update(dt)
     for id, comp in pairs(self.components) do
         comp.timeAlive = comp.timeAlive + dt
         if comp.timeAlive > comp.lifetime then
@@ -16,8 +21,9 @@ function lifetimeSystem:update(dt)
     end
 end
 
-function lifetimeSystem:getLifetime(id)
+function LifetimeSystem:getLifetime(id)
     return self.components[id].lifetime
 end
 
-return lifetimeSystem
+local lifetimeSystemInstance = LifetimeSystem:new()
+return lifetimeSystemInstance

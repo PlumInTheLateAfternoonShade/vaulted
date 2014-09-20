@@ -1,7 +1,7 @@
 local Point = require 'geometry.Point'
 local element = require 'components.element'
-local input = require 'components.input'
-local walker = require 'components.walker'
+local Input = require 'components.Input'
+local Walker = require 'components.Walker'
 
 -- Handles rune components.
 local runeSystem = {}
@@ -41,10 +41,10 @@ function runeSystem:init(objectFactory)
             return lines
         end,
         input = function(spellBook, previewId)
-            addToExisting(spellBook, input.prototype(false, false), previewId)
+            addToExisting(spellBook, Input:new(false, false), previewId)
         end,
         walker = function(spellBook, previewId)
-            addToExisting(spellBook, walker.prototype(250, 500), previewId)
+            addToExisting(spellBook, Walker:new(250, 500), previewId)
         end,
     }
 end

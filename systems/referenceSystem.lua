@@ -1,11 +1,17 @@
+local Referencer = require('components.Referencer')
+local ComponentSystem = require('systems.ComponentSystem')
+
 -- Handles reference components.
-local referenceSystem = {}
+local ReferenceSystem = require('lib.middleclass')(
+    'ReferenceSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(referenceSystem)
+function ReferenceSystem:init(entities)
+    self.components = entities[Referencer]
+end
 
-function referenceSystem:getParent(id)
+function ReferenceSystem:getParent(id)
     local comp = self:get(id)
     if comp then return comp.parentId end
 end
 
-return referenceSystem
+return ReferenceSystem:new()

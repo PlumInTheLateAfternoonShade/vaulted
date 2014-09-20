@@ -80,7 +80,6 @@ end
 
 local function initMesh(comp)
     comp.mesh = love.graphics.newMesh(getMeshVertices(comp), img.load(comp.imageName))
-    print("init mesh")
 end
 
 local function drawMesh(comp)

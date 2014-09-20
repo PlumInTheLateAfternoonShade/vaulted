@@ -1,28 +1,26 @@
 local physicsSystem = require 'systems.physicsSystem'
+local Welder = require('components.Welder')
+local ComponentSystem = require('systems.ComponentSystem')
+
 -- Handles joint components.
-local jointSystem = {}
+local JointSystem = require('lib.middleclass')(
+    'JointSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(jointSystem)
-
-function jointSystem:init()
-    self.components = {}
-    self.addQueue = {}
+function JointSystem:init(entities)
+    self.components = entities[Welder]
 end
 
-function jointSystem:add(comp)
-    self.addQueue[comp.id] = comp
-end
-
-function jointSystem:update(dt)
-    for id, comp in pairs(self.addQueue) do
-        comp.joint = love.physics.newWeldJoint(
+function JointSystem:update(dt)
+    for id, comp in pairs(self.components) do
+        if comp.firstUpdate then
+            comp.joint = love.physics.newWeldJoint(
             physicsSystem:get(comp.id1).body,
             physicsSystem:get(comp.id2).body,
             comp.point.x, comp.point.y,
             comp.shouldCollide)
-        self.components[id] = comp
+            comp.firstUpdate = false
+        end
     end
-    self.addQueue = {}
 end
 
-return jointSystem
+return JointSystem:new()
