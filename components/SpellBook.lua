@@ -4,7 +4,7 @@ local Spell = require 'Spell'
 local SpellBook = require 'lib.middleclass'('SpellBook',
                  require 'components.Component')
 
-function SpellBook:initialize(serializedSpellBook, builder)
+function SpellBook:initialize(builder, serializedSpellBook)
     self.i = 1
     if not serializedSpellBook then
         self[1] = Spell(builder)

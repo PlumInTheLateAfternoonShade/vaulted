@@ -96,8 +96,8 @@ end
 
 local function drawMeshes(meshes)
     for id, comp in pairs(meshes) do
-        if comp.needsInit then
-            comp.needsInit = false
+        if comp.firstUpdate then
+            comp.firstUpdate = false
             initMesh(comp)
         end
         drawMesh(comp)

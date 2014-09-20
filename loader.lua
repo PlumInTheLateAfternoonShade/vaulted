@@ -8,7 +8,8 @@ function loader:pack(table)
     if table == nil then
         return
     end
-    local saveName = table.name..'.sav'
+    local tableName = table.name or table.class.name
+    local saveName = tableName..'.sav'
     lady.save_all(saveName, table)
     print('Saving '..saveName..' to '..love.filesystem.getSaveDirectory()..'.')
 end

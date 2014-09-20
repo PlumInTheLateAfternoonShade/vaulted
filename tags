@@ -40,9 +40,7 @@ Camera:setScale	camera.lua	/^function Camera:setScale(sx, sy)$/;"	f
 Camera:shake	camera.lua	/^function Camera:shake(a, b, contact)$/;"	f
 Camera:unset	camera.lua	/^function Camera:unset()$/;"	f
 Collider:initialize	components/Collider.lua	/^function Collider:initialize(friction, type, breakable, initV, density,$/;"	f
-Component:addToSystems	components/Component.lua	/^function Component:addToSystems(id)$/;"	f
 Component:addToSystems	components/component.lua	/^function Component:addToSystems(id)$/;"	f
-Component:initialize	components/Component.lua	/^function Component:initialize(systems)$/;"	f
 ComponentSystem:add	systems/ComponentSystem.lua	/^function ComponentSystem:add(comp)$/;"	f
 ComponentSystem:delete	systems/ComponentSystem.lua	/^function ComponentSystem:delete(id)$/;"	f
 ComponentSystem:get	systems/ComponentSystem.lua	/^function ComponentSystem:get(id)$/;"	f
@@ -308,7 +306,7 @@ Spell:cast	Spell.lua	/^function Spell:cast(casterId)$/;"	f
 Spell:delete	Spell.lua	/^function Spell:delete(id)$/;"	f
 Spell:initialize	Spell.lua	/^function Spell:initialize(entityBuilder, serializedSpell)$/;"	f
 Spell:preview	Spell.lua	/^function Spell:preview()$/;"	f
-SpellBook:initialize	components/SpellBook.lua	/^function SpellBook:initialize(serializedSpellBook, builder)$/;"	f
+SpellBook:initialize	components/SpellBook.lua	/^function SpellBook:initialize(builder, serializedSpellBook)$/;"	f
 SpellBookSystem:cast	systems/spellBookSystem.lua	/^function SpellBookSystem:cast(id, index)$/;"	f
 SpellBookSystem:deleteFromCurrent	systems/spellBookSystem.lua	/^function SpellBookSystem:deleteFromCurrent(id, deleteId)$/;"	f
 SpellBookSystem:draw	systems/spellBookSystem.lua	/^function SpellBookSystem:draw(id)$/;"	f

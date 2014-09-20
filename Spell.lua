@@ -50,6 +50,9 @@ function Spell:cast(casterId)
             assert(self.componentTables[i][j])
             local comp = utils.objectDeepcopyWithoutMetatable(
                 self.componentTables[i][j])
+            if comp.firstUpdate == false then
+                comp.firstUpdate = true
+            end
             -- Adjust the comp's pos so it appears where the caster casts it.
             if comp.center then 
                 adjustPositionPointForCaster(comp.center, facing, casterId)
@@ -76,8 +79,7 @@ end
 
 function Spell:preview()
     for i = 1, #self.componentTables do
-        builder:withNewId()
-        self.componentTables[i].previewId = id
+        self.componentTables[i].previewId = builder:withNewId().inUseId
         for j = 1, #self.componentTables[i] do
             local component = self.componentTables[i][j]
             if component.shouldPreview then
