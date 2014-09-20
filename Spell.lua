@@ -12,7 +12,7 @@ local componentPrototypeDeserializers =
     earth = function (table) return require 'components.element'.earth end,
     ice = function (table) return require 'components.element'.ice end,
     air = function (table) return require 'components.element'.air end,
-    collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV,
+    collider = function (t) return require 'components.Collider':new(t.friction, t.type, t.breakable, t.initV,
                                                                            t.density,
                                                                            t.shouldBalance,
                                                                            t.shouldPierce,
@@ -102,11 +102,7 @@ function Spell:cast(casterId)
                 comp.casterId = casterId
             end
             print(j.." spell loop ")
-            if comp.name == 'force' then
-                builder:withId(id):add(comp)
-            else
-                comp:addToSystems(id)
-            end
+            builder:withId(id):add(comp)
             print(j.." spell loop pos: "..tostring(positionSystem:get(168)))
         end
     end
@@ -121,11 +117,7 @@ function Spell:preview()
         for j = 1, #self.componentTables[i] do
             local component = self.componentTables[i][j]
             if component.shouldPreview then
-                if component.name == 'force' then
-                    builder:withId(id):add(component)
-                else
-                    component:addToSystems(id)
-                end
+                builder:withId(id):add(component)
             end
         end
     end

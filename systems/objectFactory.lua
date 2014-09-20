@@ -1,7 +1,7 @@
 local entitySystem = require('systems.entitySystem')
 local manaSystem = require('systems.manaSystem')
 local healthSystem = require('systems.healthSystem')
-local collider = require('components.collider')
+local Collider = require('components.Collider')
 local shapeRenderer = require('components.shapeRenderer')
 local meshRenderer = require('components.meshRenderer')
 local Position = require('components.Position')
@@ -32,7 +32,7 @@ end
 function objectFactory.createTile(points, center)
     local id = builder:withNewId().inUseId
     builder:Position(points, center)
-    collider.create(id, 0.5, 'static')
+    :Collider(0.5, 'static')
     -- Draws the tile as a polygon. Uncomment for debugging.
     --shapeRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
     builder:finalize()
@@ -43,8 +43,8 @@ function objectFactory.createElemental(points, center, eleName, initV)
     local initV = initV or Point(0, 0)
     local id = builder:withNewId().inUseId
     builder:Position(points, center)
+    :Collider(ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV, ele.density, false, true, ele.hardness)
     local ele = element.create(id, eleName)
-    collider.create(id, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV, ele.density, false, true, ele.hardness)
     local textureName
     if eleName == 'fire' then
         textureName = eleName..'.png'
@@ -73,7 +73,7 @@ function objectFactory.prototypeElemental(points, center, eleName)
     return
     {
         ele,
-        collider.prototype(ele.friction, --friction
+        Collider:new(ele.friction, --friction
                            'dynamic', --type
                            eleName == 'ice' or eleName == 'fire', --breakable
                            nil, --initV
@@ -106,8 +106,8 @@ local function createBipedalLeg(parentId, weldPoint, center, legRadius)
     local legId = builder:withNewId().inUseId
     referencer.create(legId, parentId)
     builder:Position({}, center, 'circle', legRadius)
+    :Collider(playerFriction, 'dynamic', false, nil, nil, true)
     shapeRenderer.create(legId, {r=math.random()*255, g=255, b=255})
-    collider.create(legId, playerFriction, 'dynamic', false, nil, nil, true)
     local weldId = entitySystem:register()
     welder.create(weldId, parentId, legId, weldPoint)
     builder:finalize()
@@ -118,8 +118,7 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     builder:Position(serializedPosition.points, serializedPosition.center)
 --, type, breakable, initV, density,
 --    shouldBalance, shouldPierce, hardness
-    collider.create(id, 
-        playerFriction, --friction
+    :Collider(playerFriction, --friction
         'dynamic', --type
         false, --breakable
         nil, --initV 

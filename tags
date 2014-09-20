@@ -39,6 +39,7 @@ Camera:setPosition	camera.lua	/^function Camera:setPosition(x, y)$/;"	f
 Camera:setScale	camera.lua	/^function Camera:setScale(sx, sy)$/;"	f
 Camera:shake	camera.lua	/^function Camera:shake(a, b, contact)$/;"	f
 Camera:unset	camera.lua	/^function Camera:unset()$/;"	f
+Collider:initialize	components/Collider.lua	/^function Collider:initialize(friction, type, breakable, initV, density,$/;"	f
 Component:addToSystems	components/Component.lua	/^function Component:addToSystems(id)$/;"	f
 Component:addToSystems	components/component.lua	/^function Component:addToSystems(id)$/;"	f
 Component:initialize	components/Component.lua	/^function Component:initialize(systems)$/;"	f
@@ -405,7 +406,7 @@ class_mt:__index	lib/class.lua	/^function class_mt:__index(key)$/;"	f
 clearBuffer	lib/AdvTiledLoader/base64.lua	/^local function clearBuffer()$/;"	f
 close.OnClick 	lib/LoveFrames/objects/frame.lua	/^	close.OnClick = function(x, y, object)$/;"	f
 collect	lib/AdvTiledLoader/external/xml.lua	/^local function collect(s)$/;"	f
-collider 	Spell.lua	/^    collider = function (t) return require 'components.collider'.prototype(t.friction, t.type, t.breakable, t.initV,$/;"	f
+collider 	Spell.lua	/^    collider = function (t) return require 'components.Collider':new(t.friction, t.type, t.breakable, t.initV,$/;"	f
 collider.create	components/collider.lua	/^function collider.create(id, ...)$/;"	f
 collider.prototype	components/collider.lua	/^function collider.prototype(friction, type, breakable, initV, density,$/;"	f
 collidesAtSmallAngle	systems/physicsSystem.lua	/^local function collidesAtSmallAngle(comp, colliderComp, contact)$/;"	f

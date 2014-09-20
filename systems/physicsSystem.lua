@@ -1,6 +1,7 @@
 local utils = require 'utils'
 local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
+local Collider = require 'components.Collider'
 local positionSystem = require 'systems.positionSystem'
 local eleSystem = require 'systems.eleSystem'
 
@@ -17,7 +18,7 @@ function physicsSystem:init(w, objFact, eSys)
     self.world:setSleepingAllowed(true)
     objectFactory = objFact
     entitySystem = eSys
-    self.components = {}
+    self.components = entitySystem.entities[Collider]
     self.destroyQueue = {}
 end
 
@@ -79,8 +80,6 @@ local shapeInits =
 }
 
 local function initShape(id)
-    assert(positionSystem)
-    print(positionSystem:getShape(id))
     return shapeInits[positionSystem:getShape(id)](id)
 end
 
