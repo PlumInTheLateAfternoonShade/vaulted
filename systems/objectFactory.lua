@@ -26,21 +26,23 @@ local objectFactory = {}
 function objectFactory.init()
     entitySystem:init(objectFactory)
     builder = entitySystem.builder
+    entitySystem:addMapToWorld(objectFactory)
 end
 
 function objectFactory.createTile(points, center)
-    local id = entitySystem:register()
-    Position.create(id, points, center)
+    local id = builder:withNewId().inUseId
+    builder:Position(points, center)
     collider.create(id, 0.5, 'static')
     -- Draws the tile as a polygon. Uncomment for debugging.
     --shapeRenderer.create(id, {r=math.random()*255, g=math.random()*255, b=math.random()*255})
+    builder:finalize()
     return id
 end
 
 function objectFactory.createElemental(points, center, eleName, initV)
     local initV = initV or Point(0, 0)
-    local id = entitySystem:register()
-    Position.create(id, points, center)
+    local id = builder:withNewId().inUseId
+    builder:Position(points, center)
     local ele = element.create(id, eleName)
     collider.create(id, ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV, ele.density, false, true, ele.hardness)
     local textureName
@@ -51,6 +53,7 @@ function objectFactory.createElemental(points, center, eleName, initV)
     end
     meshRenderer.create(id, ele.color, textureName)
     temperature.create(id, ele.temp)
+    builder:finalize()
     return id
 end
 
@@ -63,10 +66,10 @@ function objectFactory.prototypeElemental(points, center, eleName)
         textureName = eleName..'.jpg'
     end
     local meshR = meshRenderer.prototype(ele.color, textureName)
-    local pos = Position:new(points, center)
-    local previewId = entitySystem:register()
+    local previewId = builder:withNewId().inUseId
     meshR:addToSystems(previewId)
-    pos:addToSystems(previewId)
+    local _, pos = builder:Position(points, center)
+    builder:finalize()
     return
     {
         ele,
@@ -79,7 +82,7 @@ function objectFactory.prototypeElemental(points, center, eleName)
                            true, --shouldPierce
                            ele.hardness --hardness
                            ),
-        Position:new(points, center),
+        pos,
         meshR,
         temperature.prototype(ele.temp),
         previewId = previewId
@@ -92,24 +95,27 @@ function objectFactory.prototypeForce(h, v, x, y, casterId)
     local forceComp = Force:new(h, v, x, y, casterId)
     local previewId = entitySystem:register()
     forceComp:addToSystems(previewId)]]--
-    return {forceComp, previewId = builder.inUseId}
+    local id = builder.inUseId
+    builder:finalize()
+    return {forceComp, previewId = id}
 end
 
 local playerFriction = 0.5
 
 local function createBipedalLeg(parentId, weldPoint, center, legRadius)
-    local legId = entitySystem:register()
+    local legId = builder:withNewId().inUseId
     referencer.create(legId, parentId)
-    Position.create(legId, {}, center, 'circle', legRadius)
+    builder:Position({}, center, 'circle', legRadius)
     shapeRenderer.create(legId, {r=math.random()*255, g=255, b=255})
     collider.create(legId, playerFriction, 'dynamic', false, nil, nil, true)
     local weldId = entitySystem:register()
     welder.create(weldId, parentId, legId, weldPoint)
+    builder:finalize()
 end
 
 function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
-    local id = entitySystem:register()
-    Position.create(id, serializedPosition.points, serializedPosition.center)
+    local id = builder:withNewId().inUseId
+    builder:Position(serializedPosition.points, serializedPosition.center)
 --, type, breakable, initV, density,
 --    shouldBalance, shouldPierce, hardness
     collider.create(id, 
@@ -133,6 +139,7 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
     shapeRenderer.create(id, {r=255, g=255, b=255})
     local playerLegOffsetLeft = serializedPosition.center + Point(-conf.tileSize, conf.tileSize)
     local playerLegOffsetRight = serializedPosition.center + Point(conf.tileSize, conf.tileSize)
+    builder:finalize()
     createBipedalLeg(id, playerLegOffsetLeft, playerLegOffsetLeft, 15)
     createBipedalLeg(id, playerLegOffsetRight, playerLegOffsetRight, 15)
     return id

@@ -42,6 +42,11 @@ Camera:unset	camera.lua	/^function Camera:unset()$/;"	f
 Component:addToSystems	components/Component.lua	/^function Component:addToSystems(id)$/;"	f
 Component:addToSystems	components/component.lua	/^function Component:addToSystems(id)$/;"	f
 Component:initialize	components/Component.lua	/^function Component:initialize(systems)$/;"	f
+ComponentSystem:add	systems/ComponentSystem.lua	/^function ComponentSystem:add(comp)$/;"	f
+ComponentSystem:delete	systems/ComponentSystem.lua	/^function ComponentSystem:delete(id)$/;"	f
+ComponentSystem:get	systems/ComponentSystem.lua	/^function ComponentSystem:get(id)$/;"	f
+ComponentSystem:init	systems/ComponentSystem.lua	/^function ComponentSystem:init(referenceSystem)$/;"	f
+ComponentSystem:update	systems/ComponentSystem.lua	/^function ComponentSystem:update(dt)$/;"	f
 ControlSet:draw	menus/controlSet.lua	/^function ControlSet:draw()$/;"	f
 ControlSet:keypressed	menus/controlSet.lua	/^function ControlSet:keypressed(key)$/;"	f
 Controls:draw	menus/controls.lua	/^function Controls:draw()$/;"	f
@@ -52,6 +57,7 @@ Controls:mousereleased	menus/controls.lua	/^function Controls:mousereleased(x, y
 Controls:update	menus/controls.lua	/^function Controls:update(dt)$/;"	f
 CreateObjects	lib/LoveFrames/init.lua	/^		local function CreateObjects(t, o, c)$/;"	f
 EntityBuilder:add	systems/EntityBuilder.lua	/^function EntityBuilder:add(comp)$/;"	f
+EntityBuilder:finalize	systems/EntityBuilder.lua	/^function EntityBuilder:finalize()$/;"	f
 EntityBuilder:initialize	systems/EntityBuilder.lua	/^function EntityBuilder:initialize(entities, entitySystem)$/;"	f
 EntityBuilder:withId	systems/EntityBuilder.lua	/^function EntityBuilder:withId(id)$/;"	f
 EntityBuilder:withNewId	systems/EntityBuilder.lua	/^function EntityBuilder:withNewId()$/;"	f
@@ -181,10 +187,19 @@ Point:normalize	geometry/Point.lua	/^function Point:normalize()$/;"	f
 Point:offset	geometry/Point.lua	/^function Point:offset(x, y)$/;"	f
 Point:reflectAcrossPoint	geometry/Point.lua	/^function Point:reflectAcrossPoint(point)$/;"	f
 Point:scale	geometry/Point.lua	/^function Point:scale(value)$/;"	f
-Position.create	components/Position.lua	/^function Position.create(id, ...)$/;"	f
 Position.create	components/position.lua	/^function Position.create(id, ...)$/;"	f
 Position:initialize	components/Position.lua	/^function Position:initialize(coords, center, shape, radius)$/;"	f
 Position:initialize	components/position.lua	/^function Position:initialize(coords, center, shape, radius)$/;"	f
+PositionSystem:add	systems/positionSystem.lua	/^function PositionSystem:add(comp)$/;"	f
+PositionSystem:getCenter	systems/positionSystem.lua	/^function PositionSystem:getCenter(id)$/;"	f
+PositionSystem:getCoords	systems/positionSystem.lua	/^function PositionSystem:getCoords(id)$/;"	f
+PositionSystem:getPoints	systems/positionSystem.lua	/^function PositionSystem:getPoints(id)$/;"	f
+PositionSystem:getRadius	systems/positionSystem.lua	/^function PositionSystem:getRadius(id)$/;"	f
+PositionSystem:getShape	systems/positionSystem.lua	/^function PositionSystem:getShape(id)$/;"	f
+PositionSystem:init	systems/positionSystem.lua	/^function PositionSystem:init(referenceSystem, entities)$/;"	f
+PositionSystem:setCenter	systems/positionSystem.lua	/^function PositionSystem:setCenter(id, centerX, centerY)$/;"	f
+PositionSystem:setPos	systems/positionSystem.lua	/^function PositionSystem:setPos(id, centerX, centerY, coords)$/;"	f
+PositionSystem:testPointInRange	systems/positionSystem.lua	/^function PositionSystem:testPointInRange(point, startId, endId)$/;"	f
 ProFi:checkMemory	lib/ProFi.lua	/^function ProFi:checkMemory( interval, note )$/;"	f
 ProFi:createFuncReport	lib/ProFi.lua	/^function ProFi:createFuncReport( funcInfo )$/;"	f
 ProFi:doInspection	lib/ProFi.lua	/^function ProFi:doInspection( inspect, funcReport )$/;"	f
@@ -328,7 +343,7 @@ acc, x) return acc + x end, 0, range	lib/luafun/tests/reducing.lua	/^print(foldl
 activatorFunc	lib/LoveFrames/objects/menu.lua	/^	local function activatorFunc(object)$/;"	f
 add 	lib/luafun/fun.lua	/^    add = function(a, b) return a + b end,$/;"	f
 addRectAndMark	rectAlgo.js	/^var addRectAndMark = function(x1, y1, x2, y2) { $/;"	c
-addSpecificComponentByName	systems/EntityBuilder.lua	/^        local function addSpecificComponentByName(self, ...)$/;"	f
+addSpecificComponentByName	systems/EntityBuilder.lua	/^            local function addSpecificComponentByName(self, ...)$/;"	f
 addToSystems 	components/input.lua	/^        addToSystems = function (self, id)$/;"	f
 add_body_joint	lib/Lady/lady.lua	/^local function add_body_joint(body, joint)$/;"	f
 adjustPositionForCaster	Spell.lua	/^local function adjustPositionForCaster(x, y, facing, casterId)$/;"	f
@@ -465,6 +480,7 @@ elseif type(o) 	lib/AdvTiledLoader/external/deflatelua.lua	/^  elseif type(o) ==
 elseif type(obj) 	lib/luafun/fun.lua	/^    elseif type(obj) == "table" and type(obj[1]) == "function" then$/;"	f
 elseif vtype 	lib/AdvTiledLoader/Map.lua	/^		elseif vtype == "function" then $/;"	f
 end	lib/luafun/doc/make.bat	/^:end$/;"	l
+entitySystem:addMapToWorld	systems/entitySystem.lua	/^function entitySystem:addMapToWorld(objectFactory)$/;"	f
 entitySystem:delete	systems/entitySystem.lua	/^function entitySystem:delete(id)$/;"	f
 entitySystem:deleteAllInRange	systems/entitySystem.lua	/^function entitySystem:deleteAllInRange(lowerId, upperId)$/;"	f
 entitySystem:draw	systems/entitySystem.lua	/^function entitySystem:draw(raw)$/;"	f
@@ -1520,15 +1536,6 @@ physicsSystem:postSolveCollision	systems/physicsSystem.lua	/^function physicsSys
 physicsSystem:update	systems/physicsSystem.lua	/^function physicsSystem:update(dt)$/;"	f
 polygon 	systems/graphicsSystem.lua	/^    polygon = function(id)$/;"	f
 position 	Spell.lua	/^    position = function (t) return require 'components.Position':new(t.coords, t.center) end,$/;"	f
-positionSystem:add	systems/positionSystem.lua	/^function positionSystem:add(comp)$/;"	f
-positionSystem:getCenter	systems/positionSystem.lua	/^function positionSystem:getCenter(id)$/;"	f
-positionSystem:getCoords	systems/positionSystem.lua	/^function positionSystem:getCoords(id)$/;"	f
-positionSystem:getPoints	systems/positionSystem.lua	/^function positionSystem:getPoints(id)$/;"	f
-positionSystem:getRadius	systems/positionSystem.lua	/^function positionSystem:getRadius(id)$/;"	f
-positionSystem:getShape	systems/positionSystem.lua	/^function positionSystem:getShape(id)$/;"	f
-positionSystem:setCenter	systems/positionSystem.lua	/^function positionSystem:setCenter(id, centerX, centerY)$/;"	f
-positionSystem:setPos	systems/positionSystem.lua	/^function positionSystem:setPos(id, centerX, centerY, coords)$/;"	f
-positionSystem:testPointInRange	systems/positionSystem.lua	/^function positionSystem:testPointInRange(point, startId, endId)$/;"	f
 pow 	lib/luafun/fun.lua	/^    pow = function(a, b) return a ^ b end,$/;"	f
 primary_domain	lib/luafun/doc/conf.py	/^primary_domain = "lua"$/;"	v
 print 	lib/luafun/tests/runtest	/^    print = function(...) file_print(new_file, ...) end$/;"	f
@@ -1694,6 +1701,7 @@ userdata_constructor:WeldJoint	lib/Lady/lady.lua	/^function userdata_constructor
 userdata_constructor:WheelJoint	lib/Lady/lady.lua	/^function userdata_constructor:WheelJoint(srefs)$/;"	f
 userdata_constructor:World	lib/Lady/lady.lua	/^function userdata_constructor:World(srefs, memo, rev_memo)$/;"	f
 utils.objectDeepcopyWithoutMetatable	utils.lua	/^function utils.objectDeepcopyWithoutMetatable(object)$/;"	f
+utils.requireAll	utils.lua	/^function utils.requireAll(folder)$/;"	f
 utils.setFieldRecursive	utils.lua	/^function utils.setFieldRecursive(object, fieldName, newValue)$/;"	f
 utils.setSystemsRecursive	utils.lua	/^function utils.setSystemsRecursive(object)$/;"	f
 utils.tableCompareNoField	utils.lua	/^function utils.tableCompareNoField(table, compare)$/;"	f

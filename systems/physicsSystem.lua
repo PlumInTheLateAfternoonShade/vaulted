@@ -79,6 +79,8 @@ local shapeInits =
 }
 
 local function initShape(id)
+    assert(positionSystem)
+    print(positionSystem:getShape(id))
     return shapeInits[positionSystem:getShape(id)](id)
 end
 

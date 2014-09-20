@@ -2,12 +2,14 @@ local EntityBuilder = require 'lib.middleclass'('EntityBuilder')
 
 local function initComponentMethods(self, entities)
     for CompClass, compTable in pairs(entities) do
-        local function addSpecificComponentByName(self, ...)
-            local c = CompClass:new(...)
-            self:add(c)
-            return self, c
+        if CompClass.name then --TODO delete when all components middleclass
+            local function addSpecificComponentByName(self, ...)
+                local c = CompClass:new(...)
+                self:add(c)
+                return self, c
+            end
+            self[CompClass.name] = addSpecificComponentByName
         end
-        self[CompClass.name] = addSpecificComponentByName
     end
 end
 
@@ -22,9 +24,10 @@ function EntityBuilder:add(comp)
     if not self.inUseId then
         error('Must notify EntityBuilder of id to use before adding component.')
     end
+    assert(type(self.inUseId) == 'number', 'id must be number')
     comp.id = self.inUseId
-    print("class: "..comp.class.name)
-    assert(comp.class == require 'components.Force')
+    print("class: "..comp.class.name..' id: '..self.inUseId)
+    assert(comp.class == require('components.'..comp.class.name))
     self.entities[comp.class][comp.id] = comp
     return self
 end
@@ -37,6 +40,10 @@ end
 function EntityBuilder:withNewId()
     self.inUseId = self.entitySystem:register()
     return self
+end
+
+function EntityBuilder:finalize()
+    self.inUseId = nil
 end
 
 return EntityBuilder

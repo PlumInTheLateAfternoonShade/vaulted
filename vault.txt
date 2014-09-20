@@ -1,0 +1,200 @@
+conf.sav exists, loading it.
+keys.sav exists, loading it.
+Component
+Force
+Position
+SpellBook
+circleRenderer
+collider
+element
+experience
+health
+input
+lifetime
+mana
+meshRenderer
+referencer
+shapeRenderer
+statBar
+temperature
+walker
+welder
+class: Position id: 0
+class: Position id: 1
+class: Position id: 2
+class: Position id: 3
+class: Position id: 4
+class: Position id: 5
+class: Position id: 6
+class: Position id: 7
+class: Position id: 8
+class: Position id: 9
+class: Position id: 10
+class: Position id: 11
+class: Position id: 12
+class: Position id: 13
+class: Position id: 14
+class: Position id: 15
+class: Position id: 16
+class: Position id: 17
+class: Position id: 18
+class: Position id: 19
+class: Position id: 20
+class: Position id: 21
+class: Position id: 22
+class: Position id: 23
+class: Position id: 24
+class: Position id: 25
+class: Position id: 26
+class: Position id: 27
+class: Position id: 28
+class: Position id: 29
+class: Position id: 30
+class: Position id: 31
+class: Position id: 32
+class: Position id: 33
+class: Position id: 34
+class: Position id: 35
+class: Position id: 36
+class: Position id: 37
+class: Position id: 38
+class: Position id: 39
+class: Position id: 40
+class: Position id: 41
+class: Position id: 42
+class: Position id: 43
+class: Position id: 44
+class: Position id: 45
+class: Position id: 46
+class: Position id: 47
+class: Position id: 48
+class: Position id: 49
+class: Position id: 50
+class: Position id: 51
+class: Position id: 52
+class: Position id: 53
+class: Position id: 54
+class: Position id: 55
+class: Position id: 56
+class: Position id: 57
+class: Position id: 58
+class: Position id: 59
+class: Position id: 60
+class: Position id: 61
+class: Position id: 62
+class: Position id: 63
+class: Position id: 64
+class: Position id: 65
+class: Position id: 66
+class: Position id: 67
+class: Position id: 68
+class: Position id: 69
+class: Position id: 70
+class: Position id: 71
+class: Position id: 72
+class: Position id: 73
+class: Position id: 74
+class: Position id: 75
+class: Position id: 76
+class: Position id: 77
+class: Position id: 78
+class: Position id: 79
+class: Position id: 80
+class: Position id: 81
+class: Position id: 82
+class: Position id: 83
+class: Position id: 84
+class: Position id: 85
+class: Position id: 86
+class: Position id: 87
+class: Position id: 88
+class: Position id: 89
+class: Position id: 90
+class: Position id: 91
+class: Position id: 92
+class: Position id: 93
+class: Position id: 94
+class: Position id: 95
+class: Position id: 96
+class: Position id: 97
+class: Position id: 98
+class: Position id: 99
+class: Position id: 100
+class: Position id: 101
+class: Position id: 102
+class: Position id: 103
+class: Position id: 104
+class: Position id: 105
+class: Position id: 106
+class: Position id: 107
+class: Position id: 108
+class: Position id: 109
+class: Position id: 110
+class: Position id: 111
+class: Position id: 112
+class: Position id: 113
+class: Position id: 114
+class: Position id: 115
+class: Position id: 116
+class: Position id: 117
+class: Position id: 118
+class: Position id: 119
+class: Position id: 120
+class: Position id: 121
+class: Position id: 122
+class: Position id: 123
+class: Position id: 124
+class: Position id: 125
+class: Position id: 126
+class: Position id: 127
+class: Position id: 128
+class: Position id: 129
+class: Position id: 130
+class: Position id: 131
+class: Position id: 132
+class: Position id: 133
+class: Position id: 134
+class: Position id: 135
+class: Position id: 136
+class: Position id: 137
+class: Position id: 138
+class: Position id: 139
+class: Position id: 140
+class: Position id: 141
+class: Position id: 142
+class: Position id: 143
+class: Position id: 144
+class: Position id: 145
+class: Position id: 146
+class: Position id: 147
+class: Position id: 148
+class: Position id: 149
+class: Position id: 150
+class: Position id: 151
+class: Position id: 152
+class: Position id: 153
+class: Position id: 154
+class: Position id: 155
+class: Position id: 156
+class: Position id: 157
+class: Position id: 158
+class: Position id: 159
+class: Position id: 160
+initialized. serializedSpell: nil
+initialized. serializedSpell: nil
+initialized. serializedSpell: nil
+initialized. serializedSpell: nil
+class: Position id: 163
+class: Position id: 165
+called, id: 0 #self.components: 0
+Error: systems/positionSystem.lua:40: assertion failed!
+stack traceback:
+	[C]: in function 'assert'
+	systems/positionSystem.lua:40: in function 'getCenter'
+	systems/physicsSystem.lua:90: in function 'updateComponent'
+	systems/physicsSystem.lua:128: in function 'update'
+	systems/entitySystem.lua:114: in function 'update'
+	game.lua:47: in function 'update'
+	main.lua:98: in function 'update'
+	[string "boot.lua"]:433: in function <[string "boot.lua"]:399>
+	[C]: in function 'xpcall'

@@ -82,6 +82,25 @@ function utils.setSystemsRecursive(object)
     _setRecursive(object)
 end
 
+-- Stashes all lua files from a folder by key in a table with the value
+-- an empty table.
+function utils.requireAll(folder)
+    local requires = {}
+    local files = love.filesystem.getDirectoryItems(folder)
+    for i = 1, #files do
+        local name = files[i]
+        if name:find('%.lua') then
+            local name = name:gsub('%.lua', '')
+            if not name:find('%.') then
+                print(name)
+                requires[require(folder..'.'..name)] = {}
+            end
+        end
+    end
+    return requires
+end
+
+
 function setColorInverted(color)
     love.graphics.setColor(255 - color.r, 255 - color.g,
     255 - color.b, color.a)

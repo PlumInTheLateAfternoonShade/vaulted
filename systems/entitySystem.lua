@@ -1,3 +1,4 @@
+local utils = require('utils')
 local EntityBuilder = require('systems.EntityBuilder')
 local physicsSystem = require('systems.physicsSystem')
 local temperatureSystem = require('systems.temperatureSystem')
@@ -24,21 +25,17 @@ loader.path = "maps/"
 local entitySystem = {}
 
 function entitySystem:init(objectFactory)
-    self.currId = -1
-    self.entities =
-    {
-        [require 'components.Force'] = {}
-    }
-    print("compforce: "..tostring(require 'components.Force'))
+    self.currId = 0
+    self.entities = utils.requireAll('components')
     self.camera = Camera()
     
     local world = love.physics.newWorld(0, 50*conf.tileSize, true)
     
-    local map = loader.load("level1.tmx")
-    map.tileWidth = conf.tileSize
-    map.widthInPixels = map.tileWidth * map.width
+    self.map = loader.load("level1.tmx")
+    self.map.tileWidth = conf.tileSize
+    self.map.widthInPixels = self.map.tileWidth * self.map.width
     
-    graphicsSystem:init(self.camera, map)
+    graphicsSystem:init(self.camera, self.map)
     referenceSystem:init()
     physicsSystem:init(world, objectFactory, entitySystem)
     runeSystem:init(objectFactory)
@@ -46,7 +43,7 @@ function entitySystem:init(objectFactory)
     jointSystem:init()
     temperatureSystem:init(referenceSystem)
     eleSystem:init(referenceSystem)
-    positionSystem:init(referenceSystem)
+    positionSystem:init(referenceSystem, self.entities)
     walkingSystem:init(referenceSystem)
     inputSystem:init(referenceSystem)
     experienceSystem:init(referenceSystem)
@@ -57,8 +54,6 @@ function entitySystem:init(objectFactory)
    
     self.builder = EntityBuilder:new(self.entities, self)
 
-    map:addToWorld(objectFactory)
-    
     local getIds = function(a, b)
         return a:getUserData(), b:getUserData()
     end
@@ -83,6 +78,10 @@ function entitySystem:init(objectFactory)
             tangentImpulse1, normalImpulse2, tangentImpulse2)
     end
     world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+end
+
+function entitySystem:addMapToWorld(objectFactory)
+    self.map:addToWorld(objectFactory)
 end
 
 function entitySystem:delete(id)

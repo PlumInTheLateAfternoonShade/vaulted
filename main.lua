@@ -1,5 +1,5 @@
 require 'utils'
-require 'sertest'
+--require 'sertest' -- Casual testing file
 local Game = require('game')
 local Menu = require('menus.menu')
 local Settings = require('menus.settings')

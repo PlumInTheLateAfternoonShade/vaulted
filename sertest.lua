@@ -38,7 +38,6 @@ print(tostring(system.components[pos2.id]))
 local positionSystem = require 'systems.positionSystem'
 positionSystem:init()
 print(tostring(positionSystem.components))
-pos2:addToSystems(400)
 print(pos2.id)
 print(tostring(positionSystem.components[pos2.id]))
 

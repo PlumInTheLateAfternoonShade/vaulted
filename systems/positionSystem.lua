@@ -1,52 +1,58 @@
 local Point = require('geometry.Point')
+local Position = require('components.Position')
+local ComponentSystem = require('systems.ComponentSystem')
 
 -- Handles position components.
-local positionSystem = {}
+local PositionSystem = require('lib.middleclass')(
+    'PositionSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(positionSystem)
+function PositionSystem:init(referenceSystem, entities)
+    self.components = entities[Position]
+    print("# in pos: "..#self.components)
+    ComponentSystem.init(self, referenceSystem)
+end
 
-function positionSystem:add(comp)
+function PositionSystem:add(comp)
     if type(comp.coords[1]) ~= 'number' then
         comp.coords = Point.pointsToCoordsTable(comp.coords)
     end
     self.components[comp.id] = comp
 end
 
-function positionSystem:setPos(id, centerX, centerY, coords)
+function PositionSystem:setPos(id, centerX, centerY, coords)
     local comp = self.components[id]
     comp.center.x = centerX
     comp.center.y = centerY
     comp.coords = coords
 end
 
-function positionSystem:setCenter(id, centerX, centerY)
+function PositionSystem:setCenter(id, centerX, centerY)
     local comp = self.components[id]
     comp.center.x = centerX
     comp.center.y = centerY
 end
 
-function positionSystem:getCenter(id)
-    assert(self.components[id] ~= nil)
+function PositionSystem:getCenter(id)
     return self.components[id].center
 end
 
-function positionSystem:getPoints(id)
+function PositionSystem:getPoints(id)
     return Point.coordsToPoints(self.components[id].coords)
 end
 
-function positionSystem:getCoords(id)
+function PositionSystem:getCoords(id)
     return self.components[id].coords
 end
 
-function positionSystem:getRadius(id)
+function PositionSystem:getRadius(id)
     return self.components[id].radius
 end
 
-function positionSystem:getShape(id)
+function PositionSystem:getShape(id)
     return self.components[id].shape
 end
 
-function positionSystem:testPointInRange(point, startId, endId)
+function PositionSystem:testPointInRange(point, startId, endId)
     for id = startId, endId do
         if self.components[id] and testPoint(point, Point.coordsToPoints(self.components[id].coords)) then
             return id
@@ -55,4 +61,5 @@ function positionSystem:testPointInRange(point, startId, endId)
     return false
 end
 
-return positionSystem
+local positionSystemInstance = PositionSystem:new()
+return positionSystemInstance
