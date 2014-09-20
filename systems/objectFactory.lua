@@ -7,6 +7,7 @@ local MeshRenderer = require('components.MeshRenderer')
 local Position = require('components.Position')
 local element = require('components.element')
 local Temperature = require('components.Temperature')
+local Lifetime = require('components.Lifetime')
 local Point = require('geometry.Point')
 local builder
 
@@ -62,7 +63,6 @@ function objectFactory.prototypeElemental(points, center, eleName)
     builder:finalize()
     return
     {
-        
         ElementInstance:new(eleName),
         Collider:new(ele.friction, --friction
                            'dynamic', --type
@@ -84,7 +84,11 @@ function objectFactory.prototypeForce(h, v, x, y, casterId)
     local _, forceComp = builder:withNewId():Force(h, v, x, y, casterId)
     local id = builder.inUseId
     builder:finalize()
-    return {forceComp, previewId = id}
+    return
+    {
+        forceComp,
+        Lifetime:new(0.5),
+        previewId = id}
 end
 
 local playerFriction = 0.5
