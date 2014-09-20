@@ -8,15 +8,7 @@ local PositionSystem = require('lib.middleclass')(
 
 function PositionSystem:init(referenceSystem, entities)
     self.components = entities[Position]
-    print("# in pos: "..#self.components)
     ComponentSystem.init(self, referenceSystem)
-end
-
-function PositionSystem:add(comp)
-    if type(comp.coords[1]) ~= 'number' then
-        comp.coords = Point.pointsToCoordsTable(comp.coords)
-    end
-    self.components[comp.id] = comp
 end
 
 function PositionSystem:setPos(id, centerX, centerY, coords)

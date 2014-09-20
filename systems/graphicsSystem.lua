@@ -2,28 +2,19 @@ local Point = require('geometry.Point')
 local positionSystem = require('systems.positionSystem')
 local temperatureSystem = require('systems.temperatureSystem')
 local img = require('images.img')
+local MeshRenderer = require 'components.MeshRenderer'
+local ShapeRenderer = require 'components.ShapeRenderer'
+local StatBar = require 'components.StatBar'
 
 -- System for rendering graphics
 local graphicsSystem = {}
 
-function graphicsSystem:init(cam, map)
+function graphicsSystem:init(cam, map, entities)
     self.camera = cam
     self.map = map
-    self.meshes = {}
-    self.shapes = {}
-    self.statBars = {}
-end
-
-function graphicsSystem:addMesh(comp)
-    self.meshes[comp.id] = comp
-end
-
-function graphicsSystem:addShape(comp)
-    self.shapes[comp.id] = comp
-end
-
-function graphicsSystem:addStatBar(comp)
-    self.statBars[comp.id] = comp
+    self.meshes = entities[MeshRenderer]
+    self.shapes = entities[ShapeRenderer]
+    self.statBars = entities[StatBar]
 end
 
 function graphicsSystem:delete(id)
@@ -89,6 +80,7 @@ end
 
 local function initMesh(comp)
     comp.mesh = love.graphics.newMesh(getMeshVertices(comp), img.load(comp.imageName))
+    print("init mesh")
 end
 
 local function drawMesh(comp)

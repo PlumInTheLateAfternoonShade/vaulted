@@ -57,6 +57,8 @@ Controls:mousepressed	menus/controls.lua	/^function Controls:mousepressed(x, y, 
 Controls:mousereleased	menus/controls.lua	/^function Controls:mousereleased(x, y, button)$/;"	f
 Controls:update	menus/controls.lua	/^function Controls:update(dt)$/;"	f
 CreateObjects	lib/LoveFrames/init.lua	/^		local function CreateObjects(t, o, c)$/;"	f
+ElementInstance:initialize	components/ElementInstance.lua	/^function ElementInstance:initialize(name)$/;"	f
+ElementSystem:init	systems/eleSystem.lua	/^function ElementSystem:init(referenceSystem, entities)$/;"	f
 EntityBuilder:add	systems/EntityBuilder.lua	/^function EntityBuilder:add(comp)$/;"	f
 EntityBuilder:finalize	systems/EntityBuilder.lua	/^function EntityBuilder:finalize()$/;"	f
 EntityBuilder:initialize	systems/EntityBuilder.lua	/^function EntityBuilder:initialize(entities, entitySystem)$/;"	f
@@ -135,6 +137,7 @@ Map:toIso	lib/AdvTiledLoader/Map.lua	/^function Map:toIso(a, b)$/;"	f
 Map:updateTiles	lib/AdvTiledLoader/Map.lua	/^function Map:updateTiles()$/;"	f
 Menu:draw	menus/menu.lua	/^function Menu:draw()$/;"	f
 Menu:keypressed	menus/menu.lua	/^function Menu:keypressed(key)$/;"	f
+MeshRenderer:initialize	components/MeshRenderer.lua	/^function MeshRenderer:initialize(color, imageName)$/;"	f
 Object.static:allocate	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:allocate	lib/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:include	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:include( ... )$/;"	f
@@ -191,7 +194,6 @@ Point:scale	geometry/Point.lua	/^function Point:scale(value)$/;"	f
 Position.create	components/position.lua	/^function Position.create(id, ...)$/;"	f
 Position:initialize	components/Position.lua	/^function Position:initialize(coords, center, shape, radius)$/;"	f
 Position:initialize	components/position.lua	/^function Position:initialize(coords, center, shape, radius)$/;"	f
-PositionSystem:add	systems/positionSystem.lua	/^function PositionSystem:add(comp)$/;"	f
 PositionSystem:getCenter	systems/positionSystem.lua	/^function PositionSystem:getCenter(id)$/;"	f
 PositionSystem:getCoords	systems/positionSystem.lua	/^function PositionSystem:getCoords(id)$/;"	f
 PositionSystem:getPoints	systems/positionSystem.lua	/^function PositionSystem:getPoints(id)$/;"	f
@@ -266,6 +268,7 @@ Seg:scale	geometry/Seg.lua	/^function Seg:scale(value)$/;"	f
 Seg:sharesAPoint	geometry/Seg.lua	/^function Seg:sharesAPoint(seg)$/;"	f
 Settings:draw	menus/settings.lua	/^function Settings:draw()$/;"	f
 Settings:keypressed	menus/settings.lua	/^function Settings:keypressed(key)$/;"	f
+ShapeRenderer:initialize	components/ShapeRenderer.lua	/^function ShapeRenderer:initialize(color)$/;"	f
 Spell:addComponentTable	Spell.lua	/^function Spell:addComponentTable(compTable)$/;"	f
 Spell:addComponentToEntity	Spell.lua	/^function Spell:addComponentToEntity(component, previewId)$/;"	f
 Spell:cast	Spell.lua	/^function Spell:cast(casterId)$/;"	f
@@ -274,6 +277,7 @@ Spell:initialize	Spell.lua	/^function Spell:initialize(serializedSpell)$/;"	f
 Spell:preview	Spell.lua	/^function Spell:preview()$/;"	f
 SpellBook.create	components/SpellBook.lua	/^function SpellBook.create(id, ...)$/;"	f
 SpellBook:initialize	components/SpellBook.lua	/^function SpellBook:initialize(serializedSpellBook)$/;"	f
+StatBar:initialize	components/StatBar.lua	/^function StatBar:initialize(topPercent, heightPercent, color, getPercent)$/;"	f
 State:draw	state.lua	/^function State:draw()$/;"	f
 State:keypressed	state.lua	/^function State:keypressed(key)$/;"	f
 State:keyreleased	state.lua	/^function State:keyreleased(key)$/;"	f
@@ -281,6 +285,13 @@ State:load	state.lua	/^function State:load()$/;"	f
 State:mousepressed	state.lua	/^function State:mousepressed(x, y, button)$/;"	f
 State:mousereleased	state.lua	/^function State:mousereleased(x, y, button)$/;"	f
 State:update	state.lua	/^function State:update(dt)$/;"	f
+Temperature:initialize	components/temperature.lua	/^function Temperature:initialize(initTemp)$/;"	f
+TemperatureSystem:beginCollision	systems/temperatureSystem.lua	/^function TemperatureSystem:beginCollision(id, otherId, contact)$/;"	f
+TemperatureSystem:endCollision	systems/temperatureSystem.lua	/^function TemperatureSystem:endCollision(id, otherId, contact)$/;"	f
+TemperatureSystem:getAdjustedColor	systems/temperatureSystem.lua	/^function TemperatureSystem:getAdjustedColor(id, ambientColor)$/;"	f
+TemperatureSystem:getTemp	systems/temperatureSystem.lua	/^function TemperatureSystem:getTemp(id)$/;"	f
+TemperatureSystem:init	systems/temperatureSystem.lua	/^function TemperatureSystem:init(referenceSystem, entities)$/;"	f
+TemperatureSystem:update	systems/temperatureSystem.lua	/^function TemperatureSystem:update(dt)$/;"	f
 Tests:testAverageAngle	Tests.lua	/^function Tests:testAverageAngle()$/;"	f
 Tests:testSegmentIntersects	Tests.lua	/^function Tests:testSegmentIntersects()$/;"	f
 Tests:testSegmentPointDist	Tests.lua	/^function Tests:testSegmentPointDist()$/;"	f
@@ -350,7 +361,6 @@ add_body_joint	lib/Lady/lady.lua	/^local function add_body_joint(body, joint)$/;
 adjustPositionForCaster	Spell.lua	/^local function adjustPositionForCaster(x, y, facing, casterId)$/;"	f
 adjustPositionPointForCaster	Spell.lua	/^local function adjustPositionPointForCaster(point, facing, casterId)$/;"	f
 adler32	lib/AdvTiledLoader/external/deflatelua.lua	/^local function adler32(byte, crc)$/;"	f
-air 	Spell.lua	/^    air = function (table) return require 'components.element'.air end,$/;"	f
 apply	systems/forceSystem.lua	/^local function apply(id, comp, world)$/;"	f
 assert( type(method)	lib/LoveFrames/third-party/middleclass.lua	/^    assert( type(method)=='function', tostring(aClass) .. " doesn't implement metamethod '" .. name .. "'" )$/;"	f
 assert( type(method)	lib/middleclass.lua	/^    assert( type(method)=='function', tostring(aClass) .. " doesn't implement metamethod '" .. name .. "'" )$/;"	f
@@ -390,7 +400,6 @@ c:addToSystems	components/collider.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/fixture.lua	/^    function c:addToSystems(id, bodyId)$/;"	f
 c:addToSystems	components/meshRenderer.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/referencer.lua	/^    function c:addToSystems(id)$/;"	f
-c:addToSystems	components/temperature.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/walker.lua	/^    function c:addToSystems(id)$/;"	f
 c:addToSystems	components/welder.lua	/^    function c:addToSystems(id)$/;"	f
 call	lib/AdvTiledLoader/external/gunziplua.lua	/^local function call(...)$/;"	f
@@ -406,12 +415,10 @@ class_mt:__index	lib/class.lua	/^function class_mt:__index(key)$/;"	f
 clearBuffer	lib/AdvTiledLoader/base64.lua	/^local function clearBuffer()$/;"	f
 close.OnClick 	lib/LoveFrames/objects/frame.lua	/^	close.OnClick = function(x, y, object)$/;"	f
 collect	lib/AdvTiledLoader/external/xml.lua	/^local function collect(s)$/;"	f
-collider 	Spell.lua	/^    collider = function (t) return require 'components.Collider':new(t.friction, t.type, t.breakable, t.initV,$/;"	f
 collider.create	components/collider.lua	/^function collider.create(id, ...)$/;"	f
 collider.prototype	components/collider.lua	/^function collider.prototype(friction, type, breakable, initV, density,$/;"	f
 collidesAtSmallAngle	systems/physicsSystem.lua	/^local function collidesAtSmallAngle(comp, colliderComp, contact)$/;"	f
 colorEquals	utils.lua	/^function colorEquals(color1, color2)$/;"	f
-colorVary	components/element.lua	/^local function colorVary(color)$/;"	f
 common.class	class.lua	/^	function common.class(name, prototype, parent)$/;"	f
 compareXthenY	geometry/Point.lua	/^function compareXthenY(p0, p1)$/;"	f
 compareYthenX	geometry/Point.lua	/^function compareYthenX(p0, p1)$/;"	f
@@ -444,7 +451,6 @@ decreasesbutton.OnClick 	lib/LoveFrames/objects/numberbox.lua	/^	decreasesbutton
 decreasesbutton.Update 	lib/LoveFrames/objects/numberbox.lua	/^	decreasesbutton.Update = function(object)$/;"	f
 deepcopy	lib/luafun/fun.lua	/^local function deepcopy(orig) -- used by cycle()$/;"	f
 deflate	lib/AdvTiledLoader/external/deflatelua.lua	/^local function deflate(t)$/;"	f
-deserializeComponentPrototype	Spell.lua	/^local function deserializeComponentPrototype(table)$/;"	f
 distance	utils.lua	/^function distance(x1, y1, x2, y2)$/;"	f
 distanceSquared	utils.lua	/^function distanceSquared(x1, y1, x2, y2)$/;"	f
 div 	lib/luafun/fun.lua	/^    div = function(a, b) return a \/ b end,$/;"	f
@@ -463,9 +469,7 @@ dump(filter(function(x) return x % 3 	lib/luafun/tests/filtering.lua	/^dump(filt
 dump(take(5, filter(function(i, x) return i % 3 	lib/luafun/tests/filtering.lua	/^dump(take(5, filter(function(i, x) return i % 3 == 0 end,$/;"	f
 dump(take_while(function(i, a) return i ~	lib/luafun/tests/slicing.lua	/^dump(take_while(function(i, a) return i ~=a end, enumerate({5, 2, 1, 3, 4})))$/;"	f
 dump(zip(partition(function(i, x) return i % 3 	lib/luafun/tests/filtering.lua	/^dump(zip(partition(function(i, x) return i % 3 == 0 end, range(10))))$/;"	f
-e:addToSystems	components/element.lua	/^    function e:addToSystems(id)$/;"	f
-earth 	Spell.lua	/^    earth = function (table) return require 'components.element'.earth end,$/;"	f
-element.create	components/element.lua	/^function element.create(id, name)$/;"	f
+element.colorVary	components/element.lua	/^function element.colorVary(color)$/;"	f
 element:get	components/element.lua	/^function element:get()$/;"	f
 element:getColor	components/element.lua	/^function element:getColor()$/;"	f
 element:getEleFromColor	components/element.lua	/^function element:getEleFromColor(color)$/;"	f
@@ -502,12 +506,10 @@ file_exists	lib/AdvTiledLoader/external/gunziplua.lua	/^local function file_exis
 file_print	lib/luafun/tests/runtest	/^function file_print(file, ...)$/;"	f
 filter_fun	lib/luafun/tests/filtering.lua	/^function filter_fun(a, b, c)$/;"	f
 filterm_gen 	lib/luafun/fun.lua	/^filterm_gen = function(fun, gen_x, param_x, state_x, ...)$/;"	f
-fire 	Spell.lua	/^    fire = function (table) return require 'components.element'.fire end,$/;"	f
 fixture.create	components/fixture.lua	/^function fixture.create(id, bodyId, ...)$/;"	f
 fixture.prototype	components/fixture.lua	/^function fixture.prototype(friction)$/;"	f
 flags_str	lib/AdvTiledLoader/external/optparse.lua	/^  local function flags_str(optdesc)$/;"	f
 floordiv 	lib/luafun/fun.lua	/^    floordiv = function(a, b) return math.floor(a\/b) end,$/;"	f
-force 	Spell.lua	/^    force = function (t) $/;"	f
 force 	systems/runeSystem.lua	/^        force = function(spellBook, lines, startPoint, endPoint, firstGestureId)$/;"	f
 forceRayCallBack	systems/forceSystem.lua	/^local function forceRayCallBack(fixture, x, y, xn, yn, fraction)$/;"	f
 forceSystem:draw	systems/forceSystem.lua	/^function forceSystem:draw()$/;"	f
@@ -536,14 +538,11 @@ global	lib/strict.lua	/^function global(...)$/;"	f
 glueInt	lib/AdvTiledLoader/base64.lua	/^local function glueInt(b1, b2, b3, b4)$/;"	f
 goDownAndRightWhileValid	lib/AdvTiledLoader/TileLayer.lua	/^local function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWidth, tileHeight)$/;"	f
 goRightWhileValid	lib/AdvTiledLoader/TileLayer.lua	/^local function goRightWhileValid(x, y, targetWidth, tiles, tileData, tileWidth)$/;"	f
-graphicsSystem:addMesh	systems/graphicsSystem.lua	/^function graphicsSystem:addMesh(comp)$/;"	f
-graphicsSystem:addShape	systems/graphicsSystem.lua	/^function graphicsSystem:addShape(comp)$/;"	f
-graphicsSystem:addStatBar	systems/graphicsSystem.lua	/^function graphicsSystem:addStatBar(comp)$/;"	f
 graphicsSystem:delete	systems/graphicsSystem.lua	/^function graphicsSystem:delete(id)$/;"	f
 graphicsSystem:drawMap	systems/graphicsSystem.lua	/^function graphicsSystem:drawMap()$/;"	f
 graphicsSystem:drawRawComponents	systems/graphicsSystem.lua	/^function graphicsSystem:drawRawComponents()$/;"	f
 graphicsSystem:drawUI	systems/graphicsSystem.lua	/^function graphicsSystem:drawUI()$/;"	f
-graphicsSystem:init	systems/graphicsSystem.lua	/^function graphicsSystem:init(cam, map)$/;"	f
+graphicsSystem:init	systems/graphicsSystem.lua	/^function graphicsSystem:init(cam, map, entities)$/;"	f
 graphicsSystem:update	systems/graphicsSystem.lua	/^function graphicsSystem:update(dt)$/;"	f
 greater	utils.lua	/^function greater(a, b)$/;"	f
 gt  	lib/luafun/fun.lua	/^    gt  = function(a, b) return a > b end,$/;"	f
@@ -556,7 +555,6 @@ healthSystem:update	systems/healthSystem.lua	/^function healthSystem:update(dt)$
 html_logo	lib/luafun/doc/conf.py	/^html_logo = "logo.png"$/;"	v
 html_static_path	lib/luafun/doc/conf.py	/^html_static_path = ['_static']$/;"	v
 html_theme	lib/luafun/doc/conf.py	/^html_theme = 'haiku'$/;"	v
-ice 	Spell.lua	/^    ice = function (table) return require 'components.element'.ice end,$/;"	f
 if (type(obj) 	lib/luafun/fun.lua	/^    if (type(obj) == "function") then$/;"	f
 if type(mixin.included)	lib/LoveFrames/third-party/middleclass.lua	/^  if type(mixin.included)=="function" then mixin:included(aClass) end$/;"	f
 if type(mixin.included)	lib/middleclass.lua	/^  if type(mixin.included)=="function" then mixin:included(aClass) end$/;"	f
@@ -577,7 +575,6 @@ initFixture	systems/physicsSystem.lua	/^local function initFixture(comp)$/;"	f
 initMesh	systems/graphicsSystem.lua	/^local function initMesh(comp)$/;"	f
 initPolygonShape	systems/physicsSystem.lua	/^local function initPolygonShape(id)$/;"	f
 initShape	systems/physicsSystem.lua	/^local function initShape(id)$/;"	f
-input 	Spell.lua	/^    input = function (t) return require 'components.input'.prototype(t.canAdministrate, t.canCast) end,$/;"	f
 input 	systems/runeSystem.lua	/^        input = function(spellBook, previewId)$/;"	f
 input.OnTextChanged 	lib/LoveFrames/objects/numberbox.lua	/^	input.OnTextChanged = function(object)$/;"	f
 input.Update 	lib/LoveFrames/objects/numberbox.lua	/^	input.Update = function(object)$/;"	f
@@ -795,7 +792,6 @@ max_cmp	lib/luafun/tests/reducing.lua	/^function max_cmp(a, b) if -a > -b then r
 memoize	lib/AdvTiledLoader/external/crc32lua.lua	/^local function memoize(f)$/;"	f
 memoize	lib/AdvTiledLoader/external/deflatelua.lua	/^local function memoize(f)$/;"	f
 memoize	lib/AdvTiledLoader/external/numberlua.lua	/^local function memoize(f)$/;"	f
-meshRenderer 	Spell.lua	/^    meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,$/;"	f
 meshRenderer.create	components/meshRenderer.lua	/^function meshRenderer.create(id, color, imageName)$/;"	f
 meshRenderer.prototype	components/meshRenderer.lua	/^function meshRenderer.prototype(color, imageName)$/;"	f
 midPoint	geometry/Point.lua	/^function midPoint(p0, p1)$/;"	f
@@ -1536,7 +1532,6 @@ physicsSystem:init	systems/physicsSystem.lua	/^function physicsSystem:init(w, ob
 physicsSystem:postSolveCollision	systems/physicsSystem.lua	/^function physicsSystem:postSolveCollision(aId, bId, coll, normalImpulse1,$/;"	f
 physicsSystem:update	systems/physicsSystem.lua	/^function physicsSystem:update(dt)$/;"	f
 polygon 	systems/graphicsSystem.lua	/^    polygon = function(id)$/;"	f
-position 	Spell.lua	/^    position = function (t) return require 'components.Position':new(t.coords, t.center) end,$/;"	f
 pow 	lib/luafun/fun.lua	/^    pow = function(a, b) return a ^ b end,$/;"	f
 primary_domain	lib/luafun/doc/conf.py	/^primary_domain = "lua"$/;"	v
 print 	lib/luafun/tests/runtest	/^    print = function(...) file_print(new_file, ...) end$/;"	f
@@ -1559,7 +1554,6 @@ referencer.prototype	components/referencer.lua	/^function referencer.prototype(p
 release	lib/luafun/doc/conf.py	/^release = '0.1-alpha'$/;"	v
 removeRedundantPoints	geometry/Point.lua	/^function removeRedundantPoints(points)$/;"	f
 returnToSettings	menus/controls.lua	/^local function returnToSettings()$/;"	f
-rgbVary	components/element.lua	/^        local function rgbVary(num)$/;"	f
 rgbVary	components/element.lua	/^local function rgbVary(num)$/;"	f
 rightbutton.Update 	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		rightbutton.Update = function(object, dt)$/;"	f
 rightbutton.Update 	lib/LoveFrames/objects/tabs.lua	/^	rightbutton.Update = function(object, dt)$/;"	f
@@ -1652,14 +1646,6 @@ tableCompare	utils.lua	/^function tableCompare(table, field, compare)$/;"	f
 tableMax	utils.lua	/^function tableMax(table, field)$/;"	f
 tableMin	utils.lua	/^function tableMin(table, field)$/;"	f
 tableSwap	utils.lua	/^function tableSwap(table, index1, index2)$/;"	f
-temperature 	Spell.lua	/^    temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,$/;"	f
-temperature.create	components/temperature.lua	/^function temperature.create(id, initTemp)$/;"	f
-temperature.prototype	components/temperature.lua	/^function temperature.prototype(initTemp)$/;"	f
-temperatureSystem:beginCollision	systems/temperatureSystem.lua	/^function temperatureSystem:beginCollision(id, otherId, contact)$/;"	f
-temperatureSystem:endCollision	systems/temperatureSystem.lua	/^function temperatureSystem:endCollision(id, otherId, contact)$/;"	f
-temperatureSystem:getAdjustedColor	systems/temperatureSystem.lua	/^function temperatureSystem:getAdjustedColor(id, ambientColor)$/;"	f
-temperatureSystem:getTemp	systems/temperatureSystem.lua	/^function temperatureSystem:getTemp(id)$/;"	f
-temperatureSystem:update	systems/temperatureSystem.lua	/^function temperatureSystem:update(dt)$/;"	f
 templates_path	lib/luafun/doc/conf.py	/^templates_path = ['_templates']$/;"	v
 test3	lib/luafun/tests/filtering.lua	/^function test3(a, b, c)$/;"	f
 testPoint	geometry/Point.lua	/^function testPoint(p, points)$/;"	f
@@ -1710,7 +1696,6 @@ validTile	lib/AdvTiledLoader/TileLayer.lua	/^local function validTile(tile)$/;"	
 valid_classname	lib/Lady/lady.lua	/^local function valid_classname(s)$/;"	f
 valid_identifier	lib/Lady/lady.lua	/^local function valid_identifier(s)$/;"	f
 version	lib/luafun/doc/conf.py	/^version = '0.1'$/;"	v
-walker 	Spell.lua	/^    walker = function (t) return require 'components.walker'.prototype(t.force) end,$/;"	f
 walker 	systems/runeSystem.lua	/^        walker = function(spellBook, previewId)$/;"	f
 walker.create	components/walker.lua	/^function walker.create(id, ...)$/;"	f
 walker.prototype	components/walker.lua	/^function walker.prototype(force, targetVeloc)$/;"	f

@@ -6,45 +6,11 @@ local inputSystem = require 'systems.inputSystem'
 local Point = require 'geometry.Point'
 local builder
 
-local componentPrototypeDeserializers =
-{
-    fire = function (table) return require 'components.element'.fire end,
-    earth = function (table) return require 'components.element'.earth end,
-    ice = function (table) return require 'components.element'.ice end,
-    air = function (table) return require 'components.element'.air end,
-    collider = function (t) return require 'components.Collider':new(t.friction, t.type, t.breakable, t.initV,
-                                                                           t.density,
-                                                                           t.shouldBalance,
-                                                                           t.shouldPierce,
-                                                                           t.hardness) end,
-    position = function (t) return require 'components.Position':new(t.coords, t.center) end,
-    meshRenderer = function (t) return require 'components.meshRenderer'.prototype(t.color, t.imageName) end,
-    temperature = function (t) return require 'components.temperature'.prototype(t.ambientTemp) end,
-    force = function (t) 
-        print("force built.")
-        return require 'components.Force':new(t.h, t.v, t.x, t.y, t.casterId)
-    end,
-    input = function (t) return require 'components.input'.prototype(t.canAdministrate, t.canCast) end,
-    walker = function (t) return require 'components.walker'.prototype(t.force) end,
-}
-
-local function deserializeComponentPrototype(table)
-    return componentPrototypeDeserializers[table.name](table)
-end
-
 local function constructComponentTables(serializedSpell)
-    local compTables = {}
     if not serializedSpell or not serializedSpell.componentTables then
-        return compTables
+        return {}
     end
-    --return serializedSpell.componentTables TODO delete below, prototyping
-    for i = 1, #serializedSpell.componentTables do
-        table.insert(compTables, {})
-        for j = 1, #serializedSpell.componentTables[i] do
-            compTables[i][j] = deserializeComponentPrototype(serializedSpell.componentTables[i][j])
-        end
-    end
-    return compTables
+    return serializedSpell.componentTables 
 end
 
 -- Defines a spell that can be cast by a caster.
@@ -60,6 +26,9 @@ function Spell:initialize(serializedSpell)
 end
 
 function Spell:addComponentTable(compTable)
+    for i = 1, #compTable do
+        print("compTable, i: "..i.." val: "..tostring(compTable[i]))
+    end
     table.insert(self.componentTables, compTable)
 end
 
@@ -78,8 +47,9 @@ end
 function Spell:cast(casterId)
     local facing = walkingSystem:get(casterId).facing
     for i = 1, #self.componentTables do
-        local id = entitySystem:register()
+        builder:withNewId()
         for j = 1, #self.componentTables[i] do
+            assert(self.componentTables[i][j])
             local comp = utils.objectDeepcopyWithoutMetatable(
                 self.componentTables[i][j])
             -- Adjust the comp's pos so it appears where the caster casts it.
@@ -92,18 +62,15 @@ function Spell:cast(casterId)
                 Point.coordsToPoints(comp.coords)))
             end
             if comp.x and comp.y and comp.h and comp.v then
-                print("got here. x:"..comp.x.." y: "..comp.y.." h: "..comp.h.." v: "..comp.v)
                 comp.x, comp.y = adjustPositionForCaster(comp.x, comp.y,
                                                          facing, casterId)
                 comp.h = comp.h * facing
-                print("x:"..comp.x.." y: "..comp.y.." h: "..comp.h.." v: "..comp.v)
             end
             if comp.casterId then
                 comp.casterId = casterId
             end
             print(j.." spell loop ")
-            builder:withId(id):add(comp)
-            print(j.." spell loop pos: "..tostring(positionSystem:get(168)))
+            builder:add(comp)
         end
     end
     inputSystem:syncAllWithKeys()

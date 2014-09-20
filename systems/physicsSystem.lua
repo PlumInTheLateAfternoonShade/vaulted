@@ -3,7 +3,7 @@ local Point = require 'geometry.Point'
 local Seg = require 'geometry.Seg'
 local Collider = require 'components.Collider'
 local positionSystem = require 'systems.positionSystem'
-local eleSystem = require 'systems.eleSystem'
+local elementSystem = require 'systems.elementSystem'
 
 -- Handles physics components.
 local physicsSystem = {}
@@ -92,7 +92,7 @@ local function updateComponent(comp, world, dt)
         comp.shape = initShape(comp.id)
         comp.fixture = initFixture(comp)
         -- Adjust stats if elemental object.
-        local ele = eleSystem:get(comp.id)
+        local ele = elementSystem:get(comp.id)
         if ele then
             comp.fixture:setDensity(ele.density)
             comp.body:setGravityScale(ele.gravScale)
@@ -209,7 +209,7 @@ local function makeElementalObjectFromPoints(id, points, center, v)
     -- Assign the velocity
     local newV = getNewVelocity(v, center, newCenter)
     -- Construct the elemental object.
-    objectFactory.createElemental(points, newCenter, eleSystem:get(id).name, newV)
+    objectFactory.createElemental(points, newCenter, elementSystem:get(id).name, newV)
 end
 
 function physicsSystem:handleBeginCollision(id, idOfCollider, contact)

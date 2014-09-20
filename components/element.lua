@@ -1,14 +1,8 @@
+local utils = require 'utils'
 local Point = require 'geometry.Point'
-local eleSystem = require 'systems.eleSystem'
 
 local function rgbVary(num)
     return limit(num + math.random()*40 - 20, 0, 255)
-end
-
-local function colorVary(color)
-    color.r = rgbVary(color.r)
-    color.g = rgbVary(color.g)
-    color.b = rgbVary(color.b)
 end
 
 local function createElementPrototype(name, color, friction, density, temp, gravScale, hardness)
@@ -20,17 +14,6 @@ local function createElementPrototype(name, color, friction, density, temp, grav
     e.temp = temp
     e.gravScale = gravScale or 1
     e.hardness = hardness
-    function e:addToSystems(id)
-        self.id = id
-        -- Make the color slightly varied
-        local function rgbVary(num)
-            return limit(num + math.random()*40 - 20, 0, 255)
-        end
-        self.color.r = rgbVary(self.color.r)
-        self.color.g = rgbVary(self.color.g)
-        self.color.b = rgbVary(self.color.b)
-        require 'systems.eleSystem':add(self)
-    end
     return e
 end
 
@@ -46,6 +29,12 @@ local element =
 -- Create numerical indexes for gesture screen
 element[1], element[2] = element.fire, element.ice
 element[3], element[4] = element.earth, element.air
+
+function element.colorVary(color)
+    color.r = rgbVary(color.r)
+    color.g = rgbVary(color.g)
+    color.b = rgbVary(color.b)
+end
 
 function element:inc(amount)
     local amount = amount or 1
@@ -78,12 +67,6 @@ end
 
 function element:setAsColor()
     setColor(self[self.i].color)
-end
-
-function element.create(id, name)
-    local c = objectDeepcopy(element[name])
-    c:addToSystems(id)
-    return c
 end
 
 return element

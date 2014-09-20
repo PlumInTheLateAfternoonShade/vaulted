@@ -5,7 +5,6 @@ local Position = require 'lib.middleclass'('Position',
                  require 'components.Component')
 
 function Position:initialize(coords, center, shape, radius)
-    self.name = 'position' --TODO delete
     self.coords = coords
     if self.coords and self.coords[1] and self.coords[1] ~= 'number' then
         self.coords = Point.pointsToCoordsTable(self.coords)
@@ -14,7 +13,6 @@ function Position:initialize(coords, center, shape, radius)
     self.shape = shape or 'polygon'
     self.radius = radius
     self.shouldPreview = true
-    self.systems = self.class.static.systems
 end
 
 return Position

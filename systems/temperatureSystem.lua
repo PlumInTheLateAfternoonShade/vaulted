@@ -1,9 +1,15 @@
 local physicsSystem = require('systems.physicsSystem')
+local Temperature = require('components.Temperature')
+local ComponentSystem = require('systems.ComponentSystem')
 
--- Handles temperature components.
-local temperatureSystem = {}
+-- Handles Temperature components.
+local TemperatureSystem = require('lib.middleclass')(
+    'TemperatureSystem', ComponentSystem)
 
-require('systems.componentSystem'):inherit(temperatureSystem)
+function TemperatureSystem:init(referenceSystem, entities)
+    self.components = entities[Temperature]
+    ComponentSystem.init(self, referenceSystem)
+end
 
 local function updateTemp(comp, dt)
     local mult = 0
@@ -16,12 +22,11 @@ local function updateTemp(comp, dt)
     comp.temp = comp.temp + mult/math.max(physicsSystem:getMass(comp.id), 0.1)*dt
 end
 
-
-function temperatureSystem:update(dt)
+function TemperatureSystem:update(dt)
     for id, comp in pairs(self.components) do updateTemp(comp, dt) end
 end
 
-function temperatureSystem:getAdjustedColor(id, ambientColor)
+function TemperatureSystem:getAdjustedColor(id, ambientColor)
     if not self.components[id] then return ambientColor end
     local diff = self.components[id].temp - self.components[id].ambientTemp
     return 
@@ -33,11 +38,11 @@ function temperatureSystem:getAdjustedColor(id, ambientColor)
     }
 end
 
-function temperatureSystem:getTemp(id)
+function TemperatureSystem:getTemp(id)
     return self.components[id].temp
 end
 
-function temperatureSystem:beginCollision(id, otherId, contact)
+function TemperatureSystem:beginCollision(id, otherId, contact)
     --Update the temp as a weighted average.
     --This should really happen non-instantaneously and when things
     --are near each other, but this is good enough for now.
@@ -49,8 +54,9 @@ function temperatureSystem:beginCollision(id, otherId, contact)
     tempComp.temp = (tempComp.temp + (mass*tempComp.temp + otherMass*otherTempComp.temp)/(mass + otherMass))/2
 end
 
-function temperatureSystem:endCollision(id, otherId, contact)
+function TemperatureSystem:endCollision(id, otherId, contact)
     --Do nothing special.
 end
 
-return temperatureSystem
+local temperatureSystemInstance = TemperatureSystem:new()
+return temperatureSystemInstance
