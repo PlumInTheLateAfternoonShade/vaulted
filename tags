@@ -54,6 +54,19 @@ Controls:keypressed	menus/controls.lua	/^function Controls:keypressed(key)$/;"	f
 Controls:mousepressed	menus/controls.lua	/^function Controls:mousepressed(x, y, button)$/;"	f
 Controls:mousereleased	menus/controls.lua	/^function Controls:mousereleased(x, y, button)$/;"	f
 Controls:update	menus/controls.lua	/^function Controls:update(dt)$/;"	f
+CoolDownMetro	metro.py	/^class CoolDownMetro(object):$/;"	c
+CoolDownMetro:fire	CoolDownMetro.lua	/^function CoolDownMetro:fire()$/;"	f
+CoolDownMetro:fizzle	CoolDownMetro.lua	/^function CoolDownMetro:fizzle()$/;"	f
+CoolDownMetro:getPercent	CoolDownMetro.lua	/^function CoolDownMetro:getPercent()$/;"	f
+CoolDownMetro:getState	CoolDownMetro.lua	/^function CoolDownMetro:getState()$/;"	f
+CoolDownMetro:getTime	CoolDownMetro.lua	/^function CoolDownMetro:getTime()$/;"	f
+CoolDownMetro:initialize	CoolDownMetro.lua	/^function CoolDownMetro:initialize(coolDown)$/;"	f
+CoolDownMetro:tick	CoolDownMetro.lua	/^function CoolDownMetro:tick(dt)$/;"	f
+CooldownSystem:deduct	systems/coolDownSystem.lua	/^function CooldownSystem:deduct(id, amount)$/;"	f
+CooldownSystem:getCooldown	systems/coolDownSystem.lua	/^function CooldownSystem:getCooldown(id)$/;"	f
+CooldownSystem:getCooldownPercent	systems/coolDownSystem.lua	/^function CooldownSystem:getCooldownPercent(id)$/;"	f
+CooldownSystem:init	systems/coolDownSystem.lua	/^function CooldownSystem:init(referenceSystem, entities)$/;"	f
+CooldownSystem:update	systems/coolDownSystem.lua	/^function CooldownSystem:update(dt)$/;"	f
 CreateObjects	lib/LoveFrames/init.lua	/^		local function CreateObjects(t, o, c)$/;"	f
 ElementInstance:initialize	components/ElementInstance.lua	/^function ElementInstance:initialize(name)$/;"	f
 ElementSystem:init	systems/eleSystem.lua	/^function ElementSystem:init(referenceSystem, entities)$/;"	f
@@ -166,6 +179,12 @@ Map:updateTiles	lib/AdvTiledLoader/Map.lua	/^function Map:updateTiles()$/;"	f
 Menu:draw	menus/menu.lua	/^function Menu:draw()$/;"	f
 Menu:keypressed	menus/menu.lua	/^function Menu:keypressed(key)$/;"	f
 MeshRenderer:initialize	components/MeshRenderer.lua	/^function MeshRenderer:initialize(color, imageName, shouldPreview)$/;"	f
+Metro	metro.py	/^class Metro(object):$/;"	c
+Metro:assignTickTime	metro.lua	/^function Metro:assignTickTime()$/;"	f
+Metro:getPercentGreen	metro.lua	/^function Metro:getPercentGreen()$/;"	f
+Metro:initialize	metro.lua	/^function Metro:initialize(redTime, greenTime,$/;"	f
+Metro:tick	metro.lua	/^function Metro:tick(dt)$/;"	f
+Metro:zero	metro.lua	/^function Metro:zero()$/;"	f
 Object.static:allocate	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:allocate	lib/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:include	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:include( ... )$/;"	f
@@ -375,6 +394,8 @@ __call 	class.lua	/^		__call = function(self, ...)$/;"	f
 __call 	lib/luafun/fun.lua	/^    __call = function(t)$/;"	f
 __call     	lib/LoveFrames/third-party/middleclass.lua	/^    __call     = function(self, ...) return self:new(...) end$/;"	f
 __call     	lib/middleclass.lua	/^    __call     = function(self, ...) return self:new(...) end$/;"	f
+__init__	metro.py	/^    def __init__(self, coolDown):$/;"	m	class:CoolDownMetro
+__init__	metro.py	/^    def __init__(self, redTime=0, greenTime=0,$/;"	m	class:Metro
 __tostring 	class.lua	/^		__tostring = function() return name end$/;"	f
 __tostring 	lib/LoveFrames/third-party/middleclass.lua	/^    __tostring = function() return "class " .. aClass.name end,$/;"	f
 __tostring 	lib/middleclass.lua	/^    __tostring = function() return "class " .. aClass.name end,$/;"	f
@@ -413,6 +434,7 @@ assert(type(constructor) 	class.lua	/^	assert(type(constructor) == "function", '
 assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function")$/;"	f
 assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function", "invalid first argument to drop_while")$/;"	f
 assert(type(fun) 	lib/luafun/fun.lua	/^    assert(type(fun) == "function", "invalid first argument to take_while")$/;"	f
+assignTickTime	metro.py	/^    def assignTickTime(self):$/;"	m	class:Metro
 band	lib/AdvTiledLoader/external/numberlua.lua	/^local function band(a,b) return ((a+b) - bxor(a,b))\/2 end$/;"	f
 bitop	lib/AdvTiledLoader/external/numberlua.lua	/^  local function bitop(a, b)$/;"	f
 bits) return pow2[minbits] + msb	lib/AdvTiledLoader/external/deflatelua.lua	/^    function(bits) return pow2[minbits] + msb(bits, minbits) end)$/;"	f
@@ -545,8 +567,10 @@ file_exists	lib/AdvTiledLoader/external/gunziplua.lua	/^local function file_exis
 file_print	lib/luafun/tests/runtest	/^function file_print(file, ...)$/;"	f
 filter_fun	lib/luafun/tests/filtering.lua	/^function filter_fun(a, b, c)$/;"	f
 filterm_gen 	lib/luafun/fun.lua	/^filterm_gen = function(fun, gen_x, param_x, state_x, ...)$/;"	f
+fire	metro.py	/^    def fire(self):$/;"	m	class:CoolDownMetro
 fixture.create	components/fixture.lua	/^function fixture.create(id, bodyId, ...)$/;"	f
 fixture.prototype	components/fixture.lua	/^function fixture.prototype(friction)$/;"	f
+fizzle	metro.py	/^    def fizzle(self):$/;"	m	class:CoolDownMetro
 flags_str	lib/AdvTiledLoader/external/optparse.lua	/^  local function flags_str(optdesc)$/;"	f
 floordiv 	lib/luafun/fun.lua	/^    floordiv = function(a, b) return math.floor(a\/b) end,$/;"	f
 force 	systems/runeSystem.lua	/^        force = function(spellBook, lines, startPoint, endPoint, firstGestureId)$/;"	f
@@ -569,6 +593,10 @@ getMeshVertices	systems/graphicsSystem.lua	/^local function getMeshVertices(comp
 getNewVelocity	systems/bodySystem.lua	/^local function getNewVelocity(v, center, newCenter)$/;"	f
 getNewVelocity	systems/physicsSystem.lua	/^local function getNewVelocity(v, center, newCenter)$/;"	f
 getOtherPointFromLines	geometry/Point.lua	/^local function getOtherPointFromLines(lines, point)$/;"	f
+getPercent	metro.py	/^    def getPercent(self):$/;"	m	class:CoolDownMetro
+getPercentGreen	metro.py	/^    def getPercentGreen(self):$/;"	m	class:Metro
+getState	metro.py	/^    def getState(self):$/;"	m	class:CoolDownMetro
+getTime	metro.py	/^    def getTime(self):$/;"	m	class:CoolDownMetro
 get_bitstream	lib/AdvTiledLoader/external/deflatelua.lua	/^local function get_bitstream(o)$/;"	f
 get_obytestream	lib/AdvTiledLoader/external/deflatelua.lua	/^local function get_obytestream(o)$/;"	f
 getchr	lib/Lady/lady.lua	/^local function getchr(c)$/;"	f
@@ -1662,6 +1690,8 @@ templates_path	lib/luafun/doc/conf.py	/^templates_path = ['_templates']$/;"	v
 test3	lib/luafun/tests/filtering.lua	/^function test3(a, b, c)$/;"	f
 testPoint	geometry/Point.lua	/^function testPoint(p, points)$/;"	f
 textobject.Update 	lib/LoveFrames/objects/checkbox.lua	/^		textobject.Update = function(object, dt)$/;"	f
+tick	metro.py	/^    def tick(self, dt):$/;"	m	class:CoolDownMetro
+tick	metro.py	/^    def tick(self, dt):$/;"	m	class:Metro
 tileSize	rectAlgo.js	/^var tileSize = 4;$/;"	v
 toggleFullscreen	main.lua	/^function toggleFullscreen()$/;"	f
 truediv 	lib/luafun/fun.lua	/^    truediv = function(a, b) return a \/ b end,$/;"	f
@@ -1676,6 +1706,7 @@ unm 	lib/luafun/fun.lua	/^    unm = function(a) return -a end, -- an alias$/;"	f
 unpacks	utils.lua	/^function unpacks( ... )$/;"	f
 upbutton.Update		lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		upbutton.Update	= function(object, dt)$/;"	f
 updateComponent	systems/physicsSystem.lua	/^local function updateComponent(comp, world, dt)$/;"	f
+updateCooldown	systems/coolDownSystem.lua	/^local function updateCooldown(id, comp, dt)$/;"	f
 updateExperience	systems/experienceSystem.lua	/^local function updateExperience(id, comp, dt)$/;"	f
 updateHealth	systems/healthSystem.lua	/^local function updateHealth(id, comp, dt)$/;"	f
 updateMana	systems/manaSystem.lua	/^local function updateMana(id, comp, dt)$/;"	f
@@ -1729,6 +1760,7 @@ x) return x < 5 end, range	lib/luafun/tests/slicing.lua	/^dump(zip(span(function
 x) return x > 100 end, range	lib/luafun/tests/slicing.lua	/^dump(drop_while(function(x) return x > 100 end, range(10)))$/;"	f
 x) return x > 100 end, range	lib/luafun/tests/slicing.lua	/^dump(take_while(function(x) return x > 100 end, range(10)))$/;"	f
 x) return x > 7 end, range	lib/luafun/tests/compositions.lua	/^dump(zip(partition(function(x) return x > 7 end, range(1, 15, 1))))$/;"	f
+zero	metro.py	/^    def zero(self):$/;"	m	class:Metro
 zip_gen_r	lib/luafun/fun.lua	/^local function zip_gen_r(param, state, state_new, ...)$/;"	f
 {__call 	class.lua	/^	{__call = function(_,...) return new(...) end})$/;"	f
 {imageName 	gestures.lua	/^            {imageName = "airRune.png", func = function(object) self.rune = "air" end},$/;"	f

@@ -13,7 +13,8 @@ function SpellBookSystem:init(referenceSystem, entities)
 end
 
 function SpellBookSystem:cast(id, index)
-    if manaSystem:deduct(id, self.components[id][index].power) then
+    if manaSystem:deduct(id, self.components[id][index].power) and
+       coolDownSystem:isOffSpellCooldown(id) then
         return self.components[id][index]:cast(id)
     end
 end

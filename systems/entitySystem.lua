@@ -32,7 +32,7 @@ function entitySystem:init(objectFactory)
     
     local world = love.physics.newWorld(0, 50*conf.tileSize, true)
     
-    self.map = loader.load("level1.tmx")
+    self.map = loader.load("bedrock1.tmx")
     self.map.tileWidth = conf.tileSize
     self.map.widthInPixels = self.map.tileWidth * self.map.width
     
