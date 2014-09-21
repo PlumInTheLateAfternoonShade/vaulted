@@ -13,9 +13,12 @@ function SpellBookSystem:init(referenceSystem, entities)
 end
 
 function SpellBookSystem:cast(id, index)
-    if manaSystem:deduct(id, self.components[id][index].power) and
-       coolDownSystem:isOffSpellCooldown(id) then
-        return self.components[id][index]:cast(id)
+    local comp = self.components[id]
+    if comp.coolDown:canFire() then
+        if manaSystem:deduct(id, comp[index].power) then
+            comp.coolDown:fire() 
+            return comp[index]:cast(id)
+        end
     end
 end
 
@@ -53,6 +56,19 @@ function SpellBookSystem:draw(id)
             love.graphics.print(keys.spells[i], 
             height*(i - 1) + adjLeft, height*0.1 + top)
         end
+    end
+    setColor({r=255, g=255, b=255})
+    love.graphics.print(string.format('CD: %g', comp.coolDown:getPercent()),
+        conf.screenWidth*0.9,
+        conf.screenHeight*0.5)
+    love.graphics.print(string.format('CD raw: %g', comp.coolDown.metro.time),
+        conf.screenWidth*0.9,
+        conf.screenHeight*0.4)
+end
+
+function SpellBookSystem:update(dt)
+    for id, comp in pairs(self.components) do
+        comp.coolDown:tick(dt)
     end
 end
 

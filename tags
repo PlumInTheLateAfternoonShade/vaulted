@@ -55,6 +55,7 @@ Controls:mousepressed	menus/controls.lua	/^function Controls:mousepressed(x, y, 
 Controls:mousereleased	menus/controls.lua	/^function Controls:mousereleased(x, y, button)$/;"	f
 Controls:update	menus/controls.lua	/^function Controls:update(dt)$/;"	f
 CoolDownMetro	metro.py	/^class CoolDownMetro(object):$/;"	c
+CoolDownMetro:canFire	CoolDownMetro.lua	/^function CoolDownMetro:canFire()$/;"	f
 CoolDownMetro:fire	CoolDownMetro.lua	/^function CoolDownMetro:fire()$/;"	f
 CoolDownMetro:fizzle	CoolDownMetro.lua	/^function CoolDownMetro:fizzle()$/;"	f
 CoolDownMetro:getPercent	CoolDownMetro.lua	/^function CoolDownMetro:getPercent()$/;"	f
@@ -180,10 +181,15 @@ Menu:draw	menus/menu.lua	/^function Menu:draw()$/;"	f
 Menu:keypressed	menus/menu.lua	/^function Menu:keypressed(key)$/;"	f
 MeshRenderer:initialize	components/MeshRenderer.lua	/^function MeshRenderer:initialize(color, imageName, shouldPreview)$/;"	f
 Metro	metro.py	/^class Metro(object):$/;"	c
+Metro:assignTickTime	Metro.lua	/^function Metro:assignTickTime()$/;"	f
 Metro:assignTickTime	metro.lua	/^function Metro:assignTickTime()$/;"	f
+Metro:getPercentGreen	Metro.lua	/^function Metro:getPercentGreen()$/;"	f
 Metro:getPercentGreen	metro.lua	/^function Metro:getPercentGreen()$/;"	f
+Metro:initialize	Metro.lua	/^function Metro:initialize(redTime, greenTime,$/;"	f
 Metro:initialize	metro.lua	/^function Metro:initialize(redTime, greenTime,$/;"	f
+Metro:tick	Metro.lua	/^function Metro:tick(dt)$/;"	f
 Metro:tick	metro.lua	/^function Metro:tick(dt)$/;"	f
+Metro:zero	Metro.lua	/^function Metro:zero()$/;"	f
 Metro:zero	metro.lua	/^function Metro:zero()$/;"	f
 Object.static:allocate	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:allocate	lib/middleclass.lua	/^function Object.static:allocate()$/;"	f
@@ -332,6 +338,7 @@ SpellBookSystem:draw	systems/spellBookSystem.lua	/^function SpellBookSystem:draw
 SpellBookSystem:inc	systems/spellBookSystem.lua	/^function SpellBookSystem:inc(id, amount)$/;"	f
 SpellBookSystem:init	systems/spellBookSystem.lua	/^function SpellBookSystem:init(referenceSystem, entities)$/;"	f
 SpellBookSystem:preview	systems/spellBookSystem.lua	/^function SpellBookSystem:preview(id)$/;"	f
+SpellBookSystem:update	systems/spellBookSystem.lua	/^function SpellBookSystem:update(dt)$/;"	f
 StatBar:initialize	components/StatBar.lua	/^function StatBar:initialize(topPercent, heightPercent, color, getPercent)$/;"	f
 State:draw	state.lua	/^function State:draw()$/;"	f
 State:keypressed	state.lua	/^function State:keypressed(key)$/;"	f

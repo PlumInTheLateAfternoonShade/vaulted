@@ -8,7 +8,8 @@ function Metro:initialize(redTime, greenTime,
     self.redTime = redTime or 0
     -- How many millis the metro will be in a "true" state.
     self.greenTime = greenTime or 0
-    self.time = -delay or 0
+    local delay = delay or 0
+    self.time = -delay
     self.state = initState or false
     self:assignTickTime()
 end
@@ -17,7 +18,7 @@ function Metro:tick(dt)
     --Updates by a millisecond argument and returns its current state.--
     self.time = self.time + dt
     if self.time > self.tickTime then
-        self.time = self.time + self.tickTime
+        self.time = 0 
         self.state = not self.state
         self:assignTickTime()
     end

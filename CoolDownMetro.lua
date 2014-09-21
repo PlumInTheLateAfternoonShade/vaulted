@@ -1,3 +1,4 @@
+local Metro = require 'Metro'
 local CoolDownMetro = require('lib.middleclass')('CoolDownMetro')
 
 --Handles a timer that fires, then can't fire for awhile.--
@@ -33,6 +34,10 @@ end
 
 function CoolDownMetro:getState()
     return self.hasFired
+end
+
+function CoolDownMetro:canFire()
+    return not self.hasFired
 end
 
 function CoolDownMetro:getPercent()
