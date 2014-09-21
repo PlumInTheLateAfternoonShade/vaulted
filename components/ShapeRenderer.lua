@@ -2,9 +2,9 @@
 local ShapeRenderer = require 'lib.middleclass'('ShapeRenderer',
                  require 'components.Component')
 
-function ShapeRenderer:initialize(color)
+function ShapeRenderer:initialize(color, shouldPreview)
     self.color = color
-    self.shouldPreview = true
+    self.shouldPreview = shouldPreview 
 end
 
 return ShapeRenderer

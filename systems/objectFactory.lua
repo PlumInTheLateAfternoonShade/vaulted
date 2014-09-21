@@ -43,7 +43,7 @@ function objectFactory.createElemental(points, center, eleName, initV)
     builder:Position(points, center)
     :Collider(ele.friction, 'dynamic', eleName == 'ice' or eleName == 'fire', initV, ele.density, false, true, ele.hardness)
     :ElementInstance(eleName)
-    :MeshRenderer(ele.color, textureName)
+    :MeshRenderer(ele.color, textureName, false)
     :Temperature(ele.temp)
     :finalize()
     return id
@@ -59,7 +59,7 @@ function objectFactory.prototypeElemental(points, center, eleName)
     end
     local previewId = builder:withNewId().inUseId
     local _, pos = builder:Position(points, center)
-    local _, meshR = builder:MeshRenderer(ele.color, textureName)
+    local _, meshR = builder:MeshRenderer(ele.color, textureName, true)
     builder:finalize()
     return
     {
@@ -81,14 +81,15 @@ function objectFactory.prototypeElemental(points, center, eleName)
 end
 
 function objectFactory.prototypeForce(h, v, x, y, casterId)
-    local _, forceComp = builder:withNewId():Force(h, v, x, y, casterId)
+    local _, forceComp = builder:withNewId():Force(h, v, x, y, casterId, true)
     local id = builder.inUseId
     builder:finalize()
     return
     {
         forceComp,
         Lifetime:new(0.5),
-        previewId = id}
+        previewId = id
+    }
 end
 
 local playerFriction = 0.5
@@ -98,7 +99,7 @@ local function createBipedalLeg(parentId, weldPoint, center, legRadius)
     builder:Referencer(parentId)
     :Position({}, center, 'circle', legRadius)
     :Collider(playerFriction, 'dynamic', false, nil, nil, true)
-    :ShapeRenderer({r=math.random()*255, g=255, b=255})
+    :ShapeRenderer({r=math.random()*255, g=255, b=255}, false)
     :withNewId()
     :Welder(parentId, legId, weldPoint)
     :finalize()
@@ -115,7 +116,7 @@ function objectFactory.createPlayer(serializedPosition, serializedSpellBook)
         nil, --initV 
         nil, --density
         true) --shouldBalance
-    :ShapeRenderer({r=255, g=255, b=255})
+    :ShapeRenderer({r=255, g=255, b=255}, false)
     :SpellBook(builder, serializedSpellBook)
     :Walker(250, 400)
     :Input()

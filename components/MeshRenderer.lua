@@ -2,11 +2,11 @@
 local MeshRenderer = require 'lib.middleclass'('MeshRenderer',
                  require 'components.Component')
 
-function MeshRenderer:initialize(color, imageName)
+function MeshRenderer:initialize(color, imageName, shouldPreview)
     self.color = color
     self.imageName = imageName
     self.firstUpdate = true
-    self.shouldPreview = true
+    self.shouldPreview = shouldPreview
 end
 
 return MeshRenderer

@@ -70,7 +70,7 @@ FireParticleSystem:draw	particles/fireParticleSystem.lua	/^function FireParticle
 FireParticleSystem:reduce	particles/fireParticleSystem.lua	/^function FireParticleSystem:reduce(deathTime, deathSeconds)$/;"	f
 FireParticleSystem:update	particles/fireParticleSystem.lua	/^function FireParticleSystem:update(dt, vX, vY, color)$/;"	f
 Force.create	components/force.lua	/^function Force.create(id, ...)$/;"	f
-Force:initialize	components/Force.lua	/^function Force:initialize(h, v, x, y, casterId)$/;"	f
+Force:initialize	components/Force.lua	/^function Force:initialize(h, v, x, y, casterId, shouldPreview)$/;"	f
 Force:initialize	components/force.lua	/^function Force:initialize(h, v, x, y, casterId)$/;"	f
 Game:draw	game.lua	/^function Game:draw()$/;"	f
 Game:keypressed	game.lua	/^function Game:keypressed(key)$/;"	f
@@ -165,7 +165,7 @@ Map:toIso	lib/AdvTiledLoader/Map.lua	/^function Map:toIso(a, b)$/;"	f
 Map:updateTiles	lib/AdvTiledLoader/Map.lua	/^function Map:updateTiles()$/;"	f
 Menu:draw	menus/menu.lua	/^function Menu:draw()$/;"	f
 Menu:keypressed	menus/menu.lua	/^function Menu:keypressed(key)$/;"	f
-MeshRenderer:initialize	components/MeshRenderer.lua	/^function MeshRenderer:initialize(color, imageName)$/;"	f
+MeshRenderer:initialize	components/MeshRenderer.lua	/^function MeshRenderer:initialize(color, imageName, shouldPreview)$/;"	f
 Object.static:allocate	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:allocate	lib/middleclass.lua	/^function Object.static:allocate()$/;"	f
 Object.static:include	lib/LoveFrames/third-party/middleclass.lua	/^function Object.static:include( ... )$/;"	f
@@ -299,7 +299,7 @@ Seg:scale	geometry/Seg.lua	/^function Seg:scale(value)$/;"	f
 Seg:sharesAPoint	geometry/Seg.lua	/^function Seg:sharesAPoint(seg)$/;"	f
 Settings:draw	menus/settings.lua	/^function Settings:draw()$/;"	f
 Settings:keypressed	menus/settings.lua	/^function Settings:keypressed(key)$/;"	f
-ShapeRenderer:initialize	components/ShapeRenderer.lua	/^function ShapeRenderer:initialize(color)$/;"	f
+ShapeRenderer:initialize	components/ShapeRenderer.lua	/^function ShapeRenderer:initialize(color, shouldPreview)$/;"	f
 Spell:addComponentTable	Spell.lua	/^function Spell:addComponentTable(compTable)$/;"	f
 Spell:addComponentToEntity	Spell.lua	/^function Spell:addComponentToEntity(component, previewId)$/;"	f
 Spell:cast	Spell.lua	/^function Spell:cast(casterId)$/;"	f
@@ -499,8 +499,8 @@ div 	lib/luafun/fun.lua	/^    div = function(a, b) return a \/ b end,$/;"	f
 dot 	geometry/Point.lua	/^dot = function(p0, p1)$/;"	f
 downbutton.Update 	lib/LoveFrames/objects/internal/scrollable/scrollbody.lua	/^		downbutton.Update = function(object, dt)$/;"	f
 drawMesh	systems/graphicsSystem.lua	/^local function drawMesh(comp)$/;"	f
-drawMeshes	systems/graphicsSystem.lua	/^local function drawMeshes(meshes)$/;"	f
-drawShapes	systems/graphicsSystem.lua	/^local function drawShapes(shapes)$/;"	f
+drawMeshes	systems/graphicsSystem.lua	/^local function drawMeshes(meshes, raw)$/;"	f
+drawShapes	systems/graphicsSystem.lua	/^local function drawShapes(shapes, raw)$/;"	f
 drawSort	lib/AdvTiledLoader/ObjectLayer.lua	/^local function drawSort(o1, o2) $/;"	f
 drawStatBars	systems/graphicsSystem.lua	/^local function drawStatBars(statBars)$/;"	f
 dump	lib/luafun/tests/runtest	/^function dump(gen, init, state) each(print, gen, init, state) end$/;"	f
@@ -578,8 +578,9 @@ glueInt	lib/AdvTiledLoader/base64.lua	/^local function glueInt(b1, b2, b3, b4)$/
 goDownAndRightWhileValid	lib/AdvTiledLoader/TileLayer.lua	/^local function goDownAndRightWhileValid(x, y, mWidth, mHeight, tiles, tileData, tileWidth, tileHeight)$/;"	f
 goRightWhileValid	lib/AdvTiledLoader/TileLayer.lua	/^local function goRightWhileValid(x, y, targetWidth, tiles, tileData, tileWidth)$/;"	f
 graphicsSystem:delete	systems/graphicsSystem.lua	/^function graphicsSystem:delete(id)$/;"	f
+graphicsSystem:drawBackground	systems/graphicsSystem.lua	/^function graphicsSystem:drawBackground()$/;"	f
 graphicsSystem:drawMap	systems/graphicsSystem.lua	/^function graphicsSystem:drawMap()$/;"	f
-graphicsSystem:drawRawComponents	systems/graphicsSystem.lua	/^function graphicsSystem:drawRawComponents()$/;"	f
+graphicsSystem:drawRawComponents	systems/graphicsSystem.lua	/^function graphicsSystem:drawRawComponents(raw)$/;"	f
 graphicsSystem:drawUI	systems/graphicsSystem.lua	/^function graphicsSystem:drawUI()$/;"	f
 graphicsSystem:init	systems/graphicsSystem.lua	/^function graphicsSystem:init(cam, map, entities)$/;"	f
 graphicsSystem:update	systems/graphicsSystem.lua	/^function graphicsSystem:update(dt)$/;"	f
@@ -1698,6 +1699,7 @@ userdata_constructor:RopeJoint	lib/Lady/lady.lua	/^function userdata_constructor
 userdata_constructor:WeldJoint	lib/Lady/lady.lua	/^function userdata_constructor:WeldJoint(srefs)$/;"	f
 userdata_constructor:WheelJoint	lib/Lady/lady.lua	/^function userdata_constructor:WheelJoint(srefs)$/;"	f
 userdata_constructor:World	lib/Lady/lady.lua	/^function userdata_constructor:World(srefs, memo, rev_memo)$/;"	f
+utils.mapOnAllFiles	utils.lua	/^function utils.mapOnAllFiles(folder, func, allowedFormats)$/;"	f
 utils.objectDeepcopyWithoutMetatable	utils.lua	/^function utils.objectDeepcopyWithoutMetatable(object)$/;"	f
 utils.requireAll	utils.lua	/^function utils.requireAll(folder)$/;"	f
 utils.setFieldRecursive	utils.lua	/^function utils.setFieldRecursive(object, fieldName, newValue)$/;"	f

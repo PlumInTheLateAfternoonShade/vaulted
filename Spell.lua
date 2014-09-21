@@ -12,11 +12,9 @@ local function constructComponentTables(serializedSpell)
         for j = 1, #serializedSpell.componentTables[i] do
             local comp = serializedSpell.componentTables[i][j]
             assert(comp)
-            print("class: "..comp.class.name.." fU: "..tostring(comp.firstUpdate))
             if comp.firstUpdate == false then
                 comp.firstUpdate = true
             end
-            print("fU2: "..tostring(comp.firstUpdate))
         end
     end
     return serializedSpell.componentTables 
@@ -28,16 +26,12 @@ end
 local Spell = require 'lib.middleclass'('Spell')
  
 function Spell:initialize(entityBuilder, serializedSpell)
-    print("initialized. serializedSpell: "..tostring(serializedSpell))
     self.power = 0.1
     builder = entityBuilder
     self.componentTables = constructComponentTables(serializedSpell)
 end
 
 function Spell:addComponentTable(compTable)
-    for i = 1, #compTable do
-        print("compTable, i: "..i.." val: "..tostring(compTable[i]))
-    end
     table.insert(self.componentTables, compTable)
 end
 
@@ -81,11 +75,9 @@ function Spell:cast(casterId)
             if comp.casterId then
                 comp.casterId = casterId
             end
-            print(j.." spell loop ")
             builder:add(comp)
         end
     end
-    print("spell pos: "..tostring(positionSystem.components[168]))
 end
 
 function Spell:preview()

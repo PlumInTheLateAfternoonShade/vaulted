@@ -133,11 +133,12 @@ function entitySystem:update(dt)
 end
 
 function entitySystem:draw(raw)
+    --graphicsSystem:drawBackground()
     if not raw then
         self.camera:set()
         graphicsSystem:drawMap()
     end
-    graphicsSystem:drawRawComponents()
+    graphicsSystem:drawRawComponents(raw)
     forceSystem:draw()
     if not raw then
         self.camera:unset()

@@ -2,7 +2,7 @@
 local Force = require 'lib.middleclass'('Force',
                  require 'components.Component')
 
-function Force:initialize(h, v, x, y, casterId)
+function Force:initialize(h, v, x, y, casterId, shouldPreview)
     self.name = 'force' --TODO delete
     self.h = h
     self.v = v
@@ -10,7 +10,7 @@ function Force:initialize(h, v, x, y, casterId)
     self.y = y
     self.casterId = casterId
     self.fired = false
-    self.shouldPreview = true
+    self.shouldPreview = shouldPreview
 end
 
 return Force

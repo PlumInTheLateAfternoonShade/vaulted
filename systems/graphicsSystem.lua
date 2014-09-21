@@ -15,6 +15,7 @@ function graphicsSystem:init(cam, map, entities)
     self.meshes = entities[MeshRenderer]
     self.shapes = entities[ShapeRenderer]
     self.statBars = entities[StatBar]
+    self.background = img.load('bg4.png')
 end
 
 function graphicsSystem:delete(id)
@@ -38,10 +39,12 @@ local drawShape =
     end,
 }
 
-local function drawShapes(shapes)
+local function drawShapes(shapes, raw)
     for id, comp in pairs(shapes) do
-        setToComponentColor(comp)
-        drawShape[positionSystem:getShape(id)](id)
+        if not raw or comp.shouldPreview then
+            setToComponentColor(comp)
+            drawShape[positionSystem:getShape(id)](id)
+        end
     end
 end
 
@@ -79,7 +82,6 @@ local function getMeshVertices(comp)
 end
 
 local function initMesh(comp)
-    print("mesh inited, id: "..comp.id)
     comp.mesh = love.graphics.newMesh(getMeshVertices(comp), img.load(comp.imageName))
 end
 
@@ -95,13 +97,15 @@ local function drawMesh(comp)
     each(function(p) love.graphics.circle("fill", p.x, p.y, 5, 10) end, positionSystem:getPoints(comp.id))
 end
 
-local function drawMeshes(meshes)
+local function drawMeshes(meshes, raw)
     for id, comp in pairs(meshes) do
         if comp.firstUpdate then
             comp.firstUpdate = false
             initMesh(comp)
         end
-        drawMesh(comp)
+        if not raw or comp.shouldPreview then
+            drawMesh(comp)
+        end
     end
 end
 
@@ -113,9 +117,9 @@ local function drawStatBars(statBars)
     end
 end
 
-function graphicsSystem:drawRawComponents()
-    drawShapes(self.shapes)
-    drawMeshes(self.meshes)
+function graphicsSystem:drawRawComponents(raw)
+    drawShapes(self.shapes, raw)
+    drawMeshes(self.meshes, raw)
 end
 
 
@@ -128,6 +132,10 @@ end
 
 function graphicsSystem:drawUI()
     drawStatBars(self.statBars)
+end
+
+function graphicsSystem:drawBackground()
+    love.graphics.draw(self.background, 0, 0)
 end
 
 function graphicsSystem:update(dt)

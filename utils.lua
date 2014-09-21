@@ -72,7 +72,6 @@ function utils.requireAll(folder)
         if name:find('%.lua') then
             local name = name:gsub('%.lua', '')
             if not name:find('%.') then
-                print(name)
                 requires[require(folder..'.'..name)] = {}
             end
         end
@@ -80,6 +79,27 @@ function utils.requireAll(folder)
     return requires
 end
 
+-- Applies function on each file name in the folder that matches the
+-- allowed formats
+--
+-- folder: string -- game folder is base dir
+-- func: function -- to apply
+-- allowedFormats: table -- 1..n strings, in Lua pattern format
+function utils.mapOnAllFiles(folder, func, allowedFormats)
+    local files = love.filesystem.getDirectoryItems(folder)
+    for i = 1, #files do
+        local name = files[i]
+        local found = false
+        for j = 1, #allowedFormats do
+            if name:find(allowedFormats[j]) then
+                found = true
+            end
+        end
+        if found then
+            func(name)
+        end
+    end
+end
 
 function setColorInverted(color)
     love.graphics.setColor(255 - color.r, 255 - color.g,

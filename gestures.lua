@@ -16,6 +16,7 @@ local Gestures = require 'class'
 {
     name = 'Gestures',
     function(self)
+        print('gestures')
         -- Entity system preview setup
         self.firstGestureId = entitySystem.currId + 1
         self.spellBook = spellBookSystem:get(heroId)

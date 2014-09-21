@@ -17,22 +17,6 @@ local Game = require 'class'
         local heroSpellBook = nil
         if shouldLoadHero then
             heroSpellBook = loader:unpack("SpellBook")
-            local componentTables = heroSpellBook[1].componentTables
-            if not componentTables then
-                print("nil spell book")
-            else
-                for i = 1, #componentTables do
-                    for j = 1, #componentTables[i] do
-                        local comp = componentTables[i][j]
-                        assert(comp)
-                        print("class: "..comp.class.name.." fU: "..tostring(comp.firstUpdate))
-                        if comp.firstUpdate == false then
-                            comp.firstUpdate = true
-                        end
-                        print("fU2: "..tostring(comp.firstUpdate))
-                    end
-                end
-            end
         end
         heroId = objectFactory.createPlayer({
         points = {

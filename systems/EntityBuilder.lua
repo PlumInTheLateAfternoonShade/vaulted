@@ -26,14 +26,9 @@ function EntityBuilder:add(comp)
     end
     assert(type(self.inUseId) == 'number', 'id must be number')
     comp.id = self.inUseId
-    print("ebadd: "..tostring(comp))
     if not comp.class then
-        for key, value in pairs(comp) do
-            print(tostring(key).." : "..tostring(value))
-        end
         error("Only objects can be added.")
     end
-    print("class: "..comp.class.name..' id: '..self.inUseId)
     assert(comp.class == require('components.'..comp.class.name))
     self.entities[comp.class][comp.id] = comp
     return self
