@@ -6,7 +6,7 @@ local SpellBook = require 'lib.middleclass'('SpellBook',
                  require 'components.Component')
 
 function SpellBook:initialize(builder, serializedSpellBook)
-    self.coolDown = CoolDownMetro:new(0.5)
+    self.coolDown = CoolDownMetro:new(0.4)
     self.i = 1
     if not serializedSpellBook then
         self[1] = Spell(builder)

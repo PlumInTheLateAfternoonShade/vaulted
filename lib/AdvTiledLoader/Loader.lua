@@ -215,7 +215,9 @@ function Loader._processTileSet(t, map)
 				imageHeight = cache_imagesize[image].height
 			-- Else load it and store in the cache
 			else
-				image = love.image.newImageData(Loader.path .. v.xarg.source) 
+                -- TODO remove hardcode
+				--image = love.image.newImageData(Loader.path .. v.xarg.source) 
+				image = love.image.newImageData("images/tileset_caves1.png")
 				-- transparent color
 				if v.xarg.trans then
 					local trans = { tonumber( "0x" .. v.xarg.trans:sub(1,2) ), 
